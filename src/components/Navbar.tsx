@@ -92,9 +92,9 @@ export default function Navbar({
         </div>
 
         {/* Center: Brand Logo (Absolutely Centered) */}
-        <div className="static md:absolute md:left-1/2 md:-translate-x-1/2 flex justify-center items-center text-center z-10 pointer-events-none px-1 overflow-hidden shrink">
+        <div className="flex-1 flex justify-center items-center text-center z-10 pointer-events-none px-1 overflow-hidden min-w-0">
           <a href="#" className="inline-block text-center pointer-events-auto">
-            <span className="brand-logo text-[12px] xs:text-[14px] sm:text-lg md:text-xl font-black luxury-tracking tracking-[0.1em] xs:tracking-[0.15em] sm:tracking-[0.25em] uppercase text-[#30001A] dark:text-white whitespace-nowrap">
+            <span className="brand-logo text-[13px] sm:text-lg md:text-xl font-black luxury-tracking tracking-[0.05em] sm:tracking-[0.25em] uppercase truncate text-[#30001A] dark:text-white whitespace-nowrap">
               AVENTO7
             </span>
           </a>
