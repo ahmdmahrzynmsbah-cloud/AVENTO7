@@ -103,7 +103,7 @@ export default function ProductToolbar({
               onClick={() => setIsFilterOpen(true)}
               aria-expanded={isFilterOpen}
               aria-label={isRTL ? "تصفية المنتجات" : "Filter products"}
-              className={`relative min-h-[44px] w-[45%] md:w-auto px-2 sm:px-4 rounded-xl text-xs font-bold uppercase luxury-tracking flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer select-none shrink-0 border focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 ${
+              className={`relative min-h-[44px] w-auto min-w-[40%] px-2 sm:px-4 rounded-xl text-xs font-bold uppercase luxury-tracking flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer select-none shrink-0 border focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 ${
                 activeFilterCount > 0
                   ? 'bg-[#30001A] text-white border-[#30001A] dark:bg-rose-300 dark:text-[#30001A] dark:border-rose-300 shadow-md scale-[1.02]'
                   : 'bg-zinc-100 hover:bg-zinc-200 text-zinc-900 border-black/10 dark:bg-white/10 dark:hover:bg-white/15 dark:text-white dark:border-white/15'
@@ -121,7 +121,7 @@ export default function ProductToolbar({
             </button>
 
             {/* Quick Search Input */}
-            <div className="relative w-[55%] md:flex-1 min-h-[44px] flex items-center">
+            <div className="relative flex-1 min-h-[44px] flex items-center">
               <input
                 type="text"
                 value={filters.searchQuery || ''}
