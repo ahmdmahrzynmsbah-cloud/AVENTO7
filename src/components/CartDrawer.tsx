@@ -3,7 +3,7 @@ import { X, Minus, Plus, CheckCircle2, ArrowLeft, Truck, Tag, Ticket, MessageCir
 import React, { useState, useEffect } from 'react';
 import { CartItem, User, Order, StoreSettings, Coupon } from '../types';
 import { EGYPT_GOVERNORATES } from '../constants/governorates';
-import { saveOrder } from '../lib/db';
+import { saveOrder, addAdminNotification } from '../lib/db';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -165,13 +165,13 @@ export default function CartDrawer({
     try {
       const newOrder: Order = {
         id: `ORD-${Math.floor(100000 + Math.random() * 900000)}`,
-        userId: currentUser?.id,
+        userId: currentUser?.id || null,
         customerName: name,
         customerEmail: email,
         customerPhone: phone,
         governorate,
         shippingFee,
-        appliedCoupon: appliedCoupon?.code,
+        appliedCoupon: appliedCoupon?.code || null,
         discountAmount,
         address,
         items: cartItems.map(item => ({
@@ -189,6 +189,14 @@ export default function CartDrawer({
 
       // Save order to Firestore & localStorage
       await saveOrder(newOrder);
+
+      // Trigger admin notification
+      await addAdminNotification({
+        type: 'NEW_ORDER',
+        title: `New Order Received (${newOrder.id})`,
+        body: `${name} placed an order for ${totalAmount} EGP.`,
+        relatedId: newOrder.id
+      });
 
       const existingOrdersStr = localStorage.getItem('unknown_orders') || '[]';
       const orders: Order[] = JSON.parse(existingOrdersStr);

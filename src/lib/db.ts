@@ -70,9 +70,12 @@ export function subscribeProducts(onUpdate: (products: Product[]) => void) {
 export async function saveProduct(product: Product) {
   try {
     const docRef = doc(db, PRODUCTS_COLLECTION, product.id);
-    await setDoc(docRef, product, { merge: true });
+    const productData = { ...product };
+    Object.keys(productData).forEach(key => productData[key as keyof Product] === undefined && delete productData[key as keyof Product]);
+    await setDoc(docRef, productData, { merge: true });
   } catch (err) {
     console.error('Error saving product to Firestore:', err);
+    throw err;
   }
 }
 
@@ -103,9 +106,12 @@ export function subscribeOrders(onUpdate: (orders: Order[]) => void) {
 export async function saveOrder(order: Order) {
   try {
     const docRef = doc(db, ORDERS_COLLECTION, order.id);
-    await setDoc(docRef, order, { merge: true });
+    const orderData = { ...order };
+    Object.keys(orderData).forEach(key => orderData[key as keyof Order] === undefined && delete orderData[key as keyof Order]);
+    await setDoc(docRef, orderData, { merge: true });
   } catch (err) {
     console.error('Error saving order to Firestore:', err);
+    throw err;
   }
 }
 
@@ -149,9 +155,12 @@ export function subscribeUsers(onUpdate: (users: (User & { password?: string })[
 export async function saveUser(user: User & { password?: string }) {
   try {
     const docRef = doc(db, USERS_COLLECTION, user.id);
-    await setDoc(docRef, user, { merge: true });
+    const userData = { ...user };
+    Object.keys(userData).forEach(key => userData[key as keyof typeof userData] === undefined && delete userData[key as keyof typeof userData]);
+    await setDoc(docRef, userData, { merge: true });
   } catch (err) {
     console.error('Error saving user to Firestore:', err);
+    throw err;
   }
 }
 
@@ -182,9 +191,12 @@ export function subscribeSettings(onUpdate: (settings: StoreSettings) => void) {
 export async function saveSettings(settings: StoreSettings) {
   try {
     const docRef = doc(db, SETTINGS_COLLECTION, GENERAL_SETTINGS_DOC);
-    await setDoc(docRef, settings, { merge: true });
+    const settingsData = { ...settings };
+    Object.keys(settingsData).forEach(key => settingsData[key as keyof StoreSettings] === undefined && delete settingsData[key as keyof StoreSettings]);
+    await setDoc(docRef, settingsData, { merge: true });
   } catch (err) {
     console.error('Error saving settings to Firestore:', err);
+    throw err;
   }
 }
 
@@ -294,5 +306,20 @@ export const markAllNotificationsAsRead = async (notifications: import('../types
     await Promise.all(unread.map(n => updateDoc(doc(db, 'adminNotifications', n.id), { isRead: true })));
   } catch (error) {
     console.error('Error marking all read', error);
+  }
+};
+
+export const addAdminNotification = async (notification: Omit<import('../types').AdminNotification, 'id' | 'createdAt' | 'isRead'>) => {
+  try {
+    const id = `notif_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
+    const newNotif = {
+      ...notification,
+      id,
+      isRead: false,
+      createdAt: new Date().toISOString()
+    };
+    await setDoc(doc(db, 'adminNotifications', id), newNotif);
+  } catch (error) {
+    console.error('Error adding admin notification', error);
   }
 };
