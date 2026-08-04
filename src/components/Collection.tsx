@@ -228,17 +228,17 @@ export default function Collection({
   const getGridClass = (mode: ViewMode) => {
     switch (mode) {
       case '2':
-        return 'grid-cols-2 gap-3.5 sm:gap-6';
+        return 'grid-cols-2 gap-4 sm:gap-6';
       case '3':
-        return 'grid-cols-2 md:grid-cols-3 gap-3.5 sm:gap-6';
+        return 'grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6';
       case '4':
-        return 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-6';
+        return 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6';
       case '5':
-        return 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-5';
+        return 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5';
       case 'list':
-        return 'grid-cols-1 gap-3.5 sm:gap-5';
+        return 'grid-cols-1 gap-4 sm:gap-5';
       default:
-        return 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-6';
+        return 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6';
     }
   };
 
@@ -308,7 +308,7 @@ export default function Collection({
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                    className="group w-full flex flex-row items-center gap-3 sm:gap-5 bg-white dark:bg-[#0c060a]/80 border border-black/10 dark:border-white/10 p-2.5 sm:p-4 rounded-2xl hover:border-amber-500/50 hover:shadow-xl transition-all duration-300 cursor-pointer relative overflow-hidden"
+                    className="group w-full flex flex-row items-center gap-4 sm:gap-5 bg-white dark:bg-[#0c060a]/80 border border-black/10 dark:border-white/10 p-2.5 sm:p-4 rounded-2xl hover:border-amber-500/50 hover:shadow-xl transition-all duration-300 cursor-pointer relative overflow-hidden"
                     onClick={() => onViewProduct?.(product)}
                   >
                     {/* List Item Image */}
@@ -465,12 +465,12 @@ export default function Collection({
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                  className="group h-full flex flex-col justify-between bg-white dark:bg-[#0c060a]/80 border border-black/10 dark:border-white/10 rounded-2xl p-2 sm:p-3 hover:border-amber-500/50 hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden relative"
+                  className="group h-full flex flex-col justify-between bg-white dark:bg-[#0c060a]/80 border border-black/10 dark:border-white/10 rounded-[22px] p-4 hover:border-amber-500/50 hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden relative"
                   onClick={() => onViewProduct?.(product)}
                 >
-                  <div>
-                    {/* Image Container with 3/4 aspect ratio */}
-                    <div className="relative w-full aspect-[3/4] overflow-hidden bg-zinc-100 dark:bg-[#0A0A0A] mb-2.5 sm:mb-3 rounded-xl border border-black/5 dark:border-white/5">
+                  <div className="flex flex-col w-full">
+                    {/* Image Container */}
+                    <div className="relative w-full aspect-[4/5] sm:aspect-[3/4] overflow-hidden bg-zinc-100 dark:bg-[#0A0A0A] mb-3 sm:mb-4 rounded-xl border border-black/5 dark:border-white/5 shrink-0">
                       {/* Primary Product Image */}
                       <img 
                         src={product.images && product.images.length > 0 ? product.images[0] : product.image} 
@@ -480,7 +480,6 @@ export default function Collection({
                         }`} 
                         referrerPolicy="no-referrer" 
                       />
-
                       {/* Secondary Product Image Crossfade on Hover */}
                       {product.images && product.images.length > 1 && (
                         <img 
@@ -490,7 +489,6 @@ export default function Collection({
                           referrerPolicy="no-referrer" 
                         />
                       )}
-
                       <div className="absolute inset-0 bg-black/5 dark:bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                       
                       {/* Multi-Image Count Badge - Bottom Left */}
@@ -501,106 +499,111 @@ export default function Collection({
                         </div>
                       )}
 
-                      {/* Sold Out Badge or New Badge */}
-                      {product.isSoldOut ? (
-                        <div className="absolute top-2 left-2 z-10 text-[8px] sm:text-[9px] luxury-tracking px-2 py-0.5 border border-rose-500/40 bg-rose-950/85 text-rose-200 backdrop-blur-md uppercase font-bold tracking-widest shadow-md flex items-center gap-1 rounded-md">
-                          <span className="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse" />
-                          {isRTL ? 'نفذت' : 'SOLD OUT'}
-                        </div>
-                      ) : product.isNew ? (
-                        <div className="absolute top-2 left-2 rtl:left-auto rtl:right-2 z-10 text-[8px] sm:text-[9px] luxury-tracking px-2 py-0.5 border border-black/10 dark:border-white/20 bg-black/70 text-white backdrop-blur-md uppercase font-semibold rounded-md">
-                          {isRTL ? 'جديد' : 'NEW'}
-                        </div>
-                      ) : null}
-
-                      {/* Top Right Action Group: Compare & Wishlist */}
-                      <div className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 z-20 flex items-center gap-1">
-                        {/* Compare Button */}
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onToggleCompare?.(product);
-                          }}
-                          className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all ${
-                            isCompared
-                              ? 'bg-amber-400 text-zinc-950 font-bold shadow-md scale-105'
-                              : 'bg-black/40 text-white hover:bg-amber-400 hover:text-zinc-950 backdrop-blur-md border border-white/20 active:scale-95'
-                          }`}
-                          title={isRTL ? 'مقارنة' : 'Compare'}
-                          aria-label="Toggle compare"
-                        >
-                          <ArrowLeftRight size={14} />
-                        </button>
-
-                        {/* Wishlist Heart Button */}
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onToggleWishlist?.(product.id);
-                          }}
-                          className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all ${
-                            isWishlisted
-                              ? 'bg-[#30001A] text-white shadow-md scale-105'
-                              : 'bg-black/40 text-white hover:bg-[#30001A] backdrop-blur-md border border-white/20 active:scale-95'
-                          }`}
-                          aria-label="Toggle wishlist"
-                        >
-                          <Heart size={14} className={isWishlisted ? 'fill-white' : ''} />
-                        </button>
-                      </div>
-
-                      {/* Quick View / Notify Overlay Button */}
-                      <div 
-                        className="absolute bottom-1.5 inset-x-1.5 sm:bottom-2 sm:inset-x-2 z-10 transition-all duration-300 sm:opacity-0 sm:group-hover:opacity-100 sm:translate-y-2 sm:group-hover:translate-y-0"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onViewProduct?.(product);
-                        }}
-                      >
-                        <button 
-                          type="button"
-                          className={`w-full py-1.5 sm:py-2 px-2 text-[8px] sm:text-[10px] luxury-tracking font-bold transition-all uppercase tracking-wider cursor-pointer shadow-md flex items-center justify-center gap-1 rounded-lg min-h-[32px] sm:min-h-[36px] ${
-                            product.isSoldOut 
-                              ? 'bg-zinc-900/95 text-amber-300 hover:bg-black border border-amber-500/30' 
-                              : 'bg-[#30001A]/95 text-white dark:bg-rose-300/95 dark:text-[#30001A] hover:opacity-90 backdrop-blur-md'
-                          }`}
-                        >
+                      {/* Top Overlay Flex Container (Avoid Overlap) */}
+                      <div className="absolute top-0 left-0 w-full p-2 flex flex-col sm:flex-row items-start sm:justify-between gap-1 sm:gap-0 z-20 pointer-events-none">
+                        {/* Left: Badges */}
+                        <div className="flex flex-col gap-1 items-start">
                           {product.isSoldOut ? (
-                            <>
-                              <Bell size={11} className="text-amber-400 animate-bounce" />
-                              <span className="truncate">{isRTL ? 'أبلغني بالتوفر' : 'NOTIFY ME'}</span>
-                            </>
-                          ) : (
-                            <>
-                              <Eye size={12} />
-                              <span className="truncate">{isRTL ? 'نظرة سريعة' : 'QUICK VIEW'}</span>
-                            </>
-                          )}
-                        </button>
+                            <div className="text-[8px] sm:text-[9px] luxury-tracking px-2 py-0.5 border border-rose-500/40 bg-rose-950/85 text-rose-200 backdrop-blur-md uppercase font-bold tracking-widest shadow-md flex items-center gap-1 rounded-md pointer-events-auto">
+                              <span className="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse" />
+                              {isRTL ? 'نفذت' : 'SOLD OUT'}
+                            </div>
+                          ) : product.isNew ? (
+                            <div className="text-[8px] sm:text-[9px] luxury-tracking px-2 py-0.5 border border-black/10 dark:border-white/20 bg-black/70 text-white backdrop-blur-md uppercase font-semibold rounded-md pointer-events-auto">
+                              {isRTL ? 'جديد' : 'NEW'}
+                            </div>
+                          ) : <div />}
+                        </div>
+                        
+                        {/* Right Action Group: Compare & Wishlist */}
+                        <div className="flex items-center gap-2 pointer-events-auto self-end sm:self-auto mt-1 sm:mt-0">
+                          {/* Compare Button */}
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onToggleCompare?.(product);
+                            }}
+                            className={`w-11 h-11 min-w-[44px] min-h-[44px] rounded-full flex items-center justify-center transition-all ${
+                              isCompared
+                                ? 'bg-amber-400 text-zinc-950 font-bold shadow-md scale-105'
+                                : 'bg-black/40 text-white hover:bg-amber-400 hover:text-zinc-950 backdrop-blur-md border border-white/20 active:scale-95'
+                            }`}
+                            title={isRTL ? 'مقارنة' : 'Compare'}
+                            aria-label="Toggle compare"
+                          >
+                            <ArrowLeftRight size={14} />
+                          </button>
+                          {/* Wishlist Heart Button */}
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onToggleWishlist?.(product.id);
+                            }}
+                            className={`w-11 h-11 min-w-[44px] min-h-[44px] rounded-full flex items-center justify-center transition-all ${
+                              isWishlisted
+                                ? 'bg-[#30001A] text-white shadow-md scale-105'
+                                : 'bg-black/40 text-white hover:bg-[#30001A] backdrop-blur-md border border-white/20 active:scale-95'
+                            }`}
+                            aria-label="Toggle wishlist"
+                          >
+                            <Heart size={14} className={isWishlisted ? 'fill-white' : ''} />
+                          </button>
+                        </div>
                       </div>
                     </div>
-
+                    
                     {/* Title & Category */}
-                    <div className="px-1">
-                      <h3 className="text-xs sm:text-sm font-semibold luxury-tracking text-zinc-900 dark:text-white mb-1 line-clamp-2 leading-tight group-hover:text-amber-600 dark:group-hover:text-rose-300 transition-colors min-h-[2rem]">
+                    <div className="px-1 flex-1">
+                      <h3 className="text-[16px] font-semibold luxury-tracking text-zinc-900 dark:text-white mb-1 line-clamp-2 leading-tight group-hover:text-amber-600 dark:group-hover:text-rose-300 transition-colors min-h-[2rem]">
                         {isRTL && product.nameAr ? product.nameAr : product.name}
                       </h3>
                     </div>
                   </div>
 
-                  {/* Price & Rating Section - Prominent & Aligned at bottom */}
-                  <div className="px-1 pt-2 border-t border-black/5 dark:border-white/5 mt-2 flex items-center justify-between gap-1.5 w-full">
-                    <span className="text-xs sm:text-sm font-mono font-extrabold text-zinc-900 dark:text-white tracking-tight">
-                      {product.price.toLocaleString()} {isRTL ? 'ج.م' : 'EGP'}
-                    </span>
-                    {product.rating && (
-                      <div className="flex items-center gap-0.5 text-[#d4af37] text-[10px] sm:text-xs font-bold shrink-0">
-                        <Star size={11} className="fill-amber-400 text-amber-400" />
-                        <span>{product.rating}</span>
-                      </div>
-                    )}
+                  {/* Bottom Area */}
+                  <div className="flex flex-col gap-3 mt-3 w-full">
+                    {/* Price & Rating Section */}
+                    <div className="px-1 pt-3 border-t border-black/5 dark:border-white/5 flex items-center justify-between gap-1.5 w-full">
+                      <span className="text-[22px] font-mono font-extrabold text-zinc-900 dark:text-white tracking-tight leading-none whitespace-nowrap">
+                        {product.price.toLocaleString()} <span className="text-sm ml-0.5">{isRTL ? 'ج.م' : 'EGP'}</span>
+                      </span>
+                      {product.rating && (
+                        <div className="flex items-center gap-1 text-[#d4af37] text-[15px] font-bold shrink-0">
+                          <Star size={14} className="fill-amber-400 text-amber-400" />
+                          <span>{product.rating}</span>
+                        </div>
+                      )}
+                    </div>
+                    
+                    {/* Quick View / Notify Overlay Button (Full width at bottom) */}
+                    <div className="w-full">
+                      <button 
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onViewProduct?.(product);
+                        }}
+                        className={`w-full py-2 px-2 text-[10px] sm:text-[11px] luxury-tracking font-bold transition-all uppercase tracking-wider cursor-pointer shadow-md flex items-center justify-center gap-2 rounded-xl min-h-[44px] ${
+                          product.isSoldOut 
+                            ? 'bg-zinc-900 text-amber-300 hover:bg-black border border-amber-500/30' 
+                            : 'bg-[#30001A] text-white dark:bg-rose-300 dark:text-[#30001A] hover:opacity-90'
+                        }`}
+                      >
+                        {product.isSoldOut ? (
+                          <>
+                            <Bell size={14} className="text-amber-400 animate-bounce shrink-0" />
+                            <span className="truncate">{isRTL ? 'أبلغني بالتوفر' : 'NOTIFY ME'}</span>
+                          </>
+                        ) : (
+                          <>
+                            <Eye size={14} className="shrink-0" />
+                            <span className="truncate">{isRTL ? 'نظرة سريعة' : 'QUICK VIEW'}</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
                   </div>
                 </motion.div>
               );

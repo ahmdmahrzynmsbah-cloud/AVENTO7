@@ -938,7 +938,7 @@ export default function AdminPanel({
           isSidebarCollapsed ? 'lg:w-20' : 'lg:w-64 xl:w-72'
         } transition-all duration-300 ease-in-out shrink-0 bg-white/95 dark:bg-[#0d060b]/95 backdrop-blur-2xl border border-black/10 dark:border-white/10 rounded-2xl ${
           isSidebarCollapsed ? 'p-2 sm:p-3' : 'p-3 sm:p-5'
-        } shadow-xl flex flex-col justify-between lg:sticky lg:top-6 lg:self-start lg:max-h-[calc(100vh-3rem)] z-30`}>
+        } shadow-xl flex flex-col justify-between lg:sticky lg:top-6 lg:self-start lg:max-h-[calc(100vh-3rem)] overflow-y-auto custom-scrollbar z-30`}>
           
           <div className="flex flex-col h-full justify-between min-h-0">
             <div className="flex flex-col min-h-0">

@@ -320,7 +320,7 @@ export default function App() {
     <>
       <Preloader onComplete={() => setIsLoading(false)} lang={lang} />
       
-      <div className="min-h-screen bg-[#fcfcfc] text-[#0a0a0a] dark:bg-[#050505] dark:text-[#f5f5f7] flex flex-col font-sans overflow-x-clip transition-colors duration-500">
+      <div className="min-h-screen bg-[#fcfcfc] text-[#0a0a0a] dark:bg-[#050505] dark:text-[#f5f5f7] flex flex-col font-sans transition-colors duration-500 w-full">
         {/* Persistent Admin Storefront Preview Sticky Banner */}
         {currentUser?.role === 'admin' && viewMode === 'store' && (
           <div className="sticky top-0 z-[100] w-full bg-amber-500 text-zinc-950 px-4 py-2.5 text-xs font-bold flex flex-col sm:flex-row items-center justify-between gap-2 shadow-lg border-b border-amber-600">

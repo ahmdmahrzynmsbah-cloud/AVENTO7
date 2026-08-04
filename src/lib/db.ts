@@ -284,7 +284,7 @@ export const subscribeAdminNotifications = (callback: (notifications: import('..
     const notifs = snapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data(),
-      createdAt: doc.data().createdAt?.toDate().toISOString() || new Date().toISOString()
+      createdAt: typeof doc.data().createdAt?.toDate === 'function' ? doc.data().createdAt.toDate().toISOString() : (doc.data().createdAt || new Date().toISOString())
     })) as import('../types').AdminNotification[];
     callback(notifs);
   }, (error) => {
