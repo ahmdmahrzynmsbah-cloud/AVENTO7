@@ -17,6 +17,7 @@ interface NavbarProps {
   onOpenAuth: () => void;
   onOpenMenu: () => void;
   user: User | null;
+  isAdminPreview?: boolean;
   onLogout: () => void;
   onViewAdmin: () => void;
   onOpenCustomerDashboard: () => void;
@@ -38,7 +39,8 @@ export default function Navbar({
   user, 
   onLogout, 
   onViewAdmin,
-  onOpenCustomerDashboard
+  onOpenCustomerDashboard,
+  isAdminPreview
 }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -62,7 +64,7 @@ export default function Navbar({
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed top-2 sm:top-5 left-2 right-2 sm:left-6 sm:right-6 z-50 max-w-6xl mx-auto"
+      className={`fixed left-2 right-2 sm:left-6 sm:right-6 z-50 max-w-6xl mx-auto transition-all duration-300 ${isAdminPreview ? "top-14 sm:top-16" : "top-2 sm:top-5"}`}
     >
       <div 
         className={`w-full rounded-full px-2.5 xs:px-4 sm:px-8 py-2 sm:py-3.5 transition-all duration-300 relative flex items-center justify-between border backdrop-blur-2xl shadow-xl ${
@@ -92,9 +94,9 @@ export default function Navbar({
         </div>
 
         {/* Center: Brand Logo (Absolutely Centered) */}
-        <div className="flex-1 flex justify-center items-center text-center z-10 pointer-events-none px-1 overflow-hidden min-w-0">
+        <div className="absolute inset-x-0 mx-auto flex justify-center items-center text-center z-10 pointer-events-none overflow-hidden">
           <a href="#" className="inline-block text-center pointer-events-auto">
-            <span className="brand-logo text-[13px] sm:text-lg md:text-xl font-black luxury-tracking tracking-[0.05em] sm:tracking-[0.25em] uppercase truncate text-[#30001A] dark:text-white whitespace-nowrap">
+            <span className="brand-logo text-[14px] sm:text-lg md:text-xl font-black luxury-tracking tracking-[0.1em] sm:tracking-[0.25em] uppercase text-[#30001A] dark:text-white whitespace-nowrap">
               AVENTO7
             </span>
           </a>

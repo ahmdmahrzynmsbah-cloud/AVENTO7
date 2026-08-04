@@ -323,7 +323,7 @@ export default function App() {
       <div className="min-h-screen bg-[#fcfcfc] text-[#0a0a0a] dark:bg-[#050505] dark:text-[#f5f5f7] flex flex-col font-sans transition-colors duration-500 w-full">
         {/* Persistent Admin Storefront Preview Sticky Banner */}
         {currentUser?.role === 'admin' && viewMode === 'store' && (
-          <div className="sticky top-0 z-[100] w-full bg-amber-500 text-zinc-950 px-4 py-2.5 text-xs font-bold flex flex-col sm:flex-row items-center justify-between gap-2 shadow-lg border-b border-amber-600">
+          <div className="fixed top-0 left-0 right-0 z-[100] w-full bg-amber-500 text-zinc-950 px-4 py-2.5 text-[10px] sm:text-xs font-bold flex flex-row items-center justify-between gap-2 shadow-lg border-b border-amber-600">
             <div className="flex items-center gap-2 text-center sm:text-left">
               <ShieldCheck size={18} className="shrink-0" />
               <span>
@@ -343,6 +343,7 @@ export default function App() {
 
         {viewMode === 'store' && (
           <Navbar 
+            isAdminPreview={currentUser?.role === 'admin' && viewMode === 'store'}
             theme={theme}
             onToggleTheme={toggleTheme}
             lang={lang}

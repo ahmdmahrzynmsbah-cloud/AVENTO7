@@ -37,7 +37,7 @@ export default function MobileMenu({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-md z-[100] md:hidden"
+            className="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-md z-[200] md:hidden"
           />
 
           <motion.div
@@ -45,7 +45,7 @@ export default function MobileMenu({
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed top-0 left-0 bottom-0 w-[85vw] max-w-[400px] bg-white text-zinc-900 dark:bg-[#050505] dark:text-[#f5f5f7] border-r border-black/10 dark:border-white/5 z-[101] flex flex-col pt-24 px-8 pb-12 shadow-2xl md:hidden overflow-y-auto"
+            className="fixed top-0 left-0 bottom-0 w-[85vw] max-w-[400px] bg-white text-zinc-900 dark:bg-[#050505] dark:text-[#f5f5f7] border-r border-black/10 dark:border-white/5 z-[201] flex flex-col pt-24 px-8 pb-12 shadow-2xl md:hidden overflow-y-auto"
           >
             <button 
               onClick={onClose}

@@ -231,14 +231,14 @@ export default function CartDrawer({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
             onClick={handleClose}
-            className="fixed inset-0 bg-black/60 backdrop-blur-md z-50"
+            className="fixed inset-0 bg-black/60 backdrop-blur-md z-[200]"
           />
           <motion.div
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: "spring", damping: 25, stiffness: 200, mass: 0.8 }}
-            className="fixed top-0 right-0 bottom-0 w-full md:w-[480px] bg-white text-zinc-900 border-l border-black/10 dark:bg-[#050505] dark:text-[#f5f5f7] dark:border-white/5 z-50 flex flex-col shadow-2xl"
+            className="fixed top-0 right-0 bottom-0 w-full md:w-[480px] bg-white text-zinc-900 border-l border-black/10 dark:bg-[#050505] dark:text-[#f5f5f7] dark:border-white/5 z-[200] flex flex-col shadow-2xl"
           >
             {/* Header */}
             <div className="p-6 md:p-8 flex justify-between items-center border-b border-black/10 dark:border-white/5">
