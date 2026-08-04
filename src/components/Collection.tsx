@@ -228,24 +228,24 @@ export default function Collection({
   const getGridClass = (mode: ViewMode) => {
     switch (mode) {
       case '2':
-        return 'grid-cols-2 gap-2 sm:gap-5';
+        return 'grid-cols-2 gap-1 sm:gap-5';
       case '3':
-        return 'grid-cols-2 md:grid-cols-3 gap-2 sm:gap-5';
+        return 'grid-cols-2 md:grid-cols-3 gap-1 sm:gap-5';
       case '4':
-        return 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-5';
+        return 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 sm:gap-5';
       case '5':
         return 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5';
       case 'list':
         return 'grid-cols-1 gap-4 sm:gap-5';
       default:
-        return 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-5';
+        return 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 sm:gap-5';
     }
   };
 
   const isRTL = lang === 'ar';
 
   return (
-    <section ref={sectionRef} className="w-full flex flex-col items-center px-4 sm:px-6 lg:px-8" id="collection">
+    <section ref={sectionRef} className="w-full flex flex-col items-center px-2 sm:px-6 lg:px-8" id="collection">
       
       {/* SECTION HEADER */}
       <div 
@@ -308,7 +308,7 @@ export default function Collection({
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                    className="group w-full flex flex-row items-center gap-4 sm:gap-5 bg-white dark:bg-[#0c060a]/80 border border-black/10 dark:border-white/10 p-2.5 sm:p-4 rounded-2xl hover:border-amber-500/50 hover:shadow-xl transition-all duration-300 cursor-pointer relative overflow-hidden"
+                    className="group w-full flex flex-row items-center gap-4 sm:gap-5 bg-white dark:bg-[#0c060a]/80 border border-black/10 dark:border-white/10 p-2 sm:p-4 rounded-2xl hover:border-amber-500/50 hover:shadow-xl transition-all duration-300 cursor-pointer relative overflow-hidden"
                     onClick={() => onViewProduct?.(product)}
                   >
                     {/* List Item Image */}
@@ -465,12 +465,12 @@ export default function Collection({
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                  className="group h-full flex flex-col justify-between bg-white dark:bg-[#0c060a]/80 border border-black/10 dark:border-white/10 rounded-[16px] sm:rounded-[22px] p-2.5 sm:p-4 hover:border-amber-500/50 hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden relative"
+                  className="group h-full flex flex-col justify-between bg-white dark:bg-[#0c060a]/80 border border-black/10 dark:border-white/10 rounded-[16px] sm:rounded-[22px] p-1.5 sm:p-4 hover:border-amber-500/50 hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden relative"
                   onClick={() => onViewProduct?.(product)}
                 >
                   <div className="flex flex-col w-full">
                     {/* Image Container */}
-                    <div className="relative w-full aspect-[4/5] sm:aspect-[3/4] overflow-hidden bg-zinc-100 dark:bg-[#0A0A0A] mb-2 sm:mb-4 rounded-xl border border-black/5 dark:border-white/5 shrink-0">
+                    <div className="relative w-full aspect-[4/5] sm:aspect-[3/4] overflow-hidden bg-zinc-100 dark:bg-[#0A0A0A] mb-1.5 sm:mb-4 rounded-xl border border-black/5 dark:border-white/5 shrink-0">
                       {/* Primary Product Image */}
                       <img 
                         src={product.images && product.images.length > 0 ? product.images[0] : product.image} 
@@ -524,7 +524,7 @@ export default function Collection({
                               e.stopPropagation();
                               onToggleCompare?.(product);
                             }}
-                            className={`w-9 h-9 sm:w-11 sm:h-11 min-w-[36px] sm:min-w-[44px] min-h-[36px] sm:min-h-[44px] rounded-full flex items-center justify-center transition-all ${
+                            className={`w-7 h-7 sm:w-11 sm:h-11 min-w-[28px] sm:min-w-[44px] min-h-[28px] sm:min-h-[44px] rounded-full flex items-center justify-center transition-all ${
                               isCompared
                                 ? 'bg-amber-400 text-zinc-950 font-bold shadow-md scale-105'
                                 : 'bg-black/40 text-white hover:bg-amber-400 hover:text-zinc-950 backdrop-blur-md border border-white/20 active:scale-95'
@@ -541,7 +541,7 @@ export default function Collection({
                               e.stopPropagation();
                               onToggleWishlist?.(product.id);
                             }}
-                            className={`w-9 h-9 sm:w-11 sm:h-11 min-w-[36px] sm:min-w-[44px] min-h-[36px] sm:min-h-[44px] rounded-full flex items-center justify-center transition-all ${
+                            className={`w-7 h-7 sm:w-11 sm:h-11 min-w-[28px] sm:min-w-[44px] min-h-[28px] sm:min-h-[44px] rounded-full flex items-center justify-center transition-all ${
                               isWishlisted
                                 ? 'bg-[#30001A] text-white shadow-md scale-105'
                                 : 'bg-black/40 text-white hover:bg-[#30001A] backdrop-blur-md border border-white/20 active:scale-95'
@@ -556,7 +556,7 @@ export default function Collection({
                     
                     {/* Title & Category */}
                     <div className="px-1 flex-1">
-                      <h3 className="text-[13px] sm:text-[16px] font-semibold luxury-tracking text-zinc-900 dark:text-white mb-1 line-clamp-2 leading-tight group-hover:text-amber-600 dark:group-hover:text-rose-300 transition-colors min-h-[2rem]">
+                      <h3 className="text-[11px] sm:text-[16px] font-semibold luxury-tracking text-zinc-900 dark:text-white mb-1 line-clamp-2 leading-tight group-hover:text-amber-600 dark:group-hover:text-rose-300 transition-colors min-h-[2rem]">
                         {isRTL && product.nameAr ? product.nameAr : product.name}
                       </h3>
                     </div>
@@ -566,7 +566,7 @@ export default function Collection({
                   <div className="flex flex-col gap-3 mt-3 w-full">
                     {/* Price & Rating Section */}
                     <div className="px-1 pt-3 border-t border-black/5 dark:border-white/5 flex items-center justify-between gap-1.5 w-full">
-                      <span className="text-[16px] sm:text-[22px] font-mono font-extrabold text-zinc-900 dark:text-white tracking-tight leading-none whitespace-nowrap">
+                      <span className="text-[14px] sm:text-[22px] font-mono font-extrabold text-zinc-900 dark:text-white tracking-tight leading-none whitespace-nowrap">
                         {product.price.toLocaleString()} <span className="text-sm ml-0.5">{isRTL ? 'ج.م' : 'EGP'}</span>
                       </span>
                       {product.rating && (
@@ -585,7 +585,7 @@ export default function Collection({
                           e.stopPropagation();
                           onViewProduct?.(product);
                         }}
-                        className={`w-full py-1.5 sm:py-2 px-1.5 sm:px-2 text-[10px] sm:text-[11px] luxury-tracking font-bold transition-all uppercase tracking-wider cursor-pointer shadow-md flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl min-h-[36px] sm:min-h-[44px] ${
+                        className={`w-full py-1.5 sm:py-2 px-1.5 sm:px-2 text-[9px] sm:text-[11px] luxury-tracking font-bold transition-all uppercase tracking-wider cursor-pointer shadow-md flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl min-h-[32px] sm:min-h-[44px] ${
                           product.isSoldOut 
                             ? 'bg-zinc-900 text-amber-300 hover:bg-black border border-amber-500/30' 
                             : 'bg-[#30001A] text-white dark:bg-rose-300 dark:text-[#30001A] hover:opacity-90'

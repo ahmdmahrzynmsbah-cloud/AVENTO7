@@ -518,7 +518,7 @@ export default function App() {
               <Hero images={storeSettings.heroImages} lang={lang} />
               <TopMarquee offers={storeSettings.offers} lang={lang} />
               <div className="w-full flex justify-center py-12 md:py-20">
-                <div className="w-full max-w-[1400px] px-6 md:px-12">
+                <div className="w-full max-w-[1600px] px-0 sm:px-6 md:px-12">
                   <Collection 
                     products={productsList} 
                     onViewProduct={handleViewProduct} 
