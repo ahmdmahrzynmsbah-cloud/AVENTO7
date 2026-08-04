@@ -255,7 +255,7 @@ export default function AuthPage({
 
           {/* Bottom Editorial Copy */}
           <div className="relative z-10 max-w-lg space-y-6">
-            <h1 className="serif-display text-4xl xl:text-5xl font-light tracking-wide leading-tight uppercase">
+            <h1 className="serif-display text-3xl md:text-4xl xl:text-5xl font-light tracking-wide leading-tight uppercase">
               {lang === 'ar' ? 'عالم من الفخامة والتميز الفريد' : 'ENTER THE REALM OF ESSENTIAL LUXURY'}
             </h1>
             <p className="text-sm font-light text-zinc-200/90 leading-relaxed font-sans">
@@ -291,7 +291,7 @@ export default function AuthPage({
               <span>{lang === 'ar' ? 'البوابة الحصرية' : 'EXCLUSIVE ACCESS'}</span>
             </div>
             
-            <h2 className="serif-display text-2xl sm:text-3xl lg:text-4xl font-light tracking-wider uppercase text-[#30001A] dark:text-white mb-6 whitespace-nowrap">
+            <h2 className="serif-display text-xl sm:text-2xl lg:text-3xl font-bold tracking-widest uppercase text-[#30001A] dark:text-white mb-6 flex flex-row items-center gap-2 whitespace-nowrap">
               {view === 'login' ? (lang === 'ar' ? 'تسجيل الدخول' : 'SIGN IN') : (lang === 'ar' ? 'إنشاء حساب' : 'CREATE ACCOUNT')}
             </h2>
 
@@ -357,7 +357,7 @@ export default function AuthPage({
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="E.G. AHMED HASSAN"
+                    placeholder={lang === 'ar' ? 'الاسم بالكامل' : 'ENTER YOUR FULL NAME'}
                     className="w-full bg-zinc-50 dark:bg-white/5 border border-black/15 dark:border-white/15 px-4 py-3.5 text-xs luxury-tracking text-[#30001A] dark:text-white placeholder-zinc-400 focus:outline-none focus:border-[#30001A] dark:focus:border-rose-300 transition-colors uppercase rounded-md font-bold"
                     required
                   />
@@ -378,7 +378,7 @@ export default function AuthPage({
                       type="tel"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      placeholder="1012345678"
+                      placeholder={lang === 'ar' ? 'رقم الهاتف' : 'PHONE NUMBER'}
                       className="w-full bg-transparent text-xs font-mono font-bold text-[#30001A] dark:text-white placeholder-zinc-400 focus:outline-none"
                       required
                     />
@@ -415,7 +415,7 @@ export default function AuthPage({
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder={"USER@EXAMPLE.COM"}
+                placeholder={lang === 'ar' ? 'البريد الإلكتروني' : 'EMAIL ADDRESS'}
                 className="w-full bg-zinc-50 dark:bg-white/5 border border-black/15 dark:border-white/15 px-4 py-3.5 text-xs luxury-tracking text-[#30001A] dark:text-white placeholder-zinc-400 focus:outline-none focus:border-[#30001A] dark:focus:border-rose-300 transition-colors uppercase rounded-md"
               />
             </div>
