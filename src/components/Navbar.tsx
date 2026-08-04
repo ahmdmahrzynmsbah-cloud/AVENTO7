@@ -17,7 +17,7 @@ interface NavbarProps {
   onOpenAuth: () => void;
   onOpenMenu: () => void;
   user: User | null;
-  isAdminPreview?: boolean;
+
   onLogout: () => void;
   onViewAdmin: () => void;
   onOpenCustomerDashboard: () => void;
@@ -39,8 +39,7 @@ export default function Navbar({
   user, 
   onLogout, 
   onViewAdmin,
-  onOpenCustomerDashboard,
-  isAdminPreview
+  onOpenCustomerDashboard
 }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -64,7 +63,7 @@ export default function Navbar({
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className={`fixed left-2 right-2 sm:left-6 sm:right-6 z-50 max-w-6xl mx-auto transition-all duration-300 ${isAdminPreview ? "top-14 sm:top-16" : "top-2 sm:top-5"}`}
+      className="fixed top-2 sm:top-5 left-2 right-2 sm:left-6 sm:right-6 z-50 max-w-6xl mx-auto transition-all duration-300"
     >
       <div 
         className={`w-full rounded-full px-2.5 xs:px-4 sm:px-8 py-2 sm:py-3.5 transition-all duration-300 relative flex items-center justify-between border backdrop-blur-2xl shadow-xl ${

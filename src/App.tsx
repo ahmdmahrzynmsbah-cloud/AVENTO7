@@ -343,7 +343,6 @@ export default function App() {
 
         {viewMode === 'store' && (
           <Navbar 
-            isAdminPreview={currentUser?.role === 'admin' && viewMode === 'store'}
             theme={theme}
             onToggleTheme={toggleTheme}
             lang={lang}
