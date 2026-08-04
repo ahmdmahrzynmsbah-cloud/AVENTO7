@@ -1,0 +1,118 @@
+{
+  "entities": {
+    "users": {
+      "title": "Users",
+      "description": "Registered customers and admin users",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "role": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "isArchived": { "type": "boolean" }
+      },
+      "required": ["id", "name", "email"]
+    },
+    "orders": {
+      "title": "Orders",
+      "description": "Store orders submitted by customers",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerEmail": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "address": { "type": "string" },
+        "governorate": { "type": "string" },
+        "shippingFee": { "type": "number" },
+        "appliedCoupon": { "type": "string" },
+        "discountAmount": { "type": "number" },
+        "items": { "type": "array" },
+        "totalAmount": { "type": "number" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "customerName", "customerPhone", "items", "totalAmount"]
+    },
+    "products": {
+      "title": "Products",
+      "description": "Store catalog products",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "nameAr": { "type": "string" },
+        "price": { "type": "number" },
+        "costPrice": { "type": "number" },
+        "image": { "type": "string" },
+        "category": { "type": "string" },
+        "gender": { "type": "string" },
+        "isNew": { "type": "boolean" },
+        "rating": { "type": "number" },
+        "reviews": { "type": "number" },
+        "description": { "type": "string" },
+        "descriptionAr": { "type": "string" },
+        "sizes": { "type": "array" },
+        "isSoldOut": { "type": "boolean" },
+        "notifySubscribers": { "type": "array" }
+      },
+      "required": ["id", "name", "price"]
+    },
+    "settings": {
+      "title": "Store Settings",
+      "description": "Configuration, shipping rates, banners, coupons",
+      "type": "object",
+      "properties": {
+        "heroImages": { "type": "array" },
+        "offers": { "type": "array" },
+        "shippingRates": { "type": "object" },
+        "defaultShippingRate": { "type": "number" },
+        "coupons": { "type": "array" },
+        "socialLinks": { "type": "object" }
+      }
+    },
+    "notifications": {
+      "title": "Restock Notifications",
+      "description": "Stock notification subscriptions for sold-out products",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "userName": { "type": "string" },
+        "userPhone": { "type": "string" },
+        "productId": { "type": "string" },
+        "productName": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "notified": { "type": "boolean" },
+        "notifiedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "productId", "notified"]
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "schema": { "$ref": "#/entities/products" },
+      "description": "Product catalog"
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/orders" },
+      "description": "Customer orders"
+    },
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/users" },
+      "description": "User accounts"
+    },
+    "/settings/general": {
+      "schema": { "$ref": "#/entities/settings" },
+      "description": "Store settings"
+    },
+    "/notifications/{notificationId}": {
+      "schema": { "$ref": "#/entities/notifications" },
+      "description": "Restock notification subscriptions"
+    }
+  }
+}

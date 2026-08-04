@@ -1,0 +1,6 @@
+{
+  "name": "AVENTO7",
+  "description": "A luxury fashion e-commerce storefront for AVENTO7, featuring dual light (day) and dark (night) modes, GSAP animations, and full admin storefront control.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
