@@ -42,6 +42,7 @@ export default function CartDrawer({
   const [appliedCoupon, setAppliedCoupon] = useState<Coupon | null>(null);
   const [couponError, setCouponError] = useState('');
   const [couponSuccess, setCouponSuccess] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (currentUser) {
@@ -147,50 +148,62 @@ export default function CartDrawer({
     setCouponSuccess('');
   };
 
-  const handlePlaceOrder = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handlePlaceOrder = async (e: React.FormEvent | React.MouseEvent) => {
+    if (e && e.preventDefault) {
+      e.preventDefault();
+    }
     setError('');
+    
+    if (isSubmitting) return;
 
     if (!name || !phone || !email || !governorate || !address) {
       setError(lang === 'ar' ? 'يرجى إدخال جميع بيانات الشحن والمحافظة المطلوبة.' : 'ALL SHIPPING DETAILS & GOVERNORATE ARE REQUIRED.');
       return;
     }
 
-    const newOrder: Order = {
-      id: `ORD-${Math.floor(100000 + Math.random() * 900000)}`,
-      userId: currentUser?.id,
-      customerName: name,
-      customerEmail: email,
-      customerPhone: phone,
-      governorate,
-      shippingFee,
-      appliedCoupon: appliedCoupon?.code,
-      discountAmount,
-      address,
-      items: cartItems.map(item => ({
-        id: item.id,
-        name: item.name,
-        price: item.price,
-        quantity: item.quantity,
-        size: item.size,
-        image: item.image
-      })),
-      totalAmount,
-      status: 'PENDING',
-      createdAt: new Date().toISOString()
-    };
+    setIsSubmitting(true);
+    try {
+      const newOrder: Order = {
+        id: `ORD-${Math.floor(100000 + Math.random() * 900000)}`,
+        userId: currentUser?.id,
+        customerName: name,
+        customerEmail: email,
+        customerPhone: phone,
+        governorate,
+        shippingFee,
+        appliedCoupon: appliedCoupon?.code,
+        discountAmount,
+        address,
+        items: cartItems.map(item => ({
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+          size: item.size,
+          image: item.image
+        })),
+        totalAmount,
+        status: 'PENDING',
+        createdAt: new Date().toISOString()
+      };
 
-    // Save order to Firestore & localStorage
-    saveOrder(newOrder);
+      // Save order to Firestore & localStorage
+      await saveOrder(newOrder);
 
-    const existingOrdersStr = localStorage.getItem('unknown_orders') || '[]';
-    const orders: Order[] = JSON.parse(existingOrdersStr);
-    orders.unshift(newOrder);
-    localStorage.setItem('unknown_orders', JSON.stringify(orders));
+      const existingOrdersStr = localStorage.getItem('unknown_orders') || '[]';
+      const orders: Order[] = JSON.parse(existingOrdersStr);
+      orders.unshift(newOrder);
+      localStorage.setItem('unknown_orders', JSON.stringify(orders));
 
-    // Clear cart & show success screen
-    setPlacedOrder(newOrder);
-    setCartItems([]);
+      // Clear cart & show success screen
+      setPlacedOrder(newOrder);
+      setCartItems([]);
+    } catch (err) {
+      console.error("Failed to place order:", err);
+      setError(lang === 'ar' ? 'حدث خطأ أثناء إتمام الطلب. يرجى المحاولة مرة أخرى.' : 'Failed to place order. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleClose = () => {
@@ -359,7 +372,7 @@ export default function CartDrawer({
                       onChange={(e) => setName(e.target.value)}
                       placeholder="JOHN DOE"
                       className="w-full bg-transparent border-b border-black/20 dark:border-white/20 pb-2 text-xs luxury-tracking text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-[#86868b] focus:outline-none focus:border-black dark:focus:border-white transition-colors font-medium"
-                      required
+                      
                     />
                   </div>
 
@@ -373,7 +386,7 @@ export default function CartDrawer({
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="+20 100 000 0000"
                       className="w-full bg-transparent border-b border-black/20 dark:border-white/20 pb-2 text-xs luxury-tracking text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-[#86868b] focus:outline-none focus:border-black dark:focus:border-white transition-colors font-medium"
-                      required
+                      
                     />
                   </div>
 
@@ -387,7 +400,7 @@ export default function CartDrawer({
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="CUSTOMER@DOMAIN.COM"
                       className="w-full bg-transparent border-b border-black/20 dark:border-white/20 pb-2 text-xs luxury-tracking text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-[#86868b] focus:outline-none focus:border-black dark:focus:border-white transition-colors font-medium"
-                      required
+                      
                     />
                   </div>
 
@@ -406,7 +419,7 @@ export default function CartDrawer({
                       value={governorate}
                       onChange={(e) => setGovernorate(e.target.value)}
                       className="w-full bg-zinc-50 dark:bg-[#0A0A0A] border border-black/20 dark:border-white/20 p-2.5 text-xs font-bold luxury-tracking text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500 transition-colors"
-                      required
+                      
                     >
                       {EGYPT_GOVERNORATES.map((gov, idx) => {
                         const rate = (storeSettings?.shippingRates && storeSettings.shippingRates[gov.nameAr] !== undefined)
@@ -431,7 +444,7 @@ export default function CartDrawer({
                       placeholder={lang === 'ar' ? 'اسم الشارع، رقم المبنى، المنطقة...' : 'STREET, BUILDING, DISTRICT...'}
                       rows={2}
                       className="w-full bg-transparent border border-black/20 dark:border-white/20 p-2.5 text-xs luxury-tracking text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-[#86868b] focus:outline-none focus:border-black dark:focus:border-white transition-colors uppercase font-medium"
-                      required
+                      
                     />
                   </div>
 
@@ -588,11 +601,12 @@ export default function CartDrawer({
 
                 {isCheckout ? (
                   <button 
-                    type="submit" 
-                    form="checkout-form"
-                    className="w-full relative group bg-[#30001A] text-white dark:bg-white dark:text-[#30001A] py-4 px-6 overflow-hidden uppercase font-bold text-[10px] luxury-tracking tracking-[0.2em] hover:bg-[#1b000f] dark:hover:bg-[#f8f1f5] transition-colors shadow-lg shadow-[#30001A]/20 cursor-pointer"
+                    type="button"
+                    onClick={(e) => handlePlaceOrder(e as any)}
+                    disabled={isSubmitting}
+                    className="w-full relative group bg-[#30001A] text-white dark:bg-white dark:text-[#30001A] py-4 px-6 overflow-hidden uppercase font-bold text-[10px] luxury-tracking tracking-[0.2em] hover:bg-[#1b000f] dark:hover:bg-[#f8f1f5] transition-colors shadow-lg shadow-[#30001A]/20 cursor-pointer disabled:opacity-50"
                   >
-                    {lang === 'ar' ? 'تأكيد وإرسال الطلب الآن' : 'PLACE ORDER NOW'}
+                    {isSubmitting ? (lang === 'ar' ? 'جاري الإرسال...' : 'PLACING ORDER...') : (lang === 'ar' ? 'تأكيد وإرسال الطلب الآن' : 'PLACE ORDER NOW')}
                   </button>
                 ) : (
                   <button 
