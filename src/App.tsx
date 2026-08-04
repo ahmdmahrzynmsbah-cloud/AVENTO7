@@ -321,26 +321,6 @@ export default function App() {
       <Preloader onComplete={() => setIsLoading(false)} lang={lang} />
       
       <div className="min-h-screen bg-[#fcfcfc] text-[#0a0a0a] dark:bg-[#050505] dark:text-[#f5f5f7] flex flex-col font-sans transition-colors duration-500 w-full">
-        {/* Persistent Admin Storefront Preview Sticky Banner */}
-        {currentUser?.role === 'admin' && viewMode === 'store' && (
-          <div className="fixed top-0 left-0 right-0 z-[100] w-full bg-amber-500 text-zinc-950 px-4 py-2.5 text-[10px] sm:text-xs font-bold flex flex-row items-center justify-between gap-2 shadow-lg border-b border-amber-600">
-            <div className="flex items-center gap-2 text-center sm:text-left">
-              <ShieldCheck size={18} className="shrink-0" />
-              <span>
-                {lang === 'ar'
-                  ? 'معاينة المتجر (حساب مسؤول) — إجراءات الشراء، السلة والدفع معطلة تماماً للحساب الإداري.'
-                  : 'STOREFRONT PREVIEW (ADMIN) — Purchasing, Cart, and Checkout actions are strictly disabled for admin accounts.'}
-              </span>
-            </div>
-            <button
-              onClick={() => setViewMode('admin')}
-              className="px-3.5 py-1.5 bg-zinc-950 text-amber-400 font-extrabold text-[11px] uppercase rounded-lg hover:bg-zinc-800 transition-all shadow-md cursor-pointer shrink-0"
-            >
-              {lang === 'ar' ? 'العودة للوحة التحكم' : 'RETURN TO ADMIN PANEL'}
-            </button>
-          </div>
-        )}
-
         {viewMode === 'store' && (
           <Navbar 
             theme={theme}
