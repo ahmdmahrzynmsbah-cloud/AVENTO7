@@ -520,6 +520,7 @@ export default function App() {
               onAddProduct={handleAddProduct}
               onUpdateProduct={handleUpdateProduct}
               onDeleteProduct={handleDeleteProduct}
+              onLogout={handleLogout}
               onUpdateSettings={handleUpdateSettings}
               onBackToStore={() => setViewMode('store')}
               currentUser={currentUser}

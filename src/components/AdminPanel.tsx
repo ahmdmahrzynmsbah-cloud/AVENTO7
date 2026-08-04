@@ -27,6 +27,7 @@ interface AdminPanelProps {
   onDeleteProduct: (id: string) => void;
   onUpdateSettings: (settings: StoreSettings) => void;
   onBackToStore: () => void;
+  onLogout?: () => void;
   currentUser?: User | null;
   onUpdateCurrentUser?: (user: User) => void;
   lang?: 'en' | 'ar';
@@ -48,6 +49,7 @@ export default function AdminPanel({
   onDeleteProduct, 
   onUpdateSettings, 
   onBackToStore,
+  onLogout,
   currentUser,
   onUpdateCurrentUser,
   lang = 'en'
@@ -982,6 +984,15 @@ export default function AdminPanel({
                       <ArrowLeft size={14} className="rtl:rotate-180" />
                       <span className="text-[10px]">{lang === 'ar' ? 'المتجر' : 'STORE'}</span>
                     </button>
+                    {onLogout && (
+                      <button
+                        onClick={onLogout}
+                        className="lg:hidden p-1.5 rounded-lg text-xs font-bold text-rose-600 hover:text-rose-700 bg-rose-50 dark:bg-rose-900/30 transition-colors flex items-center gap-1 cursor-pointer"
+                        title={lang === 'ar' ? 'تسجيل الخروج' : 'LOGOUT'}
+                      >
+                        <LogOut size={14} />
+                      </button>
+                    )}
                     <button 
                       onClick={() => setIsSidebarCollapsed(true)}
                       className="hidden lg:inline-flex p-1.5 rounded-lg text-zinc-500 hover:text-black dark:text-zinc-400 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer"

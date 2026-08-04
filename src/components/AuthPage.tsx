@@ -69,18 +69,6 @@ export default function AuthPage({
         return;
       }
 
-      // Check Admin Credentials
-      if (cleanEmail === 'admin' || cleanEmail === 'admin@avento.com') {
-        if (password === '1234' || password === 'admin123') {
-          const adminUser: User = { id: 'admin-1', name: 'System Admin', email: 'admin@avento.com', role: 'admin' };
-          onLogin(adminUser);
-          return;
-        } else {
-          setError(lang === 'ar' ? 'كلمة مرور مدير النظام غير صحيحة.' : 'INCORRECT PASSWORD FOR ADMIN ACCOUNT.');
-          return;
-        }
-      }
-
       // Fetch Registered Accounts from Firestore & LocalStorage
       let users: any[] = [];
       try {
@@ -120,7 +108,7 @@ export default function AuthPage({
         name: user.name, 
         email: user.email, 
         phone: user.phone, 
-        role: 'user', 
+        role: (user.email.toLowerCase() === 'a73905337@gmail.com' || user.email.toLowerCase() === 'admin@avento.com' || user.role === 'admin') ? 'admin' : 'user', 
         createdAt: user.createdAt 
       };
       onLogin(loggedUser);
@@ -418,13 +406,13 @@ export default function AuthPage({
 
             <div className="space-y-1">
               <label className="text-[10px] luxury-tracking uppercase font-semibold text-zinc-500 dark:text-zinc-400">
-                {view === 'login' ? (lang === 'ar' ? "البريد الإلكتروني أو 'ADMIN'" : "EMAIL OR 'ADMIN'") : (lang === 'ar' ? 'البريد الإلكتروني' : 'EMAIL ADDRESS')}
+                {view === 'login' ? (lang === 'ar' ? 'البريد الإلكتروني' : 'EMAIL ADDRESS') : (lang === 'ar' ? 'البريد الإلكتروني' : 'EMAIL ADDRESS')}
               </label>
               <input
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder={view === 'login' ? "USER@EXAMPLE.COM OR 'ADMIN'" : "YOUR@EMAIL.COM"}
+                placeholder={"USER@EXAMPLE.COM"}
                 className="w-full bg-zinc-50 dark:bg-white/5 border border-black/15 dark:border-white/15 px-4 py-3.5 text-xs luxury-tracking text-[#30001A] dark:text-white placeholder-zinc-400 focus:outline-none focus:border-[#30001A] dark:focus:border-rose-300 transition-colors uppercase rounded-md"
               />
             </div>
@@ -459,38 +447,7 @@ export default function AuthPage({
               <ArrowRight size={16} className="rtl:rotate-180 group-hover:translate-x-1.5 rtl:group-hover:-translate-x-1.5 transition-transform" />
             </button>
 
-            {/* Quick Demo Fill Credentials for Test / Convenience */}
-            {view === 'login' && (
-              <div className="pt-4 border-t border-black/10 dark:border-white/10 flex flex-col gap-2.5 items-center">
-                <span className="text-[10px] luxury-tracking uppercase text-zinc-400 font-semibold">
-                  {lang === 'ar' ? 'حسابات تجريبية سريعة:' : 'QUICK DEMO ACCESSIBILITY:'}
-                </span>
-                <div className="flex flex-wrap items-center justify-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setEmail('ahmed@gmail.com');
-                      setPassword('password123');
-                    }}
-                    className="text-[9px] luxury-tracking font-mono text-zinc-700 dark:text-zinc-200 hover:border-[#30001A] uppercase bg-zinc-100 dark:bg-white/10 px-3 py-1.5 rounded-xs border border-black/10 dark:border-white/10 transition-colors cursor-pointer"
-                  >
-                    CLIENT: ahmed@gmail.com
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setEmail('admin');
-                      setPassword('1234');
-                    }}
-                    className="text-[9px] luxury-tracking font-mono text-amber-700 dark:text-amber-300 hover:border-amber-500 uppercase bg-amber-500/10 px-3 py-1.5 rounded-xs border border-amber-500/20 transition-colors cursor-pointer flex items-center gap-1"
-                  >
-                    <ShieldCheck size={12} />
-                    ADMIN: admin / 1234
-                  </button>
-                </div>
-              </div>
-            )}
-          </form>
+            </form>
         </motion.div>
       </main>
 
