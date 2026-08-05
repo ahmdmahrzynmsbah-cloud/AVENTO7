@@ -220,7 +220,7 @@ ${productList}
                   { text: "❌ إلغاء الطلب", callback_data: `cancel_${newOrder.id}` }
                 ],
                 [
-                  { text: "🖨️ طباعة الفاتورة", url: `${window.location.origin.replace("ais-dev-", "ais-pre-")}/?print_order=${newOrder.id}` }
+                  { text: "🖨️ طباعة الفاتورة", url: `https://ais-pre-ruogt7bxatoxwqkssqhffv-853596307183.europe-west2.run.app/?print_order=${newOrder.id}` }
                 ]
               ]
             }
