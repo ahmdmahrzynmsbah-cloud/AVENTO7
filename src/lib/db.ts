@@ -278,15 +278,35 @@ export const triggerRestockNotificationsForProduct = triggerNotificationsForProd
 export const deleteRestockNotification = deleteNotification;
 
 
-export const subscribeAdminNotifications = (callback: (notifications: import('../types').AdminNotification[]) => void) => {
+export const subscribeAdminNotifications = (
+  callback: (notifications: import('../types').AdminNotification[]) => void,
+  onNewNotification?: (notification: import('../types').AdminNotification) => void
+) => {
   const q = query(collection(db, 'adminNotifications'), orderBy('createdAt', 'desc'));
+  let isFirstLoad = true;
   return onSnapshot(q, (snapshot) => {
     const notifs = snapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data(),
       createdAt: typeof doc.data().createdAt?.toDate === 'function' ? doc.data().createdAt.toDate().toISOString() : (doc.data().createdAt || new Date().toISOString())
     })) as import('../types').AdminNotification[];
+    
     callback(notifs);
+
+    if (onNewNotification && !isFirstLoad) {
+      snapshot.docChanges().forEach((change) => {
+        if (change.type === 'added') {
+           const newNotif = {
+             id: change.doc.id,
+             ...change.doc.data(),
+             createdAt: typeof change.doc.data().createdAt?.toDate === 'function' ? change.doc.data().createdAt.toDate().toISOString() : (change.doc.data().createdAt || new Date().toISOString())
+           } as import('../types').AdminNotification;
+           onNewNotification(newNotif);
+        }
+      });
+    }
+    
+    isFirstLoad = false;
   }, (error) => {
     console.error('Error fetching admin notifications', error);
   });

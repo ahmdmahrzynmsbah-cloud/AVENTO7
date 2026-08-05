@@ -33,7 +33,8 @@ import {
   deleteProduct, 
   saveSettings,
   saveUser,
-  defaultSettings
+  defaultSettings,
+  subscribeAdminNotifications
 } from './lib/db';
 
 export default function App() {
@@ -78,6 +79,51 @@ export default function App() {
     }, 3000);
   };
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    if (currentUser?.role === 'admin') {
+      if ("Notification" in window && Notification.permission === "default") {
+        Notification.requestPermission();
+      }
+
+      const unsub = subscribeAdminNotifications(
+        (notifs) => {
+          // We don't need to store all notifications globally yet, AdminPanel handles it.
+        },
+        (newNotif) => {
+          if ("Notification" in window && Notification.permission === "granted") {
+            const title = newNotif.title || 'Avento7: New Order';
+            const body = newNotif.body || 'A new order has been received!';
+            const notification = new Notification(title, {
+              body,
+              // icon: '/icon.png',
+            });
+            
+            // Try to play a subtle sound if available or standard beep
+            try {
+              // Creating a simple beep sound using AudioContext
+              const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+              const oscillator = audioCtx.createOscillator();
+              const gainNode = audioCtx.createGain();
+              oscillator.connect(gainNode);
+              gainNode.connect(audioCtx.destination);
+              oscillator.type = 'sine';
+              oscillator.frequency.value = 880; // A5
+              gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+              gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.5);
+              oscillator.start(audioCtx.currentTime);
+              oscillator.stop(audioCtx.currentTime + 0.5);
+            } catch (e) {
+              console.log("Could not play sound", e);
+            }
+          }
+        }
+      );
+      
+      return () => unsub();
+    }
+  }, [currentUser]);
+
   const [viewMode, setViewMode] = useState<'store' | 'admin' | 'customer' | 'auth'>('store');
   const [customerTab, setCustomerTab] = useState<'overview' | 'orders' | 'profile' | 'addresses'>('orders');
   const [storeSettings, setStoreSettings] = useState<StoreSettings>(defaultSettings);
@@ -498,7 +544,7 @@ export default function App() {
               <Hero images={storeSettings.heroImages} lang={lang} />
               <TopMarquee offers={storeSettings.offers} lang={lang} />
               <div className="w-full flex justify-center py-12 md:py-20">
-                <div className="w-full max-w-[1600px] px-0 sm:px-6 md:px-12">
+                <div className="w-full max-w-[1600px]">
                   <Collection 
                     products={productsList} 
                     onViewProduct={handleViewProduct} 
