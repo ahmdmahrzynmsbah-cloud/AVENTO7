@@ -148,11 +148,9 @@ export default function PrintInvoice({ orderId, settings }: PrintInvoiceProps) {
       {/* Footer */}
       <div className="mt-16 text-center">
         <p className="text-sm font-bold uppercase tracking-widest mb-2">Thank you for your business</p>
-        {(settings.supportPhone || settings.supportEmail) && (
-          <p className="text-xs text-gray-500" dir="ltr">
-            Contact us: <span className="font-semibold text-black">{settings.supportPhone || settings.supportEmail}</span>
-          </p>
-        )}
+        <p className="text-xs text-gray-500" dir="ltr">
+          Contact us: <span className="font-semibold text-black">{settings.supportPhone || '01022293420'}</span>
+        </p>
       </div>
     </div>
   );
