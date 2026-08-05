@@ -425,7 +425,7 @@ export default function AdminPanel({
                           reply_markup: {
                             inline_keyboard: [
                               [
-                                { text: "🖨️ طباعة الفاتورة", url: `https://ais-pre-ruogt7bxatoxwqkssqhffv-853596307183.europe-west2.run.app/?print_order=${orderId}` }
+                                { text: "🖨️ طباعة الفاتورة", url: `${window.location.origin}/?print_order=${orderId}` }
                               ]
                             ]
                           }
