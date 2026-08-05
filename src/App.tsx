@@ -19,6 +19,7 @@ import AuthModal from './components/AuthModal';
 import AuthPage from './components/AuthPage';
 import MobileMenu from './components/MobileMenu';
 import AdminPanel from './components/AdminPanel';
+import PrintInvoice from './components/PrintInvoice';
 import CustomerDashboard from './components/CustomerDashboard';
 import TopMarquee from './components/TopMarquee';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
@@ -126,6 +127,15 @@ export default function App() {
 
   const [viewMode, setViewMode] = useState<'store' | 'admin' | 'customer' | 'auth'>('store');
   const [customerTab, setCustomerTab] = useState<'overview' | 'orders' | 'profile' | 'addresses'>('orders');
+  const [printOrderId, setPrintOrderId] = useState<string | null>(null);
+  
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const pid = params.get('print_order');
+    if (pid) {
+      setPrintOrderId(pid);
+    }
+  }, []);
   const [storeSettings, setStoreSettings] = useState<StoreSettings>(defaultSettings);
   useEffect(() => {
     if (storeSettings && !storeSettings.telegramBotToken && storeSettings.storeName) {
@@ -378,7 +388,9 @@ export default function App() {
       <Preloader onComplete={() => setIsLoading(false)} lang={lang} />
       
       <div className="min-h-screen bg-[#fcfcfc] text-[#0a0a0a] dark:bg-[#050505] dark:text-[#f5f5f7] flex flex-col font-sans transition-colors duration-500 w-full">
-        {viewMode === 'store' && (
+        {printOrderId ? (
+          <PrintInvoice orderId={printOrderId} settings={storeSettings} />
+        ) : viewMode === 'store' && (
           <Navbar 
             theme={theme}
             onToggleTheme={toggleTheme}
@@ -541,7 +553,7 @@ export default function App() {
           )}
         </AnimatePresence>
         
-        <main className="flex-1 w-full flex flex-col">
+        <main className={printOrderId ? "hidden" : "flex-1 w-full flex flex-col"}>
           {viewMode === 'auth' ? (
             <AuthPage
               onLogin={handleLogin}
@@ -600,7 +612,7 @@ export default function App() {
           )}
         </main>
         
-        {viewMode === 'store' && (
+        {!printOrderId && viewMode === 'store' && (
           <>
             <Footer 
               onOpenTrackOrder={handleOpenTrackOrder} 

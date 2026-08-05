@@ -192,14 +192,34 @@ export default function CartDrawer({
 
       // Send Telegram Notification
       if (storeSettings?.telegramBotToken && storeSettings?.telegramChatId) {
-        const text = `🔔 *New Order Received!*\n\n*Order ID:* \`${newOrder.id}\`\n*Customer:* ${name}\n*Phone:* ${phone}\n*Total:* ${totalAmount.toLocaleString()} EGP`;
+        const productList = cartItems.map(i => `• ${i.name} (${i.size}) x${i.quantity} - ${i.price} EGP`).join('\n');
+        const text = `<b>🆕 طلب جديد (New Order)</b>
+━━━━━━━━━━━━━━━━━
+<b>📦 رقم الطلب:</b> <code>${newOrder.id}</code>
+<b>👤 العميل:</b> ${name}
+<b>📱 الهاتف:</b> ${phone}
+<b>📍 المحافظة:</b> ${governorate}
+<b>🏠 العنوان:</b> ${address}
+━━━━━━━━━━━━━━━━━
+<b>🛒 المنتجات:</b>
+${productList}
+
+<b>💰 الإجمالي:</b> <b>${totalAmount.toLocaleString()} EGP</b>`;
+        
         fetch(`https://api.telegram.org/bot${storeSettings.telegramBotToken}/sendMessage`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             chat_id: storeSettings.telegramChatId,
             text,
-            parse_mode: 'Markdown'
+            parse_mode: 'HTML',
+            reply_markup: {
+              inline_keyboard: [
+                [
+                  { text: "🖨️ طباعة الفاتورة (Print Invoice)", url: `${window.location.origin}/?print_order=${newOrder.id}` }
+                ]
+              ]
+            }
           })
         }).catch(err => console.error("Telegram error:", err));
       }
