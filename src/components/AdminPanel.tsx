@@ -425,7 +425,7 @@ export default function AdminPanel({
                           reply_markup: {
                             inline_keyboard: [
                               [
-                                { text: "🖨️ طباعة الفاتورة", url: `${window.location.origin}/?print_order=${orderId}` }
+                                { text: "🖨️ طباعة الفاتورة", url: `${window.location.origin.replace("ais-dev-", "ais-pre-")}/?print_order=${orderId}` }
                               ]
                             ]
                           }
@@ -604,6 +604,7 @@ export default function AdminPanel({
   const [editingId, setEditingId] = useState<string | null>(null);
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
+  const [originalPrice, setOriginalPrice] = useState('');
   const [costPrice, setCostPrice] = useState('');
   const [category, setCategory] = useState("TOPS");
   const [gender, setGender] = useState<"Men" | "Women" | "Unisex">('Unisex');
@@ -622,11 +623,11 @@ export default function AdminPanel({
   const [profitSort, setProfitSort] = useState<'profit' | 'qty' | 'margin' | 'price' | 'cost'>('profit');
 
   // Calculate Real Dynamic KPIs
-  const nonCancelledOrders = orders.filter(o => o.status !== 'CANCELLED');
-  const completedOrders = orders.filter(o => o.status === 'COMPLETED');
+  const nonCancelledOrders = orders.filter(o => o.status !== 'CANCELLED' && o.status !== 'Cancelled');
+  const completedOrders = orders.filter(o => o.status === 'COMPLETED' || o.status === 'Confirmed');
   const pendingOrders = orders.filter(o => o.status === 'PENDING');
   const processingOrders = orders.filter(o => o.status === 'PROCESSING');
-  const cancelledOrders = orders.filter(o => o.status === 'CANCELLED');
+  const cancelledOrders = orders.filter(o => o.status === 'CANCELLED' || o.status === 'Cancelled');
 
   const totalRevenue = nonCancelledOrders.reduce((acc, curr) => acc + curr.totalAmount, 0);
   const activeOrdersCount = pendingOrders.length + processingOrders.length;
@@ -737,6 +738,7 @@ export default function AdminPanel({
     setEditingId(null);
     setName('');
     setPrice('');
+    setOriginalPrice('');
     setCostPrice('');
     setCategory("TOPS");
     setGender('Unisex');
@@ -831,6 +833,7 @@ export default function AdminPanel({
           ...existingProduct,
           name,
           price: parsedPrice,
+        originalPrice: !isNaN(parsedOriginalPrice) ? parsedOriginalPrice : undefined,
           costPrice: parsedCost,
           image: finalImage,
           images: finalImagesList,
@@ -851,6 +854,7 @@ export default function AdminPanel({
         id: `prod-${Date.now()}`,
         name,
         price: parsedPrice,
+        originalPrice: !isNaN(parsedOriginalPrice) ? parsedOriginalPrice : undefined,
         costPrice: parsedCost,
         image: finalImage,
         images: finalImagesList,
@@ -875,6 +879,7 @@ export default function AdminPanel({
     setEditingId(product.id);
     setName(product.name);
     setPrice(product.price.toString());
+    setOriginalPrice(product.originalPrice ? product.originalPrice.toString() : '');
     setCostPrice(product.costPrice ? product.costPrice.toString() : Math.round(product.price * 0.55).toString());
     setImageUrl(product.image);
     const productImgs = (product.images && product.images.length > 0)
@@ -1836,15 +1841,15 @@ export default function AdminPanel({
                           <div className="flex items-center gap-3">
                             <span className="font-mono text-sm font-bold text-zinc-900 dark:text-white">#{ord.id}</span>
                             <span className={`text-[9px] luxury-tracking uppercase font-bold px-2.5 py-0.5 border ${
-                              ord.status === 'COMPLETED' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20' :
-                              ord.status === 'CANCELLED' ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20' :
+                              ord.status === 'COMPLETED' || ord.status === 'Confirmed' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20' :
+                              ord.status === 'CANCELLED' || ord.status === 'Cancelled' ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20' :
                               'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20'
                             }`}>
                               {ord.status}
                             </span>
                           </div>
                           <span className="text-[9px] luxury-tracking text-zinc-400 dark:text-white/40 block mt-1 flex items-center gap-1 font-medium">
-                            <Calendar size={10} /> {new Date(ord.createdAt).toLocaleString()}
+                            <Calendar size={10} /> {new Date(ord.createdAt).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true }).toUpperCase()}
                           </span>
                         </div>
 
@@ -4192,9 +4197,9 @@ export default function AdminPanel({
                 </div>
 
                 {/* Pricing & Stock Row */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  <div className="flex flex-col gap-1">
-                    <label className="text-[10px] font-bold uppercase luxury-tracking text-zinc-500 dark:text-zinc-400">
+                <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+                  <div className="flex flex-col h-full gap-1">
+                    <label className="text-[10px] font-bold uppercase luxury-tracking text-zinc-500 dark:text-zinc-400 min-h-[2rem] flex items-end">
                       {lang === 'ar' ? 'سعر البيع (ج.م) *' : 'SELLING PRICE (EGP) *'}
                     </label>
                     <input
@@ -4202,13 +4207,25 @@ export default function AdminPanel({
                       value={price}
                       onChange={(e) => setPrice(e.target.value)}
                       placeholder="1200"
-                      className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold font-mono text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500 transition-colors"
+                      className="mt-auto w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold font-mono text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500 transition-colors"
                       required
                     />
                   </div>
+                  <div className="flex flex-col h-full gap-1">
+                    <label className="text-[10px] font-bold uppercase luxury-tracking text-zinc-500 dark:text-zinc-400 min-h-[2rem] flex items-end leading-tight">
+                      {lang === 'ar' ? 'السعر الاصلي (لخصم)' : 'ORIGINAL PRICE (DISCOUNT)'}
+                    </label>
+                    <input
+                      type="number"
+                      value={originalPrice}
+                      onChange={(e) => setOriginalPrice(e.target.value)}
+                      placeholder="1500"
+                      className="mt-auto w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold font-mono text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500 transition-colors"
+                    />
+                  </div>
 
-                  <div className="flex flex-col gap-1">
-                    <label className="text-[10px] font-bold uppercase luxury-tracking text-zinc-500 dark:text-zinc-400">
+                  <div className="flex flex-col h-full gap-1">
+                    <label className="text-[10px] font-bold uppercase luxury-tracking text-zinc-500 dark:text-zinc-400 min-h-[2rem] flex items-end">
                       {lang === 'ar' ? 'سعر التكلفة (ج.م)' : 'COST PRICE (EGP)'}
                     </label>
                     <input
@@ -4216,12 +4233,12 @@ export default function AdminPanel({
                       value={costPrice}
                       onChange={(e) => setCostPrice(e.target.value)}
                       placeholder="650"
-                      className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold font-mono text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500 transition-colors"
+                      className="mt-auto w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold font-mono text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500 transition-colors"
                     />
                   </div>
 
-                  <div className="flex flex-col gap-1">
-                    <label className="text-[10px] font-bold uppercase luxury-tracking text-zinc-500 dark:text-zinc-400">
+                  <div className="flex flex-col h-full gap-1">
+                    <label className="text-[10px] font-bold uppercase luxury-tracking text-zinc-500 dark:text-zinc-400 min-h-[2rem] flex items-end">
                       {lang === 'ar' ? 'كمية المخزون' : 'STOCK QTY'}
                     </label>
                     <input
@@ -4229,7 +4246,7 @@ export default function AdminPanel({
                       value={stockInput}
                       onChange={(e) => setStockInput(e.target.value)}
                       placeholder="25"
-                      className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold font-mono text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500 transition-colors"
+                      className="mt-auto w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold font-mono text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500 transition-colors"
                     />
                   </div>
                 </div>
@@ -4294,7 +4311,7 @@ export default function AdminPanel({
                   <label className="text-[10px] font-bold uppercase luxury-tracking text-zinc-500 dark:text-zinc-400">
                     {lang === 'ar' ? 'المقاسات المتاحة' : 'AVAILABLE SIZES'}
                   </label>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="grid grid-cols-4 sm:grid-cols-8 gap-2">
                     {['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL', 'OS'].map(sz => (
                       <button
                         type="button"
@@ -4304,7 +4321,7 @@ export default function AdminPanel({
                             prev.includes(sz) ? prev.filter(s => s !== sz) : [...prev, sz]
                           );
                         }}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-bold font-mono transition-all border cursor-pointer ${
+                        className={`flex items-center justify-center py-2 rounded-lg text-xs font-bold font-mono transition-all border cursor-pointer ${
                           sizesInput.includes(sz)
                             ? 'bg-amber-500 text-black border-amber-500 shadow-sm'
                             : 'bg-zinc-50 dark:bg-white/5 text-zinc-500 border-black/10 dark:border-white/10 hover:border-amber-500/50'

@@ -92,6 +92,11 @@ export default function WishlistDrawer({
                         </h3>
                         <span className="text-xs font-mono font-bold text-amber-600 dark:text-amber-400 mt-1 block">
                           {product.price.toLocaleString()} {lang === 'ar' ? 'ج.م' : 'EGP'}
+                          {product.originalPrice && product.originalPrice > product.price && (
+                            <span className="text-zinc-400 dark:text-zinc-500 line-through text-[10px] ml-1 rtl:mr-1 rtl:ml-0">
+                              {product.originalPrice.toLocaleString()} {lang === 'ar' ? 'ج.م' : 'EGP'}
+                            </span>
+                          )}
                         </span>
                       </div>
 

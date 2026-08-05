@@ -154,13 +154,21 @@ export default function ProductModal({
                 />
               </AnimatePresence>
 
-              {/* Sold Out Badge */}
-              {product.isSoldOut && (
-                <div className="absolute top-4 left-4 z-10 text-[10px] luxury-tracking px-3 py-1.5 border border-rose-500/50 bg-rose-950/90 text-rose-200 backdrop-blur-md uppercase font-bold tracking-widest shadow-2xl flex items-center gap-1.5 rounded-md">
+              {/* Status Badges */}
+              {product.isSoldOut ? (
+                <div className="absolute top-4 left-4 rtl:left-auto rtl:right-4 z-10 text-[10px] luxury-tracking px-3 py-1.5 border border-rose-500/50 bg-rose-950/90 text-rose-200 backdrop-blur-md uppercase font-bold tracking-widest shadow-2xl flex items-center gap-1.5 rounded-md">
                   <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping" />
                   {lang === 'ar' ? 'نفذت الكمية (SOLD OUT)' : 'SOLD OUT'}
                 </div>
-              )}
+              ) : product.originalPrice && product.originalPrice > product.price ? (
+                <div className="absolute top-4 left-4 rtl:left-auto rtl:right-4 z-10 text-[10px] luxury-tracking px-3 py-1.5 border border-rose-500/30 bg-rose-600/90 text-white backdrop-blur-md uppercase font-bold shadow-md rounded-md">
+                  {lang === 'ar' ? 'خصم' : 'SALE'} {Math.round((1 - product.price / product.originalPrice) * 100)}%
+                </div>
+              ) : product.isNew ? (
+                <div className="absolute top-4 left-4 rtl:left-auto rtl:right-4 z-10 text-[10px] luxury-tracking px-3 py-1.5 border border-black/10 dark:border-white/20 bg-black/70 text-white backdrop-blur-md uppercase font-semibold rounded-md">
+                  {lang === 'ar' ? 'جديد' : 'NEW'}
+                </div>
+              ) : null}
 
               {/* Image Index Counter Badge */}
               {galleryImages.length > 1 && (
@@ -231,7 +239,14 @@ export default function ProductModal({
                 {lang === 'ar' ? (product.nameAr || product.name) : product.name}
               </h2>
               <div className="flex items-center gap-4 mb-5">
-                <span className="text-xl font-extrabold font-mono text-zinc-900 dark:text-white">{product.price.toLocaleString()} {lang === 'ar' ? 'ج.م' : 'EGP'}</span>
+                <div className="flex items-end gap-2">
+                  <span className="text-xl font-extrabold font-mono text-zinc-900 dark:text-white">{product.price.toLocaleString()} {lang === 'ar' ? 'ج.م' : 'EGP'}</span>
+                  {product.originalPrice && product.originalPrice > product.price && (
+                    <span className="text-sm font-medium line-through text-zinc-400 mb-[2px]">
+                      {product.originalPrice.toLocaleString()} {lang === 'ar' ? 'ج.م' : 'EGP'}
+                    </span>
+                  )}
+                </div>
                 {product.rating && (
                   <div className="flex items-center gap-2">
                     <span className="w-[1px] h-4 bg-black/20 dark:bg-white/20"></span>

@@ -336,6 +336,10 @@ export default function Collection({
                         <div className="absolute top-2 left-2 z-10 text-[8px] luxury-tracking px-1.5 py-0.5 border border-rose-500/40 bg-rose-950/85 text-rose-200 backdrop-blur-md uppercase font-bold rounded shadow-xs">
                           {isRTL ? 'نفذت' : 'SOLD OUT'}
                         </div>
+                      ) : product.originalPrice && product.originalPrice > product.price ? (
+                        <div className="absolute top-2 left-2 rtl:left-auto rtl:right-2 z-10 text-[8px] luxury-tracking px-1.5 py-0.5 border border-rose-500/30 bg-rose-600/90 text-white uppercase font-bold rounded shadow-sm">
+                          {isRTL ? 'خصم' : 'SALE'} {Math.round((1 - product.price / product.originalPrice) * 100)}%
+                        </div>
                       ) : product.isNew ? (
                         <div className="absolute top-2 left-2 rtl:left-auto rtl:right-2 z-10 text-[8px] luxury-tracking px-1.5 py-0.5 border border-black/10 dark:border-white/20 bg-black/70 text-white uppercase font-semibold rounded">
                           {isRTL ? 'جديد' : 'NEW'}
@@ -416,6 +420,11 @@ export default function Collection({
                         <div className="flex items-baseline gap-1.5">
                           <span className="text-xs sm:text-base font-mono font-extrabold text-zinc-900 dark:text-white">
                             {product.price.toLocaleString()} {isRTL ? 'ج.م' : 'EGP'}
+                            {product.originalPrice && product.originalPrice > product.price && (
+                              <span className="text-zinc-400 dark:text-zinc-500 line-through text-[10px] ml-1 rtl:mr-1 rtl:ml-0">
+                                {product.originalPrice.toLocaleString()} {isRTL ? 'ج.م' : 'EGP'}
+                              </span>
+                            )}
                           </span>
                           {product.rating && (
                             <div className="hidden sm:flex items-center text-[#d4af37] gap-1 ml-2 rtl:mr-2 rtl:ml-0">
@@ -508,6 +517,10 @@ export default function Collection({
                               <span className="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse" />
                               {isRTL ? 'نفذت' : 'SOLD OUT'}
                             </div>
+                          ) : product.originalPrice && product.originalPrice > product.price ? (
+                            <div className="text-[8px] sm:text-[9px] luxury-tracking px-2 py-0.5 border border-rose-500/30 bg-rose-600/90 text-white backdrop-blur-md uppercase font-bold tracking-widest shadow-md flex items-center gap-1 rounded-md pointer-events-auto">
+                              {isRTL ? 'خصم' : 'SALE'} {Math.round((1 - product.price / product.originalPrice) * 100)}%
+                            </div>
                           ) : product.isNew ? (
                             <div className="text-[8px] sm:text-[9px] luxury-tracking px-2 py-0.5 border border-black/10 dark:border-white/20 bg-black/70 text-white backdrop-blur-md uppercase font-semibold rounded-md pointer-events-auto">
                               {isRTL ? 'جديد' : 'NEW'}
@@ -568,6 +581,11 @@ export default function Collection({
                     <div className="px-0.5 pt-1 flex items-center justify-between gap-1.5 w-full">
                       <span className="text-[15px] sm:text-[22px] font-mono font-extrabold text-zinc-900 dark:text-white tracking-tight leading-none whitespace-nowrap">
                         {product.price.toLocaleString()} <span className="text-sm ml-0.5">{isRTL ? 'ج.م' : 'EGP'}</span>
+                        {product.originalPrice && product.originalPrice > product.price && (
+                          <span className="text-zinc-400 dark:text-zinc-500 line-through text-sm font-medium ml-2 rtl:mr-2 rtl:ml-0">
+                            {product.originalPrice.toLocaleString()} {isRTL ? 'ج.م' : 'EGP'}
+                          </span>
+                        )}
                       </span>
                       {product.rating && (
                         <div className="flex items-center gap-1 text-[#d4af37] text-[12px] sm:text-[15px] font-bold shrink-0">

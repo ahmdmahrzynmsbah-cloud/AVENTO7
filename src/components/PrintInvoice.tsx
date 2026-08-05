@@ -59,7 +59,7 @@ export default function PrintInvoice({ orderId, settings }: PrintInvoiceProps) {
         <div className="w-full flex flex-col items-center sm:w-auto sm:items-end">
           <img src={`https://bwipjs-api.metafloor.com/?bcid=code128&text=${order.id}&scale=2&height=10`} alt="Barcode" className="h-12 w-auto mb-2 mix-blend-multiply" />
           <p className="text-xs sm:text-sm font-bold tracking-widest">{order.id}</p>
-          <p className="text-xs text-gray-500 mt-1">{new Date(order.createdAt).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}</p>
+          <p className="text-xs text-gray-500 mt-1">{new Date(order.createdAt).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true }).toUpperCase()}</p>
         </div>
       </div>
 

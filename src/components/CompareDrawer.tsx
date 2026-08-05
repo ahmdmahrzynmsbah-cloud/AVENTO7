@@ -171,6 +171,11 @@ export default function CompareDrawer({
                             <div className="mt-1 flex items-baseline gap-2">
                               <span className="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">
                                 {product.price.toLocaleString()} {isRTL ? 'ج.م' : 'EGP'}
+                                {product.originalPrice && product.originalPrice > product.price && (
+                                  <span className="text-zinc-400 dark:text-zinc-500 line-through text-[10px] ml-1 rtl:mr-1 rtl:ml-0">
+                                    {product.originalPrice.toLocaleString()} {isRTL ? 'ج.م' : 'EGP'}
+                                  </span>
+                                )}
                               </span>
                               {product.originalPrice && (
                                 <span className="text-[10px] font-mono text-zinc-400 line-through">

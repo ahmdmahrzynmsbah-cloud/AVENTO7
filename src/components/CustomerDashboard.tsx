@@ -217,7 +217,7 @@ export default function CustomerDashboard({
                       {searchedOrder.totalAmount.toLocaleString()} EGP
                     </span>
                     <span className="text-[10px] text-zinc-400 dark:text-white/40 block">
-                      {new Date(searchedOrder.createdAt).toLocaleDateString()}
+                      {new Date(searchedOrder.createdAt).toLocaleDateString('en-GB')}
                     </span>
                   </div>
                 </div>
@@ -234,7 +234,7 @@ export default function CustomerDashboard({
                       { step: 3, labelAr: 'جاري الشحن', labelEn: 'On the Way', icon: Truck },
                       { step: 4, labelAr: 'تم التسليم', labelEn: 'Delivered', icon: CheckCircle2 }
                     ].map((item) => {
-                      const stepNum = searchedOrder.status === 'COMPLETED' ? 4 : searchedOrder.status === 'PENDING' ? 1 : 2;
+                      const stepNum = searchedOrder.status === 'COMPLETED' || searchedOrder.status === 'Confirmed' ? 4 : searchedOrder.status === 'PENDING' ? 1 : 2;
                       const isDone = item.step <= stepNum;
                       const ItemIcon = item.icon;
 
@@ -312,9 +312,9 @@ export default function CustomerDashboard({
   // Calculate Metrics
   const totalOrdersCount = userOrders.length;
   const pendingOrdersCount = userOrders.filter(o => o.status === 'PENDING').length;
-  const completedOrdersCount = userOrders.filter(o => o.status === 'COMPLETED').length;
+  const completedOrdersCount = userOrders.filter(o => o.status === 'COMPLETED' || o.status === 'Confirmed').length;
   const totalSpent = userOrders
-    .filter(o => o.status !== 'CANCELLED')
+    .filter(o => o.status !== 'CANCELLED' && o.status !== 'Cancelled')
     .reduce((acc, o) => acc + o.totalAmount, 0);
 
   const filteredOrders = userOrders.filter(o => {
@@ -663,14 +663,14 @@ export default function CustomerDashboard({
                           </div>
                           <div className="flex flex-col text-[10px] luxury-tracking">
                             <span className="font-bold text-zinc-900 dark:text-white uppercase font-mono">ORDER #{ord.id}</span>
-                            <span className="text-zinc-400 uppercase font-medium">{new Date(ord.createdAt).toLocaleDateString()} • {ord.items.length} ITEM(S)</span>
+                            <span className="text-zinc-400 uppercase font-medium">{new Date(ord.createdAt).toLocaleDateString('en-GB')} • {ord.items.length} ITEM(S)</span>
                           </div>
                         </div>
 
                         <div className="flex items-center gap-6 text-[10px] luxury-tracking w-full sm:w-auto justify-between sm:justify-end">
                           <span className={`px-2.5 py-1 uppercase font-bold border ${
-                            ord.status === 'COMPLETED' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20' :
-                            ord.status === 'CANCELLED' ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20' :
+                            ord.status === 'COMPLETED' || ord.status === 'Confirmed' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20' :
+                            ord.status === 'CANCELLED' || ord.status === 'Cancelled' ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20' :
                             'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20'
                           }`}>
                             {ord.status}
@@ -736,15 +736,15 @@ export default function CustomerDashboard({
                           <div className="flex items-center gap-3">
                             <span className="font-mono text-base font-bold text-zinc-900 dark:text-white">ORDER #{ord.id}</span>
                             <span className={`text-[9px] luxury-tracking uppercase font-bold px-2.5 py-0.5 border ${
-                              ord.status === 'COMPLETED' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20' :
-                              ord.status === 'CANCELLED' ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20' :
+                              ord.status === 'COMPLETED' || ord.status === 'Confirmed' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20' :
+                              ord.status === 'CANCELLED' || ord.status === 'Cancelled' ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20' :
                               'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20'
                             }`}>
                               {ord.status}
                             </span>
                           </div>
                           <span className="text-[9px] luxury-tracking text-zinc-400 block mt-1 flex items-center gap-1 font-medium">
-                            <Calendar size={11} /> PLACED ON: {new Date(ord.createdAt).toLocaleString()}
+                            <Calendar size={11} /> PLACED ON: {new Date(ord.createdAt).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true }).toUpperCase()}
                           </span>
                         </div>
 
@@ -775,7 +775,7 @@ export default function CustomerDashboard({
                       </div>
 
                       {/* Order Status Progress Tracker Bar */}
-                      {ord.status !== 'CANCELLED' ? (
+                      {ord.status !== 'CANCELLED' && ord.status !== 'Cancelled' ? (
                         <div className="bg-white dark:bg-[#0A0A0A] p-4 border border-black/5 dark:border-white/5 flex flex-col gap-3">
                           <span className="text-[10px] luxury-tracking text-zinc-500 dark:text-white/50 font-bold uppercase">SHIPMENT STATUS TRACKER:</span>
                           <div className="grid grid-cols-4 gap-2 text-[9px] luxury-tracking text-center">
@@ -785,27 +785,27 @@ export default function CustomerDashboard({
                             </div>
                             <div className="flex flex-col items-center gap-1.5">
                               <div className={`w-6 h-6 rounded-full flex items-center justify-center font-bold text-[10px] ${
-                                ord.status === 'COMPLETED' ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-white animate-pulse'
+                                ord.status === 'COMPLETED' || ord.status === 'Confirmed' ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-white animate-pulse'
                               }`}>
-                                {ord.status === 'COMPLETED' ? '✓' : '2'}
+                                {ord.status === 'COMPLETED' || ord.status === 'Confirmed' ? '✓' : '2'}
                               </div>
                               <span className="font-bold text-zinc-900 dark:text-white">PROCESSING</span>
                             </div>
                             <div className="flex flex-col items-center gap-1.5">
                               <div className={`w-6 h-6 rounded-full flex items-center justify-center font-bold text-[10px] ${
-                                ord.status === 'COMPLETED' ? 'bg-emerald-500 text-white' : 'bg-zinc-200 dark:bg-white/10 text-zinc-400'
+                                ord.status === 'COMPLETED' || ord.status === 'Confirmed' ? 'bg-emerald-500 text-white' : 'bg-zinc-200 dark:bg-white/10 text-zinc-400'
                               }`}>
-                                {ord.status === 'COMPLETED' ? '✓' : '3'}
+                                {ord.status === 'COMPLETED' || ord.status === 'Confirmed' ? '✓' : '3'}
                               </div>
-                              <span className={`font-bold ${ord.status === 'COMPLETED' ? 'text-zinc-900 dark:text-white' : 'text-zinc-400 dark:text-white/30'}`}>IN TRANSIT</span>
+                              <span className={`font-bold ${ord.status === 'COMPLETED' || ord.status === 'Confirmed' ? 'text-zinc-900 dark:text-white' : 'text-zinc-400 dark:text-white/30'}`}>IN TRANSIT</span>
                             </div>
                             <div className="flex flex-col items-center gap-1.5">
                               <div className={`w-6 h-6 rounded-full flex items-center justify-center font-bold text-[10px] ${
-                                ord.status === 'COMPLETED' ? 'bg-emerald-500 text-white' : 'bg-zinc-200 dark:bg-white/10 text-zinc-400'
+                                ord.status === 'COMPLETED' || ord.status === 'Confirmed' ? 'bg-emerald-500 text-white' : 'bg-zinc-200 dark:bg-white/10 text-zinc-400'
                               }`}>
-                                {ord.status === 'COMPLETED' ? '✓' : '4'}
+                                {ord.status === 'COMPLETED' || ord.status === 'Confirmed' ? '✓' : '4'}
                               </div>
-                              <span className={`font-bold ${ord.status === 'COMPLETED' ? 'text-zinc-900 dark:text-white' : 'text-zinc-400 dark:text-white/30'}`}>DELIVERED</span>
+                              <span className={`font-bold ${ord.status === 'COMPLETED' || ord.status === 'Confirmed' ? 'text-zinc-900 dark:text-white' : 'text-zinc-400 dark:text-white/30'}`}>DELIVERED</span>
                             </div>
                           </div>
                         </div>

@@ -139,7 +139,7 @@ export default function OrderTrackerModal({
                       {searchedOrder.totalAmount.toLocaleString()} {lang === 'ar' ? 'ج.م' : 'EGP'}
                     </span>
                     <span className="text-[9px] text-zinc-400 dark:text-white/40 block">
-                      {new Date(searchedOrder.createdAt).toLocaleDateString()}
+                      {new Date(searchedOrder.createdAt).toLocaleDateString('en-GB')}
                     </span>
                   </div>
                 </div>
