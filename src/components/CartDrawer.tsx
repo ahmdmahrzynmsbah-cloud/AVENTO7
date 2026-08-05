@@ -216,7 +216,11 @@ ${productList}
             reply_markup: {
               inline_keyboard: [
                 [
-                  { text: "🖨️ طباعة الفاتورة (Print Invoice)", url: `${window.location.origin}/?print_order=${newOrder.id}` }
+                  { text: "✅ تأكيد الطلب", callback_data: `confirm_${newOrder.id}` },
+                  { text: "❌ إلغاء الطلب", callback_data: `cancel_${newOrder.id}` }
+                ],
+                [
+                  { text: "🖨️ طباعة الفاتورة", url: `${window.location.origin}/?print_order=${newOrder.id}` }
                 ]
               ]
             }

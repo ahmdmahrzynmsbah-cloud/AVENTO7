@@ -343,3 +343,27 @@ export const addAdminNotification = async (notification: Omit<import('../types')
     console.error('Error adding admin notification', error);
   }
 };
+
+export async function updateOrderStatus(orderId: string, status: string) {
+  try {
+    const { doc, updateDoc } = await import('firebase/firestore');
+    const { db: firestoreDb } = await import('./firebase');
+    const docRef = doc(firestoreDb, 'orders', orderId);
+    await updateDoc(docRef, { status });
+  } catch (err) {
+    console.error("updateOrderStatus firebase error, falling back to local storage", err);
+    try {
+      const local = localStorage.getItem('unknown_orders');
+      if (local) {
+        let orders = JSON.parse(local);
+        const index = orders.findIndex((o: any) => o.id === orderId);
+        if (index !== -1) {
+          orders[index].status = status;
+          localStorage.setItem('unknown_orders', JSON.stringify(orders));
+        }
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
+}
