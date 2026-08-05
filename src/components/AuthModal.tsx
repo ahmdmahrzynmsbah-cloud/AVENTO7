@@ -67,12 +67,9 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
       // Check Admin Credentials
       if (cleanEmail === 'admin' || cleanEmail === 'admin@avento.com' || cleanEmail === 'a73905337@gmail.com') {
         if (password === '1234' || password.toLowerCase() === 'admin123') {
-          const adminUser: User = { id: 'admin-1', name: 'System Admin', email: 'admin@avento.com', role: 'admin' };
+          const adminUser: User = { id: 'admin-1', name: 'System Admin', email: cleanEmail === 'admin' ? 'admin@avento.com' : cleanEmail, role: 'admin' };
           onLogin(adminUser);
           onClose();
-          return;
-        } else {
-          setError(lang === 'ar' ? 'كلمة مرور مدير النظام غير صحيحة.' : 'INCORRECT PASSWORD FOR ADMIN ACCOUNT.');
           return;
         }
       }
@@ -116,7 +113,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
         name: user.name, 
         email: user.email, 
         phone: user.phone, 
-        role: 'user', 
+        role: ((user.email.toLowerCase() === 'a73905337@gmail.com' || user.email.toLowerCase() === 'admin@avento.com' || user.role === 'admin') ? 'admin' : 'user') as 'admin' | 'user',
         createdAt: user.createdAt 
       };
       onLogin(loggedUser);
@@ -171,7 +168,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
         phone: formattedPhone,
         governorate: governorate || 'القاهرة',
         password,
-        role: 'user' as const,
+        role: ((cleanEmail === 'a73905337@gmail.com' || cleanEmail === 'admin@avento.com') ? 'admin' : 'user') as 'admin' | 'user',
         createdAt: new Date().toISOString()
       };
 
@@ -188,7 +185,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
         email: newUser.email, 
         phone: newUser.phone, 
         governorate: newUser.governorate,
-        role: 'user', 
+        role: (newUser.email.toLowerCase() === 'a73905337@gmail.com' || newUser.email.toLowerCase() === 'admin@avento.com' || newUser.role === 'admin') ? 'admin' : 'user',
         createdAt: newUser.createdAt 
       };
       onLogin(loggedUser);
@@ -232,7 +229,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
             >
               <X size={24} strokeWidth={1.5} />
             </button>
-            <h2 className="serif-display text-4xl mb-8 font-light tracking-wider uppercase text-zinc-900 dark:text-[#f5f5f7]">
+            <h2 className="serif-display text-4xl mb-8 font-light tracking-wider text-zinc-900 dark:text-[#f5f5f7]">
               {view === 'login' ? (lang === 'ar' ? 'تسجيل الدخول' : 'SIGN IN') : (lang === 'ar' ? 'إنشاء حساب' : 'CREATE ACCOUNT')}
             </h2>
 
@@ -267,7 +264,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
 
             <form onSubmit={handleAuth} className="flex flex-col gap-6">
               {error && (
-                <div className="text-red-500 text-[10px] luxury-tracking uppercase p-3 bg-red-500/10 border border-red-500/20">
+                <div className="text-red-500 text-[10px] luxury-tracking p-3 bg-red-500/10 border border-red-500/20">
                   {error}
                 </div>
               )}
@@ -280,14 +277,14 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder={lang === 'ar' ? 'الاسم الكامل' : 'FULL NAME'}
-                      className="w-full bg-transparent border-b border-black/20 dark:border-white/20 pb-4 text-xs luxury-tracking text-zinc-900 dark:text-white placeholder-zinc-500 dark:placeholder-[#86868b] focus:outline-none focus:border-black dark:focus:border-white transition-colors uppercase font-medium"
+                      className="w-full bg-transparent border-b border-black/20 dark:border-white/20 pb-4 text-xs luxury-tracking text-zinc-900 dark:text-white placeholder-zinc-500 dark:placeholder-[#86868b] focus:outline-none focus:border-black dark:focus:border-white transition-colors font-medium"
                       required
                     />
                   </div>
 
                   {/* Phone Input with Fixed Egypt Prefix */}
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[10px] font-bold uppercase luxury-tracking text-zinc-500 dark:text-zinc-400 flex items-center gap-1">
+                    <label className="uppercase text-[10px] font-bold luxury-tracking text-zinc-500 dark:text-zinc-400 flex items-center gap-1">
                       <PhoneIcon size={12} className="text-amber-500" />
                       {lang === 'ar' ? 'رقم الهاتف (مصر)' : 'PHONE NUMBER (EGYPT)'}
                     </label>
@@ -309,7 +306,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
 
                   {/* Governorate Select */}
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[10px] font-bold uppercase luxury-tracking text-zinc-500 dark:text-zinc-400 flex items-center gap-1">
+                    <label className="uppercase text-[10px] font-bold luxury-tracking text-zinc-500 dark:text-zinc-400 flex items-center gap-1">
                       <MapPin size={12} className="text-amber-500" />
                       {lang === 'ar' ? 'المحافظة (جميع محافظات مصر)' : 'GOVERNORATE'}
                     </label>
@@ -335,7 +332,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder={view === 'login' ? (lang === 'ar' ? "البريد الإلكتروني أو 'ADMIN'" : "EMAIL OR 'ADMIN'") : (lang === 'ar' ? 'البريد الإلكتروني' : 'EMAIL ADDRESS')}
-                  className="w-full bg-transparent border-b border-black/20 dark:border-white/20 pb-4 text-xs luxury-tracking text-zinc-900 dark:text-white placeholder-zinc-500 dark:placeholder-[#86868b] focus:outline-none focus:border-black dark:focus:border-white transition-colors uppercase"
+                  className="w-full bg-transparent border-b border-black/20 dark:border-white/20 pb-4 text-xs luxury-tracking text-zinc-900 dark:text-white placeholder-zinc-500 dark:placeholder-[#86868b] focus:outline-none focus:border-black dark:focus:border-white transition-colors"
                 />
               </div>
 
@@ -345,7 +342,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder={lang === 'ar' ? 'كلمة المرور' : 'PASSWORD'}
-                  className="w-full bg-transparent border-b border-black/20 dark:border-white/20 pb-4 text-xs luxury-tracking text-zinc-900 dark:text-white placeholder-zinc-500 dark:placeholder-[#86868b] focus:outline-none focus:border-black dark:focus:border-white transition-colors uppercase rtl:pr-0 rtl:pl-10 pr-10"
+                  className="w-full bg-transparent border-b border-black/20 dark:border-white/20 pb-4 text-xs luxury-tracking text-zinc-900 dark:text-white placeholder-zinc-500 dark:placeholder-[#86868b] focus:outline-none focus:border-black dark:focus:border-white transition-colors rtl:pr-0 rtl:pl-10 pr-10"
                 />
                 <button
                   type="button"
@@ -359,7 +356,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
               <div className="mt-8 flex flex-col gap-4">
                 <button
                   type="submit"
-                  className="w-full bg-[#30001A] text-white dark:bg-white dark:text-[#30001A] py-4 text-[10px] luxury-tracking font-bold uppercase tracking-[0.2em] hover:bg-[#1b000f] dark:hover:bg-[#f8f1f5] transition-colors flex justify-center items-center gap-4 group cursor-pointer shadow-lg shadow-[#30001A]/20"
+                  className="w-full bg-[#30001A] text-white dark:bg-white dark:text-[#30001A] py-4 text-[10px] luxury-tracking font-bold tracking-[0.2em] hover:bg-[#1b000f] dark:hover:bg-[#f8f1f5] transition-colors flex justify-center items-center gap-4 group cursor-pointer shadow-lg shadow-[#30001A]/20"
                 >
                   {view === 'login' ? (lang === 'ar' ? 'تسجيل الدخول' : 'SIGN IN') : (lang === 'ar' ? 'تسجيل' : 'REGISTER')}
                   <ArrowRight size={16} className="rtl:rotate-180 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform" />
@@ -367,7 +364,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
                 
                 {view === 'login' && (
                   <div className="flex flex-col items-center gap-2.5 mt-2">
-                    <button type="button" className="text-[10px] luxury-tracking text-zinc-500 dark:text-[#86868b] hover:text-black dark:hover:text-white transition-colors uppercase text-center">
+                    <button type="button" className="text-[10px] luxury-tracking text-zinc-500 dark:text-[#86868b] hover:text-black dark:hover:text-white transition-colors text-center">
                       {lang === 'ar' ? 'نسيت كلمة المرور؟' : 'FORGOT PASSWORD?'}
                     </button>
                     <div className="flex flex-wrap items-center justify-center gap-2 mt-1">
@@ -377,7 +374,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
                           setEmail('ahmed@gmail.com');
                           setPassword('password123');
                         }}
-                        className="text-[9px] luxury-tracking font-mono text-zinc-700 dark:text-zinc-300 hover:underline uppercase bg-zinc-100 dark:bg-white/10 px-2.5 py-1 border border-black/10 dark:border-white/10"
+                        className="text-[9px] luxury-tracking font-mono text-zinc-700 dark:text-zinc-300 hover:underline bg-zinc-100 dark:bg-white/10 px-2.5 py-1 border border-black/10 dark:border-white/10"
                       >
                         DEMO CLIENT: ahmed@gmail.com / password123
                       </button>
@@ -387,7 +384,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
                           setEmail('admin');
                           setPassword('1234');
                         }}
-                        className="text-[9px] luxury-tracking font-mono text-amber-600 dark:text-amber-400 hover:underline uppercase bg-amber-500/10 px-2.5 py-1 border border-amber-500/20"
+                        className="text-[9px] luxury-tracking font-mono text-amber-600 dark:text-amber-400 hover:underline bg-amber-500/10 px-2.5 py-1 border border-amber-500/20"
                       >
                         DEMO ADMIN: admin / 1234
                       </button>

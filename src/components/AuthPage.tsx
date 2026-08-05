@@ -116,7 +116,7 @@ export default function AuthPage({
         name: user.name, 
         email: user.email, 
         phone: user.phone, 
-        role: (user.email.toLowerCase() === 'a73905337@gmail.com' || user.email.toLowerCase() === 'admin@avento.com' || user.role === 'admin') ? 'admin' : 'user', 
+        role: ((user.email.toLowerCase() === 'a73905337@gmail.com' || user.email.toLowerCase() === 'admin@avento.com' || user.role === 'admin') ? 'admin' : 'user') as 'admin' | 'user', 
         createdAt: user.createdAt 
       };
       onLogin(loggedUser);
@@ -170,7 +170,7 @@ export default function AuthPage({
         phone: formattedPhone,
         governorate: governorate || 'القاهرة',
         password,
-        role: 'user' as const,
+        role: ((cleanEmail === 'a73905337@gmail.com' || cleanEmail === 'admin@avento.com') ? 'admin' : 'user') as 'admin' | 'user',
         createdAt: new Date().toISOString()
       };
 
@@ -187,7 +187,7 @@ export default function AuthPage({
         email: newUser.email, 
         phone: newUser.phone, 
         governorate: newUser.governorate,
-        role: 'user', 
+        role: (newUser.email.toLowerCase() === 'a73905337@gmail.com' || newUser.email.toLowerCase() === 'admin@avento.com' || newUser.role === 'admin') ? 'admin' : 'user',
         createdAt: newUser.createdAt 
       };
       onLogin(loggedUser);
@@ -218,7 +218,7 @@ export default function AuthPage({
           </button>
         </div>
 
-        <a href="#" onClick={onBackToStore} className="brand-logo flex-1 text-center text-xl sm:text-2xl font-black luxury-tracking tracking-[0.25em] uppercase text-[#30001A] dark:text-white shrink-0">
+        <a href="#" onClick={onBackToStore} className="brand-logo flex-1 text-center text-xl sm:text-2xl font-black luxury-tracking tracking-[0.25em] text-[#30001A] dark:text-white shrink-0">
           AVENTO7
         </a>
 
@@ -255,7 +255,7 @@ export default function AuthPage({
 
           {/* Top Brand Watermark */}
           <div className="relative z-10 flex items-center justify-between">
-            <span className="text-[10px] luxury-tracking font-mono uppercase tracking-[0.3em] bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
+            <span className="text-[10px] luxury-tracking font-mono tracking-[0.3em] bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
               MENSWEAR SS26
             </span>
             <Sparkles size={20} className="text-amber-300 animate-pulse" />
@@ -263,7 +263,7 @@ export default function AuthPage({
 
           {/* Bottom Editorial Copy */}
           <div className="relative z-10 max-w-lg space-y-6">
-            <h1 className="serif-display text-3xl md:text-4xl xl:text-5xl font-light tracking-wide leading-tight uppercase">
+            <h1 className="serif-display text-3xl md:text-4xl xl:text-5xl font-light tracking-wide leading-tight">
               {lang === 'ar' ? 'عالم من الفخامة والتميز الفريد' : 'ENTER THE REALM OF ESSENTIAL LUXURY'}
             </h1>
             <p className="text-sm font-light text-zinc-200/90 leading-relaxed font-sans">
@@ -294,12 +294,12 @@ export default function AuthPage({
         >
           {/* Header & Tabs */}
           <div className="mb-8">
-            <div className="flex items-center gap-2 text-[10px] luxury-tracking uppercase font-bold text-[#30001A] dark:text-rose-300 mb-2 tracking-[0.25em]">
+            <div className="flex items-center gap-2 text-[10px] luxury-tracking font-bold text-[#30001A] dark:text-rose-300 mb-2 tracking-[0.25em]">
               <UserCheck size={14} />
               <span>{lang === 'ar' ? 'البوابة الحصرية' : 'EXCLUSIVE ACCESS'}</span>
             </div>
             
-            <h2 className="serif-display text-xl sm:text-2xl lg:text-3xl font-bold tracking-widest uppercase text-[#30001A] dark:text-white mb-6 flex flex-row items-center gap-2 whitespace-nowrap">
+            <h2 className="serif-display text-xl sm:text-2xl lg:text-3xl font-bold tracking-widest text-[#30001A] dark:text-white mb-6 flex flex-row items-center gap-2 whitespace-nowrap">
               {view === 'login' ? (lang === 'ar' ? 'تسجيل الدخول' : 'SIGN IN') : (lang === 'ar' ? 'إنشاء حساب' : 'CREATE ACCOUNT')}
             </h2>
 
@@ -349,7 +349,7 @@ export default function AuthPage({
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-red-600 dark:text-red-400 text-[11px] luxury-tracking uppercase p-3.5 bg-red-500/10 border border-red-500/20 rounded-md font-semibold"
+                className="text-red-600 dark:text-red-400 text-[11px] luxury-tracking p-3.5 bg-red-500/10 border border-red-500/20 rounded-md font-semibold"
               >
                 {error}
               </motion.div>
@@ -358,7 +358,7 @@ export default function AuthPage({
             {view === 'register' && (
               <>
                 <div className="space-y-1">
-                  <label className="text-[10px] luxury-tracking uppercase font-semibold text-zinc-500 dark:text-zinc-400">
+                  <label className="uppercase text-[10px] luxury-tracking font-semibold text-zinc-500 dark:text-zinc-400">
                     {lang === 'ar' ? 'الاسم الكامل' : 'FULL NAME'}
                   </label>
                   <input
@@ -373,7 +373,7 @@ export default function AuthPage({
 
                 {/* Phone Number with Fixed Egypt Badge */}
                 <div className="space-y-1">
-                  <label className="text-[10px] luxury-tracking uppercase font-semibold text-zinc-500 dark:text-zinc-400 flex items-center gap-1">
+                  <label className="uppercase text-[10px] luxury-tracking font-semibold text-zinc-500 dark:text-zinc-400 flex items-center gap-1">
                     <PhoneIcon size={12} className="text-amber-500" />
                     {lang === 'ar' ? 'رقم الهاتف (رمز مصر ثابت)' : 'PHONE NUMBER (EGYPT)'}
                   </label>
@@ -395,7 +395,7 @@ export default function AuthPage({
 
                 {/* Governorate Select */}
                 <div className="space-y-1">
-                  <label className="text-[10px] luxury-tracking uppercase font-semibold text-zinc-500 dark:text-zinc-400 flex items-center gap-1">
+                  <label className="uppercase text-[10px] luxury-tracking font-semibold text-zinc-500 dark:text-zinc-400 flex items-center gap-1">
                     <MapPin size={12} className="text-amber-500" />
                     {lang === 'ar' ? 'المحافظة (جميع محافظات مصر)' : 'GOVERNORATE'}
                   </label>
@@ -416,7 +416,7 @@ export default function AuthPage({
             )}
 
             <div className="space-y-1">
-              <label className="text-[10px] luxury-tracking uppercase font-semibold text-zinc-500 dark:text-zinc-400">
+              <label className="uppercase text-[10px] luxury-tracking font-semibold text-zinc-500 dark:text-zinc-400">
                 {view === 'login' ? (lang === 'ar' ? 'البريد الإلكتروني' : 'EMAIL ADDRESS') : (lang === 'ar' ? 'البريد الإلكتروني' : 'EMAIL ADDRESS')}
               </label>
               <input
@@ -429,7 +429,7 @@ export default function AuthPage({
             </div>
 
             <div className="space-y-1 relative">
-              <label className="text-[10px] luxury-tracking uppercase font-semibold text-zinc-500 dark:text-zinc-400">
+              <label className="uppercase text-[10px] luxury-tracking font-semibold text-zinc-500 dark:text-zinc-400">
                 {lang === 'ar' ? 'كلمة المرور' : 'PASSWORD'}
               </label>
               <div className="relative">
@@ -452,7 +452,7 @@ export default function AuthPage({
 
             <button
               type="submit"
-              className="w-full bg-[#30001A] text-white dark:bg-white dark:text-[#30001A] py-4 rounded-md text-xs luxury-tracking font-extrabold uppercase tracking-[0.25em] hover:bg-[#1b000f] dark:hover:bg-[#f8f1f5] transition-all flex justify-center items-center gap-3 cursor-pointer shadow-xl shadow-[#30001A]/20 group mt-2"
+              className="w-full bg-[#30001A] text-white dark:bg-white dark:text-[#30001A] py-4 rounded-md text-xs luxury-tracking font-extrabold tracking-[0.25em] hover:bg-[#1b000f] dark:hover:bg-[#f8f1f5] transition-all flex justify-center items-center gap-3 cursor-pointer shadow-xl shadow-[#30001A]/20 group mt-2"
             >
               <span>{view === 'login' ? (lang === 'ar' ? 'تسجيل الدخول' : 'SIGN IN') : (lang === 'ar' ? 'إتمام التسجيل' : 'CREATE ACCOUNT')}</span>
               <ArrowRight size={16} className="rtl:rotate-180 group-hover:translate-x-1.5 rtl:group-hover:-translate-x-1.5 transition-transform" />

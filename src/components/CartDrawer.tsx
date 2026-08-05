@@ -190,6 +190,20 @@ export default function CartDrawer({
       // Save order to Firestore & localStorage
       await saveOrder(newOrder);
 
+      // Send Telegram Notification
+      if (storeSettings?.telegramBotToken && storeSettings?.telegramChatId) {
+        const text = `🔔 *New Order Received!*\n\n*Order ID:* \`${newOrder.id}\`\n*Customer:* ${name}\n*Phone:* ${phone}\n*Total:* ${totalAmount.toLocaleString()} EGP`;
+        fetch(`https://api.telegram.org/bot${storeSettings.telegramBotToken}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: storeSettings.telegramChatId,
+            text,
+            parse_mode: 'Markdown'
+          })
+        }).catch(err => console.error("Telegram error:", err));
+      }
+
       // Trigger admin notification
       await addAdminNotification({
         type: 'NEW_ORDER',
@@ -271,7 +285,7 @@ export default function CartDrawer({
                     <ShieldCheck size={36} />
                   </div>
                   <div className="space-y-2">
-                    <h3 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-wider">
+                    <h3 className="text-base font-black text-zinc-900 dark:text-white tracking-wider">
                       {lang === 'ar' ? 'تقييد حساب مسؤول المتجر' : 'ADMIN ACCOUNT RESTRICTION'}
                     </h3>
                     <p className="text-xs text-zinc-500 dark:text-zinc-400 max-w-xs leading-relaxed">
@@ -285,7 +299,7 @@ export default function CartDrawer({
                       handleClose();
                       if (onViewAdmin) onViewAdmin();
                     }}
-                    className="px-6 py-3.5 bg-amber-500 text-zinc-950 font-black text-xs uppercase tracking-wider rounded-xl shadow-xl hover:bg-amber-400 transition-all cursor-pointer flex items-center gap-2"
+                    className="px-6 py-3.5 bg-amber-500 text-zinc-950 font-black text-xs tracking-wider rounded-xl shadow-xl hover:bg-amber-400 transition-all cursor-pointer flex items-center gap-2"
                   >
                     <ShieldCheck size={16} />
                     <span>{lang === 'ar' ? 'الانتقال إلى لوحة التحكم' : 'OPEN ADMIN DASHBOARD'}</span>
@@ -297,8 +311,8 @@ export default function CartDrawer({
                   <div className="w-16 h-16 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-6">
                     <CheckCircle2 size={36} />
                   </div>
-                  <h3 className="serif-display text-3xl mb-2 text-zinc-900 dark:text-white uppercase font-light">THANK YOU FOR YOUR ORDER</h3>
-                  <p className="text-[10px] luxury-tracking text-zinc-500 dark:text-white/50 uppercase mb-6 font-medium">ORDER ID: #{placedOrder.id}</p>
+                  <h3 className="serif-display text-3xl mb-2 text-zinc-900 dark:text-white font-light">THANK YOU FOR YOUR ORDER</h3>
+                  <p className="text-[10px] luxury-tracking text-zinc-500 dark:text-white/50 mb-6 font-medium">ORDER ID: #{placedOrder.id}</p>
                   
                   <div className="w-full bg-zinc-50 dark:bg-[#0A0A0A] p-6 border border-black/5 dark:border-white/5 text-left mb-8 text-[11px] luxury-tracking space-y-3">
                     <div className="flex justify-between border-b border-black/5 dark:border-white/5 pb-2">
@@ -348,7 +362,7 @@ export default function CartDrawer({
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full bg-emerald-600 text-white py-4 text-[10px] luxury-tracking font-bold uppercase tracking-[0.2em] hover:bg-emerald-500 transition-colors flex items-center justify-center gap-2 mb-3 shadow-lg cursor-pointer"
+                    className="w-full bg-emerald-600 text-white py-4 text-[10px] luxury-tracking font-bold tracking-[0.2em] hover:bg-emerald-500 transition-colors flex items-center justify-center gap-2 mb-3 shadow-lg cursor-pointer"
                   >
                     <MessageCircle size={16} />
                     {lang === 'ar' ? 'إرسال تفاصيل الطلب عبر الواتساب' : 'SEND ORDER VIA WHATSAPP'}
@@ -356,7 +370,7 @@ export default function CartDrawer({
 
                   <button 
                     onClick={handleClose}
-                    className="w-full bg-black text-white dark:bg-white dark:text-black py-4 text-[10px] luxury-tracking font-bold uppercase tracking-[0.2em] hover:bg-zinc-800 dark:hover:bg-white/90 transition-colors"
+                    className="w-full bg-black text-white dark:bg-white dark:text-black py-4 text-[10px] luxury-tracking font-bold tracking-[0.2em] hover:bg-zinc-800 dark:hover:bg-white/90 transition-colors"
                   >
                     {lang === 'ar' ? 'متابعة التسوق' : 'CONTINUE SHOPPING'}
                   </button>
@@ -365,13 +379,13 @@ export default function CartDrawer({
                 /* Checkout Form View */
                 <form id="checkout-form" onSubmit={handlePlaceOrder} className="flex flex-col gap-5">
                   {error && (
-                    <div className="text-red-500 text-[10px] luxury-tracking uppercase p-3 bg-red-500/10 border border-red-500/20 font-bold">
+                    <div className="text-red-500 text-[10px] luxury-tracking p-3 bg-red-500/10 border border-red-500/20 font-bold">
                       {error}
                     </div>
                   )}
 
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[10px] luxury-tracking text-zinc-500 dark:text-white/50 uppercase font-medium">
+                    <label className="uppercase text-[10px] luxury-tracking text-zinc-500 dark:text-white/50 font-medium">
                       {lang === 'ar' ? 'الاسم بالكامل *' : 'FULL NAME *'}
                     </label>
                     <input
@@ -385,7 +399,7 @@ export default function CartDrawer({
                   </div>
 
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[10px] luxury-tracking text-zinc-500 dark:text-white/50 uppercase font-medium">
+                    <label className="uppercase text-[10px] luxury-tracking text-zinc-500 dark:text-white/50 font-medium">
                       {lang === 'ar' ? 'رقم الهاتف *' : 'PHONE NUMBER *'}
                     </label>
                     <input
@@ -399,7 +413,7 @@ export default function CartDrawer({
                   </div>
 
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[10px] luxury-tracking text-zinc-500 dark:text-white/50 uppercase font-medium">
+                    <label className="uppercase text-[10px] luxury-tracking text-zinc-500 dark:text-white/50 font-medium">
                       {lang === 'ar' ? 'البريد الإلكتروني *' : 'EMAIL ADDRESS *'}
                     </label>
                     <input
@@ -414,7 +428,7 @@ export default function CartDrawer({
 
                   {/* Governorate Dropdown Select */}
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[10px] luxury-tracking text-amber-600 dark:text-amber-400 uppercase font-bold flex items-center justify-between">
+                    <label className="uppercase text-[10px] luxury-tracking text-amber-600 dark:text-amber-400 font-bold flex items-center justify-between">
                       <span className="flex items-center gap-1.5">
                         <Truck size={13} />
                         {lang === 'ar' ? 'المحافظة (حساب سعر الشحن) *' : 'GOVERNORATE (SHIPPING CALCULATOR) *'}
@@ -443,7 +457,7 @@ export default function CartDrawer({
                   </div>
 
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[10px] luxury-tracking text-zinc-500 dark:text-white/50 uppercase font-medium">
+                    <label className="uppercase text-[10px] luxury-tracking text-zinc-500 dark:text-white/50 font-medium">
                       {lang === 'ar' ? 'عنوان التسليم التفصيلي *' : 'DELIVERY ADDRESS *'}
                     </label>
                     <textarea
@@ -451,19 +465,19 @@ export default function CartDrawer({
                       onChange={(e) => setAddress(e.target.value)}
                       placeholder={lang === 'ar' ? 'اسم الشارع، رقم المبنى، المنطقة...' : 'STREET, BUILDING, DISTRICT...'}
                       rows={2}
-                      className="w-full bg-transparent border border-black/20 dark:border-white/20 p-2.5 text-xs luxury-tracking text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-[#86868b] focus:outline-none focus:border-black dark:focus:border-white transition-colors uppercase font-medium"
+                      className="w-full bg-transparent border border-black/20 dark:border-white/20 p-2.5 text-xs luxury-tracking text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-[#86868b] focus:outline-none focus:border-black dark:focus:border-white transition-colors font-medium"
                       
                     />
                   </div>
 
-                  <div className="p-3 bg-zinc-50 dark:bg-[#0A0A0A] border border-black/5 dark:border-white/5 text-[10px] luxury-tracking text-zinc-500 dark:text-white/50 uppercase font-medium flex justify-between items-center">
+                  <div className="p-3 bg-zinc-50 dark:bg-[#0A0A0A] border border-black/5 dark:border-white/5 text-[10px] luxury-tracking text-zinc-500 dark:text-white/50 font-medium flex justify-between items-center">
                     <span>{lang === 'ar' ? 'طريقة الدفع' : 'PAYMENT METHOD'}</span>
                     <span className="text-zinc-900 dark:text-white font-bold">{lang === 'ar' ? 'الدفع عند الاستلام' : 'CASH ON DELIVERY'}</span>
                   </div>
 
                   {/* Coupon Promo Code Section */}
                   <div className="flex flex-col gap-2 pt-2 border-t border-black/10 dark:border-white/10">
-                    <label className="text-[10px] luxury-tracking text-amber-600 dark:text-amber-400 uppercase font-bold flex items-center gap-1.5">
+                    <label className="uppercase text-[10px] luxury-tracking text-amber-600 dark:text-amber-400 font-bold flex items-center gap-1.5">
                       <Ticket size={13} />
                       {lang === 'ar' ? 'هل لديك كود خصم (كوبون)؟' : 'HAVE A DISCOUNT COUPON?'}
                     </label>
@@ -480,7 +494,7 @@ export default function CartDrawer({
                         <button 
                           type="button"
                           onClick={handleRemoveCoupon}
-                          className="text-xs text-rose-500 hover:text-rose-700 font-bold uppercase underline cursor-pointer"
+                          className="text-xs text-rose-500 hover:text-rose-700 font-bold underline cursor-pointer"
                         >
                           {lang === 'ar' ? 'إزالة' : 'REMOVE'}
                         </button>
@@ -492,12 +506,12 @@ export default function CartDrawer({
                           value={couponInput}
                           onChange={(e) => setCouponInput(e.target.value.toUpperCase())}
                           placeholder="AVENTO10"
-                          className="flex-1 bg-zinc-50 dark:bg-[#0A0A0A] border border-black/20 dark:border-white/20 p-2 text-xs font-mono font-bold uppercase text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500"
+                          className="flex-1 bg-zinc-50 dark:bg-[#0A0A0A] border border-black/20 dark:border-white/20 p-2 text-xs font-mono font-bold text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500"
                         />
                         <button
                           type="button"
                           onClick={handleApplyCoupon}
-                          className="px-4 py-2 bg-black text-white dark:bg-white dark:text-black font-bold uppercase text-[10px] luxury-tracking hover:bg-zinc-800 dark:hover:bg-white/80 transition-colors cursor-pointer"
+                          className="px-4 py-2 bg-black text-white dark:bg-white dark:text-black font-bold text-[10px] luxury-tracking hover:bg-zinc-800 dark:hover:bg-white/80 transition-colors cursor-pointer"
                         >
                           {lang === 'ar' ? 'تطبيق' : 'APPLY'}
                         </button>
@@ -515,7 +529,7 @@ export default function CartDrawer({
               ) : cartItems.length === 0 ? (
                 /* Empty Bag View */
                 <div className="h-full flex flex-col items-center justify-center text-zinc-500 dark:text-[#86868b]">
-                  <p className="luxury-tracking text-sm mb-6 uppercase">YOUR BAG IS EMPTY</p>
+                  <p className="luxury-tracking text-sm mb-6">YOUR BAG IS EMPTY</p>
                   <button onClick={onClose} className="border-b border-zinc-500 hover:border-black hover:text-black dark:border-[#86868b] dark:hover:border-white dark:hover:text-white transition-all text-[10px] luxury-tracking pb-1">
                     RETURN TO SHOP
                   </button>
@@ -612,14 +626,14 @@ export default function CartDrawer({
                     type="button"
                     onClick={(e) => handlePlaceOrder(e as any)}
                     disabled={isSubmitting}
-                    className="w-full relative group bg-[#30001A] text-white dark:bg-white dark:text-[#30001A] py-4 px-6 overflow-hidden uppercase font-bold text-[10px] luxury-tracking tracking-[0.2em] hover:bg-[#1b000f] dark:hover:bg-[#f8f1f5] transition-colors shadow-lg shadow-[#30001A]/20 cursor-pointer disabled:opacity-50"
+                    className="w-full relative group bg-[#30001A] text-white dark:bg-white dark:text-[#30001A] py-4 px-6 overflow-hidden font-bold text-[10px] luxury-tracking tracking-[0.2em] hover:bg-[#1b000f] dark:hover:bg-[#f8f1f5] transition-colors shadow-lg shadow-[#30001A]/20 cursor-pointer disabled:opacity-50"
                   >
                     {isSubmitting ? (lang === 'ar' ? 'جاري الإرسال...' : 'PLACING ORDER...') : (lang === 'ar' ? 'تأكيد وإرسال الطلب الآن' : 'PLACE ORDER NOW')}
                   </button>
                 ) : (
                   <button 
                     onClick={() => setIsCheckout(true)}
-                    className="w-full relative group bg-[#30001A] text-white dark:bg-white dark:text-[#30001A] py-4 px-6 overflow-hidden uppercase font-bold text-[10px] luxury-tracking tracking-[0.2em] hover:bg-[#1b000f] dark:hover:bg-[#f8f1f5] transition-colors shadow-lg shadow-[#30001A]/20 cursor-pointer"
+                    className="w-full relative group bg-[#30001A] text-white dark:bg-white dark:text-[#30001A] py-4 px-6 overflow-hidden font-bold text-[10px] luxury-tracking tracking-[0.2em] hover:bg-[#1b000f] dark:hover:bg-[#f8f1f5] transition-colors shadow-lg shadow-[#30001A]/20 cursor-pointer"
                   >
                     {lang === 'ar' ? 'المتابعة لإتمام الطلب' : 'PROCEED TO CHECKOUT'}
                   </button>

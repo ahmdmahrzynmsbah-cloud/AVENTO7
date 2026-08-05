@@ -134,6 +134,8 @@ export interface StoreSettings {
   currency?: string;
   freeShippingThreshold?: number;
   marqueeText?: string;
+  telegramBotToken?: string;
+  telegramChatId?: string;
 }
 
 export interface RestockNotification {
