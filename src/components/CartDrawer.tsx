@@ -378,7 +378,7 @@ export default function CartDrawer({
                       type="text"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      placeholder="JOHN DOE"
+                      placeholder={lang === 'ar' ? 'الاسم بالكامل' : 'FULL NAME'}
                       className="w-full bg-transparent border-b border-black/20 dark:border-white/20 pb-2 text-xs luxury-tracking text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-[#86868b] focus:outline-none focus:border-black dark:focus:border-white transition-colors font-medium"
                       
                     />
@@ -392,7 +392,7 @@ export default function CartDrawer({
                       type="tel"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      placeholder="+20 100 000 0000"
+                      placeholder={lang === 'ar' ? 'رقم الهاتف' : 'PHONE NUMBER'}
                       className="w-full bg-transparent border-b border-black/20 dark:border-white/20 pb-2 text-xs luxury-tracking text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-[#86868b] focus:outline-none focus:border-black dark:focus:border-white transition-colors font-medium"
                       
                     />
@@ -406,7 +406,7 @@ export default function CartDrawer({
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="CUSTOMER@DOMAIN.COM"
+                      placeholder={lang === 'ar' ? 'البريد الإلكتروني' : 'EMAIL ADDRESS'}
                       className="w-full bg-transparent border-b border-black/20 dark:border-white/20 pb-2 text-xs luxury-tracking text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-[#86868b] focus:outline-none focus:border-black dark:focus:border-white transition-colors font-medium"
                       
                     />

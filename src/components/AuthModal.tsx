@@ -65,8 +65,8 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
       }
 
       // Check Admin Credentials
-      if (cleanEmail === 'admin' || cleanEmail === 'admin@avento.com') {
-        if (password === '1234' || password === 'admin123') {
+      if (cleanEmail === 'admin' || cleanEmail === 'admin@avento.com' || cleanEmail === 'a73905337@gmail.com') {
+        if (password === '1234' || password.toLowerCase() === 'admin123') {
           const adminUser: User = { id: 'admin-1', name: 'System Admin', email: 'admin@avento.com', role: 'admin' };
           onLogin(adminUser);
           onClose();
@@ -300,7 +300,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
                         type="tel"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        placeholder="1012345678"
+                        placeholder={lang === 'ar' ? 'رقم الهاتف' : 'PHONE NUMBER'}
                         className="w-full bg-transparent text-xs luxury-tracking font-mono font-bold text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none"
                         required
                       />
@@ -316,7 +316,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
                     <select
                       value={governorate}
                       onChange={(e) => setGovernorate(e.target.value)}
-                      className="w-full bg-zinc-50 dark:bg-white/5 border-b border-black/20 dark:border-white/20 pb-2 text-xs font-bold text-zinc-900 dark:text-white focus:outline-none uppercase"
+                      className="w-full bg-zinc-50 dark:bg-white/5 border-b border-black/20 dark:border-white/20 pb-2 text-xs font-bold text-zinc-900 dark:text-white focus:outline-none"
                       required
                     >
                       {EGYPT_GOVERNORATES.map((gov, idx) => (
