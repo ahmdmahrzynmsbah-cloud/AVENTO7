@@ -152,9 +152,22 @@ export default function AdminPanel({
   const [facebookUrl, setFacebookUrl] = useState(settings.socialLinks?.facebook || '');
   const [instagramUrl, setInstagramUrl] = useState(settings.socialLinks?.instagram || '');
   const [tiktokUrl, setTiktokUrl] = useState(settings.socialLinks?.tiktok || '');
+  const [storeUrl, setStoreUrl] = useState(settings.storeUrl || '');
   const [telegramBotToken, setTelegramBotToken] = useState(settings.telegramBotToken || '');
   const [telegramChatId, setTelegramChatId] = useState(settings.telegramChatId || '');
   const [socialSavedSuccess, setSocialSavedSuccess] = useState(false);
+
+  useEffect(() => {
+    setStoreName(settings.storeName || '');
+    setStoreUrl(settings.storeUrl || '');
+    setContactEmail(settings.supportEmail || '');
+    setContactPhone(settings.supportPhone || '');
+    setStoreCurrency(settings.currency || 'EGP');
+    setFreeShippingThreshold(settings.freeShippingThreshold || 0);
+    setMarqueeText(settings.marqueeText || '');
+    setTelegramBotToken(settings.telegramBotToken || '');
+    setTelegramChatId(settings.telegramChatId || '');
+  }, [settings]);
 
   useEffect(() => {
     if (settings.socialLinks) {
@@ -171,7 +184,9 @@ export default function AdminPanel({
         facebook: facebookUrl.trim(),
         instagram: instagramUrl.trim(),
         tiktok: tiktokUrl.trim()
-      }
+      },
+      telegramBotToken: telegramBotToken.trim(),
+      telegramChatId: telegramChatId.trim()
     });
     setSocialSavedSuccess(true);
     setTimeout(() => setSocialSavedSuccess(false), 3000);
@@ -305,6 +320,7 @@ export default function AdminPanel({
     onUpdateSettings({
       ...settings,
       storeName: storeName.trim(),
+      storeUrl: storeUrl.trim(),
       supportEmail: contactEmail.trim(),
       supportPhone: contactPhone.trim(),
       currency: storeCurrency.trim(),
@@ -314,7 +330,9 @@ export default function AdminPanel({
         facebook: facebookUrl.trim(),
         instagram: instagramUrl.trim(),
         tiktok: tiktokUrl.trim()
-      }
+      },
+      telegramBotToken: telegramBotToken.trim(),
+      telegramChatId: telegramChatId.trim()
     });
     if (currentUser && onUpdateCurrentUser) {
       try {
@@ -425,7 +443,7 @@ export default function AdminPanel({
                           reply_markup: {
                             inline_keyboard: [
                               [
-                                { text: "🖨️ طباعة الفاتورة", url: `${window.location.origin.replace("ais-dev-", "ais-pre-")}/?print_order=${orderId}` }
+                                { text: "🖨️ طباعة الفاتورة", url: `${settings.storeUrl || window.location.origin.replace("ais-dev-", "ais-pre-")}/?print_order=${orderId}` }
                               ]
                             ]
                           }
@@ -3800,6 +3818,18 @@ export default function AdminPanel({
                       value={storeName}
                       onChange={(e) => setStoreName(e.target.value)}
                       className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2.5 font-bold text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[10px] font-bold uppercase text-zinc-500 dark:text-zinc-400">
+                      {lang === 'ar' ? 'رابط المتجر (يستخدم في إشعارات تليجرام)' : 'STORE URL'}
+                    </label>
+                    <input
+                      type="url"
+                      value={storeUrl}
+                      onChange={(e) => setStoreUrl(e.target.value)}
+                      placeholder="https://mystore.com"
+                      className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2.5 font-mono text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500"
                     />
                   </div>
 

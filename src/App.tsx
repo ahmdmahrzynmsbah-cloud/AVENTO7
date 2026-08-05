@@ -137,17 +137,7 @@ export default function App() {
     }
   }, []);
   const [storeSettings, setStoreSettings] = useState<StoreSettings>(defaultSettings);
-  useEffect(() => {
-    if (storeSettings && !storeSettings.telegramBotToken && storeSettings.storeName) {
-      import('./lib/db').then(({ saveSettings }) => {
-        saveSettings({
-          ...storeSettings,
-          telegramBotToken: "8943745115:AAGvx28k0SZjExCvpRRbWInaSU-E4aEPR9o",
-          telegramChatId: "7627021927"
-        }).then(() => console.log("Force updated telegram settings"));
-      });
-    }
-  }, [storeSettings]);
+  
 
   const handleOpenTrackOrder = () => {
     setCustomerTab('orders');

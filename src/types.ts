@@ -136,6 +136,7 @@ export interface StoreSettings {
   marqueeText?: string;
   telegramBotToken?: string;
   telegramChatId?: string;
+  storeUrl?: string;
 }
 
 export interface RestockNotification {
