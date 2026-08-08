@@ -89,7 +89,7 @@ export default function ProductToolbar({
   return (
     <div className="w-full mb-6 sm:mb-8" role="toolbar" aria-label={isRTL ? "شريط أداة تحكم المنتجات" : "Product grid toolbar"}>
       {/* MAIN TOOLBAR CONTAINER */}
-      <div className="w-full bg-white/90 dark:bg-[#0c060a]/90 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-[22px] p-2 sm:p-3.5 shadow-lg transition-all duration-300">
+      <div className="w-full bg-white/90 dark:bg-[#0c060a]/90 backdrop-blur-xl border border-wine/10 dark:border-white/10 rounded-[22px] p-2 sm:p-3.5 shadow-lg transition-all duration-300">
         
         {/* TOP ROW: SEARCH, FILTER BUTTON & SORT */}
         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2.5 sm:gap-3">
@@ -106,7 +106,7 @@ export default function ProductToolbar({
               className={`relative min-h-[44px] w-auto min-w-[40%] px-2 sm:px-4 rounded-xl text-xs font-bold uppercase luxury-tracking flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer select-none shrink-0 border focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 ${
                 activeFilterCount > 0
                   ? 'bg-[#30001A] text-white border-[#30001A] dark:bg-rose-300 dark:text-[#30001A] dark:border-rose-300 shadow-md scale-[1.02]'
-                  : 'bg-zinc-100 hover:bg-zinc-200 text-zinc-900 border-black/10 dark:bg-white/10 dark:hover:bg-white/15 dark:text-white dark:border-white/15'
+                  : 'bg-zinc-100 hover:bg-zinc-200 text-wine border-wine/10 dark:bg-white/10 dark:hover:bg-white/15 dark:text-white dark:border-white/15'
               }`}
             >
               <SlidersHorizontal size={16} className={activeFilterCount > 0 ? "animate-pulse text-amber-300 dark:text-[#30001A]" : "text-amber-500"} />
@@ -114,7 +114,7 @@ export default function ProductToolbar({
                 {isRTL ? 'تصفية' : 'FILTER'}
               </span>
               {activeFilterCount > 0 && (
-                <span className="min-w-[20px] h-5 px-1.5 rounded-full bg-amber-400 text-zinc-950 font-mono font-black text-[10px] flex items-center justify-center shadow-xs">
+                <span className="min-w-[20px] h-5 px-1.5 rounded-full bg-amber-400 text-wine font-mono font-black text-[10px] flex items-center justify-center shadow-xs">
                   {activeFilterCount}
                 </span>
               )}
@@ -127,14 +127,14 @@ export default function ProductToolbar({
                 value={filters.searchQuery || ''}
                 onChange={(e) => onFilterChange({ ...filters, searchQuery: e.target.value })}
                 placeholder={isRTL ? 'ابحث عن منتج أو نوع...' : 'Search collection...'}
-                className="w-full h-11 bg-zinc-100/80 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3.5 pl-9 rtl:pl-3.5 rtl:pr-9 text-xs font-semibold text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-amber-500 dark:focus:border-rose-400 transition-colors"
+                className="w-full h-11 bg-zinc-100/80 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl px-3.5 pl-9 rtl:pl-3.5 rtl:pr-9 text-xs font-semibold text-wine dark:text-white placeholder-zinc-400 focus:outline-none focus:border-amber-500 dark:focus:border-rose-400 transition-colors"
                 aria-label={isRTL ? 'البحث عن منتج' : 'Search products'}
               />
               <Search size={15} className="absolute left-3 rtl:left-auto rtl:right-3 text-zinc-400 pointer-events-none" />
               {filters.searchQuery && (
                 <button
                   onClick={() => onFilterChange({ ...filters, searchQuery: '' })}
-                  className="absolute right-2.5 rtl:right-auto rtl:left-2.5 p-1 rounded-full text-zinc-400 hover:text-zinc-900 dark:hover:text-white cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
+                  className="absolute right-2.5 rtl:right-auto rtl:left-2.5 p-1 rounded-full text-zinc-400 hover:text-wine dark:hover:text-white cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
                   aria-label="Clear search"
                 >
                   <X size={14} />
@@ -144,7 +144,7 @@ export default function ProductToolbar({
 
             {/* Item Count Display (Desktop / Tablet) */}
             <div className="hidden lg:flex items-center gap-1.5 px-3 py-2 text-[11px] font-mono font-bold text-zinc-500 dark:text-zinc-400 shrink-0">
-              <span className="text-zinc-900 dark:text-white">{filteredCount}</span>
+              <span className="text-wine dark:text-white">{filteredCount}</span>
               <span>/</span>
               <span>{totalCount}</span>
               <span className="text-[10px] luxury-tracking uppercase ml-1 rtl:mr-1 rtl:ml-0 font-sans">
@@ -157,40 +157,40 @@ export default function ProductToolbar({
           <div className="flex flex-wrap md:flex-nowrap items-center justify-between md:justify-end gap-2 sm:gap-3 shrink-0">
             
             {/* Sort Dropdown */}
-            <div className="relative w-full md:w-auto md:flex-none min-h-[44px] flex items-center bg-zinc-100/80 dark:bg-white/10 border border-black/10 dark:border-white/15 rounded-xl px-3 py-1 hover:border-amber-500/50 transition-colors">
+            <div className="relative w-full md:w-auto md:flex-none min-h-[44px] flex items-center bg-zinc-100/80 dark:bg-white/10 border border-wine/10 dark:border-white/15 rounded-xl px-3 py-1 hover:border-amber-500/50 transition-colors">
               <ArrowUpDown size={14} className="text-amber-500 shrink-0 mr-2 rtl:mr-0 rtl:ml-2" />
               <select
                 value={sortBy}
                 onChange={(e) => onSortChange(e.target.value as SortOption)}
                 aria-label={isRTL ? "ترتيب المنتجات" : "Sort products"}
-                className="w-full bg-transparent text-xs font-bold uppercase text-zinc-900 dark:text-white focus:outline-none cursor-pointer pr-5 rtl:pr-0 rtl:pl-5 py-2.5 appearance-none"
+                className="w-full bg-transparent text-xs font-bold uppercase text-wine dark:text-white focus:outline-none cursor-pointer pr-5 rtl:pr-0 rtl:pl-5 py-2.5 appearance-none"
               >
-                <option value="featured" className="bg-white text-black dark:bg-[#120810] dark:text-white">
+                <option value="featured" className="bg-white text-wine dark:bg-[#120810] dark:text-white">
                   {isRTL ? 'المميزة / الافتراضي' : 'Featured'}
                 </option>
-                <option value="newest" className="bg-white text-black dark:bg-[#120810] dark:text-white">
+                <option value="newest" className="bg-white text-wine dark:bg-[#120810] dark:text-white">
                   {isRTL ? 'وصل حديثاً' : 'Newest First'}
                 </option>
-                <option value="price-asc" className="bg-white text-black dark:bg-[#120810] dark:text-white">
+                <option value="price-asc" className="bg-white text-wine dark:bg-[#120810] dark:text-white">
                   {isRTL ? 'السعر: من الأقل للأعلى' : 'Price: Low → High'}
                 </option>
-                <option value="price-desc" className="bg-white text-black dark:bg-[#120810] dark:text-white">
+                <option value="price-desc" className="bg-white text-wine dark:bg-[#120810] dark:text-white">
                   {isRTL ? 'السعر: من الأعلى للأقل' : 'Price: High → Low'}
                 </option>
-                <option value="best-selling" className="bg-white text-black dark:bg-[#120810] dark:text-white">
+                <option value="best-selling" className="bg-white text-wine dark:bg-[#120810] dark:text-white">
                   {isRTL ? 'الأكثر مبيعاً' : 'Best Selling'}
                 </option>
-                <option value="rating" className="bg-white text-black dark:bg-[#120810] dark:text-white">
+                <option value="rating" className="bg-white text-wine dark:bg-[#120810] dark:text-white">
                   {isRTL ? 'أعلى تقييم' : 'Highest Rated'}
                 </option>
-                <option value="discount" className="bg-white text-black dark:bg-[#120810] dark:text-white">
+                <option value="discount" className="bg-white text-wine dark:bg-[#120810] dark:text-white">
                   {isRTL ? 'أعلى خصم' : 'Biggest Discount'}
                 </option>
               </select>
             </div>
 
             {/* View Mode Switcher Buttons */}
-            <div className="flex items-center gap-1 bg-zinc-100/80 dark:bg-white/10 p-1 rounded-xl border border-black/10 dark:border-white/15 shrink-0 ml-auto rtl:mr-auto rtl:ml-0" role="radiogroup" aria-label={isRTL ? "نمط العرض" : "Grid layout view mode"}>
+            <div className="flex items-center gap-1 bg-zinc-100/80 dark:bg-white/10 p-1 rounded-xl border border-wine/10 dark:border-white/15 shrink-0 ml-auto rtl:mr-auto rtl:ml-0" role="radiogroup" aria-label={isRTL ? "نمط العرض" : "Grid layout view mode"}>
               
               {/* 2 Grid Mode */}
               <button
@@ -202,7 +202,7 @@ export default function ProductToolbar({
                 className={`min-w-[44px] min-h-[44px] h-[44px] px-2 rounded-lg flex items-center justify-center transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 ${
                   viewMode === '2'
                     ? 'bg-[#30001A] text-white dark:bg-rose-300 dark:text-[#30001A] shadow-md font-bold scale-[1.05]'
-                    : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
+                    : 'text-zinc-500 hover:text-wine dark:text-zinc-400 dark:hover:text-white'
                 }`}
               >
                 <svg width="15" height="15" viewBox="0 0 18 18" fill="currentColor">
@@ -221,7 +221,7 @@ export default function ProductToolbar({
                 className={`hidden sm:flex min-w-[44px] min-h-[44px] h-[44px] px-2 rounded-lg items-center justify-center transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 ${
                   viewMode === '3'
                     ? 'bg-[#30001A] text-white dark:bg-rose-300 dark:text-[#30001A] shadow-md font-bold scale-[1.05]'
-                    : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
+                    : 'text-zinc-500 hover:text-wine dark:text-zinc-400 dark:hover:text-white'
                 }`}
               >
                 <svg width="15" height="15" viewBox="0 0 18 18" fill="currentColor">
@@ -241,7 +241,7 @@ export default function ProductToolbar({
                 className={`hidden md:flex min-w-[44px] min-h-[44px] h-[44px] px-2 rounded-lg items-center justify-center transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 ${
                   viewMode === '4'
                     ? 'bg-[#30001A] text-white dark:bg-rose-300 dark:text-[#30001A] shadow-md font-bold scale-[1.05]'
-                    : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
+                    : 'text-zinc-500 hover:text-wine dark:text-zinc-400 dark:hover:text-white'
                 }`}
               >
                 <svg width="15" height="15" viewBox="0 0 18 18" fill="currentColor">
@@ -262,7 +262,7 @@ export default function ProductToolbar({
                 className={`min-w-[44px] min-h-[44px] h-[44px] px-2 rounded-lg flex items-center justify-center transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 ${
                   viewMode === 'list'
                     ? 'bg-[#30001A] text-white dark:bg-rose-300 dark:text-[#30001A] shadow-md font-bold scale-[1.05]'
-                    : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
+                    : 'text-zinc-500 hover:text-wine dark:text-zinc-400 dark:hover:text-white'
                 }`}
               >
                 <svg width="15" height="15" viewBox="0 0 18 18" fill="currentColor">
@@ -278,7 +278,7 @@ export default function ProductToolbar({
 
         {/* ACTIVE FILTER REMOVABLE CHIPS BAR */}
         {activeFilterCount > 0 && (
-          <div className="mt-3 pt-3 border-t border-black/10 dark:border-white/10 flex flex-wrap items-center gap-2 animate-fadeIn">
+          <div className="mt-3 pt-3 border-t border-wine/10 dark:border-white/10 flex flex-wrap items-center gap-2 animate-fadeIn">
             <span className="text-[10px] font-bold uppercase luxury-tracking text-zinc-500 dark:text-zinc-400 mr-1 rtl:ml-1 rtl:mr-0 flex items-center gap-1">
               <Filter size={11} className="text-amber-500" />
               {isRTL ? 'التصفيات النشطة:' : 'Active Filters:'}

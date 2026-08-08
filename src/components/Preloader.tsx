@@ -63,18 +63,18 @@ export default function Preloader({ onComplete, lang = 'en' }: { onComplete: () 
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-[100] bg-[#fdfdfd] text-zinc-900 dark:bg-[#050505] dark:text-[#f5f5f7] flex flex-col justify-between p-8 md:p-16 select-none font-sans transition-colors duration-500"
+      className="fixed inset-0 z-[100] bg-[#fdfdfd] text-wine dark:bg-[#050505] dark:text-[#f5f5f7] flex flex-col justify-between p-8 md:p-16 select-none font-sans transition-colors duration-500"
     >
       {/* Top Header */}
       <div className="flex justify-between items-center text-[10px] luxury-tracking uppercase tracking-[0.3em] text-zinc-500 dark:text-white/50 font-medium">
-        <span>{lang === 'ar' ? 'أتيلييه أفينتو 7' : 'AVENTO7 ATELIER'}</span>
+        <span>{lang === 'ar' ? 'أتيلييه أفينتو 7' : 'KEMET ATELIER'}</span>
         <span>{lang === 'ar' ? 'أزياء راقية 2026' : 'HAUTE COUTURE 2026'}</span>
       </div>
 
       {/* Center Brand Monogram */}
       <div ref={textRef} className="flex flex-col items-center justify-center text-center my-auto">
-        <h1 className="brand-logo text-6xl md:text-8xl lg:text-9xl text-zinc-900 dark:text-white font-normal tracking-tight uppercase">
-          AVENTO7
+        <h1 className="brand-logo text-6xl md:text-8xl lg:text-9xl text-wine dark:text-white font-normal tracking-tight uppercase">
+          KEMET
         </h1>
         <p className="text-[10px] luxury-tracking uppercase tracking-[0.4em] text-zinc-500 dark:text-white/60 mt-3 font-semibold">
           {lang === 'ar' ? 'باريس — طوكيو — نيويورك' : 'PARIS — TOKYO — NEW YORK'}
@@ -83,15 +83,15 @@ export default function Preloader({ onComplete, lang = 'en' }: { onComplete: () 
 
       {/* Bottom Progress Bar & Percentage */}
       <div className="flex flex-col gap-4 w-full max-w-xl mx-auto">
-        <div className="w-full h-[1px] bg-black/10 dark:bg-white/10 relative overflow-hidden">
+        <div className="w-full h-[1px] bg-wine/10 dark:bg-white/10 relative overflow-hidden">
           <div
             ref={lineRef}
-            className={`absolute inset-0 bg-zinc-900 dark:bg-white transform scale-x-0 ${lang === 'ar' ? 'origin-right' : 'origin-left'}`}
+            className={`absolute inset-0 bg-wine dark:bg-white transform scale-x-0 ${lang === 'ar' ? 'origin-right' : 'origin-left'}`}
           ></div>
         </div>
         <div className="flex justify-between items-center text-[10px] luxury-tracking uppercase tracking-[0.25em] text-zinc-500 dark:text-white/60 font-medium">
           <span>{lang === 'ar' ? 'جاري تجهيز التجربة' : 'LOADING EXPERIENCE'}</span>
-          <span ref={counterRef} className="font-mono text-zinc-900 dark:text-white text-xs font-bold">{String(counter).padStart(3, '0')}%</span>
+          <span ref={counterRef} className="font-mono text-wine dark:text-white text-xs font-bold">{String(counter).padStart(3, '0')}%</span>
         </div>
       </div>
     </div>

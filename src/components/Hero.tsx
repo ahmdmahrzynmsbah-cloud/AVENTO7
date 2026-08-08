@@ -61,7 +61,7 @@ export default function Hero({ images, lang = 'en' }: { images: string[], lang?:
     >
       {/* Background Slides */}
       <div className="absolute inset-0 w-full h-full">
-        <div className="absolute inset-0 bg-black/25 dark:bg-black/50 z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-wine/25 dark:bg-wine/50 z-10 pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#fcfcfc] via-transparent to-black/40 dark:from-[#050505] dark:via-transparent dark:to-black/80 z-10 pointer-events-none" />
         
         {images.map((img, idx) => (
@@ -94,7 +94,7 @@ export default function Hero({ images, lang = 'en' }: { images: string[], lang?:
             <div 
               className={`h-[2px] transition-all duration-700 rounded-full ${
                 idx === currentIndex 
-                  ? 'w-10 sm:w-16 bg-zinc-900 dark:bg-white shadow-md' 
+                  ? 'w-10 sm:w-16 bg-wine dark:bg-white shadow-md' 
                   : 'w-5 sm:w-8 bg-zinc-400/50 dark:bg-white/30 group-hover:bg-zinc-800 dark:group-hover:bg-white/60'
               }`} 
             />

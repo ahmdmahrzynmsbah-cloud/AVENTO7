@@ -118,19 +118,19 @@ export default function ProductModal({
         exit={{ opacity: 0 }}
         className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 md:p-8"
       >
-        <div className="absolute inset-0 bg-black/70 dark:bg-black/85 backdrop-blur-md" onClick={onClose} />
+        <div className="absolute inset-0 bg-wine/70 dark:bg-wine/85 backdrop-blur-md" onClick={onClose} />
         
         <motion.div
           initial={{ opacity: 0, y: 40, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.95 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className="relative w-full max-w-5xl bg-white text-zinc-900 dark:bg-[#0a0a0a] dark:text-white border border-black/10 dark:border-white/10 flex flex-col md:flex-row overflow-hidden max-h-[92vh] md:max-h-[88vh] shadow-2xl rounded-2xl md:rounded-3xl"
+          className="relative w-full max-w-5xl bg-white text-wine dark:bg-[#0a0a0a] dark:text-white border border-wine/10 dark:border-white/10 flex flex-col md:flex-row overflow-hidden max-h-[92vh] md:max-h-[88vh] shadow-2xl rounded-2xl md:rounded-3xl"
         >
           {/* Close Modal Button */}
           <button 
             onClick={onClose}
-            className="absolute top-4 right-4 z-20 w-10 h-10 bg-white/80 dark:bg-black/60 backdrop-blur-md flex items-center justify-center text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white transition-colors rounded-full border border-black/10 dark:border-white/10 shadow-lg cursor-pointer"
+            className="absolute top-4 right-4 z-20 w-10 h-10 bg-white/80 dark:bg-wine/60 backdrop-blur-md flex items-center justify-center text-wine/80 dark:text-white/80 hover:text-wine dark:hover:text-white transition-colors rounded-full border border-wine/10 dark:border-white/10 shadow-lg cursor-pointer"
           >
             <X size={20} />
           </button>
@@ -138,7 +138,7 @@ export default function ProductModal({
           {/* Luxury Gallery Image Section */}
           <div className="w-full md:w-1/2 h-[45vh] md:h-auto min-h-[350px] md:min-h-[500px] relative bg-neutral-100 dark:bg-[#070707] flex flex-col justify-between overflow-hidden group">
             {/* Main Active Image Viewport */}
-            <div className="relative w-full flex-1 overflow-hidden flex items-center justify-center bg-black/5 dark:bg-white/5">
+            <div className="relative w-full flex-1 overflow-hidden flex items-center justify-center bg-wine/5 dark:bg-white/5">
               <AnimatePresence mode="wait">
                 <motion.img 
                   key={activeImageIndex}
@@ -165,14 +165,14 @@ export default function ProductModal({
                   {lang === 'ar' ? 'خصم' : 'SALE'} {Math.round((1 - product.price / product.originalPrice) * 100)}%
                 </div>
               ) : product.isNew ? (
-                <div className="absolute top-4 left-4 rtl:left-auto rtl:right-4 z-10 text-[10px] luxury-tracking px-3 py-1.5 border border-black/10 dark:border-white/20 bg-black/70 text-white backdrop-blur-md uppercase font-semibold rounded-md">
+                <div className="absolute top-4 left-4 rtl:left-auto rtl:right-4 z-10 text-[10px] luxury-tracking px-3 py-1.5 border border-wine/10 dark:border-white/20 bg-wine/70 text-white backdrop-blur-md uppercase font-semibold rounded-md">
                   {lang === 'ar' ? 'جديد' : 'NEW'}
                 </div>
               ) : null}
 
               {/* Image Index Counter Badge */}
               {galleryImages.length > 1 && (
-                <div className="absolute top-4 right-16 z-10 text-[10px] font-mono font-bold tracking-widest px-2.5 py-1 bg-black/60 text-white backdrop-blur-md rounded-full border border-white/10">
+                <div className="absolute top-4 right-16 z-10 text-[10px] font-mono font-bold tracking-widest px-2.5 py-1 bg-wine/60 text-white backdrop-blur-md rounded-full border border-white/10">
                   {activeImageIndex + 1} / {galleryImages.length}
                 </div>
               )}
@@ -180,7 +180,7 @@ export default function ProductModal({
               {/* Zoom trigger icon */}
               <button
                 onClick={() => setIsFullscreenZoom(true)}
-                className="absolute bottom-4 right-4 z-10 p-2.5 bg-black/50 text-white hover:bg-black/80 backdrop-blur-md rounded-full transition-opacity opacity-0 group-hover:opacity-100 cursor-pointer border border-white/20"
+                className="absolute bottom-4 right-4 z-10 p-2.5 bg-wine/50 text-white hover:bg-wine/80 backdrop-blur-md rounded-full transition-opacity opacity-0 group-hover:opacity-100 cursor-pointer border border-white/20"
                 title={lang === 'ar' ? 'تكبير الصورة' : 'Zoom Image'}
               >
                 <Maximize2 size={14} />
@@ -191,13 +191,13 @@ export default function ProductModal({
                 <>
                   <button 
                     onClick={handlePrevImage}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-black/40 hover:bg-black/80 text-white backdrop-blur-md flex items-center justify-center rounded-full transition-all border border-white/20 cursor-pointer opacity-80 hover:opacity-100 hover:scale-110"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-wine/40 hover:bg-wine/80 text-white backdrop-blur-md flex items-center justify-center rounded-full transition-all border border-white/20 cursor-pointer opacity-80 hover:opacity-100 hover:scale-110"
                   >
                     <ChevronLeft size={20} />
                   </button>
                   <button 
                     onClick={handleNextImage}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-black/40 hover:bg-black/80 text-white backdrop-blur-md flex items-center justify-center rounded-full transition-all border border-white/20 cursor-pointer opacity-80 hover:opacity-100 hover:scale-110"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-wine/40 hover:bg-wine/80 text-white backdrop-blur-md flex items-center justify-center rounded-full transition-all border border-white/20 cursor-pointer opacity-80 hover:opacity-100 hover:scale-110"
                   >
                     <ChevronRight size={20} />
                   </button>
@@ -207,7 +207,7 @@ export default function ProductModal({
 
             {/* Gallery Thumbnail Strip at Bottom */}
             {galleryImages.length > 1 && (
-              <div className="p-3 bg-black/20 dark:bg-black/60 backdrop-blur-md border-t border-black/10 dark:border-white/10 flex items-center gap-2.5 overflow-x-auto scrollbar-none shrink-0 justify-center">
+              <div className="p-3 bg-wine/20 dark:bg-wine/60 backdrop-blur-md border-t border-wine/10 dark:border-white/10 flex items-center gap-2.5 overflow-x-auto scrollbar-none shrink-0 justify-center">
                 {galleryImages.map((img, idx) => (
                   <button
                     key={idx}
@@ -230,17 +230,17 @@ export default function ProductModal({
             <div className="mb-6">
               <div className="flex items-center gap-4 mb-3">
                 <span className="text-[10px] luxury-tracking uppercase text-zinc-500 dark:text-[#86868b] font-bold">{product.category}</span>
-                <span className="w-1 h-1 bg-black/20 dark:bg-white/20 rounded-full"></span>
+                <span className="w-1 h-1 bg-wine/20 dark:bg-white/20 rounded-full"></span>
                 <span className="text-[10px] luxury-tracking uppercase text-zinc-500 dark:text-[#86868b] font-bold">
                   {lang === 'ar' ? (product.gender === 'Men' ? 'رجالي' : product.gender === 'Women' ? 'نسائي' : 'للجنسين') : product.gender}
                 </span>
               </div>
-              <h2 className="serif-display text-2xl sm:text-3xl md:text-4xl text-zinc-900 dark:text-white mb-3 font-medium tracking-tight">
+              <h2 className="serif-display text-2xl sm:text-3xl md:text-4xl text-wine dark:text-white mb-3 font-medium tracking-tight">
                 {lang === 'ar' ? (product.nameAr || product.name) : product.name}
               </h2>
               <div className="flex items-center gap-4 mb-5">
                 <div className="flex items-end gap-2">
-                  <span className="text-xl font-extrabold font-mono text-zinc-900 dark:text-white">{product.price.toLocaleString()} {lang === 'ar' ? 'ج.م' : 'EGP'}</span>
+                  <span className="text-xl font-extrabold font-mono text-wine dark:text-white">{product.price.toLocaleString()} {lang === 'ar' ? 'ج.م' : 'EGP'}</span>
                   {product.originalPrice && product.originalPrice > product.price && (
                     <span className="text-sm font-medium line-through text-zinc-400 mb-[2px]">
                       {product.originalPrice.toLocaleString()} {lang === 'ar' ? 'ج.م' : 'EGP'}
@@ -249,7 +249,7 @@ export default function ProductModal({
                 </div>
                 {product.rating && (
                   <div className="flex items-center gap-2">
-                    <span className="w-[1px] h-4 bg-black/20 dark:bg-white/20"></span>
+                    <span className="w-[1px] h-4 bg-wine/20 dark:bg-white/20"></span>
                     <div className="flex items-center text-[#d4af37]">
                       <Star size={14} fill="currentColor" />
                       <span className="ml-1 rtl:mr-1 rtl:ml-0 text-sm font-bold">{product.rating}</span>
@@ -293,8 +293,8 @@ export default function ProductModal({
                       onClick={() => setSelectedSize(size)}
                       className={`w-11 h-11 flex items-center justify-center border rounded-lg text-xs transition-colors cursor-pointer ${
                         selectedSize === size 
-                          ? 'border-black bg-black text-white dark:border-white dark:bg-white dark:text-black font-extrabold shadow-md' 
-                          : 'border-black/20 text-zinc-800 hover:border-black dark:border-white/20 dark:text-white dark:hover:border-white/60'
+                          ? 'border-wine bg-wine text-white dark:border-white dark:bg-white dark:text-wine font-extrabold shadow-md' 
+                          : 'border-wine/20 text-zinc-800 hover:border-wine dark:border-white/20 dark:text-white dark:hover:border-white/60'
                       }`}
                     >
                       {size}
@@ -306,7 +306,7 @@ export default function ProductModal({
 
             {/* Bottom Actions: Sold Out Subscription or Quantity & Add to Cart */}
             {product.isSoldOut ? (
-              <div className="mt-auto pt-6 border-t border-black/10 dark:border-white/10">
+              <div className="mt-auto pt-6 border-t border-wine/10 dark:border-white/10">
                 {isSubscribedSuccess ? (
                   <div className="p-5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 rounded-xl text-center space-y-2 animate-fadeIn">
                     <CheckCircle size={24} className="mx-auto text-emerald-500" />
@@ -341,12 +341,12 @@ export default function ProductModal({
                         value={subscriberContact}
                         onChange={(e) => setSubscriberContact(e.target.value)}
                         placeholder={lang === 'ar' ? 'بريدك أو رقم الهاتف (مثال: 010...)' : 'Email or Phone number...'}
-                        className="flex-1 bg-zinc-50 dark:bg-white/5 border border-black/20 dark:border-white/20 rounded-lg px-3.5 py-2.5 text-xs text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-amber-500 font-mono"
+                        className="flex-1 bg-zinc-50 dark:bg-white/5 border border-wine/20 dark:border-white/20 rounded-lg px-3.5 py-2.5 text-xs text-wine dark:text-white placeholder-zinc-400 focus:outline-none focus:border-amber-500 font-mono"
                       />
                       <button
                         onClick={handleSubscribeRestock}
                         disabled={!subscriberContact.trim() || isSubmittingSub}
-                        className="px-5 py-2.5 bg-amber-500 text-black font-extrabold uppercase text-xs luxury-tracking hover:bg-amber-400 disabled:opacity-50 transition-all rounded-lg cursor-pointer shrink-0 shadow-md flex items-center justify-center gap-1.5"
+                        className="px-5 py-2.5 bg-amber-500 text-wine font-extrabold uppercase text-xs luxury-tracking hover:bg-amber-400 disabled:opacity-50 transition-all rounded-lg cursor-pointer shrink-0 shadow-md flex items-center justify-center gap-1.5"
                       >
                         <Bell size={13} />
                         <span>{lang === 'ar' ? 'أبلغني عند التوفر' : 'NOTIFY ME'}</span>
@@ -356,20 +356,20 @@ export default function ProductModal({
                 )}
               </div>
             ) : (
-              <div className="mt-auto pt-6 border-t border-black/10 dark:border-white/10 flex flex-col gap-4">
+              <div className="mt-auto pt-6 border-t border-wine/10 dark:border-white/10 flex flex-col gap-4">
                 <div className="flex items-center gap-6">
                   <span className="text-[10px] luxury-tracking uppercase text-zinc-800 dark:text-white/80 font-bold">{lang === 'ar' ? 'الكمية' : 'Quantity'}</span>
-                  <div className="flex items-center gap-3 border border-black/20 dark:border-white/20 px-3.5 py-1.5 rounded-lg">
+                  <div className="flex items-center gap-3 border border-wine/20 dark:border-white/20 px-3.5 py-1.5 rounded-lg">
                     <button 
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                      className="text-zinc-500 hover:text-black dark:text-white/60 dark:hover:text-white transition-colors cursor-pointer"
+                      className="text-zinc-500 hover:text-wine dark:text-white/60 dark:hover:text-white transition-colors cursor-pointer"
                     >
                       <Minus size={14} />
                     </button>
                     <span className="w-6 text-center font-bold text-xs">{quantity}</span>
                     <button 
                       onClick={() => setQuantity(quantity + 1)}
-                      className="text-zinc-500 hover:text-black dark:text-white/60 dark:hover:text-white transition-colors cursor-pointer"
+                      className="text-zinc-500 hover:text-wine dark:text-white/60 dark:hover:text-white transition-colors cursor-pointer"
                     >
                       <Plus size={14} />
                     </button>
@@ -398,8 +398,8 @@ export default function ProductModal({
                       onClick={() => onToggleCompare(product)}
                       className={`p-4 rounded-xl border transition-all cursor-pointer flex items-center justify-center shrink-0 min-w-[52px] min-h-[52px] ${
                         isCompared
-                          ? 'bg-amber-400 text-zinc-950 border-amber-400 font-bold shadow-md'
-                          : 'bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border-black/10 dark:bg-white/10 dark:hover:bg-white/15 dark:text-white dark:border-white/15'
+                          ? 'bg-amber-400 text-wine border-amber-400 font-bold shadow-md'
+                          : 'bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border-wine/10 dark:bg-white/10 dark:hover:bg-white/15 dark:text-white dark:border-white/15'
                       }`}
                       title={lang === 'ar' ? 'إضافة للمقارنة' : 'Compare product'}
                       aria-label="Compare"
@@ -420,7 +420,7 @@ export default function ProductModal({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[120] bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center p-4"
+          className="fixed inset-0 z-[120] bg-wine/95 backdrop-blur-2xl flex flex-col items-center justify-center p-4"
           onClick={() => setIsFullscreenZoom(false)}
         >
           <button 

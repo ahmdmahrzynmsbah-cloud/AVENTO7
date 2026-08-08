@@ -49,11 +49,11 @@ export default function PrintInvoice({ orderId, settings }: PrintInvoiceProps) {
   if (!order) return <div className="p-10 text-center text-red-500 font-sans">Order not found.</div>;
 
   return (
-    <div className="bg-white text-black min-h-screen p-4 sm:p-8 max-w-4xl mx-auto font-sans print:p-0 print:m-0 print:bg-white print:text-black">
+    <div className="bg-white text-wine min-h-screen p-4 sm:p-8 max-w-4xl mx-auto font-sans print:p-0 print:m-0 print:bg-white print:text-wine">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b-[3px] border-black pb-6 mb-8 gap-6 sm:gap-0">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b-[3px] border-wine pb-6 mb-8 gap-6 sm:gap-0">
         <div className="w-full sm:w-auto text-center sm:text-left">
-          <h1 className="text-4xl sm:text-5xl font-black uppercase tracking-tighter leading-none">{settings.storeName || 'Store'}</h1>
+          <h1 className="text-4xl sm:text-5xl font-black uppercase tracking-tighter leading-none">KEMET</h1>
           <p className="text-sm font-bold text-gray-500 tracking-widest uppercase mt-2">Invoice / Receipt</p>
         </div>
         <div className="w-full flex flex-col items-center sm:w-auto sm:items-end">
@@ -82,7 +82,7 @@ export default function PrintInvoice({ orderId, settings }: PrintInvoiceProps) {
       <div className="hidden sm:block">
         <table className="w-full mb-8">
           <thead>
-            <tr className="border-b-[3px] border-black text-left">
+            <tr className="border-b-[3px] border-wine text-left">
               <th className="py-3 text-[11px] font-black tracking-wider uppercase text-gray-500">Item</th>
               <th className="py-3 text-[11px] font-black tracking-wider uppercase text-gray-500 text-center">Size</th>
               <th className="py-3 text-[11px] font-black tracking-wider uppercase text-gray-500 text-center">Qty</th>
@@ -105,7 +105,7 @@ export default function PrintInvoice({ orderId, settings }: PrintInvoiceProps) {
       </div>
 
       {/* Items List - Mobile Only */}
-      <div className="block sm:hidden mb-8 border-t-2 border-black pt-4">
+      <div className="block sm:hidden mb-8 border-t-2 border-wine pt-4">
         <h3 className="text-[11px] font-black tracking-wider uppercase text-gray-500 mb-4 text-center">Order Items</h3>
         {order.items.map((item, idx) => (
           <div key={idx} className="border-b border-gray-200 py-4 flex flex-col gap-2">
@@ -114,7 +114,7 @@ export default function PrintInvoice({ orderId, settings }: PrintInvoiceProps) {
               <p className="font-black text-sm whitespace-nowrap">{(item.price * item.quantity).toLocaleString()} EGP</p>
             </div>
             <div className="flex justify-between items-center text-xs text-gray-500 mt-2">
-              <p className="bg-gray-100 px-2 py-1 rounded font-bold text-black border border-gray-200">Size: {item.size || '-'}</p>
+              <p className="bg-gray-100 px-2 py-1 rounded font-bold text-wine border border-gray-200">Size: {item.size || '-'}</p>
               <p className="font-semibold">{item.quantity} x {item.price.toLocaleString()} EGP</p>
             </div>
           </div>
@@ -138,7 +138,7 @@ export default function PrintInvoice({ orderId, settings }: PrintInvoiceProps) {
               <span className="font-bold">-{order.discountAmount.toLocaleString()} EGP</span>
             </div>
           ) : null}
-          <div className="flex justify-between py-5 border-b-[3px] border-black mt-2">
+          <div className="flex justify-between py-5 border-b-[3px] border-wine mt-2">
             <span className="text-xl font-black uppercase tracking-wider">Total</span>
             <span className="text-xl font-black">{order.totalAmount.toLocaleString()} EGP</span>
           </div>
@@ -149,7 +149,7 @@ export default function PrintInvoice({ orderId, settings }: PrintInvoiceProps) {
       <div className="mt-16 text-center">
         <p className="text-sm font-bold uppercase tracking-widest mb-2">Thank you for your business</p>
         <p className="text-xs text-gray-500" dir="ltr">
-          Contact us: <span className="font-semibold text-black">{settings.supportPhone || '01022293420'}</span>
+          Contact us: <span className="font-semibold text-wine">{settings.supportPhone || '01022293420'}</span>
         </p>
       </div>
     </div>

@@ -84,7 +84,7 @@ export default function App() {
   useEffect(() => {
     if (currentUser?.role === 'admin') {
       if ("Notification" in window && Notification.permission === "default") {
-        Notification.requestPermission();
+        Notification.requestPermission().catch(e => console.warn("Notif perm error:", e));
       }
 
       const unsub = subscribeAdminNotifications(
@@ -93,7 +93,7 @@ export default function App() {
         },
         (newNotif) => {
           if ("Notification" in window && Notification.permission === "granted") {
-            const title = newNotif.title || 'Avento7: New Order';
+            const title = newNotif.title || 'Kemet: New Order';
             const body = newNotif.body || 'A new order has been received!';
             const notification = new Notification(title, {
               body,
@@ -137,6 +137,18 @@ export default function App() {
     }
   }, []);
   const [storeSettings, setStoreSettings] = useState<StoreSettings>(defaultSettings);
+
+  useEffect(() => {
+    if (storeSettings && storeSettings.storeName && storeSettings.storeName.toUpperCase().includes('AVENTO')) {
+      import('./lib/db').then(({ saveSettings }) => {
+        saveSettings({
+          ...storeSettings,
+          storeName: storeSettings.storeName.replace(/AVENTO7/ig, 'KEMET').replace(/AVENTO/ig, 'KEMET')
+        }).then(() => console.log("Force updated store name"));
+      });
+    }
+  }, [storeSettings]);
+
   
 
   const handleOpenTrackOrder = () => {
@@ -533,9 +545,9 @@ export default function App() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.95 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="fixed bottom-6 right-6 z-[100] px-4 py-3 rounded-2xl bg-zinc-900/95 text-white dark:bg-white/95 dark:text-zinc-950 text-xs font-medium shadow-2xl backdrop-blur-md flex items-center gap-3 border border-white/15 dark:border-black/15 pointer-events-none"
+              className="fixed bottom-6 right-6 z-[100] px-4 py-3 rounded-2xl bg-wine/95 text-white dark:bg-white/95 dark:text-wine text-xs font-medium shadow-2xl backdrop-blur-md flex items-center gap-3 border border-white/15 dark:border-wine/15 pointer-events-none"
             >
-              <div className="w-7 h-7 rounded-full bg-amber-400 text-zinc-950 flex items-center justify-center font-bold shrink-0">
+              <div className="w-7 h-7 rounded-full bg-amber-400 text-wine flex items-center justify-center font-bold shrink-0">
                 <ArrowLeftRight size={14} />
               </div>
               <span className="tracking-wide font-sans">{toastMessage}</span>

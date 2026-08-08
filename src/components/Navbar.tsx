@@ -68,12 +68,12 @@ export default function Navbar({
       <div 
         className={`w-full rounded-full px-2.5 xs:px-4 sm:px-8 py-2 sm:py-3.5 transition-all duration-300 relative flex items-center justify-between border backdrop-blur-2xl shadow-xl ${
           isScrolled
-            ? 'bg-white/90 text-zinc-900 border-[#30001A]/20 shadow-2xl dark:bg-[#0c0508]/90 dark:text-white dark:border-white/15'
-            : 'bg-white/80 text-zinc-900 border-black/10 shadow-lg dark:bg-black/70 dark:text-white dark:border-white/10'
+            ? 'bg-white/90 text-wine border-[#30001A]/20 shadow-2xl dark:bg-[#0c0508]/90 dark:text-white dark:border-white/15'
+            : 'bg-white/80 text-wine border-wine/10 shadow-lg dark:bg-wine/70 dark:text-white dark:border-white/10'
         }`}
       >
         {/* Left Action: SHOP Dropdown & Mobile Menu */}
-        <div className="flex items-center gap-2 sm:gap-4 z-10 shrink-0">
+        <div className="flex flex-1 items-center gap-2 sm:gap-4 z-10 shrink-0">
           <button 
             onClick={onOpenMenu} 
             className="md:hidden p-1.5 hover:opacity-80 transition-opacity text-current cursor-pointer"
@@ -92,22 +92,22 @@ export default function Navbar({
           </a>
         </div>
 
-        {/* Center: Brand Logo (Absolutely Centered) */}
-        <div className="absolute inset-x-0 mx-auto flex justify-center items-center text-center z-10 pointer-events-none overflow-hidden">
-          <a href="#" className="inline-block text-center pointer-events-auto">
+        {/* Center: Brand Logo */}
+        <div className="flex flex-shrink-0 justify-center items-center text-center z-10 overflow-hidden mx-2">
+          <a href="#" className="inline-block text-center">
             <span className="brand-logo text-[14px] sm:text-lg md:text-xl font-black luxury-tracking tracking-[0.1em] sm:tracking-[0.25em] uppercase text-[#30001A] dark:text-white whitespace-nowrap">
-              AVENTO7
+              KEMET
             </span>
           </a>
         </div>
 
         {/* Right Actions: Icons ONLY (No text) */}
-        <div className="flex items-center gap-0 sm:gap-2 justify-end z-10 shrink-0">
+        <div className="flex flex-1 items-center gap-0 sm:gap-2 justify-end z-10 shrink-0">
           
           {/* Search Icon Button */}
           <button
             onClick={handleScrollToCollection}
-            className="hidden xs:inline-flex w-8 h-8 sm:w-11 sm:h-11 min-w-[32px] sm:min-w-[44px] rounded-full flex items-center justify-center shrink-0 hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-current cursor-pointer"
+            className="hidden xs:inline-flex w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 min-w-[32px] sm:min-w-[36px] md:min-w-[40px] rounded-full flex items-center justify-center shrink-0 hover:bg-wine/5 dark:hover:bg-white/10 transition-colors text-current cursor-pointer"
             title={lang === 'ar' ? 'بحث' : 'Search'}
             aria-label="Search"
           >
@@ -118,7 +118,7 @@ export default function Navbar({
           {user ? (
             <button
               onClick={user.role === 'admin' ? onViewAdmin : onOpenCustomerDashboard}
-              className="w-8 h-8 sm:w-11 sm:h-11 min-w-[32px] sm:min-w-[44px] rounded-full flex items-center justify-center shrink-0 hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-current cursor-pointer relative"
+              className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 min-w-[32px] sm:min-w-[36px] md:min-w-[40px] rounded-full flex items-center justify-center shrink-0 hover:bg-wine/5 dark:hover:bg-white/10 transition-colors text-current cursor-pointer relative"
               title={user.role === 'admin' ? (lang === 'ar' ? 'لوحة التحكم' : 'Admin Panel') : (lang === 'ar' ? 'حسابي' : 'Account')}
               aria-label="User account"
             >
@@ -131,7 +131,7 @@ export default function Navbar({
           ) : (
             <button
               onClick={onOpenAuth}
-              className="w-8 h-8 sm:w-11 sm:h-11 min-w-[32px] sm:min-w-[44px] rounded-full flex items-center justify-center shrink-0 hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-current cursor-pointer"
+              className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 min-w-[32px] sm:min-w-[36px] md:min-w-[40px] rounded-full flex items-center justify-center shrink-0 hover:bg-wine/5 dark:hover:bg-white/10 transition-colors text-current cursor-pointer"
               title={lang === 'ar' ? 'تسجيل الدخول' : 'Sign in'}
               aria-label="Sign in"
             >
@@ -143,7 +143,7 @@ export default function Navbar({
           {onOpenTrackOrder && (
             <button
               onClick={user?.role === 'admin' ? onViewAdmin : onOpenTrackOrder}
-              className="hidden sm:inline-flex w-8 h-8 sm:w-11 sm:h-11 min-w-[32px] sm:min-w-[44px] rounded-full flex items-center justify-center shrink-0 hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-current cursor-pointer"
+              className="hidden sm:inline-flex w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 min-w-[32px] sm:min-w-[36px] md:min-w-[40px] rounded-full flex items-center justify-center shrink-0 hover:bg-wine/5 dark:hover:bg-white/10 transition-colors text-current cursor-pointer"
               title={lang === 'ar' ? 'تتبع الشحنة' : 'Track Order'}
               aria-label="Track Order"
             >
@@ -157,12 +157,12 @@ export default function Navbar({
               onClick={onOpenCompare}
               title={lang === 'ar' ? 'مقارنة المنتجات' : 'Compare Products'}
               aria-label="Compare Products"
-              className="hidden sm:flex w-8 h-8 sm:w-11 sm:h-11 min-w-[32px] sm:min-w-[44px] rounded-full items-center justify-center shrink-0 hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-current cursor-pointer relative"
+              className="hidden sm:flex w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 min-w-[32px] sm:min-w-[36px] md:min-w-[40px] rounded-full items-center justify-center shrink-0 hover:bg-wine/5 dark:hover:bg-white/10 transition-colors text-current cursor-pointer relative"
             >
               <div className="relative flex items-center justify-center">
                 <ArrowLeftRight size={18} strokeWidth={1.8} className={compareCount > 0 ? "text-amber-500 dark:text-amber-400 font-bold" : ""} />
                 {compareCount > 0 && (
-                  <span className="absolute -top-2.5 -right-3 min-w-[18px] h-[18px] px-1 bg-amber-500 text-zinc-950 text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white dark:border-zinc-900 shadow-[0_2px_8px_rgba(0,0,0,0.15)] z-10 pointer-events-none">
+                  <span className="absolute -top-2.5 -right-3 min-w-[18px] h-[18px] px-1 bg-amber-500 text-wine text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white dark:border-wine shadow-[0_2px_8px_rgba(0,0,0,0.15)] z-10 pointer-events-none">
                     {compareCount > 99 ? '99+' : compareCount}
                   </span>
                 )}
@@ -174,14 +174,14 @@ export default function Navbar({
           {onOpenWishlist && (
             <button
               onClick={onOpenWishlist}
-              className="w-8 h-8 sm:w-11 sm:h-11 min-w-[32px] sm:min-w-[44px] rounded-full flex items-center justify-center shrink-0 hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-current cursor-pointer relative"
+              className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 min-w-[32px] sm:min-w-[36px] md:min-w-[40px] rounded-full flex items-center justify-center shrink-0 hover:bg-wine/5 dark:hover:bg-white/10 transition-colors text-current cursor-pointer relative"
               title={lang === 'ar' ? 'المفضلة' : 'Wishlist'}
               aria-label="Wishlist"
             >
               <div className="relative flex items-center justify-center">
                 <Heart size={18} strokeWidth={1.8} className={wishlistCount > 0 ? "fill-[#30001A] text-[#30001A] dark:fill-rose-300 dark:text-rose-300" : ""} />
                 {wishlistCount > 0 && (
-                  <span className="absolute -top-2.5 -right-3 min-w-[18px] h-[18px] px-1 bg-[#30001A] text-white dark:bg-rose-300 dark:text-[#30001A] text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white dark:border-zinc-900 shadow-[0_2px_8px_rgba(0,0,0,0.15)] z-10 pointer-events-none">
+                  <span className="absolute -top-2.5 -right-3 min-w-[18px] h-[18px] px-1 bg-[#30001A] text-white dark:bg-rose-300 dark:text-[#30001A] text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white dark:border-wine shadow-[0_2px_8px_rgba(0,0,0,0.15)] z-10 pointer-events-none">
                     {wishlistCount > 99 ? '99+' : wishlistCount}
                   </span>
                 )}
@@ -192,14 +192,14 @@ export default function Navbar({
           {/* Cart Bag Icon Button with Badge */}
           <button
             onClick={onOpenCart}
-            className="w-8 h-8 sm:w-11 sm:h-11 min-w-[32px] sm:min-w-[44px] rounded-full flex items-center justify-center shrink-0 hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-current cursor-pointer relative"
+            className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 min-w-[32px] sm:min-w-[36px] md:min-w-[40px] rounded-full flex items-center justify-center shrink-0 hover:bg-wine/5 dark:hover:bg-white/10 transition-colors text-current cursor-pointer relative"
             title={lang === 'ar' ? 'حقيبة التسوق' : 'Cart'}
             aria-label="Cart"
           >
             <div className="relative flex items-center justify-center">
               <ShoppingBag size={18} strokeWidth={1.8} />
               {cartItemCount > 0 && (
-                <span className="absolute -top-2.5 -right-3 min-w-[18px] h-[18px] px-1 bg-[#30001A] text-white dark:bg-rose-300 dark:text-[#30001A] text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white dark:border-zinc-900 shadow-[0_2px_8px_rgba(0,0,0,0.15)] z-10 pointer-events-none">
+                <span className="absolute -top-2.5 -right-3 min-w-[18px] h-[18px] px-1 bg-[#30001A] text-white dark:bg-rose-300 dark:text-[#30001A] text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white dark:border-wine shadow-[0_2px_8px_rgba(0,0,0,0.15)] z-10 pointer-events-none">
                   {cartItemCount > 99 ? '99+' : cartItemCount}
                 </span>
               )}
@@ -211,7 +211,7 @@ export default function Navbar({
             onClick={onToggleTheme}
             title={theme === 'dark' ? (lang === 'ar' ? 'الوضع الفاتح' : 'Light Mode') : (lang === 'ar' ? 'الوضع الداكن' : 'Dark Mode')}
             aria-label="Toggle theme"
-            className="hidden xs:flex w-8 h-8 sm:w-11 sm:h-11 min-w-[32px] sm:min-w-[44px] rounded-full items-center justify-center shrink-0 hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-current cursor-pointer"
+            className="hidden xs:flex w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 min-w-[32px] sm:min-w-[36px] md:min-w-[40px] rounded-full items-center justify-center shrink-0 hover:bg-wine/5 dark:hover:bg-white/10 transition-colors text-current cursor-pointer"
           >
             {theme === 'dark' ? (
               <Sun size={17} strokeWidth={1.8} className="text-amber-400" />
@@ -224,7 +224,7 @@ export default function Navbar({
           {user && (
             <button
               onClick={onLogout}
-              className="hidden sm:inline-flex w-8 h-8 sm:w-11 sm:h-11 min-w-[32px] sm:min-w-[44px] rounded-full flex items-center justify-center shrink-0 hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-current cursor-pointer"
+              className="hidden sm:inline-flex w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 min-w-[32px] sm:min-w-[36px] md:min-w-[40px] rounded-full flex items-center justify-center shrink-0 hover:bg-wine/5 dark:hover:bg-white/10 transition-colors text-current cursor-pointer"
               title={lang === 'ar' ? 'تسجيل الخروج' : 'Logout'}
               aria-label="Logout"
             >

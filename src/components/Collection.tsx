@@ -277,7 +277,7 @@ export default function Collection({
 
       {/* PRODUCTS DISPLAY GRID OR LIST */}
       {filteredProducts.length === 0 ? (
-        <div className="w-full py-20 text-center text-zinc-400 dark:text-white/40 bg-zinc-50 dark:bg-white/5 rounded-2xl border border-black/5 dark:border-white/5 my-4">
+        <div className="w-full py-20 text-center text-zinc-400 dark:text-white/40 bg-zinc-50 dark:bg-white/5 rounded-2xl border border-wine/5 dark:border-white/5 my-4">
           <p className="text-xs uppercase luxury-tracking tracking-[0.2em] font-bold">
             {isRTL ? 'لم يتم العثور على أي منتج يطابق خيارات البحث' : 'NO PRODUCTS FOUND MATCHING YOUR FILTERS'}
           </p>
@@ -308,11 +308,11 @@ export default function Collection({
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                    className="group w-full flex flex-row items-center gap-4 sm:gap-5 bg-white dark:bg-[#0c060a]/80 border border-black/10 dark:border-white/10 p-2 sm:p-4 rounded-2xl hover:border-amber-500/50 hover:shadow-xl transition-all duration-300 cursor-pointer relative overflow-hidden"
+                    className="group w-full flex flex-row items-center gap-4 sm:gap-5 bg-white dark:bg-[#0c060a]/80 border border-wine/10 dark:border-white/10 p-2 sm:p-4 rounded-2xl hover:border-amber-500/50 hover:shadow-xl transition-all duration-300 cursor-pointer relative overflow-hidden"
                     onClick={() => onViewProduct?.(product)}
                   >
                     {/* List Item Image */}
-                    <div className="relative w-28 sm:w-44 md:w-52 aspect-[3/4] shrink-0 overflow-hidden bg-zinc-100 dark:bg-black/40 rounded-xl border border-black/5 dark:border-white/5">
+                    <div className="relative w-28 sm:w-44 md:w-52 aspect-[3/4] shrink-0 overflow-hidden bg-zinc-100 dark:bg-wine/40 rounded-xl border border-wine/5 dark:border-white/5">
                       <img 
                         src={product.images && product.images.length > 0 ? product.images[0] : product.image} 
                         alt={product.name} 
@@ -341,14 +341,14 @@ export default function Collection({
                           {isRTL ? 'خصم' : 'SALE'} {Math.round((1 - product.price / product.originalPrice) * 100)}%
                         </div>
                       ) : product.isNew ? (
-                        <div className="absolute top-2 left-2 rtl:left-auto rtl:right-2 z-10 text-[8px] luxury-tracking px-1.5 py-0.5 border border-black/10 dark:border-white/20 bg-black/70 text-white uppercase font-semibold rounded">
+                        <div className="absolute top-2 left-2 rtl:left-auto rtl:right-2 z-10 text-[8px] luxury-tracking px-1.5 py-0.5 border border-wine/10 dark:border-white/20 bg-wine/70 text-white uppercase font-semibold rounded">
                           {isRTL ? 'جديد' : 'NEW'}
                         </div>
                       ) : null}
 
                       {/* Photo Count */}
                       {product.images && product.images.length > 1 && (
-                        <div className="absolute bottom-2 left-2 z-10 text-[8px] font-mono font-bold px-1.5 py-0.5 bg-black/60 text-white backdrop-blur-md rounded-md border border-white/20 flex items-center gap-1">
+                        <div className="absolute bottom-2 left-2 z-10 text-[8px] font-mono font-bold px-1.5 py-0.5 bg-wine/60 text-white backdrop-blur-md rounded-md border border-white/20 flex items-center gap-1">
                           <Layers size={10} className="text-amber-400" />
                           <span>{product.images.length}</span>
                         </div>
@@ -374,8 +374,8 @@ export default function Collection({
                               }}
                               className={`p-2 rounded-full transition-all min-w-[44px] min-h-[44px] flex items-center justify-center ${
                                 isCompared
-                                  ? 'bg-amber-400 text-zinc-950 shadow-xs font-bold'
-                                  : 'text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
+                                  ? 'bg-amber-400 text-wine shadow-xs font-bold'
+                                  : 'text-zinc-400 hover:text-wine dark:hover:text-white'
                               }`}
                               title={isRTL ? 'مقارنة' : 'Compare'}
                               aria-label="Compare product"
@@ -393,7 +393,7 @@ export default function Collection({
                               className={`p-2 rounded-full transition-all shrink-0 min-w-[44px] min-h-[44px] flex items-center justify-center ${
                                 isWishlisted
                                   ? 'bg-[#30001A] text-white shadow-xs'
-                                  : 'text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
+                                  : 'text-zinc-400 hover:text-wine dark:hover:text-white'
                               }`}
                               aria-label="Wishlist"
                             >
@@ -403,7 +403,7 @@ export default function Collection({
                         </div>
 
                         {/* Title */}
-                        <h3 className="text-xs sm:text-base font-bold uppercase luxury-tracking text-zinc-900 dark:text-white mb-1 line-clamp-2 leading-snug group-hover:text-amber-600 dark:group-hover:text-rose-300 transition-colors">
+                        <h3 className="text-xs sm:text-base font-bold uppercase luxury-tracking text-wine dark:text-white mb-1 line-clamp-2 leading-snug group-hover:text-amber-600 dark:group-hover:text-rose-300 transition-colors">
                           {isRTL && product.nameAr ? product.nameAr : product.name}
                         </h3>
 
@@ -416,9 +416,9 @@ export default function Collection({
                       </div>
 
                       {/* Bottom Price & Action Row */}
-                      <div className="pt-2 border-t border-black/5 dark:border-white/10 flex items-center justify-between gap-2 mt-auto">
+                      <div className="pt-2 border-t border-wine/5 dark:border-white/10 flex items-center justify-between gap-2 mt-auto">
                         <div className="flex items-baseline gap-1.5">
-                          <span className="text-xs sm:text-base font-mono font-extrabold text-zinc-900 dark:text-white">
+                          <span className="text-xs sm:text-base font-mono font-extrabold text-wine dark:text-white">
                             {product.price.toLocaleString()} {isRTL ? 'ج.م' : 'EGP'}
                             {product.originalPrice && product.originalPrice > product.price && (
                               <span className="text-zinc-400 dark:text-zinc-500 line-through text-[10px] ml-1 rtl:mr-1 rtl:ml-0">
@@ -442,7 +442,7 @@ export default function Collection({
                           }}
                           className={`px-3 sm:px-5 py-2 rounded-xl text-[10px] sm:text-xs font-bold uppercase luxury-tracking tracking-wider flex items-center gap-1.5 cursor-pointer transition-all shadow-md min-h-[36px] ${
                             product.isSoldOut
-                              ? 'bg-zinc-900 text-amber-300 border border-amber-500/30'
+                              ? 'bg-wine text-amber-300 border border-amber-500/30'
                               : 'bg-[#30001A] text-white hover:bg-[#1b000f] dark:bg-rose-300 dark:text-[#30001A]'
                           }`}
                         >
@@ -498,11 +498,11 @@ export default function Collection({
                           referrerPolicy="no-referrer" 
                         />
                       )}
-                      <div className="absolute inset-0 bg-black/5 dark:bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                      <div className="absolute inset-0 bg-wine/5 dark:bg-wine/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                       
                       {/* Multi-Image Count Badge - Bottom Left */}
                       {product.images && product.images.length > 1 && (
-                        <div className="absolute bottom-2 left-2 z-10 text-[8px] sm:text-[9px] font-mono font-bold px-1.5 py-0.5 sm:px-2 sm:py-0.5 bg-black/70 text-white backdrop-blur-md rounded-md border border-white/20 flex items-center gap-1 shadow-xs">
+                        <div className="absolute bottom-2 left-2 z-10 text-[8px] sm:text-[9px] font-mono font-bold px-1.5 py-0.5 sm:px-2 sm:py-0.5 bg-wine/70 text-white backdrop-blur-md rounded-md border border-white/20 flex items-center gap-1 shadow-xs">
                           <Layers size={10} className="text-amber-400" />
                           <span>{product.images.length}</span>
                         </div>
@@ -522,7 +522,7 @@ export default function Collection({
                               {isRTL ? 'خصم' : 'SALE'} {Math.round((1 - product.price / product.originalPrice) * 100)}%
                             </div>
                           ) : product.isNew ? (
-                            <div className="text-[8px] sm:text-[9px] luxury-tracking px-2 py-0.5 border border-black/10 dark:border-white/20 bg-black/70 text-white backdrop-blur-md uppercase font-semibold rounded-md pointer-events-auto">
+                            <div className="text-[8px] sm:text-[9px] luxury-tracking px-2 py-0.5 border border-wine/10 dark:border-white/20 bg-wine/70 text-white backdrop-blur-md uppercase font-semibold rounded-md pointer-events-auto">
                               {isRTL ? 'جديد' : 'NEW'}
                             </div>
                           ) : <div />}
@@ -539,8 +539,8 @@ export default function Collection({
                             }}
                             className={`w-7 h-7 sm:w-11 sm:h-11 min-w-[28px] sm:min-w-[44px] min-h-[28px] sm:min-h-[44px] rounded-full flex items-center justify-center transition-all ${
                               isCompared
-                                ? 'bg-amber-400 text-zinc-950 font-bold shadow-md scale-105'
-                                : 'bg-black/40 text-white hover:bg-amber-400 hover:text-zinc-950 backdrop-blur-md border border-white/20 active:scale-95'
+                                ? 'bg-amber-400 text-wine font-bold shadow-md scale-105'
+                                : 'bg-wine/40 text-white hover:bg-amber-400 hover:text-wine backdrop-blur-md border border-white/20 active:scale-95'
                             }`}
                             title={isRTL ? 'مقارنة' : 'Compare'}
                             aria-label="Toggle compare"
@@ -557,7 +557,7 @@ export default function Collection({
                             className={`w-7 h-7 sm:w-11 sm:h-11 min-w-[28px] sm:min-w-[44px] min-h-[28px] sm:min-h-[44px] rounded-full flex items-center justify-center transition-all ${
                               isWishlisted
                                 ? 'bg-[#30001A] text-white shadow-md scale-105'
-                                : 'bg-black/40 text-white hover:bg-[#30001A] backdrop-blur-md border border-white/20 active:scale-95'
+                                : 'bg-wine/40 text-white hover:bg-[#30001A] backdrop-blur-md border border-white/20 active:scale-95'
                             }`}
                             aria-label="Toggle wishlist"
                           >
@@ -569,7 +569,7 @@ export default function Collection({
                     
                     {/* Title & Category */}
                     <div className="px-0.5 flex-1 mt-1">
-                      <h3 className="text-[13px] sm:text-[16px] font-semibold luxury-tracking text-zinc-900 dark:text-white mb-1 line-clamp-2 leading-tight group-hover:text-amber-600 dark:group-hover:text-rose-300 transition-colors min-h-[2rem]">
+                      <h3 className="text-[13px] sm:text-[16px] font-semibold luxury-tracking text-wine dark:text-white mb-1 line-clamp-2 leading-tight group-hover:text-amber-600 dark:group-hover:text-rose-300 transition-colors min-h-[2rem]">
                         {isRTL && product.nameAr ? product.nameAr : product.name}
                       </h3>
                     </div>
@@ -579,7 +579,7 @@ export default function Collection({
                   <div className="flex flex-col gap-2.5 mt-auto w-full">
                     {/* Price & Rating Section */}
                     <div className="px-0.5 pt-1 flex items-center justify-between gap-1.5 w-full">
-                      <span className="text-[15px] sm:text-[22px] font-mono font-extrabold text-zinc-900 dark:text-white tracking-tight leading-none whitespace-nowrap">
+                      <span className="text-[15px] sm:text-[22px] font-mono font-extrabold text-wine dark:text-white tracking-tight leading-none whitespace-nowrap">
                         {product.price.toLocaleString()} <span className="text-sm ml-0.5">{isRTL ? 'ج.م' : 'EGP'}</span>
                         {product.originalPrice && product.originalPrice > product.price && (
                           <span className="text-zinc-400 dark:text-zinc-500 line-through text-sm font-medium ml-2 rtl:mr-2 rtl:ml-0">
@@ -605,7 +605,7 @@ export default function Collection({
                         }}
                         className={`w-full py-1.5 sm:py-2 px-1.5 sm:px-2 text-[10px] sm:text-[12px] luxury-tracking font-bold transition-all uppercase tracking-wider cursor-pointer flex items-center justify-center gap-1.5 sm:gap-2 rounded min-h-[36px] sm:min-h-[44px] ${
                           product.isSoldOut 
-                            ? 'bg-zinc-900 text-amber-300 hover:bg-black border border-amber-500/30' 
+                            ? 'bg-wine text-amber-300 hover:bg-wine border border-amber-500/30' 
                             : 'bg-[#30001A] text-white dark:bg-rose-300 dark:text-[#30001A] hover:opacity-90'
                         }`}
                       >
@@ -632,7 +632,7 @@ export default function Collection({
       <div className="w-full flex justify-center mt-12 md:mt-16">
         <button 
           onClick={resetFilters}
-          className="text-[10px] luxury-tracking uppercase text-zinc-900 border-b border-zinc-900 dark:text-[#f5f5f7] dark:border-[#f5f5f7] pb-1 hover:text-amber-600 hover:border-amber-600 dark:hover:text-amber-400 dark:hover:border-amber-400 transition-colors tracking-[0.2em] cursor-pointer"
+          className="text-[10px] luxury-tracking uppercase text-wine border-b border-wine dark:text-[#f5f5f7] dark:border-[#f5f5f7] pb-1 hover:text-amber-600 hover:border-amber-600 dark:hover:text-amber-400 dark:hover:border-amber-400 transition-colors tracking-[0.2em] cursor-pointer"
         >
           {isRTL ? 'عرض جميع المنتجات والأرشيف' : 'DISCOVER ALL ARCHIVE PRODUCTS'}
         </button>

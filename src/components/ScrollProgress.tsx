@@ -53,7 +53,7 @@ export default function ScrollProgress() {
             whileHover={{ scale: 1.12 }}
             whileTap={{ scale: 0.92 }}
             onClick={scrollToTop}
-            title="A7 - Top"
+            title="KM - Top"
             aria-label="Scroll to top"
             className="relative w-14 h-14 rounded-full bg-white/90 dark:bg-[#0c0508]/90 backdrop-blur-2xl border border-[#30001A]/20 dark:border-white/20 shadow-2xl flex items-center justify-center cursor-pointer group focus:outline-none transition-shadow hover:shadow-[#30001A]/30"
           >
@@ -82,10 +82,10 @@ export default function ScrollProgress() {
               />
             </svg>
 
-            {/* Inner Brand Abbreviation Text A7 */}
+            {/* Inner Brand Abbreviation Text KM */}
             <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
               <span className="brand-logo text-xs sm:text-sm font-black tracking-widest uppercase text-[#30001A] dark:text-white drop-shadow-xs group-hover:scale-105 transition-transform">
-                A7
+                KM
               </span>
             </div>
           </motion.button>

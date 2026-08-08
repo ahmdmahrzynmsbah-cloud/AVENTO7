@@ -1,40 +1,27 @@
 const fs = require('fs');
-let auth = fs.readFileSync('src/components/AuthPage.tsx', 'utf8');
+let code = fs.readFileSync('src/components/CustomerDashboard.tsx', 'utf8');
 
-// 1. Fix header
-const headerRegex = /<header className="w-full px-6 md:px-12 py-6 flex items-center justify-between z-30">[\s\S]*?<\/header>/;
-const newHeader = `<header className="w-full px-4 sm:px-6 md:px-12 py-6 flex items-center justify-between z-30 relative">
-        <div className="flex-1 flex justify-start">
-          <button
+const targetStr = `<button
             onClick={onBackToStore}
-            className="flex items-center justify-center w-10 h-10 rounded-full text-[#30001A] dark:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer group"
+            className="flex items-center gap-2 text-xs luxury-tracking font-bold uppercase text-zinc-600 dark:text-white/60 hover:text-wine dark:hover:text-white transition-colors"
           >
-            <ArrowLeft size={18} className="rtl:rotate-180 group-hover:-translate-x-1 transition-transform" />
+            <ArrowLeft size={16} /> {lang === 'ar' ? 'العودة للمتجر' : 'BACK TO STORE'}
           </button>
-        </div>
+          <div className="h-4 w-[1px] bg-wine/10 dark:bg-white/10 hidden sm:block"></div>
+          <span className="brand-logo text-lg tracking-widest uppercase text-wine dark:text-white hidden sm:block">
+            KEMET <span className="text-[9px] font-sans luxury-tracking text-zinc-400 dark:text-white/40 ml-1 font-semibold">{lang === 'ar' ? 'بوابة العملاء' : 'CLIENT PORTAL'}</span>
+          </span>`;
 
-        <a href="#" onClick={onBackToStore} className="brand-logo flex-1 text-center text-xl sm:text-2xl font-black luxury-tracking tracking-[0.25em] uppercase text-[#30001A] dark:text-white shrink-0">
-          AVENTO7
-        </a>
-
-        <div className="flex-1 flex justify-end">
-          <button
-            onClick={onToggleTheme}
-            className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-current cursor-pointer"
-            title={theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+const replacementStr = `<button
+            onClick={onBackToStore}
+            className="flex items-center gap-2 text-xs luxury-tracking font-bold uppercase text-zinc-600 dark:text-white/60 hover:text-wine dark:hover:text-white transition-colors"
           >
-            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            <ArrowLeft size={16} /> <span className="hidden sm:inline">{lang === 'ar' ? 'العودة للمتجر' : 'BACK TO STORE'}</span>
           </button>
-        </div>
-      </header>`;
+          <div className="h-4 w-[1px] bg-wine/10 dark:bg-white/10 hidden sm:block"></div>
+          <span className="brand-logo text-lg sm:text-lg tracking-widest uppercase text-wine dark:text-white">
+            KEMET <span className="hidden sm:inline text-[9px] font-sans luxury-tracking text-zinc-400 dark:text-white/40 ml-1 font-semibold">{lang === 'ar' ? 'بوابة العملاء' : 'CLIENT PORTAL'}</span>
+          </span>`;
 
-auth = auth.replace(headerRegex, newHeader);
-
-// 2. Fix CREATE ACCOUNT text wrapping
-const h2Target = 'className="serif-display text-3xl sm:text-4xl font-light tracking-wider uppercase text-[#30001A] dark:text-white mb-6"';
-const h2Replacement = 'className="serif-display text-2xl sm:text-3xl lg:text-4xl font-light tracking-wider uppercase text-[#30001A] dark:text-white mb-6 whitespace-nowrap"';
-
-auth = auth.replace(h2Target, h2Replacement);
-
-fs.writeFileSync('src/components/AuthPage.tsx', auth);
-console.log("Header and CREATE ACCOUNT text updated");
+code = code.replace(targetStr, replacementStr);
+fs.writeFileSync('src/components/CustomerDashboard.tsx', code);

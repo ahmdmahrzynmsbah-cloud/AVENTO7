@@ -157,7 +157,7 @@ export default function FilterDrawer({
   ];
   const materialsList = ['100% Egyptian Cotton', 'Heavyweight Fleece', 'Silk Blend', 'Wool Gabardine', 'Nylon Blend', 'Vegan Leather', 'Velvet Blend'];
   const fitsList = ['Over-sized', 'Tailored', 'Boxy Fit', 'Slim Fit', 'Regular Fit'];
-  const brandsList = ['AVENTO7 Mainline', 'AVENTO7 Atelier', 'AVENTO7 Sport'];
+  const brandsList = ['KEMET Mainline', 'KEMET Atelier', 'KEMET Sport'];
 
   // Dynamic counts for each option based on allProducts
   const getCategoryCount = (cat: string) => {
@@ -329,7 +329,7 @@ export default function FilterDrawer({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/70 backdrop-blur-md cursor-pointer"
+            className="absolute inset-0 bg-wine/70 backdrop-blur-md cursor-pointer"
           />
 
           {/* Drawer Container (Slide in from Left for LTR, Right for RTL) */}
@@ -345,19 +345,19 @@ export default function FilterDrawer({
               if (!isRTL && info.offset.x < -80) onClose();
               if (isRTL && info.offset.x > 80) onClose();
             }}
-            className={`relative w-full max-w-[380px] sm:max-w-[420px] h-full bg-white dark:bg-[#0c060a] shadow-2xl flex flex-col z-10 border-r border-black/10 dark:border-white/10 ${
+            className={`relative w-full max-w-[380px] sm:max-w-[420px] h-full bg-white dark:bg-[#0c060a] shadow-2xl flex flex-col z-10 border-r border-wine/10 dark:border-white/10 ${
               isRTL ? 'mr-auto border-r-0 border-l' : 'ml-0'
             }`}
           >
             
             {/* STICKY HEADER */}
-            <div className="px-5 py-4 border-b border-black/10 dark:border-white/10 flex items-center justify-between bg-zinc-50/90 dark:bg-[#080307]/90 backdrop-blur-md sticky top-0 z-20 shrink-0">
+            <div className="px-5 py-4 border-b border-wine/10 dark:border-white/10 flex items-center justify-between bg-zinc-50/90 dark:bg-[#080307]/90 backdrop-blur-md sticky top-0 z-20 shrink-0">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl bg-[#30001A] text-white dark:bg-rose-300 dark:text-[#30001A] flex items-center justify-center shadow-md">
                   <SlidersHorizontal size={18} />
                 </div>
                 <div>
-                  <h2 className="text-xs sm:text-sm font-black uppercase luxury-tracking text-zinc-900 dark:text-white tracking-[0.18em]">
+                  <h2 className="text-xs sm:text-sm font-black uppercase luxury-tracking text-wine dark:text-white tracking-[0.18em]">
                     {isRTL ? 'تصفية التشكيلة' : 'FILTER COLLECTION'}
                   </h2>
                   <p className="text-[10px] text-zinc-500 dark:text-zinc-400 font-mono">
@@ -392,11 +392,11 @@ export default function FilterDrawer({
             <div className="flex-1 overflow-y-auto px-5 py-6 space-y-6 scrollbar-thin scrollbar-thumb-zinc-300 dark:scrollbar-thumb-zinc-800">
 
               {/* 1. NEW ARRIVALS TOGGLE SWITCH */}
-              <div className="bg-zinc-100/80 dark:bg-white/5 border border-black/5 dark:border-white/10 p-3.5 rounded-2xl flex items-center justify-between shadow-xs">
+              <div className="bg-zinc-100/80 dark:bg-white/5 border border-wine/5 dark:border-white/10 p-3.5 rounded-2xl flex items-center justify-between shadow-xs">
                 <div className="flex items-center gap-2.5">
                   <Sparkles size={16} className="text-amber-500 animate-pulse" />
                   <div>
-                    <span className="text-xs font-bold uppercase luxury-tracking text-zinc-900 dark:text-white block">
+                    <span className="text-xs font-bold uppercase luxury-tracking text-wine dark:text-white block">
                       {isRTL ? 'وصل حديثاً فقط' : 'NEW ARRIVALS ONLY'}
                     </span>
                     <span className="text-[10px] text-zinc-500 dark:text-zinc-400">
@@ -424,11 +424,11 @@ export default function FilterDrawer({
               </div>
 
               {/* 2. CATEGORY / GENDER ACCORDION */}
-              <div className="border-b border-black/10 dark:border-white/10 pb-5">
+              <div className="border-b border-wine/10 dark:border-white/10 pb-5">
                 <button
                   type="button"
                   onClick={() => toggleSection('category')}
-                  className="w-full flex items-center justify-between py-2 text-xs font-bold uppercase luxury-tracking text-zinc-900 dark:text-white tracking-[0.15em] cursor-pointer min-h-[44px]"
+                  className="w-full flex items-center justify-between py-2 text-xs font-bold uppercase luxury-tracking text-wine dark:text-white tracking-[0.15em] cursor-pointer min-h-[44px]"
                 >
                   <span className="flex items-center gap-2">
                     <Tag size={15} className="text-amber-500" />
@@ -470,12 +470,12 @@ export default function FilterDrawer({
                               className={`min-h-[44px] px-3 py-2.5 rounded-xl text-xs font-bold uppercase luxury-tracking flex items-center justify-between border cursor-pointer transition-all ${
                                 isSelected
                                   ? 'bg-[#30001A] text-white border-[#30001A] dark:bg-rose-300 dark:text-[#30001A] dark:border-rose-300 shadow-md'
-                                  : 'bg-zinc-100/80 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border-black/10 dark:border-white/10 hover:border-amber-500/50'
+                                  : 'bg-zinc-100/80 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border-wine/10 dark:border-white/10 hover:border-amber-500/50'
                               }`}
                             >
                               <span className="truncate">{label}</span>
                               <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
-                                isSelected ? 'bg-white/20 text-white dark:bg-[#30001A]/20 dark:text-[#30001A]' : 'bg-black/5 dark:bg-white/10 text-zinc-500 dark:text-zinc-400'
+                                isSelected ? 'bg-white/20 text-white dark:bg-[#30001A]/20 dark:text-[#30001A]' : 'bg-wine/5 dark:bg-white/10 text-zinc-500 dark:text-zinc-400'
                               }`}>
                                 {count}
                               </span>
@@ -489,11 +489,11 @@ export default function FilterDrawer({
               </div>
 
               {/* 3. COLLECTION ACCORDION */}
-              <div className="border-b border-black/10 dark:border-white/10 pb-5">
+              <div className="border-b border-wine/10 dark:border-white/10 pb-5">
                 <button
                   type="button"
                   onClick={() => toggleSection('collection')}
-                  className="w-full flex items-center justify-between py-2 text-xs font-bold uppercase luxury-tracking text-zinc-900 dark:text-white tracking-[0.15em] cursor-pointer min-h-[44px]"
+                  className="w-full flex items-center justify-between py-2 text-xs font-bold uppercase luxury-tracking text-wine dark:text-white tracking-[0.15em] cursor-pointer min-h-[44px]"
                 >
                   <span className="flex items-center gap-2">
                     <FolderKanban size={15} className="text-amber-500" />
@@ -523,8 +523,8 @@ export default function FilterDrawer({
                             onClick={() => toggleArrayItem('collections', coll)}
                             className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-between border transition-all cursor-pointer ${
                               isChecked
-                                ? 'bg-[#30001A]/10 border-[#30001A] dark:bg-rose-300/10 dark:border-rose-300 text-zinc-900 dark:text-white font-bold'
-                                : 'bg-zinc-100/50 dark:bg-white/5 border-black/5 dark:border-white/10 text-zinc-600 dark:text-zinc-400 hover:border-amber-500/30'
+                                ? 'bg-[#30001A]/10 border-[#30001A] dark:bg-rose-300/10 dark:border-rose-300 text-wine dark:text-white font-bold'
+                                : 'bg-zinc-100/50 dark:bg-white/5 border-wine/5 dark:border-white/10 text-zinc-600 dark:text-zinc-400 hover:border-amber-500/30'
                             }`}
                           >
                             <div className="flex items-center gap-2.5">
@@ -535,7 +535,7 @@ export default function FilterDrawer({
                               )}
                               <span>{coll}</span>
                             </div>
-                            <span className="text-[10px] font-mono font-bold text-zinc-400 bg-black/5 dark:bg-white/10 px-2 py-0.5 rounded-full">
+                            <span className="text-[10px] font-mono font-bold text-zinc-400 bg-wine/5 dark:bg-white/10 px-2 py-0.5 rounded-full">
                               {count}
                             </span>
                           </button>
@@ -547,11 +547,11 @@ export default function FilterDrawer({
               </div>
 
               {/* 4. PRICE RANGE ACCORDION */}
-              <div className="border-b border-black/10 dark:border-white/10 pb-5">
+              <div className="border-b border-wine/10 dark:border-white/10 pb-5">
                 <button
                   type="button"
                   onClick={() => toggleSection('price')}
-                  className="w-full flex items-center justify-between py-2 text-xs font-bold uppercase luxury-tracking text-zinc-900 dark:text-white tracking-[0.15em] cursor-pointer min-h-[44px]"
+                  className="w-full flex items-center justify-between py-2 text-xs font-bold uppercase luxury-tracking text-wine dark:text-white tracking-[0.15em] cursor-pointer min-h-[44px]"
                 >
                   <span className="flex items-center gap-2">
                     <DollarSign size={15} className="text-amber-500" />
@@ -582,7 +582,7 @@ export default function FilterDrawer({
                             placeholder="0"
                             value={tempFilters.minPrice}
                             onChange={(e) => setTempFilters({ ...tempFilters, minPrice: e.target.value === '' ? '' : Number(e.target.value) })}
-                            className="w-full h-11 bg-zinc-100 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 text-xs font-mono font-bold text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500"
+                            className="w-full h-11 bg-zinc-100 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl px-3 text-xs font-mono font-bold text-wine dark:text-white focus:outline-none focus:border-amber-500"
                           />
                         </div>
 
@@ -596,7 +596,7 @@ export default function FilterDrawer({
                             placeholder="Unlimited"
                             value={tempFilters.maxPrice}
                             onChange={(e) => setTempFilters({ ...tempFilters, maxPrice: e.target.value === '' ? '' : Number(e.target.value) })}
-                            className="w-full h-11 bg-zinc-100 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 text-xs font-mono font-bold text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500"
+                            className="w-full h-11 bg-zinc-100 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl px-3 text-xs font-mono font-bold text-wine dark:text-white focus:outline-none focus:border-amber-500"
                           />
                         </div>
                       </div>
@@ -612,7 +612,7 @@ export default function FilterDrawer({
                             key={idx}
                             type="button"
                             onClick={() => setTempFilters({ ...tempFilters, minPrice: preset.min, maxPrice: preset.max })}
-                            className="px-2.5 py-1.5 rounded-lg text-[10px] font-bold bg-zinc-100 hover:bg-zinc-200 dark:bg-white/5 dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 transition-colors border border-black/5 dark:border-white/10 cursor-pointer min-h-[36px]"
+                            className="px-2.5 py-1.5 rounded-lg text-[10px] font-bold bg-zinc-100 hover:bg-zinc-200 dark:bg-white/5 dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 transition-colors border border-wine/5 dark:border-white/10 cursor-pointer min-h-[36px]"
                           >
                             {preset.label}
                           </button>
@@ -624,11 +624,11 @@ export default function FilterDrawer({
               </div>
 
               {/* 5. SIZE ACCORDION */}
-              <div className="border-b border-black/10 dark:border-white/10 pb-5">
+              <div className="border-b border-wine/10 dark:border-white/10 pb-5">
                 <button
                   type="button"
                   onClick={() => toggleSection('size')}
-                  className="w-full flex items-center justify-between py-2 text-xs font-bold uppercase luxury-tracking text-zinc-900 dark:text-white tracking-[0.15em] cursor-pointer min-h-[44px]"
+                  className="w-full flex items-center justify-between py-2 text-xs font-bold uppercase luxury-tracking text-wine dark:text-white tracking-[0.15em] cursor-pointer min-h-[44px]"
                 >
                   <span className="flex items-center gap-2">
                     <Ruler size={15} className="text-amber-500" />
@@ -660,7 +660,7 @@ export default function FilterDrawer({
                               className={`relative min-w-[44px] h-11 px-3 rounded-xl text-xs font-mono font-black transition-all cursor-pointer border flex items-center justify-center gap-1.5 ${
                                 isSelected
                                   ? 'bg-[#30001A] text-white border-[#30001A] dark:bg-rose-300 dark:text-[#30001A] dark:border-rose-300 shadow-md scale-[1.03]'
-                                  : 'bg-zinc-100/80 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border-black/10 dark:border-white/10 hover:border-amber-500/50'
+                                  : 'bg-zinc-100/80 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border-wine/10 dark:border-white/10 hover:border-amber-500/50'
                               }`}
                             >
                               <span>{size}</span>
@@ -679,11 +679,11 @@ export default function FilterDrawer({
               </div>
 
               {/* 6. COLOR SWATCHES ACCORDION */}
-              <div className="border-b border-black/10 dark:border-white/10 pb-5">
+              <div className="border-b border-wine/10 dark:border-white/10 pb-5">
                 <button
                   type="button"
                   onClick={() => toggleSection('color')}
-                  className="w-full flex items-center justify-between py-2 text-xs font-bold uppercase luxury-tracking text-zinc-900 dark:text-white tracking-[0.15em] cursor-pointer min-h-[44px]"
+                  className="w-full flex items-center justify-between py-2 text-xs font-bold uppercase luxury-tracking text-wine dark:text-white tracking-[0.15em] cursor-pointer min-h-[44px]"
                 >
                   <span className="flex items-center gap-2">
                     <Palette size={15} className="text-amber-500" />
@@ -715,7 +715,7 @@ export default function FilterDrawer({
                               className={`min-h-[44px] px-3 py-2 rounded-xl text-xs font-bold flex items-center justify-between border transition-all cursor-pointer ${
                                 isSelected
                                   ? 'bg-[#30001A] text-white border-[#30001A] dark:bg-rose-300 dark:text-[#30001A] dark:border-rose-300 shadow-md'
-                                  : 'bg-zinc-100/80 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border-black/10 dark:border-white/10 hover:border-amber-500/50'
+                                  : 'bg-zinc-100/80 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border-wine/10 dark:border-white/10 hover:border-amber-500/50'
                               }`}
                             >
                               <div className="flex items-center gap-2 min-w-0">
@@ -724,7 +724,7 @@ export default function FilterDrawer({
                                   style={{ backgroundColor: colorObj.hex, borderColor: colorObj.border }}
                                 >
                                   {isSelected && (
-                                    <Check size={11} className={colorObj.name === 'Pure Ivory' ? 'text-black' : 'text-white'} />
+                                    <Check size={11} className={colorObj.name === 'Pure Ivory' ? 'text-wine' : 'text-white'} />
                                   )}
                                 </span>
                                 <span className="truncate text-[11px]">{colorObj.name}</span>
@@ -744,11 +744,11 @@ export default function FilterDrawer({
               </div>
 
               {/* 7. MATERIAL ACCORDION */}
-              <div className="border-b border-black/10 dark:border-white/10 pb-5">
+              <div className="border-b border-wine/10 dark:border-white/10 pb-5">
                 <button
                   type="button"
                   onClick={() => toggleSection('material')}
-                  className="w-full flex items-center justify-between py-2 text-xs font-bold uppercase luxury-tracking text-zinc-900 dark:text-white tracking-[0.15em] cursor-pointer min-h-[44px]"
+                  className="w-full flex items-center justify-between py-2 text-xs font-bold uppercase luxury-tracking text-wine dark:text-white tracking-[0.15em] cursor-pointer min-h-[44px]"
                 >
                   <span className="flex items-center gap-2">
                     <Scissors size={15} className="text-amber-500" />
@@ -779,11 +779,11 @@ export default function FilterDrawer({
                             className={`w-full min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center justify-between border transition-all cursor-pointer ${
                               isChecked
                                 ? 'bg-[#30001A] text-white border-[#30001A] dark:bg-rose-300 dark:text-[#30001A] dark:border-rose-300 font-bold'
-                                : 'bg-zinc-100/50 dark:bg-white/5 border-black/5 dark:border-white/10 text-zinc-600 dark:text-zinc-400'
+                                : 'bg-zinc-100/50 dark:bg-white/5 border-wine/5 dark:border-white/10 text-zinc-600 dark:text-zinc-400'
                             }`}
                           >
                             <span>{mat}</span>
-                            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-black/5 dark:bg-white/10">
+                            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-wine/5 dark:bg-white/10">
                               {count}
                             </span>
                           </button>
@@ -795,11 +795,11 @@ export default function FilterDrawer({
               </div>
 
               {/* 8. FIT ACCORDION */}
-              <div className="border-b border-black/10 dark:border-white/10 pb-5">
+              <div className="border-b border-wine/10 dark:border-white/10 pb-5">
                 <button
                   type="button"
                   onClick={() => toggleSection('fit')}
-                  className="w-full flex items-center justify-between py-2 text-xs font-bold uppercase luxury-tracking text-zinc-900 dark:text-white tracking-[0.15em] cursor-pointer min-h-[44px]"
+                  className="w-full flex items-center justify-between py-2 text-xs font-bold uppercase luxury-tracking text-wine dark:text-white tracking-[0.15em] cursor-pointer min-h-[44px]"
                 >
                   <span className="flex items-center gap-2">
                     <ShieldCheck size={15} className="text-amber-500" />
@@ -831,7 +831,7 @@ export default function FilterDrawer({
                               className={`min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-bold transition-all border cursor-pointer flex items-center gap-2 ${
                                 isSelected
                                   ? 'bg-[#30001A] text-white border-[#30001A] dark:bg-rose-300 dark:text-[#30001A] dark:border-rose-300 shadow-sm'
-                                  : 'bg-zinc-100/80 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border-black/10 dark:border-white/10'
+                                  : 'bg-zinc-100/80 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border-wine/10 dark:border-white/10'
                               }`}
                             >
                               <span>{fit}</span>
@@ -846,11 +846,11 @@ export default function FilterDrawer({
               </div>
 
               {/* 9. BRAND / LINE ACCORDION */}
-              <div className="border-b border-black/10 dark:border-white/10 pb-5">
+              <div className="border-b border-wine/10 dark:border-white/10 pb-5">
                 <button
                   type="button"
                   onClick={() => toggleSection('brand')}
-                  className="w-full flex items-center justify-between py-2 text-xs font-bold uppercase luxury-tracking text-zinc-900 dark:text-white tracking-[0.15em] cursor-pointer min-h-[44px]"
+                  className="w-full flex items-center justify-between py-2 text-xs font-bold uppercase luxury-tracking text-wine dark:text-white tracking-[0.15em] cursor-pointer min-h-[44px]"
                 >
                   <span className="flex items-center gap-2">
                     <Filter size={15} className="text-amber-500" />
@@ -881,7 +881,7 @@ export default function FilterDrawer({
                             className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-xl text-xs font-bold uppercase luxury-tracking flex items-center justify-between border cursor-pointer transition-all ${
                               isChecked
                                 ? 'bg-[#30001A] text-white border-[#30001A] dark:bg-rose-300 dark:text-[#30001A] dark:border-rose-300'
-                                : 'bg-zinc-100/50 dark:bg-white/5 border-black/5 dark:border-white/10 text-zinc-700 dark:text-zinc-300'
+                                : 'bg-zinc-100/50 dark:bg-white/5 border-wine/5 dark:border-white/10 text-zinc-700 dark:text-zinc-300'
                             }`}
                           >
                             <span>{brand}</span>
@@ -895,11 +895,11 @@ export default function FilterDrawer({
               </div>
 
               {/* 10. AVAILABILITY ACCORDION */}
-              <div className="border-b border-black/10 dark:border-white/10 pb-5">
+              <div className="border-b border-wine/10 dark:border-white/10 pb-5">
                 <button
                   type="button"
                   onClick={() => toggleSection('availability')}
-                  className="w-full flex items-center justify-between py-2 text-xs font-bold uppercase luxury-tracking text-zinc-900 dark:text-white tracking-[0.15em] cursor-pointer min-h-[44px]"
+                  className="w-full flex items-center justify-between py-2 text-xs font-bold uppercase luxury-tracking text-wine dark:text-white tracking-[0.15em] cursor-pointer min-h-[44px]"
                 >
                   <span className="flex items-center gap-2">
                     <PackageCheck size={15} className="text-amber-500" />
@@ -932,7 +932,7 @@ export default function FilterDrawer({
                           className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-xl text-xs font-bold uppercase luxury-tracking flex items-center justify-between border cursor-pointer transition-all ${
                             tempFilters.availability === opt.id
                               ? 'bg-[#30001A] text-white border-[#30001A] dark:bg-rose-300 dark:text-[#30001A] dark:border-rose-300 shadow-sm'
-                              : 'bg-zinc-100/60 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border-black/5 dark:border-white/10'
+                              : 'bg-zinc-100/60 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border-wine/5 dark:border-white/10'
                           }`}
                         >
                           <span>{opt.label}</span>
@@ -945,11 +945,11 @@ export default function FilterDrawer({
               </div>
 
               {/* 11. RATING ACCORDION */}
-              <div className="border-b border-black/10 dark:border-white/10 pb-5">
+              <div className="border-b border-wine/10 dark:border-white/10 pb-5">
                 <button
                   type="button"
                   onClick={() => toggleSection('rating')}
-                  className="w-full flex items-center justify-between py-2 text-xs font-bold uppercase luxury-tracking text-zinc-900 dark:text-white tracking-[0.15em] cursor-pointer min-h-[44px]"
+                  className="w-full flex items-center justify-between py-2 text-xs font-bold uppercase luxury-tracking text-wine dark:text-white tracking-[0.15em] cursor-pointer min-h-[44px]"
                 >
                   <span className="flex items-center gap-2">
                     <Star size={15} className="text-amber-500 fill-amber-500" />
@@ -982,7 +982,7 @@ export default function FilterDrawer({
                           className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-xl text-xs font-bold uppercase luxury-tracking flex items-center justify-between border cursor-pointer transition-all ${
                             tempFilters.minRating === item.val
                               ? 'bg-[#30001A] text-white border-[#30001A] dark:bg-rose-300 dark:text-[#30001A] dark:border-rose-300'
-                              : 'bg-zinc-100/60 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border-black/5 dark:border-white/10'
+                              : 'bg-zinc-100/60 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border-wine/5 dark:border-white/10'
                           }`}
                         >
                           <span className="flex items-center gap-1.5">
@@ -1002,7 +1002,7 @@ export default function FilterDrawer({
                 <button
                   type="button"
                   onClick={() => toggleSection('discount')}
-                  className="w-full flex items-center justify-between py-2 text-xs font-bold uppercase luxury-tracking text-zinc-900 dark:text-white tracking-[0.15em] cursor-pointer min-h-[44px]"
+                  className="w-full flex items-center justify-between py-2 text-xs font-bold uppercase luxury-tracking text-wine dark:text-white tracking-[0.15em] cursor-pointer min-h-[44px]"
                 >
                   <span className="flex items-center gap-2">
                     <Percent size={15} className="text-amber-500" />
@@ -1035,7 +1035,7 @@ export default function FilterDrawer({
                           className={`min-h-[44px] px-3 py-2.5 rounded-xl text-xs font-bold uppercase luxury-tracking text-center border cursor-pointer transition-all ${
                             tempFilters.minDiscount === item.val
                               ? 'bg-[#30001A] text-white border-[#30001A] dark:bg-rose-300 dark:text-[#30001A] dark:border-rose-300 shadow-sm'
-                              : 'bg-zinc-100/60 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border-black/5 dark:border-white/10'
+                              : 'bg-zinc-100/60 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border-wine/5 dark:border-white/10'
                           }`}
                         >
                           {item.label}
@@ -1049,11 +1049,11 @@ export default function FilterDrawer({
             </div>
 
             {/* STICKY FOOTER ACTIONS */}
-            <div className="p-4 sm:p-5 border-t border-black/10 dark:border-white/10 bg-zinc-50/90 dark:bg-[#080307]/90 backdrop-blur-md sticky bottom-0 z-20 flex items-center gap-3 shrink-0">
+            <div className="p-4 sm:p-5 border-t border-wine/10 dark:border-white/10 bg-zinc-50/90 dark:bg-[#080307]/90 backdrop-blur-md sticky bottom-0 z-20 flex items-center gap-3 shrink-0">
               <button
                 type="button"
                 onClick={handleReset}
-                className="flex-1 min-h-[48px] rounded-xl text-xs font-bold uppercase luxury-tracking border border-black/15 dark:border-white/15 text-zinc-800 dark:text-zinc-200 hover:bg-black/5 dark:hover:bg-white/10 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                className="flex-1 min-h-[48px] rounded-xl text-xs font-bold uppercase luxury-tracking border border-wine/15 dark:border-white/15 text-zinc-800 dark:text-zinc-200 hover:bg-wine/5 dark:hover:bg-white/10 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 <RotateCcw size={14} />
                 <span>{isRTL ? 'إلغاء الكل' : 'CLEAR ALL'}</span>

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   Package, User as UserIcon, Phone, Mail, Calendar, MapPin, 
   Edit2, LogOut, CheckCircle2, Clock, Ban, ArrowLeft, ShoppingBag, 
-  ShieldCheck, Sun, Moon, DollarSign, Truck, AlertCircle, Save, Plus, Trash2, Search, MessageCircle, AlertTriangle
+  ShieldCheck, Sun, Moon, DollarSign, Truck, AlertCircle, Save, Plus, Trash2, Search, MessageCircle, AlertTriangle, Menu, X
 } from 'lucide-react';
 import { User, Order } from '../types';
 import { subscribeOrders } from '../lib/db';
@@ -33,6 +33,7 @@ export default function CustomerDashboard({
   lang = 'en',
   initialTab = 'orders'
 }: CustomerDashboardProps) {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'overview' | 'orders' | 'profile' | 'addresses'>(initialTab);
   const [userOrders, setUserOrders] = useState<Order[]>([]);
   const [orderFilter, setOrderFilter] = useState<'ALL' | 'PENDING' | 'COMPLETED' | 'CANCELLED'>('ALL');
@@ -114,24 +115,24 @@ export default function CustomerDashboard({
     return (
       <div className="min-h-screen bg-[#fcfcfc] dark:bg-[#050505] text-[#0a0a0a] dark:text-[#f5f5f7] flex flex-col font-sans">
         {/* Header */}
-        <header className="sticky top-0 z-40 bg-white/90 dark:bg-[#050505]/90 backdrop-blur-md border-b border-black/10 dark:border-white/10 px-6 lg:px-12 py-4 flex justify-between items-center">
+        <header className="sticky top-0 z-40 bg-white/90 dark:bg-[#050505]/90 backdrop-blur-md border-b border-wine/10 dark:border-white/10 px-6 lg:px-12 py-4 flex justify-between items-center">
           <div className="flex items-center gap-6">
             <button
               onClick={onBackToStore}
-              className="flex items-center gap-2 text-xs luxury-tracking font-bold uppercase text-zinc-600 dark:text-white/60 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
+              className="flex items-center gap-2 text-xs luxury-tracking font-bold uppercase text-zinc-600 dark:text-white/60 hover:text-wine dark:hover:text-white transition-colors cursor-pointer"
             >
               <ArrowLeft size={16} /> {lang === 'ar' ? 'العودة للمتجر' : 'BACK TO STORE'}
             </button>
-            <div className="h-4 w-[1px] bg-black/10 dark:bg-white/10 hidden sm:block"></div>
-            <span className="brand-logo text-lg tracking-widest uppercase text-zinc-900 dark:text-white hidden sm:block">
-              AVENTO7 <span className="text-[9px] font-sans luxury-tracking text-amber-500 ml-1 font-bold">{lang === 'ar' ? 'قسم تتبع الشحنات' : 'ORDER TRACKER'}</span>
+            <div className="h-4 w-[1px] bg-wine/10 dark:bg-white/10 hidden sm:block"></div>
+            <span className="brand-logo text-lg tracking-widest uppercase text-wine dark:text-white hidden sm:block">
+              KEMET <span className="text-[9px] font-sans luxury-tracking text-amber-500 ml-1 font-bold">{lang === 'ar' ? 'قسم تتبع الشحنات' : 'ORDER TRACKER'}</span>
             </span>
           </div>
 
           <div className="flex items-center gap-3">
             <button
               onClick={onToggleTheme}
-              className="p-2 text-zinc-600 dark:text-white/70 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
+              className="p-2 text-zinc-600 dark:text-white/70 hover:text-wine dark:hover:text-white transition-colors cursor-pointer"
             >
               {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
             </button>
@@ -139,7 +140,7 @@ export default function CustomerDashboard({
             {onOpenAuth && (
               <button
                 onClick={onOpenAuth}
-                className="bg-amber-500 text-black px-4 py-2 text-[10px] luxury-tracking font-bold uppercase hover:bg-amber-400 transition-colors flex items-center gap-1.5 cursor-pointer"
+                className="bg-amber-500 text-wine px-4 py-2 text-[10px] luxury-tracking font-bold uppercase hover:bg-amber-400 transition-colors flex items-center gap-1.5 cursor-pointer"
               >
                 <UserIcon size={14} />
                 <span>{lang === 'ar' ? 'تسجيل الدخول' : 'SIGN IN'}</span>
@@ -150,12 +151,12 @@ export default function CustomerDashboard({
 
         {/* Guest Tracking Main Section */}
         <main className="flex-1 max-w-4xl w-full mx-auto p-6 sm:p-10 my-6">
-          <div className="bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/10 p-6 sm:p-10 shadow-xl space-y-8">
+          <div className="bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/10 p-6 sm:p-10 shadow-xl space-y-8">
             <div className="text-center max-w-xl mx-auto space-y-2">
               <div className="w-14 h-14 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-500 flex items-center justify-center mx-auto mb-3">
                 <Truck size={28} />
               </div>
-              <h1 className="serif-display text-3xl sm:text-4xl uppercase tracking-wider text-zinc-900 dark:text-white">
+              <h1 className="serif-display text-3xl sm:text-4xl uppercase tracking-wider text-wine dark:text-white">
                 {lang === 'ar' ? 'تتبع حالة شحنتك المباشرة' : 'TRACK YOUR LIVE SHIPMENT'}
               </h1>
               <p className="text-xs luxury-tracking text-zinc-500 dark:text-white/50 uppercase">
@@ -174,13 +175,13 @@ export default function CustomerDashboard({
                     setHasSearchedTracker(false);
                   }}
                   placeholder={lang === 'ar' ? 'مثال: 01022293420 أو #ORD-759331' : 'E.G. 01022293420 OR #ORD-759331'}
-                  className="w-full bg-zinc-50 dark:bg-white/5 border border-black/20 dark:border-white/20 p-4 pl-12 text-sm font-mono font-bold text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500 transition-colors"
+                  className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/20 dark:border-white/20 p-4 pl-12 text-sm font-mono font-bold text-wine dark:text-white focus:outline-none focus:border-amber-500 transition-colors"
                 />
                 <Search size={18} className="absolute left-4 top-4 text-zinc-400" />
               </div>
               <button
                 type="submit"
-                className="px-8 py-4 bg-amber-500 text-black font-bold uppercase text-xs luxury-tracking tracking-[0.2em] hover:bg-amber-400 transition-colors flex items-center justify-center gap-2 cursor-pointer shrink-0 shadow-md"
+                className="px-8 py-4 bg-amber-500 text-wine font-bold uppercase text-xs luxury-tracking tracking-[0.2em] hover:bg-amber-400 transition-colors flex items-center justify-center gap-2 cursor-pointer shrink-0 shadow-md"
               >
                 <Search size={16} />
                 <span>{lang === 'ar' ? 'تتبع الآن' : 'TRACK ORDER'}</span>
@@ -189,9 +190,9 @@ export default function CustomerDashboard({
 
             {/* Result Area */}
             {hasSearchedTracker && !searchedOrder && (
-              <div className="p-8 text-center bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 max-w-2xl mx-auto space-y-2">
+              <div className="p-8 text-center bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 max-w-2xl mx-auto space-y-2">
                 <AlertTriangle size={36} className="mx-auto text-amber-500" />
-                <h3 className="text-sm font-bold uppercase text-zinc-900 dark:text-white">
+                <h3 className="text-sm font-bold uppercase text-wine dark:text-white">
                   {lang === 'ar' ? 'لم نتمكن من العثور على أي طلب مطابق' : 'NO ORDER FOUND MATCHING YOUR QUERY'}
                 </h3>
                 <p className="text-xs text-zinc-500 dark:text-white/50 max-w-md mx-auto">
@@ -201,19 +202,19 @@ export default function CustomerDashboard({
             )}
 
             {searchedOrder && (
-              <div className="max-w-2xl mx-auto space-y-6 bg-zinc-50/50 dark:bg-[#050505] p-6 border border-black/10 dark:border-white/10 shadow-inner">
+              <div className="max-w-2xl mx-auto space-y-6 bg-zinc-50/50 dark:bg-[#050505] p-6 border border-wine/10 dark:border-white/10 shadow-inner">
                 {/* Meta Header */}
-                <div className="flex justify-between items-center border-b border-black/10 dark:border-white/10 pb-4">
+                <div className="flex justify-between items-center border-b border-wine/10 dark:border-white/10 pb-4">
                   <div>
                     <span className="text-xs font-mono font-bold text-amber-600 dark:text-amber-400 block">
                       #{searchedOrder.id}
                     </span>
-                    <span className="text-sm font-bold text-zinc-900 dark:text-white block mt-0.5">
+                    <span className="text-sm font-bold text-wine dark:text-white block mt-0.5">
                       {searchedOrder.customerName}
                     </span>
                   </div>
                   <div className="text-right">
-                    <span className="text-sm font-mono font-bold text-zinc-900 dark:text-white block">
+                    <span className="text-sm font-mono font-bold text-wine dark:text-white block">
                       {searchedOrder.totalAmount.toLocaleString()} EGP
                     </span>
                     <span className="text-[10px] text-zinc-400 dark:text-white/40 block">
@@ -243,15 +244,15 @@ export default function CustomerDashboard({
                           <div
                             className={`w-10 h-10 rounded-full flex items-center justify-center border transition-all ${
                               isDone
-                                ? 'bg-amber-500 text-black border-amber-500 font-bold'
-                                : 'bg-zinc-100 dark:bg-white/5 text-zinc-400 border-black/10 dark:border-white/10'
+                                ? 'bg-amber-500 text-wine border-amber-500 font-bold'
+                                : 'bg-zinc-100 dark:bg-white/5 text-zinc-400 border-wine/10 dark:border-white/10'
                             }`}
                           >
                             <ItemIcon size={18} />
                           </div>
                           <span
                             className={`text-[10px] font-bold uppercase ${
-                              isDone ? 'text-zinc-900 dark:text-white' : 'text-zinc-400 dark:text-white/30'
+                              isDone ? 'text-wine dark:text-white' : 'text-zinc-400 dark:text-white/30'
                             }`}
                           >
                             {lang === 'ar' ? item.labelAr : item.labelEn}
@@ -263,7 +264,7 @@ export default function CustomerDashboard({
                 </div>
 
                 {/* Address and details */}
-                <div className="text-xs space-y-1.5 text-zinc-600 dark:text-white/70 border-t border-black/10 dark:border-white/10 pt-4">
+                <div className="text-xs space-y-1.5 text-zinc-600 dark:text-white/70 border-t border-wine/10 dark:border-white/10 pt-4">
                   <div className="flex items-center gap-2">
                     <MapPin size={15} className="text-amber-500 shrink-0" />
                     <span>{searchedOrder.governorate} - {searchedOrder.address}</span>
@@ -290,14 +291,14 @@ export default function CustomerDashboard({
             )}
 
             {/* Account Banner */}
-            <div className="pt-6 border-t border-black/10 dark:border-white/10 text-center space-y-3">
+            <div className="pt-6 border-t border-wine/10 dark:border-white/10 text-center space-y-3">
               <p className="text-xs luxury-tracking uppercase text-zinc-500 dark:text-white/50">
                 {lang === 'ar' ? 'هل تملك حساباً في المتجر؟ سجّل الدخول لعرض جميع طلباتك السابقة تلقائياً' : 'HAVE AN ACCOUNT? SIGN IN TO AUTOMATICALLY ACCESS ALL YOUR ORDERS'}
               </p>
               {onOpenAuth && (
                 <button
                   onClick={onOpenAuth}
-                  className="px-6 py-2.5 border border-black/20 dark:border-white/20 text-xs font-bold uppercase hover:border-amber-500 transition-colors cursor-pointer"
+                  className="px-6 py-2.5 border border-wine/20 dark:border-white/20 text-xs font-bold uppercase hover:border-amber-500 transition-colors cursor-pointer"
                 >
                   {lang === 'ar' ? 'تسجيل الدخول / إنشاء حساب' : 'SIGN IN / REGISTER'}
                 </button>
@@ -392,41 +393,58 @@ export default function CustomerDashboard({
     <div className="min-h-screen bg-[#fcfcfc] dark:bg-[#050505] text-[#0a0a0a] dark:text-[#f5f5f7] flex flex-col font-sans transition-colors duration-500">
       
       {/* Dedicated Portal Navigation Header */}
-      <header className="sticky top-0 z-40 bg-white/90 dark:bg-[#050505]/90 backdrop-blur-md border-b border-black/10 dark:border-white/10 px-6 lg:px-12 py-4 flex justify-between items-center">
+      <header className="sticky top-0 z-40 bg-white/90 dark:bg-[#050505]/90 backdrop-blur-md border-b border-wine/10 dark:border-white/10 px-6 lg:px-12 py-4 flex justify-between items-center">
         <div className="flex items-center gap-6">
           <button
             onClick={onBackToStore}
-            className="flex items-center gap-2 text-xs luxury-tracking font-bold uppercase text-zinc-600 dark:text-white/60 hover:text-black dark:hover:text-white transition-colors"
+            className="flex items-center gap-2 text-xs luxury-tracking font-bold uppercase text-zinc-600 dark:text-white/60 hover:text-wine dark:hover:text-white transition-colors"
           >
-            <ArrowLeft size={16} /> {lang === 'ar' ? 'العودة للمتجر' : 'BACK TO STORE'}
+            <ArrowLeft size={16} /> <span className="hidden sm:inline">{lang === 'ar' ? 'العودة للمتجر' : 'BACK TO STORE'}</span>
           </button>
-          <div className="h-4 w-[1px] bg-black/10 dark:bg-white/10 hidden sm:block"></div>
-          <span className="brand-logo text-lg tracking-widest uppercase text-zinc-900 dark:text-white hidden sm:block">
-            AVENTO7 <span className="text-[9px] font-sans luxury-tracking text-zinc-400 dark:text-white/40 ml-1 font-semibold">{lang === 'ar' ? 'بوابة العملاء' : 'CLIENT PORTAL'}</span>
+          <div className="h-4 w-[1px] bg-wine/10 dark:bg-white/10 hidden sm:block"></div>
+          <span className="brand-logo text-lg sm:text-lg tracking-widest uppercase text-wine dark:text-white">
+            KEMET <span className="hidden sm:inline text-[9px] font-sans luxury-tracking text-zinc-400 dark:text-white/40 ml-1 font-semibold">{lang === 'ar' ? 'بوابة العملاء' : 'CLIENT PORTAL'}</span>
           </span>
         </div>
+        
+        {/* Mobile Menu Toggle */}
+        <button
+          onClick={() => setIsSidebarOpen(true)}
+          className="lg:hidden p-2 text-zinc-600 dark:text-white/70 hover:text-wine dark:hover:text-white transition-colors ml-auto mr-2"
+        >
+          <Menu size={20} />
+        </button>
+        
+        {/* Mobile Menu Toggle */}
+        <button
+          onClick={() => setIsSidebarOpen(true)}
+          className="lg:hidden p-2 text-zinc-600 dark:text-white/70 hover:text-wine dark:hover:text-white transition-colors ml-auto mr-2"
+        >
+          <Menu size={20} />
+        </button>
 
         <div className="flex items-center gap-3 sm:gap-4">
           <button
             onClick={onToggleTheme}
-            className="p-2 text-zinc-600 dark:text-white/70 hover:text-black dark:hover:text-white transition-colors"
+            className="p-2 text-zinc-600 dark:text-white/70 hover:text-wine dark:hover:text-white transition-colors"
             title="Toggle theme"
           >
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
           
-          <div className="hidden sm:flex items-center gap-2 border-l border-black/10 dark:border-white/10 pl-4 text-xs luxury-tracking font-semibold">
-            <div className="w-7 h-7 rounded-full bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-xs font-mono">
+          <div className="hidden sm:flex items-center gap-2 border-l border-wine/10 dark:border-white/10 pl-4 text-xs luxury-tracking font-semibold">
+            <div className="w-7 h-7 rounded-full bg-wine text-white dark:bg-white dark:text-wine flex items-center justify-center font-bold text-xs font-mono">
               {(user?.name || 'U').charAt(0).toUpperCase()}
             </div>
-            <span className="uppercase text-zinc-900 dark:text-white font-bold">{(user?.name || 'CLIENT').split(' ')[0]}</span>
+            <span className="uppercase text-wine dark:text-white font-bold">{(user?.name || 'CLIENT').split(' ')[0]}</span>
           </div>
 
           <button
             onClick={onLogout}
-            className="text-xs luxury-tracking uppercase text-rose-600 dark:text-rose-400 font-bold hover:opacity-80 transition-opacity flex items-center gap-1 border border-rose-500/20 px-3 py-1.5"
+            className="text-xs luxury-tracking uppercase text-rose-600 dark:text-rose-400 font-bold hover:opacity-80 transition-opacity flex items-center gap-1 border border-rose-500/20 p-2 sm:px-3 sm:py-1.5"
+            title={lang === 'ar' ? 'تسجيل الخروج' : 'LOGOUT'}
           >
-            <LogOut size={13} /> {lang === 'ar' ? 'خروج' : 'LOGOUT'}
+            <LogOut size={13} /> <span className="hidden sm:inline">{lang === 'ar' ? 'خروج' : 'LOGOUT'}</span>
           </button>
         </div>
       </header>
@@ -453,84 +471,103 @@ export default function CustomerDashboard({
       {/* Main Dedicated Account Portal Container */}
       <div className="flex-1 max-w-[1600px] w-full mx-auto p-4 sm:p-6 lg:p-8 flex flex-col lg:flex-row gap-6 lg:gap-8 lg:h-[calc(100vh-65px)] lg:overflow-hidden">
         
-        {/* SIDEBAR MENU (Fixed/Static on Desktop, Segmented Mobile Layout) */}
-        <aside className="w-full lg:w-80 flex-shrink-0 flex flex-col gap-5 lg:h-full lg:overflow-y-auto custom-scrollbar">
+        {/* Mobile Sidebar Overlay */}
+        {isSidebarOpen && (
+          <div 
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] lg:hidden"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        )}
+
+        {/* SIDEBAR MENU */}
+        <aside className={`
+          fixed lg:static inset-y-0 ${lang === 'ar' ? 'right-0' : 'left-0'} z-[110] w-[85vw] sm:w-80 lg:w-80 
+          bg-[#fcfcfc] dark:bg-[#050505] lg:bg-transparent lg:dark:bg-transparent
+          flex-shrink-0 flex flex-col gap-5 lg:h-full lg:overflow-y-auto custom-scrollbar
+          border-x border-wine/10 dark:border-white/10 lg:border-none shadow-2xl lg:shadow-none
+          transition-transform duration-300 ease-in-out p-5 lg:p-0
+          ${isSidebarOpen ? 'translate-x-0' : (lang === 'ar' ? 'translate-x-full lg:translate-x-0' : '-translate-x-full lg:translate-x-0')}
+        `}>
           
+          <div className="flex justify-between items-center lg:hidden mb-2">
+            <span className="text-xs luxury-tracking font-bold uppercase text-wine dark:text-white">{lang === 'ar' ? 'القائمة الرئيسية' : 'MAIN MENU'}</span>
+            <button onClick={() => setIsSidebarOpen(false)} className="p-2 text-zinc-500 hover:text-wine dark:hover:text-white">
+              <X size={20} />
+            </button>
+          </div>
+
           {/* Client Profile Summary Card */}
-          <div className="bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/10 p-5 sm:p-6 flex flex-col gap-4 shadow-sm relative overflow-hidden">
+          <div className="bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/10 p-5 sm:p-6 flex flex-col gap-4 shadow-sm relative overflow-hidden">
             <div className="absolute top-0 right-0 w-28 h-28 bg-gradient-to-br from-amber-500/10 via-amber-500/5 to-transparent pointer-events-none" />
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-zinc-900 text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-xl font-mono border border-black/10 dark:border-white/10 shadow-inner flex-shrink-0">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-wine text-white dark:bg-white dark:text-wine flex items-center justify-center font-bold text-xl font-mono border border-wine/10 dark:border-white/10 shadow-inner flex-shrink-0">
                 {(user?.name || 'U').charAt(0).toUpperCase()}
               </div>
               <div className="flex flex-col min-w-0">
                 <span className="text-[9px] sm:text-[10px] luxury-tracking text-amber-600 dark:text-amber-400 font-bold uppercase flex items-center gap-1">
                   <ShieldCheck size={13} /> VIP CLIENT MEMBER
                 </span>
-                <h3 className="serif-display text-lg sm:text-xl tracking-wide uppercase text-zinc-900 dark:text-white font-normal truncate mt-0.5">
+                <h3 className="serif-display text-lg sm:text-xl tracking-wide uppercase text-wine dark:text-white font-normal truncate mt-0.5">
                   {user?.name || 'VIP CLIENT'}
                 </h3>
                 <span className="text-[10px] sm:text-[11px] luxury-tracking text-zinc-500 dark:text-white/40 font-mono truncate">{user?.email || ''}</span>
               </div>
             </div>
 
-            <div className="border-t border-black/5 dark:border-white/5 pt-3 text-[10px] luxury-tracking flex justify-between items-center text-zinc-500 dark:text-white/50">
+            <div className="border-t border-wine/5 dark:border-white/5 pt-3 text-[10px] luxury-tracking flex justify-between items-center text-zinc-500 dark:text-white/50">
               <span className="font-semibold">PHONE NUMBER:</span>
-              <span className="font-mono font-bold text-zinc-900 dark:text-white">{user.phone || 'NOT PROVIDED'}</span>
+              <span className="font-mono font-bold text-wine dark:text-white">{user.phone || 'NOT PROVIDED'}</span>
             </div>
           </div>
 
           {/* Navigation Items */}
-          <nav className="bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/10 p-1.5 sm:p-2 grid grid-cols-2 sm:grid-cols-4 lg:flex lg:flex-col gap-1.5 shadow-sm">
+          <nav className="bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/10 p-1.5 sm:p-2 flex flex-col gap-1.5 shadow-sm scroll-smooth">
             <button
-              onClick={() => setActiveTab('overview')}
-              className={`flex items-center justify-center lg:justify-start gap-2.5 px-3 sm:px-4 py-3 text-[10px] sm:text-[11px] luxury-tracking uppercase font-bold transition-all ${
+              onClick={() => { setActiveTab('overview'); setIsSidebarOpen(false); }}
+              className={`flex-shrink-0 flex items-center justify-start gap-2.5 px-4 sm:px-5 py-3 text-[10px] sm:text-[11px] luxury-tracking uppercase font-bold transition-all ${
                 activeTab === 'overview'
-                  ? 'bg-zinc-900 text-white dark:bg-white dark:text-black shadow-sm'
-                  : 'text-zinc-600 dark:text-white/60 hover:bg-zinc-100 dark:hover:bg-white/5 hover:text-black dark:hover:text-white'
+                  ? 'bg-wine text-white dark:bg-white dark:text-wine shadow-sm'
+                  : 'text-zinc-600 dark:text-white/60 hover:bg-zinc-100 dark:hover:bg-white/5 hover:text-wine dark:hover:text-white'
               }`}
             >
               <Package size={15} />
               <span className="truncate">OVERVIEW</span>
             </button>
-
             <button
-              onClick={() => setActiveTab('orders')}
-              className={`flex items-center justify-center lg:justify-between gap-2.5 px-3 sm:px-4 py-3 text-[10px] sm:text-[11px] luxury-tracking uppercase font-bold transition-all ${
+              onClick={() => { setActiveTab('orders'); setIsSidebarOpen(false); }}
+              className={`flex-shrink-0 flex items-center justify-between gap-2.5 px-4 sm:px-5 py-3 text-[10px] sm:text-[11px] luxury-tracking uppercase font-bold transition-all ${
                 activeTab === 'orders'
-                  ? 'bg-zinc-900 text-white dark:bg-white dark:text-black shadow-sm'
-                  : 'text-zinc-600 dark:text-white/60 hover:bg-zinc-100 dark:hover:bg-white/5 hover:text-black dark:hover:text-white'
+                  ? 'bg-wine text-white dark:bg-white dark:text-wine shadow-sm'
+                  : 'text-zinc-600 dark:text-white/60 hover:bg-zinc-100 dark:hover:bg-white/5 hover:text-wine dark:hover:text-white'
               }`}
             >
               <div className="flex items-center gap-2 truncate">
                 <ShoppingBag size={15} />
                 <span className="truncate">MY ORDERS</span>
               </div>
-              <span className={`hidden lg:inline text-[9px] font-mono px-1.5 py-0.5 font-bold ${
-                activeTab === 'orders' ? 'bg-white/20 dark:bg-black/20 text-current' : 'bg-black/5 dark:bg-white/10 text-zinc-700 dark:text-white'
+              <span className={`inline text-[9px] font-mono px-1.5 py-0.5 font-bold ${
+                activeTab === 'orders' ? 'bg-white/20 dark:bg-wine/20 text-current' : 'bg-wine/5 dark:bg-white/10 text-zinc-700 dark:text-white'
               }`}>
                 {totalOrdersCount}
               </span>
             </button>
-
             <button
-              onClick={() => setActiveTab('addresses')}
-              className={`flex items-center justify-center lg:justify-start gap-2.5 px-3 sm:px-4 py-3 text-[10px] sm:text-[11px] luxury-tracking uppercase font-bold transition-all ${
+              onClick={() => { setActiveTab('addresses'); setIsSidebarOpen(false); }}
+              className={`flex-shrink-0 flex items-center justify-start gap-2.5 px-4 sm:px-5 py-3 text-[10px] sm:text-[11px] luxury-tracking uppercase font-bold transition-all ${
                 activeTab === 'addresses'
-                  ? 'bg-zinc-900 text-white dark:bg-white dark:text-black shadow-sm'
-                  : 'text-zinc-600 dark:text-white/60 hover:bg-zinc-100 dark:hover:bg-white/5 hover:text-black dark:hover:text-white'
+                  ? 'bg-wine text-white dark:bg-white dark:text-wine shadow-sm'
+                  : 'text-zinc-600 dark:text-white/60 hover:bg-zinc-100 dark:hover:bg-white/5 hover:text-wine dark:hover:text-white'
               }`}
             >
               <MapPin size={15} />
               <span className="truncate">ADDRESSES</span>
             </button>
-
             <button
-              onClick={() => setActiveTab('profile')}
-              className={`flex items-center justify-center lg:justify-start gap-2.5 px-3 sm:px-4 py-3 text-[10px] sm:text-[11px] luxury-tracking uppercase font-bold transition-all ${
+              onClick={() => { setActiveTab('profile'); setIsSidebarOpen(false); }}
+              className={`flex-shrink-0 flex items-center justify-start gap-2.5 px-4 sm:px-5 py-3 text-[10px] sm:text-[11px] luxury-tracking uppercase font-bold transition-all ${
                 activeTab === 'profile'
-                  ? 'bg-zinc-900 text-white dark:bg-white dark:text-black shadow-sm'
-                  : 'text-zinc-600 dark:text-white/60 hover:bg-zinc-100 dark:hover:bg-white/5 hover:text-black dark:hover:text-white'
+                  ? 'bg-wine text-white dark:bg-white dark:text-wine shadow-sm'
+                  : 'text-zinc-600 dark:text-white/60 hover:bg-zinc-100 dark:hover:bg-white/5 hover:text-wine dark:hover:text-white'
               }`}
             >
               <UserIcon size={15} />
@@ -539,14 +576,14 @@ export default function CustomerDashboard({
           </nav>
 
           {/* Concierge Banner */}
-          <div className="hidden sm:flex bg-zinc-100/80 dark:bg-[#0A0A0A] border border-black/10 dark:border-white/10 p-5 flex-col gap-2.5 text-[10px] luxury-tracking">
-            <span className="font-bold uppercase text-zinc-900 dark:text-white flex items-center gap-1.5">
+          <div className="hidden sm:flex bg-zinc-100/80 dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/10 p-5 flex-col gap-2.5 text-[10px] luxury-tracking">
+            <span className="font-bold uppercase text-wine dark:text-white flex items-center gap-1.5">
               <Clock size={13} className="text-amber-500" /> CONCIERGE SUPPORT
             </span>
             <p className="text-zinc-500 dark:text-white/50 leading-relaxed uppercase">
               Need assistance with an order or custom sizing? Our concierge team is at your service 24/7.
             </p>
-            <span className="font-mono text-zinc-900 dark:text-white font-bold mt-1">SUPPORT@AVENTO7.COM</span>
+            <span className="font-mono text-wine dark:text-white font-bold mt-1">SUPPORT@KEMET.COM</span>
           </div>
 
         </aside>
@@ -570,10 +607,10 @@ export default function CustomerDashboard({
             <div className="flex flex-col gap-8">
               
               {/* Header Greeting */}
-              <div className="bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/5 p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 shadow-sm">
+              <div className="bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/5 p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 shadow-sm">
                 <div>
                   <span className="text-[9px] luxury-tracking uppercase text-zinc-400 dark:text-white/40 block mb-1 font-semibold">CLIENT DASHBOARD OVERVIEW</span>
-                  <h1 className="serif-display text-3xl md:text-4xl tracking-widest text-zinc-900 dark:text-white uppercase font-light">
+                  <h1 className="serif-display text-3xl md:text-4xl tracking-widest text-wine dark:text-white uppercase font-light">
                     WELCOME BACK, {user.name}
                   </h1>
                   <p className="text-xs luxury-tracking text-zinc-500 dark:text-white/50 uppercase mt-2">
@@ -583,7 +620,7 @@ export default function CustomerDashboard({
 
                 <button
                   onClick={onBackToStore}
-                  className="bg-black text-white dark:bg-white dark:text-black px-6 py-3 text-[10px] luxury-tracking font-bold uppercase hover:opacity-90 transition-opacity flex items-center gap-2 whitespace-nowrap"
+                  className="bg-wine text-white dark:bg-white dark:text-wine px-6 py-3 text-[10px] luxury-tracking font-bold uppercase hover:opacity-90 transition-opacity flex items-center gap-2 whitespace-nowrap"
                 >
                   <ShoppingBag size={14} /> BROWSE NEW COLLECTION
                 </button>
@@ -591,16 +628,16 @@ export default function CustomerDashboard({
 
               {/* Quick Metrics Bar */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/5 p-6 flex flex-col gap-2 shadow-sm">
+                <div className="bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/5 p-6 flex flex-col gap-2 shadow-sm">
                   <div className="flex justify-between items-center text-zinc-400 dark:text-white/40">
                     <span className="text-[9px] luxury-tracking uppercase font-bold">TOTAL ORDERS</span>
                     <ShoppingBag size={16} />
                   </div>
-                  <span className="font-mono text-3xl font-bold text-zinc-900 dark:text-white">{totalOrdersCount}</span>
+                  <span className="font-mono text-3xl font-bold text-wine dark:text-white">{totalOrdersCount}</span>
                   <span className="text-[9px] luxury-tracking text-zinc-400 uppercase font-medium">LIFETIME ORDERS PLACED</span>
                 </div>
 
-                <div className="bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/5 p-6 flex flex-col gap-2 shadow-sm">
+                <div className="bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/5 p-6 flex flex-col gap-2 shadow-sm">
                   <div className="flex justify-between items-center text-zinc-400 dark:text-white/40">
                     <span className="text-[9px] luxury-tracking uppercase font-bold">ACTIVE DELIVERIES</span>
                     <Truck size={16} className="text-amber-500" />
@@ -609,7 +646,7 @@ export default function CustomerDashboard({
                   <span className="text-[9px] luxury-tracking text-zinc-400 uppercase font-medium">IN PROCESSING / IN TRANSIT</span>
                 </div>
 
-                <div className="bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/5 p-6 flex flex-col gap-2 shadow-sm">
+                <div className="bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/5 p-6 flex flex-col gap-2 shadow-sm">
                   <div className="flex justify-between items-center text-zinc-400 dark:text-white/40">
                     <span className="text-[9px] luxury-tracking uppercase font-bold">COMPLETED ORDERS</span>
                     <CheckCircle2 size={16} className="text-emerald-500" />
@@ -618,27 +655,27 @@ export default function CustomerDashboard({
                   <span className="text-[9px] luxury-tracking text-zinc-400 uppercase font-medium">DELIVERED SUCCESSFULLY</span>
                 </div>
 
-                <div className="bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/5 p-6 flex flex-col gap-2 shadow-sm">
+                <div className="bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/5 p-6 flex flex-col gap-2 shadow-sm">
                   <div className="flex justify-between items-center text-zinc-400 dark:text-white/40">
                     <span className="text-[9px] luxury-tracking uppercase font-bold">TOTAL SPENT</span>
                     <DollarSign size={16} />
                   </div>
-                  <span className="font-mono text-3xl font-bold text-zinc-900 dark:text-white">{totalSpent.toLocaleString()} EGP</span>
+                  <span className="font-mono text-3xl font-bold text-wine dark:text-white">{totalSpent.toLocaleString()} EGP</span>
                   <span className="text-[9px] luxury-tracking text-zinc-400 uppercase font-medium">PURCHASE TOTAL</span>
                 </div>
               </div>
 
               {/* Recent Orders Preview Block */}
-              <div className="bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/5 p-6 lg:p-8 flex flex-col gap-6 shadow-sm">
-                <div className="flex justify-between items-center border-b border-black/10 dark:border-white/10 pb-4">
+              <div className="bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/5 p-6 lg:p-8 flex flex-col gap-6 shadow-sm">
+                <div className="flex justify-between items-center border-b border-wine/10 dark:border-white/10 pb-4">
                   <div>
-                    <h3 className="text-xs luxury-tracking font-bold uppercase text-zinc-900 dark:text-white">MOST RECENT ORDERS</h3>
+                    <h3 className="text-xs luxury-tracking font-bold uppercase text-wine dark:text-white">MOST RECENT ORDERS</h3>
                     <p className="text-[10px] luxury-tracking text-zinc-400 uppercase mt-0.5">LATEST PURCHASES AND ORDER STATUSES</p>
                   </div>
                   {userOrders.length > 0 && (
                     <button
                       onClick={() => setActiveTab('orders')}
-                      className="text-[10px] luxury-tracking uppercase font-bold text-zinc-600 dark:text-white/60 hover:text-black dark:hover:text-white transition-colors"
+                      className="text-[10px] luxury-tracking uppercase font-bold text-zinc-600 dark:text-white/60 hover:text-wine dark:hover:text-white transition-colors"
                     >
                       VIEW ALL ORDERS ({totalOrdersCount}) →
                     </button>
@@ -648,7 +685,7 @@ export default function CustomerDashboard({
                 {userOrders.length === 0 ? (
                   <div className="py-12 text-center flex flex-col items-center justify-center gap-3">
                     <Package size={36} className="text-zinc-300 dark:text-white/20" />
-                    <span className="serif-display text-xl uppercase font-light text-zinc-900 dark:text-white">NO RECENT ORDERS</span>
+                    <span className="serif-display text-xl uppercase font-light text-wine dark:text-white">NO RECENT ORDERS</span>
                     <p className="text-[10px] luxury-tracking text-zinc-500 uppercase max-w-xs">
                       You haven't placed any orders yet. Explore our luxury collection today.
                     </p>
@@ -656,13 +693,13 @@ export default function CustomerDashboard({
                 ) : (
                   <div className="flex flex-col gap-4">
                     {userOrders.slice(0, 3).map((ord, idx) => (
-                      <div key={`${ord.id}-${idx}`} className="p-4 bg-zinc-50 dark:bg-[#050505] border border-black/5 dark:border-white/5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                      <div key={`${ord.id}-${idx}`} className="p-4 bg-zinc-50 dark:bg-[#050505] border border-wine/5 dark:border-white/5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                         <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 bg-black/5 dark:bg-white/5 flex items-center justify-center text-zinc-900 dark:text-white font-mono text-xs font-bold">
+                          <div className="w-10 h-10 bg-wine/5 dark:bg-white/5 flex items-center justify-center text-wine dark:text-white font-mono text-xs font-bold">
                             #{ord.id.substring(0, 4)}
                           </div>
                           <div className="flex flex-col text-[10px] luxury-tracking">
-                            <span className="font-bold text-zinc-900 dark:text-white uppercase font-mono">ORDER #{ord.id}</span>
+                            <span className="font-bold text-wine dark:text-white uppercase font-mono">ORDER #{ord.id}</span>
                             <span className="text-zinc-400 uppercase font-medium">{new Date(ord.createdAt).toLocaleDateString('en-GB')} • {ord.items.length} ITEM(S)</span>
                           </div>
                         </div>
@@ -675,7 +712,7 @@ export default function CustomerDashboard({
                           }`}>
                             {ord.status}
                           </span>
-                          <span className="font-mono text-sm font-bold text-zinc-900 dark:text-white">{ord.totalAmount.toLocaleString()} EGP</span>
+                          <span className="font-mono text-sm font-bold text-wine dark:text-white">{ord.totalAmount.toLocaleString()} EGP</span>
                         </div>
                       </div>
                     ))}
@@ -688,10 +725,10 @@ export default function CustomerDashboard({
 
           {/* TAB 2: MY ORDERS */}
           {activeTab === 'orders' && (
-            <div className="bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/5 p-6 lg:p-8 flex flex-col gap-6 shadow-sm">
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-black/10 dark:border-white/10 pb-6">
+            <div className="bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/5 p-6 lg:p-8 flex flex-col gap-6 shadow-sm">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-wine/10 dark:border-white/10 pb-6">
                 <div>
-                  <h2 className="serif-display text-2xl uppercase tracking-widest text-zinc-900 dark:text-white font-light">
+                  <h2 className="serif-display text-2xl uppercase tracking-widest text-wine dark:text-white font-light">
                     MY ORDERS HISTORY
                   </h2>
                   <p className="text-[10px] luxury-tracking text-zinc-400 uppercase mt-1">TRACK AND MANAGE ALL YOUR ORDERS</p>
@@ -705,8 +742,8 @@ export default function CustomerDashboard({
                       onClick={() => setOrderFilter(st)}
                       className={`px-3 py-1.5 transition-colors border ${
                         orderFilter === st
-                          ? 'bg-black text-white dark:bg-white dark:text-black border-transparent'
-                          : 'border-black/10 dark:border-white/10 text-zinc-500 dark:text-white/50 hover:text-black dark:hover:text-white'
+                          ? 'bg-wine text-white dark:bg-white dark:text-wine border-transparent'
+                          : 'border-wine/10 dark:border-white/10 text-zinc-500 dark:text-white/50 hover:text-wine dark:hover:text-white'
                       }`}
                     >
                       {st}
@@ -718,7 +755,7 @@ export default function CustomerDashboard({
               {filteredOrders.length === 0 ? (
                 <div className="py-20 text-center flex flex-col items-center justify-center gap-4">
                   <Package size={44} className="text-zinc-300 dark:text-white/20" />
-                  <h3 className="serif-display text-2xl uppercase font-light text-zinc-900 dark:text-white">NO ORDERS FOUND</h3>
+                  <h3 className="serif-display text-2xl uppercase font-light text-wine dark:text-white">NO ORDERS FOUND</h3>
                   <p className="text-[10px] luxury-tracking text-zinc-500 uppercase max-w-sm">
                     No orders match the selected status filter.
                   </p>
@@ -728,13 +765,13 @@ export default function CustomerDashboard({
                   {filteredOrders.map((ord, idx) => (
                     <div 
                       key={`${ord.id}-${idx}`} 
-                      className="bg-zinc-50/70 dark:bg-[#050505] border border-black/10 dark:border-white/10 p-6 flex flex-col gap-6 shadow-sm"
+                      className="bg-zinc-50/70 dark:bg-[#050505] border border-wine/10 dark:border-white/10 p-6 flex flex-col gap-6 shadow-sm"
                     >
                       {/* Order Header */}
-                      <div className="flex flex-wrap justify-between items-start border-b border-black/10 dark:border-white/10 pb-4 gap-4">
+                      <div className="flex flex-wrap justify-between items-start border-b border-wine/10 dark:border-white/10 pb-4 gap-4">
                         <div>
                           <div className="flex items-center gap-3">
-                            <span className="font-mono text-base font-bold text-zinc-900 dark:text-white">ORDER #{ord.id}</span>
+                            <span className="font-mono text-base font-bold text-wine dark:text-white">ORDER #{ord.id}</span>
                             <span className={`text-[9px] luxury-tracking uppercase font-bold px-2.5 py-0.5 border ${
                               ord.status === 'COMPLETED' || ord.status === 'Confirmed' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20' :
                               ord.status === 'CANCELLED' || ord.status === 'Cancelled' ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20' :
@@ -759,10 +796,10 @@ export default function CustomerDashboard({
                       </div>
 
                       {/* Delivery Info */}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-[10px] luxury-tracking bg-white dark:bg-[#0A0A0A] p-4 border border-black/5 dark:border-white/5">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-[10px] luxury-tracking bg-white dark:bg-[#0A0A0A] p-4 border border-wine/5 dark:border-white/5">
                         <div>
                           <span className="text-zinc-400 block uppercase font-bold mb-1">CONTACT PHONE NUMBER</span>
-                          <span className="font-mono font-bold text-zinc-900 dark:text-white flex items-center gap-1.5">
+                          <span className="font-mono font-bold text-wine dark:text-white flex items-center gap-1.5">
                             <Phone size={12} className="text-amber-500" /> {ord.customerPhone}
                           </span>
                         </div>
@@ -776,12 +813,12 @@ export default function CustomerDashboard({
 
                       {/* Order Status Progress Tracker Bar */}
                       {ord.status !== 'CANCELLED' && ord.status !== 'Cancelled' ? (
-                        <div className="bg-white dark:bg-[#0A0A0A] p-4 border border-black/5 dark:border-white/5 flex flex-col gap-3">
+                        <div className="bg-white dark:bg-[#0A0A0A] p-4 border border-wine/5 dark:border-white/5 flex flex-col gap-3">
                           <span className="text-[10px] luxury-tracking text-zinc-500 dark:text-white/50 font-bold uppercase">SHIPMENT STATUS TRACKER:</span>
                           <div className="grid grid-cols-4 gap-2 text-[9px] luxury-tracking text-center">
                             <div className="flex flex-col items-center gap-1.5">
                               <div className="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-[10px]">✓</div>
-                              <span className="font-bold text-zinc-900 dark:text-white">ORDER PLACED</span>
+                              <span className="font-bold text-wine dark:text-white">ORDER PLACED</span>
                             </div>
                             <div className="flex flex-col items-center gap-1.5">
                               <div className={`w-6 h-6 rounded-full flex items-center justify-center font-bold text-[10px] ${
@@ -789,7 +826,7 @@ export default function CustomerDashboard({
                               }`}>
                                 {ord.status === 'COMPLETED' || ord.status === 'Confirmed' ? '✓' : '2'}
                               </div>
-                              <span className="font-bold text-zinc-900 dark:text-white">PROCESSING</span>
+                              <span className="font-bold text-wine dark:text-white">PROCESSING</span>
                             </div>
                             <div className="flex flex-col items-center gap-1.5">
                               <div className={`w-6 h-6 rounded-full flex items-center justify-center font-bold text-[10px] ${
@@ -797,7 +834,7 @@ export default function CustomerDashboard({
                               }`}>
                                 {ord.status === 'COMPLETED' || ord.status === 'Confirmed' ? '✓' : '3'}
                               </div>
-                              <span className={`font-bold ${ord.status === 'COMPLETED' || ord.status === 'Confirmed' ? 'text-zinc-900 dark:text-white' : 'text-zinc-400 dark:text-white/30'}`}>IN TRANSIT</span>
+                              <span className={`font-bold ${ord.status === 'COMPLETED' || ord.status === 'Confirmed' ? 'text-wine dark:text-white' : 'text-zinc-400 dark:text-white/30'}`}>IN TRANSIT</span>
                             </div>
                             <div className="flex flex-col items-center gap-1.5">
                               <div className={`w-6 h-6 rounded-full flex items-center justify-center font-bold text-[10px] ${
@@ -805,7 +842,7 @@ export default function CustomerDashboard({
                               }`}>
                                 {ord.status === 'COMPLETED' || ord.status === 'Confirmed' ? '✓' : '4'}
                               </div>
-                              <span className={`font-bold ${ord.status === 'COMPLETED' || ord.status === 'Confirmed' ? 'text-zinc-900 dark:text-white' : 'text-zinc-400 dark:text-white/30'}`}>DELIVERED</span>
+                              <span className={`font-bold ${ord.status === 'COMPLETED' || ord.status === 'Confirmed' ? 'text-wine dark:text-white' : 'text-zinc-400 dark:text-white/30'}`}>DELIVERED</span>
                             </div>
                           </div>
                         </div>
@@ -820,12 +857,12 @@ export default function CustomerDashboard({
                         <span className="text-[10px] luxury-tracking text-zinc-500 dark:text-white/50 font-bold uppercase">ORDER ITEMS ({ord.items.length}):</span>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                           {ord.items.map((item, idx) => (
-                            <div key={idx} className="flex gap-3 items-center bg-white dark:bg-[#0A0A0A] p-3 border border-black/5 dark:border-white/5">
+                            <div key={idx} className="flex gap-3 items-center bg-white dark:bg-[#0A0A0A] p-3 border border-wine/5 dark:border-white/5">
                               <img src={item.image} alt={item.name} className="w-14 h-16 object-cover flex-shrink-0" />
                               <div className="flex flex-col text-[10px] luxury-tracking">
-                                <span className="font-bold text-zinc-900 dark:text-white line-clamp-1">{item.name}</span>
+                                <span className="font-bold text-wine dark:text-white line-clamp-1">{item.name}</span>
                                 <span className="text-zinc-400">SIZE: {item.size} | QTY: {item.quantity}</span>
-                                <span className="font-mono text-zinc-900 dark:text-white font-bold mt-1">{(item.price * item.quantity).toLocaleString()} EGP</span>
+                                <span className="font-mono text-wine dark:text-white font-bold mt-1">{(item.price * item.quantity).toLocaleString()} EGP</span>
                               </div>
                             </div>
                           ))}
@@ -833,11 +870,11 @@ export default function CustomerDashboard({
                       </div>
 
                       {/* Total Bar */}
-                      <div className="flex justify-between items-center border-t border-black/10 dark:border-white/10 pt-4 text-[11px] luxury-tracking">
+                      <div className="flex justify-between items-center border-t border-wine/10 dark:border-white/10 pt-4 text-[11px] luxury-tracking">
                         <span className="text-zinc-500 dark:text-white/50 font-semibold uppercase">PAYMENT METHOD: CASH ON DELIVERY</span>
                         <div className="flex items-center gap-2">
                           <span className="text-zinc-500 dark:text-white/50 font-semibold">TOTAL AMOUNT:</span>
-                          <span className="text-xl font-mono font-bold text-zinc-900 dark:text-white">{ord.totalAmount.toLocaleString()} EGP</span>
+                          <span className="text-xl font-mono font-bold text-wine dark:text-white">{ord.totalAmount.toLocaleString()} EGP</span>
                         </div>
                       </div>
                     </div>
@@ -849,9 +886,9 @@ export default function CustomerDashboard({
 
           {/* TAB 3: DELIVERY ADDRESSES */}
           {activeTab === 'addresses' && (
-            <div className="bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/5 p-6 lg:p-8 flex flex-col gap-6 shadow-sm">
-              <div className="border-b border-black/10 dark:border-white/10 pb-4">
-                <h2 className="serif-display text-2xl uppercase tracking-widest text-zinc-900 dark:text-white font-light">
+            <div className="bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/5 p-6 lg:p-8 flex flex-col gap-6 shadow-sm">
+              <div className="border-b border-wine/10 dark:border-white/10 pb-4">
+                <h2 className="serif-display text-2xl uppercase tracking-widest text-wine dark:text-white font-light">
                   SAVED DELIVERY ADDRESSES
                 </h2>
                 <p className="text-[10px] luxury-tracking text-zinc-400 uppercase mt-1">MANAGE ADDRESSES FOR QUICK EXPRES CHECKOUT</p>
@@ -864,11 +901,11 @@ export default function CustomerDashboard({
                   value={newAddressInput}
                   onChange={(e) => setNewAddressInput(e.target.value)}
                   placeholder="ENTER NEW ADDRESS (CITY, STREET, BUILDING, APARTMENT)..."
-                  className="flex-1 bg-zinc-50 dark:bg-[#050505] border border-black/10 dark:border-white/10 p-3 text-xs luxury-tracking font-medium text-zinc-900 dark:text-white focus:outline-none uppercase"
+                  className="flex-1 bg-zinc-50 dark:bg-[#050505] border border-wine/10 dark:border-white/10 p-3 text-xs luxury-tracking font-medium text-wine dark:text-white focus:outline-none uppercase"
                 />
                 <button
                   type="submit"
-                  className="bg-black text-white dark:bg-white dark:text-black px-6 py-3 text-[10px] luxury-tracking font-bold uppercase hover:opacity-90 transition-opacity flex items-center gap-2 justify-center"
+                  className="bg-wine text-white dark:bg-white dark:text-wine px-6 py-3 text-[10px] luxury-tracking font-bold uppercase hover:opacity-90 transition-opacity flex items-center gap-2 justify-center"
                 >
                   <Plus size={14} /> ADD ADDRESS
                 </button>
@@ -877,12 +914,12 @@ export default function CustomerDashboard({
               {/* Saved Address List */}
               <div className="flex flex-col gap-3 mt-2">
                 {savedAddresses.map((addr, idx) => (
-                  <div key={idx} className="p-4 bg-zinc-50 dark:bg-[#050505] border border-black/10 dark:border-white/10 flex justify-between items-center text-xs luxury-tracking">
+                  <div key={idx} className="p-4 bg-zinc-50 dark:bg-[#050505] border border-wine/10 dark:border-white/10 flex justify-between items-center text-xs luxury-tracking">
                     <div className="flex items-center gap-3">
                       <MapPin size={16} className="text-amber-500 flex-shrink-0" />
-                      <span className="font-medium text-zinc-900 dark:text-white uppercase">{addr}</span>
+                      <span className="font-medium text-wine dark:text-white uppercase">{addr}</span>
                       {idx === 0 && (
-                        <span className="text-[9px] bg-black text-white dark:bg-white dark:text-black px-2 py-0.5 font-bold uppercase">DEFAULT</span>
+                        <span className="text-[9px] bg-wine text-white dark:bg-white dark:text-wine px-2 py-0.5 font-bold uppercase">DEFAULT</span>
                       )}
                     </div>
                     <button
@@ -900,10 +937,10 @@ export default function CustomerDashboard({
 
           {/* TAB 4: ACCOUNT SETTINGS / PROFILE */}
           {activeTab === 'profile' && (
-            <div className="bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/5 p-6 lg:p-8 flex flex-col gap-6 shadow-sm">
-              <div className="flex justify-between items-center border-b border-black/10 dark:border-white/10 pb-4">
+            <div className="bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/5 p-6 lg:p-8 flex flex-col gap-6 shadow-sm">
+              <div className="flex justify-between items-center border-b border-wine/10 dark:border-white/10 pb-4">
                 <div>
-                  <h2 className="serif-display text-2xl uppercase tracking-widest text-zinc-900 dark:text-white font-light">
+                  <h2 className="serif-display text-2xl uppercase tracking-widest text-wine dark:text-white font-light">
                     ACCOUNT SETTINGS & PROFILE
                   </h2>
                   <p className="text-[10px] luxury-tracking text-zinc-400 uppercase mt-1">PERSONAL DETAILS AND CONTACT INFORMATION</p>
@@ -912,7 +949,7 @@ export default function CustomerDashboard({
                 {!isEditingProfile && (
                   <button
                     onClick={() => setIsEditingProfile(true)}
-                    className="text-[10px] luxury-tracking uppercase text-zinc-600 dark:text-white/60 hover:text-black dark:hover:text-white flex items-center gap-1 font-bold border border-black/10 dark:border-white/10 px-4 py-2"
+                    className="text-[10px] luxury-tracking uppercase text-zinc-600 dark:text-white/60 hover:text-wine dark:hover:text-white flex items-center gap-1 font-bold border border-wine/10 dark:border-white/10 px-4 py-2"
                   >
                     <Edit2 size={13} /> EDIT PROFILE
                   </button>
@@ -927,7 +964,7 @@ export default function CustomerDashboard({
                       type="text"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="bg-zinc-50 dark:bg-[#050505] border border-black/10 dark:border-white/10 p-3 text-zinc-900 dark:text-white font-medium focus:outline-none uppercase"
+                      className="bg-zinc-50 dark:bg-[#050505] border border-wine/10 dark:border-white/10 p-3 text-wine dark:text-white font-medium focus:outline-none uppercase"
                       required
                     />
                   </div>
@@ -939,7 +976,7 @@ export default function CustomerDashboard({
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="+20100000000"
-                      className="bg-zinc-50 dark:bg-[#050505] border border-black/10 dark:border-white/10 p-3 text-zinc-900 dark:text-white font-medium focus:outline-none uppercase"
+                      className="bg-zinc-50 dark:bg-[#050505] border border-wine/10 dark:border-white/10 p-3 text-wine dark:text-white font-medium focus:outline-none uppercase"
                       required
                     />
                   </div>
@@ -950,14 +987,14 @@ export default function CustomerDashboard({
                       type="email"
                       value={user.email}
                       disabled
-                      className="bg-zinc-100 dark:bg-white/5 p-3 text-zinc-400 dark:text-white/30 font-mono cursor-not-allowed border border-black/5 dark:border-white/5"
+                      className="bg-zinc-100 dark:bg-white/5 p-3 text-zinc-400 dark:text-white/30 font-mono cursor-not-allowed border border-wine/5 dark:border-white/5"
                     />
                   </div>
 
                   <div className="flex gap-4 pt-4">
                     <button
                       type="submit"
-                      className="flex-1 bg-black text-white dark:bg-white dark:text-black py-3.5 font-bold uppercase text-[10px] luxury-tracking hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+                      className="flex-1 bg-wine text-white dark:bg-white dark:text-wine py-3.5 font-bold uppercase text-[10px] luxury-tracking hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
                     >
                       <Save size={14} /> SAVE CHANGES
                     </button>
@@ -968,7 +1005,7 @@ export default function CustomerDashboard({
                         setName(user.name || '');
                         setPhone(user.phone || '');
                       }}
-                      className="px-6 border border-black/20 dark:border-white/20 py-3.5 uppercase text-[10px] luxury-tracking font-bold text-zinc-600 dark:text-white/60 hover:text-black dark:hover:text-white transition-colors"
+                      className="px-6 border border-wine/20 dark:border-white/20 py-3.5 uppercase text-[10px] luxury-tracking font-bold text-zinc-600 dark:text-white/60 hover:text-wine dark:hover:text-white transition-colors"
                     >
                       CANCEL
                     </button>
@@ -976,17 +1013,17 @@ export default function CustomerDashboard({
                 </form>
               ) : (
                 <div className="max-w-2xl flex flex-col gap-6 text-xs luxury-tracking">
-                  <div className="flex flex-col gap-1 border-b border-black/5 dark:border-white/5 pb-4">
+                  <div className="flex flex-col gap-1 border-b border-wine/5 dark:border-white/5 pb-4">
                     <span className="text-[9px] text-zinc-400 uppercase font-bold">CLIENT NAME</span>
-                    <span className="font-bold text-zinc-900 dark:text-white text-base">{user.name}</span>
+                    <span className="font-bold text-wine dark:text-white text-base">{user.name}</span>
                   </div>
 
-                  <div className="flex flex-col gap-1 border-b border-black/5 dark:border-white/5 pb-4">
+                  <div className="flex flex-col gap-1 border-b border-wine/5 dark:border-white/5 pb-4">
                     <span className="text-[9px] text-zinc-400 uppercase font-bold">REGISTERED EMAIL ADDRESS</span>
                     <span className="font-mono text-zinc-800 dark:text-white/90">{user.email}</span>
                   </div>
 
-                  <div className="flex flex-col gap-1 border-b border-black/5 dark:border-white/5 pb-4">
+                  <div className="flex flex-col gap-1 border-b border-wine/5 dark:border-white/5 pb-4">
                     <span className="text-[9px] text-zinc-400 uppercase font-bold">CONTACT PHONE NUMBER</span>
                     <span className="font-mono font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1.5 text-sm">
                       <Phone size={14} /> {user.phone || 'NO PHONE ADDED'}
@@ -995,7 +1032,7 @@ export default function CustomerDashboard({
 
                   <div className="flex flex-col gap-1">
                     <span className="text-[9px] text-zinc-400 uppercase font-bold">ACCOUNT ROLE</span>
-                    <span className="font-mono font-bold text-zinc-900 dark:text-white uppercase">{user.role || 'VIP CUSTOMER'}</span>
+                    <span className="font-mono font-bold text-wine dark:text-white uppercase">{user.role || 'VIP CUSTOMER'}</span>
                   </div>
                 </div>
               )}

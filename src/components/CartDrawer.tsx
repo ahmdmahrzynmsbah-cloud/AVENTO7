@@ -269,33 +269,33 @@ ${productList}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
             onClick={handleClose}
-            className="fixed inset-0 bg-black/60 backdrop-blur-md z-[200]"
+            className="fixed inset-0 bg-wine/60 backdrop-blur-md z-[200]"
           />
           <motion.div
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: "spring", damping: 25, stiffness: 200, mass: 0.8 }}
-            className="fixed top-0 right-0 bottom-0 w-full md:w-[480px] bg-white text-zinc-900 border-l border-black/10 dark:bg-[#050505] dark:text-[#f5f5f7] dark:border-white/5 z-[200] flex flex-col shadow-2xl"
+            className="fixed top-0 right-0 bottom-0 w-full md:w-[480px] bg-white text-wine border-l border-wine/10 dark:bg-[#050505] dark:text-[#f5f5f7] dark:border-white/5 z-[200] flex flex-col shadow-2xl"
           >
             {/* Header */}
-            <div className="p-6 md:p-8 flex justify-between items-center border-b border-black/10 dark:border-white/5">
+            <div className="p-6 md:p-8 flex justify-between items-center border-b border-wine/10 dark:border-white/5">
               <div className="flex items-center gap-3">
                 {isCheckout && !placedOrder && (
                   <button 
                     onClick={() => setIsCheckout(false)}
-                    className="text-zinc-500 hover:text-black dark:text-white/50 dark:hover:text-white transition-colors"
+                    className="text-zinc-500 hover:text-wine dark:text-white/50 dark:hover:text-white transition-colors"
                   >
                     <ArrowLeft size={18} />
                   </button>
                 )}
-                <h2 className="text-xl serif-display tracking-widest text-zinc-900 dark:text-[#f5f5f7]">
+                <h2 className="text-xl serif-display tracking-widest text-wine dark:text-[#f5f5f7]">
                   {placedOrder ? 'ORDER CONFIRMED' : isCheckout ? 'CHECKOUT' : 'SHOPPING BAG'}
                 </h2>
               </div>
               <button 
                 onClick={handleClose}
-                className="text-zinc-500 hover:text-black dark:text-[#86868b] dark:hover:text-white transition-colors"
+                className="text-zinc-500 hover:text-wine dark:text-[#86868b] dark:hover:text-white transition-colors"
               >
                 <X size={24} strokeWidth={1.5} />
               </button>
@@ -309,7 +309,7 @@ ${productList}
                     <ShieldCheck size={36} />
                   </div>
                   <div className="space-y-2">
-                    <h3 className="text-base font-black text-zinc-900 dark:text-white tracking-wider">
+                    <h3 className="text-base font-black text-wine dark:text-white tracking-wider">
                       {lang === 'ar' ? 'تقييد حساب مسؤول المتجر' : 'ADMIN ACCOUNT RESTRICTION'}
                     </h3>
                     <p className="text-xs text-zinc-500 dark:text-zinc-400 max-w-xs leading-relaxed">
@@ -323,7 +323,7 @@ ${productList}
                       handleClose();
                       if (onViewAdmin) onViewAdmin();
                     }}
-                    className="px-6 py-3.5 bg-amber-500 text-zinc-950 font-black text-xs tracking-wider rounded-xl shadow-xl hover:bg-amber-400 transition-all cursor-pointer flex items-center gap-2"
+                    className="px-6 py-3.5 bg-amber-500 text-wine font-black text-xs tracking-wider rounded-xl shadow-xl hover:bg-amber-400 transition-all cursor-pointer flex items-center gap-2"
                   >
                     <ShieldCheck size={16} />
                     <span>{lang === 'ar' ? 'الانتقال إلى لوحة التحكم' : 'OPEN ADMIN DASHBOARD'}</span>
@@ -335,46 +335,46 @@ ${productList}
                   <div className="w-16 h-16 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-6">
                     <CheckCircle2 size={36} />
                   </div>
-                  <h3 className="serif-display text-3xl mb-2 text-zinc-900 dark:text-white font-light">THANK YOU FOR YOUR ORDER</h3>
+                  <h3 className="serif-display text-3xl mb-2 text-wine dark:text-white font-light">THANK YOU FOR YOUR ORDER</h3>
                   <p className="text-[10px] luxury-tracking text-zinc-500 dark:text-white/50 mb-6 font-medium">ORDER ID: #{placedOrder.id}</p>
                   
-                  <div className="w-full bg-zinc-50 dark:bg-[#0A0A0A] p-6 border border-black/5 dark:border-white/5 text-left mb-8 text-[11px] luxury-tracking space-y-3">
-                    <div className="flex justify-between border-b border-black/5 dark:border-white/5 pb-2">
+                  <div className="w-full bg-zinc-50 dark:bg-[#0A0A0A] p-6 border border-wine/5 dark:border-white/5 text-left mb-8 text-[11px] luxury-tracking space-y-3">
+                    <div className="flex justify-between border-b border-wine/5 dark:border-white/5 pb-2">
                       <span className="text-zinc-500 dark:text-white/50">{lang === 'ar' ? 'الاسم' : 'NAME'}</span>
-                      <span className="text-zinc-900 dark:text-white font-medium">{placedOrder.customerName}</span>
+                      <span className="text-wine dark:text-white font-medium">{placedOrder.customerName}</span>
                     </div>
-                    <div className="flex justify-between border-b border-black/5 dark:border-white/5 pb-2">
+                    <div className="flex justify-between border-b border-wine/5 dark:border-white/5 pb-2">
                       <span className="text-zinc-500 dark:text-white/50">{lang === 'ar' ? 'الهاتف' : 'PHONE'}</span>
-                      <span className="text-zinc-900 dark:text-white font-medium">{placedOrder.customerPhone}</span>
+                      <span className="text-wine dark:text-white font-medium">{placedOrder.customerPhone}</span>
                     </div>
-                    <div className="flex justify-between border-b border-black/5 dark:border-white/5 pb-2">
+                    <div className="flex justify-between border-b border-wine/5 dark:border-white/5 pb-2">
                       <span className="text-zinc-500 dark:text-white/50">{lang === 'ar' ? 'المحافظة' : 'GOVERNORATE'}</span>
-                      <span className="text-zinc-900 dark:text-white font-bold">{placedOrder.governorate || 'القاهرة'}</span>
+                      <span className="text-wine dark:text-white font-bold">{placedOrder.governorate || 'القاهرة'}</span>
                     </div>
-                    <div className="flex justify-between border-b border-black/5 dark:border-white/5 pb-2">
+                    <div className="flex justify-between border-b border-wine/5 dark:border-white/5 pb-2">
                       <span className="text-zinc-500 dark:text-white/50">{lang === 'ar' ? 'العنوان' : 'ADDRESS'}</span>
-                      <span className="text-zinc-900 dark:text-white font-medium truncate max-w-[200px]">{placedOrder.address}</span>
+                      <span className="text-wine dark:text-white font-medium truncate max-w-[200px]">{placedOrder.address}</span>
                     </div>
-                    <div className="flex justify-between border-b border-black/5 dark:border-white/5 pb-2">
+                    <div className="flex justify-between border-b border-wine/5 dark:border-white/5 pb-2">
                       <span className="text-zinc-500 dark:text-white/50">{lang === 'ar' ? 'سعر الشحن' : 'SHIPPING FEE'}</span>
                       <span className="text-amber-600 dark:text-amber-400 font-bold">{(placedOrder.shippingFee || 0).toLocaleString()} {lang === 'ar' ? 'ج.م' : 'EGP'}</span>
                     </div>
                     {placedOrder.appliedCoupon && (
-                      <div className="flex justify-between border-b border-black/5 dark:border-white/5 pb-2 text-emerald-600 dark:text-emerald-400 font-bold">
+                      <div className="flex justify-between border-b border-wine/5 dark:border-white/5 pb-2 text-emerald-600 dark:text-emerald-400 font-bold">
                         <span>{lang === 'ar' ? `الخصم (${placedOrder.appliedCoupon})` : `DISCOUNT (${placedOrder.appliedCoupon})`}</span>
                         <span>-{(placedOrder.discountAmount || 0).toLocaleString()} {lang === 'ar' ? 'ج.م' : 'EGP'}</span>
                       </div>
                     )}
                     <div className="flex justify-between pt-1 font-bold text-sm">
                       <span className="text-zinc-500 dark:text-white/50">{lang === 'ar' ? 'الإجمالي الكلي' : 'TOTAL AMOUNT'}</span>
-                      <span className="text-zinc-900 dark:text-white">{placedOrder.totalAmount.toLocaleString()} {lang === 'ar' ? 'ج.م' : 'EGP'}</span>
+                      <span className="text-wine dark:text-white">{placedOrder.totalAmount.toLocaleString()} {lang === 'ar' ? 'ج.م' : 'EGP'}</span>
                     </div>
                   </div>
 
                   {/* Direct WhatsApp Confirmation Button */}
                   <a 
                     href={`https://wa.me/2001022293420?text=${encodeURIComponent(
-                      `مرحباً FOX TECH 👋\nقمت بطلب جديد من AVENTO7! 🛍️\n\n` +
+                      `مرحباً FOX TECH 👋\nقمت بطلب جديد من KEMET! 🛍️\n\n` +
                       `📋 *رقم الطلب:* #${placedOrder.id}\n` +
                       `👤 *الاسم:* ${placedOrder.customerName}\n` +
                       `📱 *الهاتف:* ${placedOrder.customerPhone}\n` +
@@ -394,7 +394,7 @@ ${productList}
 
                   <button 
                     onClick={handleClose}
-                    className="w-full bg-black text-white dark:bg-white dark:text-black py-4 text-[10px] luxury-tracking font-bold tracking-[0.2em] hover:bg-zinc-800 dark:hover:bg-white/90 transition-colors"
+                    className="w-full bg-wine text-white dark:bg-white dark:text-wine py-4 text-[10px] luxury-tracking font-bold tracking-[0.2em] hover:bg-zinc-800 dark:hover:bg-white/90 transition-colors"
                   >
                     {lang === 'ar' ? 'متابعة التسوق' : 'CONTINUE SHOPPING'}
                   </button>
@@ -417,7 +417,7 @@ ${productList}
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder={lang === 'ar' ? 'الاسم بالكامل' : 'FULL NAME'}
-                      className="w-full bg-transparent border-b border-black/20 dark:border-white/20 pb-2 text-xs luxury-tracking text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-[#86868b] focus:outline-none focus:border-black dark:focus:border-white transition-colors font-medium"
+                      className="w-full bg-transparent border-b border-wine/20 dark:border-white/20 pb-2 text-xs luxury-tracking text-wine dark:text-white placeholder-zinc-400 dark:placeholder-[#86868b] focus:outline-none focus:border-wine dark:focus:border-white transition-colors font-medium"
                       
                     />
                   </div>
@@ -431,7 +431,7 @@ ${productList}
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder={lang === 'ar' ? 'رقم الهاتف' : 'PHONE NUMBER'}
-                      className="w-full bg-transparent border-b border-black/20 dark:border-white/20 pb-2 text-xs luxury-tracking text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-[#86868b] focus:outline-none focus:border-black dark:focus:border-white transition-colors font-medium"
+                      className="w-full bg-transparent border-b border-wine/20 dark:border-white/20 pb-2 text-xs luxury-tracking text-wine dark:text-white placeholder-zinc-400 dark:placeholder-[#86868b] focus:outline-none focus:border-wine dark:focus:border-white transition-colors font-medium"
                       
                     />
                   </div>
@@ -445,7 +445,7 @@ ${productList}
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder={lang === 'ar' ? 'البريد الإلكتروني' : 'EMAIL ADDRESS'}
-                      className="w-full bg-transparent border-b border-black/20 dark:border-white/20 pb-2 text-xs luxury-tracking text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-[#86868b] focus:outline-none focus:border-black dark:focus:border-white transition-colors font-medium"
+                      className="w-full bg-transparent border-b border-wine/20 dark:border-white/20 pb-2 text-xs luxury-tracking text-wine dark:text-white placeholder-zinc-400 dark:placeholder-[#86868b] focus:outline-none focus:border-wine dark:focus:border-white transition-colors font-medium"
                       
                     />
                   </div>
@@ -457,14 +457,14 @@ ${productList}
                         <Truck size={13} />
                         {lang === 'ar' ? 'المحافظة (حساب سعر الشحن) *' : 'GOVERNORATE (SHIPPING CALCULATOR) *'}
                       </span>
-                      <span className="text-zinc-900 dark:text-white font-mono">
+                      <span className="text-wine dark:text-white font-mono">
                         {shippingFee === 0 ? (lang === 'ar' ? 'شحن مجاني' : 'FREE') : `${shippingFee} ${lang === 'ar' ? 'ج.م' : 'EGP'}`}
                       </span>
                     </label>
                     <select
                       value={governorate}
                       onChange={(e) => setGovernorate(e.target.value)}
-                      className="w-full bg-zinc-50 dark:bg-[#0A0A0A] border border-black/20 dark:border-white/20 p-2.5 text-xs font-bold luxury-tracking text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500 transition-colors"
+                      className="w-full bg-zinc-50 dark:bg-[#0A0A0A] border border-wine/20 dark:border-white/20 p-2.5 text-xs font-bold luxury-tracking text-wine dark:text-white focus:outline-none focus:border-amber-500 transition-colors"
                       
                     >
                       {EGYPT_GOVERNORATES.map((gov, idx) => {
@@ -472,7 +472,7 @@ ${productList}
                           ? storeSettings.shippingRates[gov.nameAr]
                           : gov.defaultPrice;
                         return (
-                          <option key={`${gov.id}-${idx}`} value={gov.nameAr} className="bg-white dark:bg-black text-zinc-900 dark:text-white">
+                          <option key={`${gov.id}-${idx}`} value={gov.nameAr} className="bg-white dark:bg-wine text-wine dark:text-white">
                             {lang === 'ar' ? `${gov.nameAr} — شحن ${rate} ج.م` : `${gov.nameEn} (${gov.nameAr}) — ${rate} EGP`}
                           </option>
                         );
@@ -489,18 +489,18 @@ ${productList}
                       onChange={(e) => setAddress(e.target.value)}
                       placeholder={lang === 'ar' ? 'اسم الشارع، رقم المبنى، المنطقة...' : 'STREET, BUILDING, DISTRICT...'}
                       rows={2}
-                      className="w-full bg-transparent border border-black/20 dark:border-white/20 p-2.5 text-xs luxury-tracking text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-[#86868b] focus:outline-none focus:border-black dark:focus:border-white transition-colors font-medium"
+                      className="w-full bg-transparent border border-wine/20 dark:border-white/20 p-2.5 text-xs luxury-tracking text-wine dark:text-white placeholder-zinc-400 dark:placeholder-[#86868b] focus:outline-none focus:border-wine dark:focus:border-white transition-colors font-medium"
                       
                     />
                   </div>
 
-                  <div className="p-3 bg-zinc-50 dark:bg-[#0A0A0A] border border-black/5 dark:border-white/5 text-[10px] luxury-tracking text-zinc-500 dark:text-white/50 font-medium flex justify-between items-center">
+                  <div className="p-3 bg-zinc-50 dark:bg-[#0A0A0A] border border-wine/5 dark:border-white/5 text-[10px] luxury-tracking text-zinc-500 dark:text-white/50 font-medium flex justify-between items-center">
                     <span>{lang === 'ar' ? 'طريقة الدفع' : 'PAYMENT METHOD'}</span>
-                    <span className="text-zinc-900 dark:text-white font-bold">{lang === 'ar' ? 'الدفع عند الاستلام' : 'CASH ON DELIVERY'}</span>
+                    <span className="text-wine dark:text-white font-bold">{lang === 'ar' ? 'الدفع عند الاستلام' : 'CASH ON DELIVERY'}</span>
                   </div>
 
                   {/* Coupon Promo Code Section */}
-                  <div className="flex flex-col gap-2 pt-2 border-t border-black/10 dark:border-white/10">
+                  <div className="flex flex-col gap-2 pt-2 border-t border-wine/10 dark:border-white/10">
                     <label className="uppercase text-[10px] luxury-tracking text-amber-600 dark:text-amber-400 font-bold flex items-center gap-1.5">
                       <Ticket size={13} />
                       {lang === 'ar' ? 'هل لديك كود خصم (كوبون)؟' : 'HAVE A DISCOUNT COUPON?'}
@@ -529,13 +529,13 @@ ${productList}
                           type="text"
                           value={couponInput}
                           onChange={(e) => setCouponInput(e.target.value.toUpperCase())}
-                          placeholder="AVENTO10"
-                          className="flex-1 bg-zinc-50 dark:bg-[#0A0A0A] border border-black/20 dark:border-white/20 p-2 text-xs font-mono font-bold text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500"
+                          placeholder="KEMET10"
+                          className="flex-1 bg-zinc-50 dark:bg-[#0A0A0A] border border-wine/20 dark:border-white/20 p-2 text-xs font-mono font-bold text-wine dark:text-white focus:outline-none focus:border-amber-500"
                         />
                         <button
                           type="button"
                           onClick={handleApplyCoupon}
-                          className="px-4 py-2 bg-black text-white dark:bg-white dark:text-black font-bold text-[10px] luxury-tracking hover:bg-zinc-800 dark:hover:bg-white/80 transition-colors cursor-pointer"
+                          className="px-4 py-2 bg-wine text-white dark:bg-white dark:text-wine font-bold text-[10px] luxury-tracking hover:bg-zinc-800 dark:hover:bg-white/80 transition-colors cursor-pointer"
                         >
                           {lang === 'ar' ? 'تطبيق' : 'APPLY'}
                         </button>
@@ -554,7 +554,7 @@ ${productList}
                 /* Empty Bag View */
                 <div className="h-full flex flex-col items-center justify-center text-zinc-500 dark:text-[#86868b]">
                   <p className="luxury-tracking text-sm mb-6">YOUR BAG IS EMPTY</p>
-                  <button onClick={onClose} className="border-b border-zinc-500 hover:border-black hover:text-black dark:border-[#86868b] dark:hover:border-white dark:hover:text-white transition-all text-[10px] luxury-tracking pb-1">
+                  <button onClick={onClose} className="border-b border-zinc-500 hover:border-wine hover:text-wine dark:border-[#86868b] dark:hover:border-white dark:hover:text-white transition-all text-[10px] luxury-tracking pb-1">
                     RETURN TO SHOP
                   </button>
                 </div>
@@ -567,17 +567,17 @@ ${productList}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.2 + idx * 0.1 }}
-                      className="flex gap-6 border-b border-black/10 dark:border-white/5 pb-8"
+                      className="flex gap-6 border-b border-wine/10 dark:border-white/5 pb-8"
                     >
-                      <div className="w-24 h-32 bg-zinc-100 dark:bg-[#0A0A0A] overflow-hidden border border-black/5 dark:border-white/5">
+                      <div className="w-24 h-32 bg-zinc-100 dark:bg-[#0A0A0A] overflow-hidden border border-wine/5 dark:border-white/5">
                         <img src={item.image} alt={item.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                       </div>
                       <div className="flex-1 flex flex-col">
                         <div className="flex justify-between items-start mb-2">
-                          <h3 className="text-xs luxury-tracking font-medium text-zinc-900 dark:text-white">{lang === 'ar' ? (item.nameAr || item.name) : item.name}</h3>
+                          <h3 className="text-xs luxury-tracking font-medium text-wine dark:text-white">{lang === 'ar' ? (item.nameAr || item.name) : item.name}</h3>
                           <button 
                             onClick={() => removeItem(item.id, item.size)}
-                            className="text-zinc-500 hover:text-black dark:text-[#86868b] dark:hover:text-white text-[10px] luxury-tracking border-b border-transparent hover:border-current transition-all"
+                            className="text-zinc-500 hover:text-wine dark:text-[#86868b] dark:hover:text-white text-[10px] luxury-tracking border-b border-transparent hover:border-current transition-all"
                           >
                             {lang === 'ar' ? 'إزالة' : 'REMOVE'}
                           </button>
@@ -585,17 +585,17 @@ ${productList}
                         <p className="text-zinc-600 dark:text-[#86868b] text-[11px] luxury-tracking mb-4">{item.price.toLocaleString()} {lang === 'ar' ? 'ج.م' : 'EGP'}</p>
                         
                         <div className="mt-auto flex justify-between items-end">
-                          <div className="flex items-center gap-4 bg-zinc-100 dark:bg-[#0A0A0A] px-2 py-1 border border-black/10 dark:border-white/5">
+                          <div className="flex items-center gap-4 bg-zinc-100 dark:bg-[#0A0A0A] px-2 py-1 border border-wine/10 dark:border-white/5">
                             <button 
                               onClick={() => updateQuantity(item.id, item.size, -1)}
-                              className="w-6 h-6 flex items-center justify-center text-zinc-500 hover:text-black dark:text-[#86868b] dark:hover:text-white"
+                              className="w-6 h-6 flex items-center justify-center text-zinc-500 hover:text-wine dark:text-[#86868b] dark:hover:text-white"
                             >
                               <Minus size={12} />
                             </button>
                             <span className="text-xs w-4 text-center font-medium">{item.quantity}</span>
                             <button 
                               onClick={() => updateQuantity(item.id, item.size, 1)}
-                              className="w-6 h-6 flex items-center justify-center text-zinc-500 hover:text-black dark:text-[#86868b] dark:hover:text-white"
+                              className="w-6 h-6 flex items-center justify-center text-zinc-500 hover:text-wine dark:text-[#86868b] dark:hover:text-white"
                             >
                               <Plus size={12} />
                             </button>
@@ -613,7 +613,7 @@ ${productList}
 
             {/* Footer */}
             {!placedOrder && cartItems.length > 0 && (
-              <div className="border-t border-black/10 dark:border-white/5 p-5 md:p-6 pb-safe bg-zinc-50 dark:bg-[#050505]">
+              <div className="border-t border-wine/10 dark:border-white/5 p-5 md:p-6 pb-safe bg-zinc-50 dark:bg-[#050505]">
                 {isCheckout ? (
                   <div className="space-y-2 mb-6 text-[11px] luxury-tracking">
                     <div className="flex justify-between items-center text-zinc-500 dark:text-[#86868b]">
@@ -633,7 +633,7 @@ ${productList}
                         <span className="font-mono">-{discountAmount.toLocaleString()} {lang === 'ar' ? 'ج.م' : 'EGP'}</span>
                       </div>
                     )}
-                    <div className="flex justify-between items-center pt-2 border-t border-black/10 dark:border-white/10 text-zinc-900 dark:text-white font-bold text-xs">
+                    <div className="flex justify-between items-center pt-2 border-t border-wine/10 dark:border-white/10 text-wine dark:text-white font-bold text-xs">
                       <span>{lang === 'ar' ? 'الإجمالي النهائي' : 'TOTAL AMOUNT'}</span>
                       <span className="font-mono text-sm">{totalAmount.toLocaleString()} {lang === 'ar' ? 'ج.م' : 'EGP'}</span>
                     </div>
@@ -641,7 +641,7 @@ ${productList}
                 ) : (
                   <div className="flex justify-between items-center mb-6 text-[11px] luxury-tracking">
                     <span className="text-zinc-500 dark:text-[#86868b]">{lang === 'ar' ? 'المجموع الفرعي' : 'SUBTOTAL'}</span>
-                    <span className="text-zinc-900 dark:text-white font-bold">{subtotal.toLocaleString()} {lang === 'ar' ? 'ج.م' : 'EGP'}</span>
+                    <span className="text-wine dark:text-white font-bold">{subtotal.toLocaleString()} {lang === 'ar' ? 'ج.م' : 'EGP'}</span>
                   </div>
                 )}
 

@@ -69,9 +69,9 @@ export default function AuthPage({
         return;
       }
       
-      if (cleanEmail === 'admin' || cleanEmail === 'admin@avento.com' || cleanEmail === 'a73905337@gmail.com') {
+      if (cleanEmail === 'admin' || cleanEmail === 'admin@kemet.com' || cleanEmail === 'a73905337@gmail.com') {
         if (password === '1234' || password.toLowerCase() === 'admin123') {
-          const adminUser = { id: 'admin-1', name: 'System Admin', email: cleanEmail === 'admin' ? 'admin@avento.com' : cleanEmail, role: 'admin' as const };
+          const adminUser = { id: 'admin-1', name: 'System Admin', email: cleanEmail === 'admin' ? 'admin@kemet.com' : cleanEmail, role: 'admin' as const };
           onLogin(adminUser);
           return;
         }
@@ -116,7 +116,7 @@ export default function AuthPage({
         name: user.name, 
         email: user.email, 
         phone: user.phone, 
-        role: ((user.email.toLowerCase() === 'a73905337@gmail.com' || user.email.toLowerCase() === 'admin@avento.com' || user.role === 'admin') ? 'admin' : 'user') as 'admin' | 'user', 
+        role: ((user.email.toLowerCase() === 'a73905337@gmail.com' || user.email.toLowerCase() === 'admin@kemet.com' || user.role === 'admin') ? 'admin' : 'user') as 'admin' | 'user', 
         createdAt: user.createdAt 
       };
       onLogin(loggedUser);
@@ -170,7 +170,7 @@ export default function AuthPage({
         phone: formattedPhone,
         governorate: governorate || 'القاهرة',
         password,
-        role: ((cleanEmail === 'a73905337@gmail.com' || cleanEmail === 'admin@avento.com') ? 'admin' : 'user') as 'admin' | 'user',
+        role: ((cleanEmail === 'a73905337@gmail.com' || cleanEmail === 'admin@kemet.com') ? 'admin' : 'user') as 'admin' | 'user',
         createdAt: new Date().toISOString()
       };
 
@@ -187,7 +187,7 @@ export default function AuthPage({
         email: newUser.email, 
         phone: newUser.phone, 
         governorate: newUser.governorate,
-        role: (newUser.email.toLowerCase() === 'a73905337@gmail.com' || newUser.email.toLowerCase() === 'admin@avento.com' || newUser.role === 'admin') ? 'admin' : 'user',
+        role: (newUser.email.toLowerCase() === 'a73905337@gmail.com' || newUser.email.toLowerCase() === 'admin@kemet.com' || newUser.role === 'admin') ? 'admin' : 'user',
         createdAt: newUser.createdAt 
       };
       onLogin(loggedUser);
@@ -212,20 +212,20 @@ export default function AuthPage({
         <div className="flex-1 flex justify-start">
           <button
             onClick={onBackToStore}
-            className="flex items-center justify-center w-10 h-10 rounded-full text-[#30001A] dark:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer group"
+            className="flex items-center justify-center w-10 h-10 rounded-full text-[#30001A] dark:text-white hover:bg-wine/5 dark:hover:bg-white/10 transition-colors cursor-pointer group"
           >
             <ArrowLeft size={18} className="rtl:rotate-180 group-hover:-translate-x-1 transition-transform" />
           </button>
         </div>
 
         <a href="#" onClick={onBackToStore} className="brand-logo flex-1 text-center text-xl sm:text-2xl font-black luxury-tracking tracking-[0.25em] text-[#30001A] dark:text-white shrink-0">
-          AVENTO7
+          KEMET
         </a>
 
         <div className="flex-1 flex justify-end">
           <button
             onClick={onToggleTheme}
-            className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-current cursor-pointer"
+            className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-wine/5 dark:hover:bg-white/10 transition-colors text-current cursor-pointer"
             title={theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
           >
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
@@ -247,7 +247,7 @@ export default function AuthPage({
           <div className="absolute inset-0 z-0">
             <img
               src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=1600"
-              alt="Avento7 Luxury Fashion"
+              alt="Kemet Luxury Fashion"
               className="w-full h-full object-cover object-center opacity-45 group-hover:scale-105 transition-transform duration-1000"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#1b000f] via-[#30001A]/60 to-transparent" />
@@ -268,7 +268,7 @@ export default function AuthPage({
             </h1>
             <p className="text-sm font-light text-zinc-200/90 leading-relaxed font-sans">
               {lang === 'ar'
-                ? 'استمتع بتجربة تسوق حصرية، تتبع طلبيتك بدقة، واحصل على أحدث الإصدارات الخاصة بأعضاء AVENTO7 قبل الجميع.'
+                ? 'استمتع بتجربة تسوق حصرية، تتبع طلبيتك بدقة، واحصل على أحدث الإصدارات الخاصة بأعضاء KEMET قبل الجميع.'
                 : 'Unlock personalized order tracking, priority checkout, private drop invitations, and an exclusive curation tailored for modern elegance.'}
             </p>
 
@@ -290,7 +290,7 @@ export default function AuthPage({
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="lg:col-span-5 w-full max-w-lg mx-auto bg-white dark:bg-[#0c0508] border border-black/10 dark:border-white/10 p-8 sm:p-12 shadow-2xl rounded-2xl relative"
+          className="lg:col-span-5 w-full max-w-lg mx-auto bg-white dark:bg-[#0c0508] border border-wine/10 dark:border-white/10 p-8 sm:p-12 shadow-2xl rounded-2xl relative"
         >
           {/* Header & Tabs */}
           <div className="mb-8">
@@ -304,7 +304,7 @@ export default function AuthPage({
             </h2>
 
             {/* Tab Switchers */}
-            <div className="flex border-b border-black/10 dark:border-white/10 text-xs luxury-tracking font-medium relative gap-2 sm:gap-4">
+            <div className="flex border-b border-wine/10 dark:border-white/10 text-xs luxury-tracking font-medium relative gap-2 sm:gap-4">
               <button
                 ref={loginTabRef}
                 type="button"
@@ -312,7 +312,7 @@ export default function AuthPage({
                 className={`pb-3.5 px-3 sm:px-4 font-bold tracking-[0.2em] transition-colors relative cursor-pointer ${
                   view === 'login'
                     ? 'text-[#30001A] dark:text-white'
-                    : 'text-zinc-400 dark:text-zinc-500 hover:text-black dark:hover:text-white'
+                    : 'text-zinc-400 dark:text-zinc-500 hover:text-wine dark:hover:text-white'
                 }`}
               >
                 <span>{lang === 'ar' ? 'تسجيل الدخول' : 'SIGN IN'}</span>
@@ -325,7 +325,7 @@ export default function AuthPage({
                 className={`pb-3.5 px-3 sm:px-4 font-bold tracking-[0.2em] transition-colors relative cursor-pointer ${
                   view === 'register'
                     ? 'text-[#30001A] dark:text-white'
-                    : 'text-zinc-400 dark:text-zinc-500 hover:text-black dark:hover:text-white'
+                    : 'text-zinc-400 dark:text-zinc-500 hover:text-wine dark:hover:text-white'
                 }`}
               >
                 <span>{lang === 'ar' ? 'إنشاء حساب جديد' : 'REGISTER'}</span>
@@ -366,7 +366,7 @@ export default function AuthPage({
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder={lang === 'ar' ? 'الاسم بالكامل' : 'ENTER YOUR FULL NAME'}
-                    className="w-full bg-zinc-50 dark:bg-white/5 border border-black/15 dark:border-white/15 px-4 py-3.5 text-xs luxury-tracking text-[#30001A] dark:text-white placeholder-zinc-400 focus:outline-none focus:border-[#30001A] dark:focus:border-rose-300 transition-colors rounded-md font-bold"
+                    className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/15 dark:border-white/15 px-4 py-3.5 text-xs luxury-tracking text-[#30001A] dark:text-white placeholder-zinc-400 focus:outline-none focus:border-[#30001A] dark:focus:border-rose-300 transition-colors rounded-md font-bold"
                     required
                   />
                 </div>
@@ -377,7 +377,7 @@ export default function AuthPage({
                     <PhoneIcon size={12} className="text-amber-500" />
                     {lang === 'ar' ? 'رقم الهاتف (رمز مصر ثابت)' : 'PHONE NUMBER (EGYPT)'}
                   </label>
-                  <div className="flex items-center gap-2 bg-zinc-50 dark:bg-white/5 border border-black/15 dark:border-white/15 px-3 py-2 rounded-md">
+                  <div className="flex items-center gap-2 bg-zinc-50 dark:bg-white/5 border border-wine/15 dark:border-white/15 px-3 py-2 rounded-md">
                     <div className="flex items-center gap-1.5 px-2.5 py-1 bg-zinc-200 dark:bg-white/10 rounded font-mono font-bold text-xs text-zinc-800 dark:text-amber-300 shrink-0">
                       <span>🇪🇬</span>
                       <span>+20</span>
@@ -402,11 +402,11 @@ export default function AuthPage({
                   <select
                     value={governorate}
                     onChange={(e) => setGovernorate(e.target.value)}
-                    className="w-full bg-zinc-50 dark:bg-white/5 border border-black/15 dark:border-white/15 px-4 py-3.5 text-xs font-bold text-[#30001A] dark:text-white focus:outline-none focus:border-[#30001A] dark:focus:border-rose-300 transition-colors rounded-md"
+                    className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/15 dark:border-white/15 px-4 py-3.5 text-xs font-bold text-[#30001A] dark:text-white focus:outline-none focus:border-[#30001A] dark:focus:border-rose-300 transition-colors rounded-md"
                     required
                   >
                     {EGYPT_GOVERNORATES.map((gov, idx) => (
-                      <option key={`${gov.id}-${idx}`} value={gov.nameAr} className="bg-white text-black dark:bg-[#0a0a0a] dark:text-white">
+                      <option key={`${gov.id}-${idx}`} value={gov.nameAr} className="bg-white text-wine dark:bg-[#0a0a0a] dark:text-white">
                         {lang === 'ar' ? gov.nameAr : `${gov.nameEn} (${gov.nameAr})`}
                       </option>
                     ))}
@@ -424,7 +424,7 @@ export default function AuthPage({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={lang === 'ar' ? 'البريد الإلكتروني' : 'EMAIL ADDRESS'}
-                className="w-full bg-zinc-50 dark:bg-white/5 border border-black/15 dark:border-white/15 px-4 py-3.5 text-xs luxury-tracking text-[#30001A] dark:text-white placeholder-zinc-400 focus:outline-none focus:border-[#30001A] dark:focus:border-rose-300 transition-colors rounded-md"
+                className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/15 dark:border-white/15 px-4 py-3.5 text-xs luxury-tracking text-[#30001A] dark:text-white placeholder-zinc-400 focus:outline-none focus:border-[#30001A] dark:focus:border-rose-300 transition-colors rounded-md"
               />
             </div>
 
@@ -438,12 +438,12 @@ export default function AuthPage({
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full bg-zinc-50 dark:bg-white/5 border border-black/15 dark:border-white/15 px-4 py-3.5 text-xs luxury-tracking text-[#30001A] dark:text-white placeholder-zinc-400 focus:outline-none focus:border-[#30001A] dark:focus:border-rose-300 transition-colors rounded-md rtl:pr-4 rtl:pl-10 pr-10"
+                  className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/15 dark:border-white/15 px-4 py-3.5 text-xs luxury-tracking text-[#30001A] dark:text-white placeholder-zinc-400 focus:outline-none focus:border-[#30001A] dark:focus:border-rose-300 transition-colors rounded-md rtl:pr-4 rtl:pl-10 pr-10"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute rtl:left-3 right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-black dark:hover:text-white transition-colors p-1"
+                  className="absolute rtl:left-3 right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-wine dark:hover:text-white transition-colors p-1"
                 >
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
@@ -463,8 +463,8 @@ export default function AuthPage({
       </main>
 
       {/* Simple Clean Footer */}
-      <footer className="w-full py-6 text-center text-[10px] luxury-tracking text-zinc-500 dark:text-zinc-400 font-mono border-t border-black/5 dark:border-white/5">
-        &copy; {new Date().getFullYear()} AVENTO7 MENSWEAR. ALL RIGHTS RESERVED.
+      <footer className="w-full py-6 text-center text-[10px] luxury-tracking text-zinc-500 dark:text-zinc-400 font-mono border-t border-wine/5 dark:border-white/5">
+        &copy; {new Date().getFullYear()} KEMET MENSWEAR. ALL RIGHTS RESERVED.
       </footer>
     </div>
   );

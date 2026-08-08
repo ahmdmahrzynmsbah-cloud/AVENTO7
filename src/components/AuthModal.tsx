@@ -65,9 +65,9 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
       }
 
       // Check Admin Credentials
-      if (cleanEmail === 'admin' || cleanEmail === 'admin@avento.com' || cleanEmail === 'a73905337@gmail.com') {
+      if (cleanEmail === 'admin' || cleanEmail === 'admin@kemet.com' || cleanEmail === 'a73905337@gmail.com') {
         if (password === '1234' || password.toLowerCase() === 'admin123') {
-          const adminUser: User = { id: 'admin-1', name: 'System Admin', email: cleanEmail === 'admin' ? 'admin@avento.com' : cleanEmail, role: 'admin' };
+          const adminUser: User = { id: 'admin-1', name: 'System Admin', email: cleanEmail === 'admin' ? 'admin@kemet.com' : cleanEmail, role: 'admin' };
           onLogin(adminUser);
           onClose();
           return;
@@ -113,7 +113,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
         name: user.name, 
         email: user.email, 
         phone: user.phone, 
-        role: ((user.email.toLowerCase() === 'a73905337@gmail.com' || user.email.toLowerCase() === 'admin@avento.com' || user.role === 'admin') ? 'admin' : 'user') as 'admin' | 'user',
+        role: ((user.email.toLowerCase() === 'a73905337@gmail.com' || user.email.toLowerCase() === 'admin@kemet.com' || user.role === 'admin') ? 'admin' : 'user') as 'admin' | 'user',
         createdAt: user.createdAt 
       };
       onLogin(loggedUser);
@@ -168,7 +168,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
         phone: formattedPhone,
         governorate: governorate || 'القاهرة',
         password,
-        role: ((cleanEmail === 'a73905337@gmail.com' || cleanEmail === 'admin@avento.com') ? 'admin' : 'user') as 'admin' | 'user',
+        role: ((cleanEmail === 'a73905337@gmail.com' || cleanEmail === 'admin@kemet.com') ? 'admin' : 'user') as 'admin' | 'user',
         createdAt: new Date().toISOString()
       };
 
@@ -185,7 +185,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
         email: newUser.email, 
         phone: newUser.phone, 
         governorate: newUser.governorate,
-        role: (newUser.email.toLowerCase() === 'a73905337@gmail.com' || newUser.email.toLowerCase() === 'admin@avento.com' || newUser.role === 'admin') ? 'admin' : 'user',
+        role: (newUser.email.toLowerCase() === 'a73905337@gmail.com' || newUser.email.toLowerCase() === 'admin@kemet.com' || newUser.role === 'admin') ? 'admin' : 'user',
         createdAt: newUser.createdAt 
       };
       onLogin(loggedUser);
@@ -213,7 +213,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-md"
+            className="absolute inset-0 bg-wine/60 dark:bg-wine/80 backdrop-blur-md"
           />
 
           <motion.div
@@ -221,23 +221,23 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.95 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-md bg-white text-zinc-900 dark:bg-[#0a0a0a] dark:text-white border border-black/10 dark:border-white/10 p-8 md:p-12 shadow-2xl flex flex-col"
+            className="relative w-full max-w-md bg-white text-wine dark:bg-[#0a0a0a] dark:text-white border border-wine/10 dark:border-white/10 p-8 md:p-12 shadow-2xl flex flex-col"
           >
             <button
               onClick={onClose}
-              className="absolute top-6 right-6 text-zinc-500 hover:text-black dark:text-white/50 dark:hover:text-white transition-colors"
+              className="absolute top-6 right-6 text-zinc-500 hover:text-wine dark:text-white/50 dark:hover:text-white transition-colors"
             >
               <X size={24} strokeWidth={1.5} />
             </button>
-            <h2 className="serif-display text-4xl mb-8 font-light tracking-wider text-zinc-900 dark:text-[#f5f5f7]">
+            <h2 className="serif-display text-4xl mb-8 font-light tracking-wider text-wine dark:text-[#f5f5f7]">
               {view === 'login' ? (lang === 'ar' ? 'تسجيل الدخول' : 'SIGN IN') : (lang === 'ar' ? 'إنشاء حساب' : 'CREATE ACCOUNT')}
             </h2>
 
-            <div className="flex gap-4 border-b border-black/10 dark:border-white/10 mb-8 text-[10px] luxury-tracking font-medium text-zinc-500 dark:text-white/50 relative">
+            <div className="flex gap-4 border-b border-wine/10 dark:border-white/10 mb-8 text-[10px] luxury-tracking font-medium text-zinc-500 dark:text-white/50 relative">
               <button
                 ref={loginTabRef}
                 type="button"
-                className={`pb-3.5 px-3 font-bold tracking-[0.2em] transition-colors relative cursor-pointer ${view === 'login' ? 'text-[#30001A] dark:text-white' : 'hover:text-black dark:hover:text-white'}`}
+                className={`pb-3.5 px-3 font-bold tracking-[0.2em] transition-colors relative cursor-pointer ${view === 'login' ? 'text-[#30001A] dark:text-white' : 'hover:text-wine dark:hover:text-white'}`}
                 onClick={() => switchView('login')}
               >
                 <span>{lang === 'ar' ? 'تسجيل الدخول' : 'LOGIN'}</span>
@@ -245,7 +245,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
               <button
                 ref={registerTabRef}
                 type="button"
-                className={`pb-3.5 px-3 font-bold tracking-[0.2em] transition-colors relative cursor-pointer ${view === 'register' ? 'text-[#30001A] dark:text-white' : 'hover:text-black dark:hover:text-white'}`}
+                className={`pb-3.5 px-3 font-bold tracking-[0.2em] transition-colors relative cursor-pointer ${view === 'register' ? 'text-[#30001A] dark:text-white' : 'hover:text-wine dark:hover:text-white'}`}
                 onClick={() => switchView('register')}
               >
                 <span>{lang === 'ar' ? 'إنشاء حساب جديد' : 'REGISTER'}</span>
@@ -277,7 +277,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder={lang === 'ar' ? 'الاسم الكامل' : 'FULL NAME'}
-                      className="w-full bg-transparent border-b border-black/20 dark:border-white/20 pb-4 text-xs luxury-tracking text-zinc-900 dark:text-white placeholder-zinc-500 dark:placeholder-[#86868b] focus:outline-none focus:border-black dark:focus:border-white transition-colors font-medium"
+                      className="w-full bg-transparent border-b border-wine/20 dark:border-white/20 pb-4 text-xs luxury-tracking text-wine dark:text-white placeholder-zinc-500 dark:placeholder-[#86868b] focus:outline-none focus:border-wine dark:focus:border-white transition-colors font-medium"
                       required
                     />
                   </div>
@@ -288,7 +288,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
                       <PhoneIcon size={12} className="text-amber-500" />
                       {lang === 'ar' ? 'رقم الهاتف (مصر)' : 'PHONE NUMBER (EGYPT)'}
                     </label>
-                    <div className="flex items-center gap-2 border-b border-black/20 dark:border-white/20 pb-2">
+                    <div className="flex items-center gap-2 border-b border-wine/20 dark:border-white/20 pb-2">
                       <div className="flex items-center gap-1 px-2 py-1 bg-zinc-100 dark:bg-white/10 rounded-md font-mono font-bold text-xs text-zinc-800 dark:text-amber-300 shrink-0">
                         <span>🇪🇬</span>
                         <span>+20</span>
@@ -298,7 +298,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder={lang === 'ar' ? 'رقم الهاتف' : 'PHONE NUMBER'}
-                        className="w-full bg-transparent text-xs luxury-tracking font-mono font-bold text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none"
+                        className="w-full bg-transparent text-xs luxury-tracking font-mono font-bold text-wine dark:text-white placeholder-zinc-400 focus:outline-none"
                         required
                       />
                     </div>
@@ -313,11 +313,11 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
                     <select
                       value={governorate}
                       onChange={(e) => setGovernorate(e.target.value)}
-                      className="w-full bg-zinc-50 dark:bg-white/5 border-b border-black/20 dark:border-white/20 pb-2 text-xs font-bold text-zinc-900 dark:text-white focus:outline-none"
+                      className="w-full bg-zinc-50 dark:bg-white/5 border-b border-wine/20 dark:border-white/20 pb-2 text-xs font-bold text-wine dark:text-white focus:outline-none"
                       required
                     >
                       {EGYPT_GOVERNORATES.map((gov, idx) => (
-                        <option key={`${gov.id}-${idx}`} value={gov.nameAr} className="bg-white text-black dark:bg-[#0a0a0a] dark:text-white">
+                        <option key={`${gov.id}-${idx}`} value={gov.nameAr} className="bg-white text-wine dark:bg-[#0a0a0a] dark:text-white">
                           {lang === 'ar' ? gov.nameAr : `${gov.nameEn} (${gov.nameAr})`}
                         </option>
                       ))}
@@ -332,7 +332,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder={view === 'login' ? (lang === 'ar' ? "البريد الإلكتروني أو 'ADMIN'" : "EMAIL OR 'ADMIN'") : (lang === 'ar' ? 'البريد الإلكتروني' : 'EMAIL ADDRESS')}
-                  className="w-full bg-transparent border-b border-black/20 dark:border-white/20 pb-4 text-xs luxury-tracking text-zinc-900 dark:text-white placeholder-zinc-500 dark:placeholder-[#86868b] focus:outline-none focus:border-black dark:focus:border-white transition-colors"
+                  className="w-full bg-transparent border-b border-wine/20 dark:border-white/20 pb-4 text-xs luxury-tracking text-wine dark:text-white placeholder-zinc-500 dark:placeholder-[#86868b] focus:outline-none focus:border-wine dark:focus:border-white transition-colors"
                 />
               </div>
 
@@ -342,12 +342,12 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder={lang === 'ar' ? 'كلمة المرور' : 'PASSWORD'}
-                  className="w-full bg-transparent border-b border-black/20 dark:border-white/20 pb-4 text-xs luxury-tracking text-zinc-900 dark:text-white placeholder-zinc-500 dark:placeholder-[#86868b] focus:outline-none focus:border-black dark:focus:border-white transition-colors rtl:pr-0 rtl:pl-10 pr-10"
+                  className="w-full bg-transparent border-b border-wine/20 dark:border-white/20 pb-4 text-xs luxury-tracking text-wine dark:text-white placeholder-zinc-500 dark:placeholder-[#86868b] focus:outline-none focus:border-wine dark:focus:border-white transition-colors rtl:pr-0 rtl:pl-10 pr-10"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute rtl:right-auto rtl:left-0 right-0 bottom-4 text-zinc-500 hover:text-black dark:text-white/50 dark:hover:text-white transition-colors"
+                  className="absolute rtl:right-auto rtl:left-0 right-0 bottom-4 text-zinc-500 hover:text-wine dark:text-white/50 dark:hover:text-white transition-colors"
                 >
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
@@ -364,7 +364,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
                 
                 {view === 'login' && (
                   <div className="flex flex-col items-center gap-2.5 mt-2">
-                    <button type="button" className="text-[10px] luxury-tracking text-zinc-500 dark:text-[#86868b] hover:text-black dark:hover:text-white transition-colors text-center">
+                    <button type="button" className="text-[10px] luxury-tracking text-zinc-500 dark:text-[#86868b] hover:text-wine dark:hover:text-white transition-colors text-center">
                       {lang === 'ar' ? 'نسيت كلمة المرور؟' : 'FORGOT PASSWORD?'}
                     </button>
                     <div className="flex flex-wrap items-center justify-center gap-2 mt-1">
@@ -374,7 +374,7 @@ export default function AuthModal({ isOpen, onClose, onLogin, lang = 'en' }: Aut
                           setEmail('ahmed@gmail.com');
                           setPassword('password123');
                         }}
-                        className="text-[9px] luxury-tracking font-mono text-zinc-700 dark:text-zinc-300 hover:underline bg-zinc-100 dark:bg-white/10 px-2.5 py-1 border border-black/10 dark:border-white/10"
+                        className="text-[9px] luxury-tracking font-mono text-zinc-700 dark:text-zinc-300 hover:underline bg-zinc-100 dark:bg-white/10 px-2.5 py-1 border border-wine/10 dark:border-white/10"
                       >
                         DEMO CLIENT: ahmed@gmail.com / password123
                       </button>

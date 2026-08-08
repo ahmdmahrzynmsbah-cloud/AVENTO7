@@ -15,7 +15,7 @@ export default function FloatingWhatsApp({
   const [showBadge, setShowBadge] = useState(true);
 
   const formattedUrl = `https://wa.me/${phoneNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
-    lang === 'ar' ? 'مرحباً، أود الاستفسار عن منتجات AVENTO7' : 'Hello, I would like to inquire about AVENTO7 products'
+    lang === 'ar' ? 'مرحباً، أود الاستفسار عن منتجات KEMET' : 'Hello, I would like to inquire about KEMET products'
   )}`;
 
   return (
@@ -27,19 +27,19 @@ export default function FloatingWhatsApp({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.85, y: 10 }}
             transition={{ duration: 0.25, ease: 'easeOut' }}
-            className="w-72 bg-white dark:bg-[#0d0d0d] border border-black/10 dark:border-white/10 rounded-2xl shadow-2xl overflow-hidden text-zinc-900 dark:text-white"
+            className="w-72 bg-white dark:bg-[#0d0d0d] border border-wine/10 dark:border-white/10 rounded-2xl shadow-2xl overflow-hidden text-wine dark:text-white"
           >
             {/* Header */}
             <div className="bg-emerald-600 dark:bg-emerald-700 p-4 text-white flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="relative">
                   <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center font-serif font-bold text-lg text-white">
-                    A7
+                    KM
                   </div>
                   <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 border-2 border-emerald-600 rounded-full"></span>
                 </div>
                 <div>
-                  <h4 className="font-bold text-xs uppercase tracking-wider">{lang === 'ar' ? 'دعم أفينتو 7' : 'AVENTO7 SUPPORT'}</h4>
+                  <h4 className="font-bold text-xs uppercase tracking-wider">{lang === 'ar' ? 'دعم أفينتو 7' : 'KEMET SUPPORT'}</h4>
                   <p className="text-[10px] text-emerald-100 flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse"></span>
                     {lang === 'ar' ? 'متواجدون الآن للخدمة' : 'Online & ready to help'}
@@ -56,10 +56,10 @@ export default function FloatingWhatsApp({
 
             {/* Chat Body snippet */}
             <div className="p-4 bg-zinc-50 dark:bg-[#121212] text-xs space-y-3">
-              <div className="bg-white dark:bg-[#1e1e1e] border border-black/5 dark:border-white/5 p-3 rounded-xl shadow-xs text-zinc-700 dark:text-zinc-300 leading-relaxed text-[11px] rtl:text-right">
+              <div className="bg-white dark:bg-[#1e1e1e] border border-wine/5 dark:border-white/5 p-3 rounded-xl shadow-xs text-zinc-700 dark:text-zinc-300 leading-relaxed text-[11px] rtl:text-right">
                 {lang === 'ar' 
-                  ? 'أهلاً بك في AVENTO7 👋 كيف يمكننا مساعدتك اليوم؟ اضغط بالأسفل للبدء بالدردشة مباشرة عبر واتساب.' 
-                  : 'Welcome to AVENTO7 👋 How can we help you today? Click below to chat directly with our team on WhatsApp.'}
+                  ? 'أهلاً بك في KEMET 👋 كيف يمكننا مساعدتك اليوم؟ اضغط بالأسفل للبدء بالدردشة مباشرة عبر واتساب.' 
+                  : 'Welcome to KEMET 👋 How can we help you today? Click below to chat directly with our team on WhatsApp.'}
               </div>
               
               <a
@@ -100,7 +100,7 @@ export default function FloatingWhatsApp({
 
           {/* Unread badge */}
           {showBadge && (
-            <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-red-500 text-white font-bold text-[10px] flex items-center justify-center border-2 border-white dark:border-black animate-bounce shadow-md">
+            <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-red-500 text-white font-bold text-[10px] flex items-center justify-center border-2 border-white dark:border-wine animate-bounce shadow-md">
               1
             </span>
           )}

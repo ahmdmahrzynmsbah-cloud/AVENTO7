@@ -87,7 +87,7 @@ export default function AdminPanel({
 
   // Coupons State & Auto Generator
   const generateRandomCouponCode = () => {
-    const prefixes = ['AVENTO', 'SALE', 'PROMO', 'OFFER', 'VIP', 'FOX', 'DEAL'];
+    const prefixes = ['KEMET', 'SALE', 'PROMO', 'OFFER', 'VIP', 'FOX', 'DEAL'];
     const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
     const randomNum = Math.floor(100 + Math.random() * 900);
     const randomStr = Math.random().toString(36).substring(2, 5).toUpperCase();
@@ -284,8 +284,8 @@ export default function AdminPanel({
   };
 
   // General Settings State
-  const [storeName, setStoreName] = useState(settings.storeName || 'A7 BRAND STORE');
-  const [contactEmail, setContactEmail] = useState(settings.supportEmail || 'support@a7clothing.com');
+  const [storeName, setStoreName] = useState(settings.storeName || 'KEMET BRAND STORE');
+  const [contactEmail, setContactEmail] = useState(settings.supportEmail || 'support@kemetclothing.com');
   const [contactPhone, setContactPhone] = useState(settings.supportPhone || '+20 100 123 4567');
   const [storeCurrency, setStoreCurrency] = useState(settings.currency || 'EGP');
   const [freeShippingThreshold, setFreeShippingThreshold] = useState<number>(settings.freeShippingThreshold || 3000);
@@ -839,9 +839,10 @@ export default function AdminPanel({
       : (imageUrl ? [imageUrl] : ['https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&q=80&w=800']);
     const finalImage = finalImagesList[0];
     const parsedPrice = Number(price);
+    const parsedOriginalPrice = Number(originalPrice);
     const parsedCost = costPrice ? Number(costPrice) : Math.round(parsedPrice * 0.55);
     const parsedStock = Number(stockInput) || 24;
-    const generatedSku = skuInput.trim() || `SKU-A7-${Date.now().toString().slice(-5)}`;
+    const generatedSku = skuInput.trim() || `SKU-KM-${Date.now().toString().slice(-5)}`;
     const todayFormatted = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
     if (editingId) {
@@ -907,7 +908,7 @@ export default function AdminPanel({
     setCategory(product.category);
     setGender(product.gender);
     setIsNew(product.isNew || false);
-    setSkuInput(product.sku || `SKU-A7-${product.id.slice(0, 6).toUpperCase()}`);
+    setSkuInput(product.sku || `SKU-KM-${product.id.slice(0, 6).toUpperCase()}`);
     setStockInput((product.stock ?? 24).toString());
     setVisibilityInput(product.visibility === 'Draft' ? 'Draft' : 'Published');
     setIsSoldOut(product.isSoldOut || false);
@@ -921,7 +922,7 @@ export default function AdminPanel({
       ...p,
       id: `prod-${Date.now()}`,
       name: `${p.name} (Copy)`,
-      sku: p.sku ? `${p.sku}-COPY` : `SKU-A7-${Date.now().toString().slice(-5)}`,
+      sku: p.sku ? `${p.sku}-COPY` : `SKU-KM-${Date.now().toString().slice(-5)}`,
       lastUpdated: todayFormatted
     };
     onAddProduct(duplicated);
@@ -985,7 +986,7 @@ export default function AdminPanel({
 
   const filteredAndSortedProducts = products.filter(p => {
     const query = productSearch.trim().toLowerCase();
-    const pSku = p.sku || `SKU-A7-${p.id.slice(0, 6).toUpperCase()}`;
+    const pSku = p.sku || `SKU-KM-${p.id.slice(0, 6).toUpperCase()}`;
     const matchesSearch = !query || 
       p.name.toLowerCase().includes(query) || 
       p.category.toLowerCase().includes(query) ||
@@ -1059,13 +1060,13 @@ export default function AdminPanel({
   };
 
   return (
-    <div className="w-full min-h-screen bg-[#f7f5f7] text-zinc-900 dark:bg-[#060205] dark:text-[#f5f5f7] pt-4 sm:pt-6 pb-8 px-3 sm:px-6 lg:px-8 transition-colors duration-500">
+    <div className="w-full min-h-screen bg-[#f7f5f7] text-wine dark:bg-[#060205] dark:text-[#f5f5f7] pt-4 sm:pt-6 pb-8 px-3 sm:px-6 lg:px-8 transition-colors duration-500">
       <div className="w-full max-w-[1650px] mx-auto flex flex-col lg:flex-row gap-5 lg:gap-6 items-start min-h-[calc(100vh-3rem)]">
         
         {/* EXECUTIVE COLLAPSIBLE SIDEBAR NAVIGATION */}
         <aside className={`w-full ${
           isSidebarCollapsed ? 'lg:w-20' : 'lg:w-64 xl:w-72'
-        } transition-all duration-300 ease-in-out shrink-0 bg-white/95 dark:bg-[#0d060b]/95 backdrop-blur-2xl border border-black/10 dark:border-white/10 rounded-2xl ${
+        } transition-all duration-300 ease-in-out shrink-0 bg-white/95 dark:bg-[#0d060b]/95 backdrop-blur-2xl border border-wine/10 dark:border-white/10 rounded-2xl ${
           isSidebarCollapsed ? 'p-2 sm:p-3' : 'p-3 sm:p-5'
         } shadow-xl flex flex-col justify-between lg:sticky lg:top-6 lg:self-start lg:max-h-[calc(100vh-3rem)] overflow-y-auto custom-scrollbar z-30`}>
           
@@ -1074,27 +1075,27 @@ export default function AdminPanel({
               
               {/* Sidebar Header with Collapse Toggle Button */}
               {isSidebarCollapsed ? (
-                <div className="hidden lg:flex flex-col items-center gap-2 border-b border-black/10 dark:border-white/10 pb-3 mb-3 shrink-0">
+                <div className="hidden lg:flex flex-col items-center gap-2 border-b border-wine/10 dark:border-white/10 pb-3 mb-3 shrink-0">
                   <button 
                     onClick={() => setIsSidebarCollapsed(false)}
-                    className="p-2 rounded-xl text-zinc-700 dark:text-zinc-200 bg-black/5 dark:bg-white/10 hover:bg-amber-500 hover:text-white dark:hover:bg-amber-500 dark:hover:text-black transition-all cursor-pointer"
+                    className="p-2 rounded-xl text-zinc-700 dark:text-zinc-200 bg-wine/5 dark:bg-white/10 hover:bg-amber-500 hover:text-white dark:hover:bg-amber-500 dark:hover:text-wine transition-all cursor-pointer"
                     title={lang === 'ar' ? 'توسيع القائمة' : 'Expand Sidebar'}
                   >
                     <PanelLeftOpen className="w-5 h-5 rtl:rotate-180" />
                   </button>
-                  <div className="w-8 h-8 rounded-xl bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-black text-xs shadow-md">
-                    A7
+                  <div className="w-8 h-8 rounded-xl bg-wine text-white dark:bg-white dark:text-wine flex items-center justify-center font-black text-xs shadow-md">
+                    KM
                   </div>
                 </div>
               ) : (
-                <div className="flex items-center justify-between border-b border-black/10 dark:border-white/10 pb-3 mb-3 shrink-0">
+                <div className="flex items-center justify-between border-b border-wine/10 dark:border-white/10 pb-3 mb-3 shrink-0">
                   <div className="flex items-center gap-2.5 min-w-0">
-                    <div className="w-8 h-8 rounded-xl bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-black text-xs shadow-md shrink-0">
-                      A7
+                    <div className="w-8 h-8 rounded-xl bg-wine text-white dark:bg-white dark:text-wine flex items-center justify-center font-black text-xs shadow-md shrink-0">
+                      KM
                     </div>
                     <div className="flex flex-col min-w-0">
-                      <span className="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-white leading-tight truncate">
-                        {lang === 'ar' ? 'لوحة التحكم' : 'A7 CONTROL'}
+                      <span className="text-xs font-bold uppercase tracking-wider text-wine dark:text-white leading-tight truncate">
+                        {lang === 'ar' ? 'لوحة التحكم' : 'KEMET CONTROL'}
                       </span>
                       <span className="text-[10px] text-zinc-500 dark:text-zinc-400 truncate">
                         {lang === 'ar' ? 'إدارة المتجر' : 'Store Management'}
@@ -1105,7 +1106,7 @@ export default function AdminPanel({
                   <div className="flex items-center gap-1.5 shrink-0">
                     <button
                       onClick={onBackToStore}
-                      className="lg:hidden p-1.5 rounded-lg text-xs font-bold text-zinc-700 hover:text-black dark:text-zinc-300 dark:hover:text-white bg-black/5 dark:bg-white/10 transition-colors flex items-center gap-1 cursor-pointer"
+                      className="lg:hidden p-1.5 rounded-lg text-xs font-bold text-zinc-700 hover:text-wine dark:text-zinc-300 dark:hover:text-white bg-wine/5 dark:bg-white/10 transition-colors flex items-center gap-1 cursor-pointer"
                       title={lang === 'ar' ? 'العودة للمتجر' : 'STORE'}
                     >
                       <ArrowLeft size={14} className="rtl:rotate-180" />
@@ -1122,7 +1123,7 @@ export default function AdminPanel({
                     )}
                     <button 
                       onClick={() => setIsSidebarCollapsed(true)}
-                      className="hidden lg:inline-flex p-1.5 rounded-lg text-zinc-500 hover:text-black dark:text-zinc-400 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer"
+                      className="hidden lg:inline-flex p-1.5 rounded-lg text-zinc-500 hover:text-wine dark:text-zinc-400 dark:hover:text-white hover:bg-wine/5 dark:hover:bg-white/10 transition-colors cursor-pointer"
                       title={lang === 'ar' ? 'طي القائمة لتوفير مساحة' : 'Collapse Sidebar'}
                     >
                       <PanelLeftClose className="w-4 h-4 rtl:rotate-180" />
@@ -1166,14 +1167,14 @@ export default function AdminPanel({
                         title={label}
                         className={`shrink-0 lg:w-full h-10 flex items-center justify-center rounded-xl transition-all duration-200 cursor-pointer relative group ${
                           isActive
-                            ? 'bg-black text-white dark:bg-white dark:text-black shadow-md'
-                            : 'text-zinc-600 dark:text-zinc-400 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white'
+                            ? 'bg-wine text-white dark:bg-white dark:text-wine shadow-md'
+                            : 'text-zinc-600 dark:text-zinc-400 hover:bg-wine/5 dark:hover:bg-white/5 hover:text-wine dark:hover:text-white'
                         }`}
                       >
                         <div className="relative w-5 h-5 flex items-center justify-center shrink-0">
                           <Icon className={`w-4 h-4 transition-transform group-hover:scale-110 ${isActive ? 'text-amber-400 dark:text-amber-600' : 'text-zinc-500'}`} />
                           {hasBadge && (
-                            <span className="absolute -top-2 -right-2.5 min-w-[18px] h-[18px] px-1 text-[10px] font-bold flex items-center justify-center rounded-full bg-amber-500 text-zinc-950 border-2 border-white dark:border-zinc-900 shadow-[0_2px_8px_rgba(0,0,0,0.15)] z-10 pointer-events-none">
+                            <span className="absolute -top-2 -right-2.5 min-w-[18px] h-[18px] px-1 text-[10px] font-bold flex items-center justify-center rounded-full bg-amber-500 text-wine border-2 border-white dark:border-wine shadow-[0_2px_8px_rgba(0,0,0,0.15)] z-10 pointer-events-none">
                               {displayBadge}
                             </span>
                           )}
@@ -1191,8 +1192,8 @@ export default function AdminPanel({
                       onClick={() => setActiveTab(item.id as any)}
                       className={`shrink-0 lg:w-full h-10 flex items-center justify-between px-3 rounded-xl transition-all duration-200 cursor-pointer group whitespace-nowrap ${
                         isActive
-                          ? 'bg-black text-white dark:bg-white dark:text-black font-bold shadow-md'
-                          : 'bg-zinc-100/70 lg:bg-transparent text-zinc-700 dark:bg-white/5 lg:dark:bg-transparent dark:text-zinc-300 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white'
+                          ? 'bg-wine text-white dark:bg-white dark:text-wine font-bold shadow-md'
+                          : 'bg-zinc-100/70 lg:bg-transparent text-zinc-700 dark:bg-white/5 lg:dark:bg-transparent dark:text-zinc-300 hover:bg-wine/5 dark:hover:bg-white/5 hover:text-wine dark:hover:text-white'
                       }`}
                     >
                       <div className="flex items-center gap-3 min-w-0">
@@ -1201,7 +1202,7 @@ export default function AdminPanel({
                           <Icon className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${isActive ? 'text-amber-400 dark:text-amber-600' : 'text-zinc-400 dark:text-zinc-500'}`} />
                           {/* Floating Notification Badge on Icon top-right */}
                           {isNotificationItem && hasBadge && (
-                            <span className="absolute -top-1.5 -right-2 min-w-[18px] h-[18px] px-1 text-[10px] font-bold flex items-center justify-center rounded-full bg-amber-500 text-zinc-950 border-2 border-white dark:border-zinc-900 shadow-[0_2px_8px_rgba(0,0,0,0.15)] z-10 pointer-events-none">
+                            <span className="absolute -top-1.5 -right-2 min-w-[18px] h-[18px] px-1 text-[10px] font-bold flex items-center justify-center rounded-full bg-amber-500 text-wine border-2 border-white dark:border-wine shadow-[0_2px_8px_rgba(0,0,0,0.15)] z-10 pointer-events-none">
                               {displayBadge}
                             </span>
                           )}
@@ -1219,9 +1220,9 @@ export default function AdminPanel({
                       )}
 
                       {!isNotificationItem && !isProItem && hasBadge && (
-                        <span className={`ml-auto rtl:mr-auto rtl:ml-0 text-[10px] font-bold font-mono px-2 py-0.5 rounded-full transition-colors shrink-0 min-w-[20px] h-[18px] flex items-center justify-center border border-black/10 dark:border-white/10 ${
+                        <span className={`ml-auto rtl:mr-auto rtl:ml-0 text-[10px] font-bold font-mono px-2 py-0.5 rounded-full transition-colors shrink-0 min-w-[20px] h-[18px] flex items-center justify-center border border-wine/10 dark:border-white/10 ${
                           isActive 
-                            ? 'bg-white/20 text-white dark:bg-black/20 dark:text-black' 
+                            ? 'bg-white/20 text-white dark:bg-wine/20 dark:text-wine' 
                             : 'bg-zinc-200/80 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300'
                         }`}>
                           {displayBadge}
@@ -1234,11 +1235,11 @@ export default function AdminPanel({
             </div>
 
             {/* Sidebar Footer */}
-            <div className="hidden lg:flex mt-3 pt-3 border-t border-black/10 dark:border-white/10 flex-col gap-2 shrink-0">
+            <div className="hidden lg:flex mt-3 pt-3 border-t border-wine/10 dark:border-white/10 flex-col gap-2 shrink-0">
               <button 
                 onClick={onBackToStore} 
                 title={lang === 'ar' ? 'العودة للمتجر الرئيسي' : 'BACK TO STORE'}
-                className={`w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs font-bold text-zinc-700 hover:text-black dark:text-zinc-300 dark:hover:text-white bg-zinc-100 hover:bg-zinc-200 dark:bg-white/5 dark:hover:bg-white/10 transition-all border border-black/5 dark:border-white/10 cursor-pointer ${
+                className={`w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs font-bold text-zinc-700 hover:text-wine dark:text-zinc-300 dark:hover:text-white bg-zinc-100 hover:bg-zinc-200 dark:bg-white/5 dark:hover:bg-white/10 transition-all border border-wine/5 dark:border-white/10 cursor-pointer ${
                   isSidebarCollapsed ? 'px-2' : ''
                 }`}
               >
@@ -1252,7 +1253,7 @@ export default function AdminPanel({
         </aside>
 
         {/* MAIN CONTENT CONTAINER WITH TIGHT COMPACT PADDING */}
-        <div className="flex-1 w-full min-w-0 bg-white/95 dark:bg-[#0a0407]/95 backdrop-blur-2xl border border-black/10 dark:border-white/10 rounded-2xl p-4 sm:p-6 lg:p-7 shadow-xl shadow-black/5 dark:shadow-black/50 flex flex-col gap-6">
+        <div className="flex-1 w-full min-w-0 bg-white/95 dark:bg-[#0a0407]/95 backdrop-blur-2xl border border-wine/10 dark:border-white/10 rounded-2xl p-4 sm:p-6 lg:p-7 shadow-xl shadow-black/5 dark:shadow-black/50 flex flex-col gap-6">
           {/* Restock Notification Trigger Toast Alert */}
           {restockAlertToast && (
             <div className="p-4 bg-amber-500/15 border border-amber-500/30 text-amber-900 dark:text-amber-200 rounded-xl flex items-center justify-between gap-3 shadow-lg animate-fadeIn">
@@ -1274,7 +1275,7 @@ export default function AdminPanel({
               </div>
               <button 
                 onClick={() => setRestockAlertToast(null)}
-                className="p-1 hover:bg-black/10 dark:hover:bg-white/10 rounded-lg transition-colors cursor-pointer"
+                className="p-1 hover:bg-wine/10 dark:hover:bg-white/10 rounded-lg transition-colors cursor-pointer"
               >
                 <X size={16} />
               </button>
@@ -1293,7 +1294,7 @@ export default function AdminPanel({
               {/* KPIs Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4">
                 {stats.map((stat, i) => (
-                  <div key={i} className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/5 shadow-xs p-4 sm:p-5 flex flex-col justify-between h-full rounded-2xl gap-4">
+                  <div key={i} className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white border border-wine/10 dark:border-white/5 shadow-xs p-4 sm:p-5 flex flex-col justify-between h-full rounded-2xl gap-4">
                     <div className="flex justify-between items-center text-zinc-500 dark:text-white/50">
                       <stat.icon size={18} strokeWidth={1.5} />
                       <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
@@ -1311,10 +1312,10 @@ export default function AdminPanel({
               {/* Recent Orders & Users Grid */}
               <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
                 {/* Recent Orders */}
-                <div className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/5 shadow-sm p-6 sm:p-8 rounded-2xl flex flex-col gap-6 justify-between h-full">
-                  <div className="flex justify-between items-center border-b border-black/10 dark:border-white/10 pb-4">
+                <div className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white border border-wine/10 dark:border-white/5 shadow-sm p-6 sm:p-8 rounded-2xl flex flex-col gap-6 justify-between h-full">
+                  <div className="flex justify-between items-center border-b border-wine/10 dark:border-white/10 pb-4">
                     <h3 className="text-xs luxury-tracking uppercase font-bold text-zinc-800 dark:text-white/90">RECENT REAL ORDERS</h3>
-                    <button onClick={() => setActiveTab('orders')} className="text-[10px] luxury-tracking text-zinc-500 hover:text-black dark:text-white/50 dark:hover:text-white uppercase font-bold cursor-pointer">
+                    <button onClick={() => setActiveTab('orders')} className="text-[10px] luxury-tracking text-zinc-500 hover:text-wine dark:text-white/50 dark:hover:text-white uppercase font-bold cursor-pointer">
                       VIEW ALL
                     </button>
                   </div>
@@ -1326,9 +1327,9 @@ export default function AdminPanel({
                   ) : (
                     <div className="flex flex-col gap-4">
                       {orders.slice(0, 5).map((ord, idx) => (
-                        <div key={`${ord.id}-${idx}`} className="p-4 bg-zinc-50 dark:bg-[#050505] border border-black/5 dark:border-white/5 rounded-xl flex flex-col gap-2">
+                        <div key={`${ord.id}-${idx}`} className="p-4 bg-zinc-50 dark:bg-[#050505] border border-wine/5 dark:border-white/5 rounded-xl flex flex-col gap-2">
                           <div className="flex justify-between items-center text-[11px] luxury-tracking">
-                            <span className="font-bold text-zinc-900 dark:text-white">#{ord.id} - {ord.customerName}</span>
+                            <span className="font-bold text-wine dark:text-white">#{ord.id} - {ord.customerName}</span>
                             <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">{ord.totalAmount.toLocaleString()} {lang === 'ar' ? 'ج.م' : 'EGP'}</span>
                           </div>
                           <div className="flex justify-between items-center text-[10px] luxury-tracking text-zinc-500 dark:text-white/50">
@@ -1342,10 +1343,10 @@ export default function AdminPanel({
                 </div>
 
                 {/* Recent Registered Customers */}
-                <div className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/5 shadow-sm p-6 sm:p-8 rounded-2xl flex flex-col gap-6 justify-between h-full">
-                  <div className="flex justify-between items-center border-b border-black/10 dark:border-white/10 pb-4">
+                <div className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white border border-wine/10 dark:border-white/5 shadow-sm p-6 sm:p-8 rounded-2xl flex flex-col gap-6 justify-between h-full">
+                  <div className="flex justify-between items-center border-b border-wine/10 dark:border-white/10 pb-4">
                     <h3 className="text-xs luxury-tracking uppercase font-bold text-zinc-800 dark:text-white/90">REGISTERED CUSTOMERS</h3>
-                    <button onClick={() => setActiveTab('users')} className="text-[10px] luxury-tracking text-zinc-500 hover:text-black dark:text-white/50 dark:hover:text-white uppercase font-bold cursor-pointer">
+                    <button onClick={() => setActiveTab('users')} className="text-[10px] luxury-tracking text-zinc-500 hover:text-wine dark:text-white/50 dark:hover:text-white uppercase font-bold cursor-pointer">
                       VIEW ALL
                     </button>
                   </div>
@@ -1357,8 +1358,8 @@ export default function AdminPanel({
                   ) : (
                     <div className="flex flex-col gap-4">
                       {registeredUsers.slice(0, 5).map((usr, idx) => (
-                        <div key={`${usr.id}-${idx}`} className="p-4 bg-zinc-50 dark:bg-[#050505] border border-black/5 dark:border-white/5 rounded-xl flex flex-col gap-2">
-                          <div className="flex justify-between items-center text-[11px] luxury-tracking font-bold text-zinc-900 dark:text-white">
+                        <div key={`${usr.id}-${idx}`} className="p-4 bg-zinc-50 dark:bg-[#050505] border border-wine/5 dark:border-white/5 rounded-xl flex flex-col gap-2">
+                          <div className="flex justify-between items-center text-[11px] luxury-tracking font-bold text-wine dark:text-white">
                             <span>{usr.name || 'Anonymous User'}</span>
                             <span className="text-[9px] font-normal text-zinc-400 dark:text-white/40">{(usr.role || 'user').toUpperCase()}</span>
                           </div>
@@ -1383,7 +1384,7 @@ export default function AdminPanel({
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
                 {/* Net Profit Card */}
-                <div className="bg-gradient-to-br from-emerald-500/10 via-white to-white dark:from-emerald-950/20 dark:via-[#0A0A0A] dark:to-[#0A0A0A] text-zinc-900 dark:text-white border border-emerald-500/30 p-6 flex flex-col gap-3 shadow-sm relative overflow-hidden">
+                <div className="bg-gradient-to-br from-emerald-500/10 via-white to-white dark:from-emerald-950/20 dark:via-[#0A0A0A] dark:to-[#0A0A0A] text-wine dark:text-white border border-emerald-500/30 p-6 flex flex-col gap-3 shadow-sm relative overflow-hidden">
                   <div className="flex justify-between items-center text-emerald-600 dark:text-emerald-400">
                     <TrendingUp size={22} />
                     <span className="text-[9px] font-bold bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 px-2.5 py-1 border border-emerald-500/30 uppercase">
@@ -1405,7 +1406,7 @@ export default function AdminPanel({
                 </div>
 
                 {/* Total Revenue Card */}
-                <div className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/5 p-6 flex flex-col gap-3 shadow-sm">
+                <div className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white border border-wine/10 dark:border-white/5 p-6 flex flex-col gap-3 shadow-sm">
                   <div className="flex justify-between items-center text-indigo-600 dark:text-indigo-400">
                     <DollarSign size={22} />
                     <span className="text-[9px] font-bold bg-indigo-500/10 px-2.5 py-1 border border-indigo-500/20 uppercase">
@@ -1421,7 +1422,7 @@ export default function AdminPanel({
                 </div>
 
                 {/* Total COGS Card */}
-                <div className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/5 p-6 flex flex-col gap-3 shadow-sm">
+                <div className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white border border-wine/10 dark:border-white/5 p-6 flex flex-col gap-3 shadow-sm">
                   <div className="flex justify-between items-center text-rose-600 dark:text-rose-400">
                     <ShoppingBag size={22} />
                     <span className="text-[9px] font-bold bg-rose-500/10 text-rose-600 dark:text-rose-400 px-2.5 py-1 border border-rose-500/20 uppercase">
@@ -1439,7 +1440,7 @@ export default function AdminPanel({
                 </div>
 
                 {/* Average Order Value Card */}
-                <div className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/5 p-6 flex flex-col gap-3 shadow-sm">
+                <div className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white border border-wine/10 dark:border-white/5 p-6 flex flex-col gap-3 shadow-sm">
                   <div className="flex justify-between items-center text-amber-600 dark:text-amber-400">
                     <BarChart2 size={22} />
                     <span className="text-[9px] font-bold bg-amber-500/10 px-2.5 py-1 border border-amber-500/20 uppercase">
@@ -1460,8 +1461,8 @@ export default function AdminPanel({
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 
                 {/* Top Profit Leader */}
-                <div className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white border border-emerald-500/30 p-6 flex flex-col gap-4 shadow-sm relative">
-                  <div className="flex justify-between items-center border-b border-black/10 dark:border-white/10 pb-3">
+                <div className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white border border-emerald-500/30 p-6 flex flex-col gap-4 shadow-sm relative">
+                  <div className="flex justify-between items-center border-b border-wine/10 dark:border-white/10 pb-3">
                     <span className="text-xs font-bold uppercase luxury-tracking text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
                       <Award size={16} /> 👑 {lang === 'ar' ? 'الأعلى أرباحاً' : 'TOP PROFIT LEADER'}
                     </span>
@@ -1472,7 +1473,7 @@ export default function AdminPanel({
 
                   {topProfitableProduct && topProfitableProduct.netProfit > 0 ? (
                     <div className="flex items-center gap-4">
-                      <img src={topProfitableProduct.product.image} alt={topProfitableProduct.product.name} className="w-16 h-20 object-cover border border-black/10 dark:border-white/10" />
+                      <img src={topProfitableProduct.product.image} alt={topProfitableProduct.product.name} className="w-16 h-20 object-cover border border-wine/10 dark:border-white/10" />
                       <div className="flex flex-col gap-1 text-xs luxury-tracking">
                         <span className="font-bold line-clamp-1">{topProfitableProduct.product.name}</span>
                         <span className="text-zinc-500 text-[10px]">
@@ -1496,8 +1497,8 @@ export default function AdminPanel({
                 </div>
 
                 {/* Top Volume Best Seller */}
-                <div className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/5 p-6 flex flex-col gap-4 shadow-sm">
-                  <div className="flex justify-between items-center border-b border-black/10 dark:border-white/10 pb-3">
+                <div className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white border border-wine/10 dark:border-white/5 p-6 flex flex-col gap-4 shadow-sm">
+                  <div className="flex justify-between items-center border-b border-wine/10 dark:border-white/10 pb-3">
                     <span className="text-xs font-bold uppercase luxury-tracking text-amber-600 dark:text-amber-400 flex items-center gap-1.5">
                       <Zap size={16} /> 🔥 {lang === 'ar' ? 'الأكثر مبيعاً بالكمية' : 'BEST SELLER BY VOLUME'}
                     </span>
@@ -1508,7 +1509,7 @@ export default function AdminPanel({
 
                   {topVolumeProduct && topVolumeProduct.unitsSold > 0 ? (
                     <div className="flex items-center gap-4">
-                      <img src={topVolumeProduct.product.image} alt={topVolumeProduct.product.name} className="w-16 h-20 object-cover border border-black/10 dark:border-white/10" />
+                      <img src={topVolumeProduct.product.image} alt={topVolumeProduct.product.name} className="w-16 h-20 object-cover border border-wine/10 dark:border-white/10" />
                       <div className="flex flex-col gap-1 text-xs luxury-tracking">
                         <span className="font-bold line-clamp-1">{topVolumeProduct.product.name}</span>
                         <span className="text-amber-600 font-bold font-mono text-sm">
@@ -1532,8 +1533,8 @@ export default function AdminPanel({
                 </div>
 
                 {/* Top Profit Margin Star */}
-                <div className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/5 p-6 flex flex-col gap-4 shadow-sm">
-                  <div className="flex justify-between items-center border-b border-black/10 dark:border-white/10 pb-3">
+                <div className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white border border-wine/10 dark:border-white/5 p-6 flex flex-col gap-4 shadow-sm">
+                  <div className="flex justify-between items-center border-b border-wine/10 dark:border-white/10 pb-3">
                     <span className="text-xs font-bold uppercase luxury-tracking text-indigo-600 dark:text-indigo-400 flex items-center gap-1.5">
                       <Sparkles size={16} /> 💎 {lang === 'ar' ? 'أعلى هامش ربحية' : 'HIGHEST MARGIN STAR'}
                     </span>
@@ -1544,7 +1545,7 @@ export default function AdminPanel({
 
                   {topMarginProduct ? (
                     <div className="flex items-center gap-4">
-                      <img src={topMarginProduct.product.image} alt={topMarginProduct.product.name} className="w-16 h-20 object-cover border border-black/10 dark:border-white/10" />
+                      <img src={topMarginProduct.product.image} alt={topMarginProduct.product.name} className="w-16 h-20 object-cover border border-wine/10 dark:border-white/10" />
                       <div className="flex flex-col gap-1 text-xs luxury-tracking">
                         <span className="font-bold line-clamp-1">{topMarginProduct.product.name}</span>
                         <span className="text-indigo-600 font-bold font-mono text-sm">
@@ -1570,12 +1571,12 @@ export default function AdminPanel({
               </div>
 
               {/* PER-PRODUCT DETAILED PROFIT TABLE */}
-              <div className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/5 p-6 flex flex-col gap-6 shadow-sm">
+              <div className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white border border-wine/10 dark:border-white/5 p-6 flex flex-col gap-6 shadow-sm">
                 
                 {/* Table Header Controls */}
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-black/10 dark:border-white/10 pb-6">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-wine/10 dark:border-white/10 pb-6">
                   <div>
-                    <h3 className="text-sm font-bold uppercase luxury-tracking text-zinc-900 dark:text-white flex items-center gap-2">
+                    <h3 className="text-sm font-bold uppercase luxury-tracking text-wine dark:text-white flex items-center gap-2">
                       <TrendingUp size={18} className="text-emerald-500" />
                       {lang === 'ar' ? 'جدول أرباح وتكاليف كل منتج بالتفصيل' : 'PER-PRODUCT PROFIT & COST MATRIX'}
                     </h3>
@@ -1593,18 +1594,18 @@ export default function AdminPanel({
                         value={profitSearch}
                         onChange={(e) => setProfitSearch(e.target.value)}
                         placeholder={lang === 'ar' ? 'ابحث باسم المنتج...' : 'Search product name...'}
-                        className="w-full bg-zinc-50 dark:bg-[#050505] border border-black/10 dark:border-white/10 pr-9 pl-3 py-2 text-xs text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-amber-500 transition-colors"
+                        className="w-full bg-zinc-50 dark:bg-[#050505] border border-wine/10 dark:border-white/10 pr-9 pl-3 py-2 text-xs text-wine dark:text-white placeholder-zinc-400 focus:outline-none focus:border-amber-500 transition-colors"
                       />
                     </div>
 
                     {/* Sorting Selector */}
-                    <div className="flex items-center gap-2 bg-zinc-50 dark:bg-[#050505] border border-black/10 dark:border-white/10 px-3 py-1.5">
+                    <div className="flex items-center gap-2 bg-zinc-50 dark:bg-[#050505] border border-wine/10 dark:border-white/10 px-3 py-1.5">
                       <ArrowUpDown size={14} className="text-amber-500" />
                       <span className="text-[10px] font-bold text-zinc-500 uppercase">{lang === 'ar' ? 'ترتيب حسب:' : 'SORT BY:'}</span>
                       <select
                         value={profitSort}
                         onChange={(e) => setProfitSort(e.target.value as any)}
-                        className="bg-transparent text-xs font-bold text-zinc-900 dark:text-white focus:outline-none cursor-pointer"
+                        className="bg-transparent text-xs font-bold text-wine dark:text-white focus:outline-none cursor-pointer"
                       >
                         <option value="profit" className="bg-white dark:bg-[#0A0A0A]">{lang === 'ar' ? 'الأعلى أرباحاً' : 'Highest Net Profit'}</option>
                         <option value="qty" className="bg-white dark:bg-[#0A0A0A]">{lang === 'ar' ? 'الأكثر مبيعاً بالكمية' : 'Most Units Sold'}</option>
@@ -1620,7 +1621,7 @@ export default function AdminPanel({
                 <div className="overflow-x-auto">
                   <table className={`w-full text-xs luxury-tracking ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
                     <thead>
-                      <tr className="border-b border-black/10 dark:border-white/10 text-zinc-500 dark:text-white/50 text-[10px] uppercase font-bold bg-zinc-50 dark:bg-white/5">
+                      <tr className="border-b border-wine/10 dark:border-white/10 text-zinc-500 dark:text-white/50 text-[10px] uppercase font-bold bg-zinc-50 dark:bg-white/5">
                         <th className="p-3">{lang === 'ar' ? 'المنتج' : 'PRODUCT'}</th>
                         <th className="p-3">{lang === 'ar' ? 'سعر البيع' : 'SELLING PRICE'}</th>
                         <th className="p-3">{lang === 'ar' ? 'التكلفة (سعر الشراء)' : 'COST PRICE'}</th>
@@ -1652,16 +1653,16 @@ export default function AdminPanel({
                               {/* Product Info */}
                               <td className="p-3">
                                 <div className="flex items-center gap-3">
-                                  <img src={item.product.image} alt={item.product.name} className="w-10 h-12 object-cover border border-black/10 dark:border-white/10" />
+                                  <img src={item.product.image} alt={item.product.name} className="w-10 h-12 object-cover border border-wine/10 dark:border-white/10" />
                                   <div className="flex flex-col">
-                                    <span className="font-bold text-zinc-900 dark:text-white line-clamp-1">{item.product.name}</span>
+                                    <span className="font-bold text-wine dark:text-white line-clamp-1">{item.product.name}</span>
                                     <span className="text-[9px] text-zinc-400 uppercase font-mono">{item.product.category} • {item.product.gender}</span>
                                   </div>
                                 </div>
                               </td>
 
                               {/* Selling Price */}
-                              <td className="p-3 font-mono font-bold text-zinc-900 dark:text-white">
+                              <td className="p-3 font-mono font-bold text-wine dark:text-white">
                                 {item.unitPrice.toLocaleString()} {lang === 'ar' ? 'ج.م' : 'EGP'}
                               </td>
 
@@ -1728,7 +1729,7 @@ export default function AdminPanel({
                                   </span>
                                 )}
                                 {!isTopProfit && !isTopVolume && item.marginPercent < 50 && item.marginPercent >= 30 && (
-                                  <span className="inline-flex items-center gap-1 bg-zinc-100 text-zinc-600 dark:bg-white/10 dark:text-white/70 border border-black/10 dark:border-white/10 px-2 py-1 text-[9px] font-bold uppercase">
+                                  <span className="inline-flex items-center gap-1 bg-zinc-100 text-zinc-600 dark:bg-white/10 dark:text-white/70 border border-wine/10 dark:border-white/10 px-2 py-1 text-[9px] font-bold uppercase">
                                     ⚡ {lang === 'ar' ? 'مستقر' : 'STABLE'}
                                   </span>
                                 )}
@@ -1751,8 +1752,8 @@ export default function AdminPanel({
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 
                 {/* Orders Breakdown by Status */}
-                <div className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/5 p-6 flex flex-col gap-6 shadow-sm">
-                  <div className="flex justify-between items-center border-b border-black/10 dark:border-white/10 pb-4">
+                <div className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white border border-wine/10 dark:border-white/5 p-6 flex flex-col gap-6 shadow-sm">
+                  <div className="flex justify-between items-center border-b border-wine/10 dark:border-white/10 pb-4">
                     <div className="flex items-center gap-2">
                       <PieChart size={16} className="text-amber-500" />
                       <h3 className="text-xs luxury-tracking uppercase font-bold text-zinc-800 dark:text-white">ORDER STATUS DISTRIBUTION (توزيع حالات الطلبات)</h3>
@@ -1762,7 +1763,7 @@ export default function AdminPanel({
 
                   <div className="flex flex-col gap-5 text-xs luxury-tracking">
                     {/* Progress Bar overall */}
-                    <div className="h-4 w-full bg-zinc-100 dark:bg-white/10 flex overflow-hidden border border-black/10 dark:border-white/10">
+                    <div className="h-4 w-full bg-zinc-100 dark:bg-white/10 flex overflow-hidden border border-wine/10 dark:border-white/10">
                       <div style={{ width: `${orders.length > 0 ? (completedOrders.length / orders.length) * 100 : 0}%` }} className="bg-emerald-500 h-full transition-all duration-500" title="Completed" />
                       <div style={{ width: `${orders.length > 0 ? (processingOrders.length / orders.length) * 100 : 0}%` }} className="bg-blue-500 h-full transition-all duration-500" title="Processing" />
                       <div style={{ width: `${orders.length > 0 ? (pendingOrders.length / orders.length) * 100 : 0}%` }} className="bg-amber-500 h-full transition-all duration-500" title="Pending" />
@@ -1772,28 +1773,28 @@ export default function AdminPanel({
                     <div className="grid grid-cols-2 gap-4">
                       <div className="p-3 bg-emerald-500/10 border border-emerald-500/20 flex flex-col gap-1">
                         <span className="text-[9px] font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1"><CheckCircle size={12} /> COMPLETED ({completedOrders.length})</span>
-                        <span className="font-mono text-lg font-bold text-zinc-900 dark:text-white">
+                        <span className="font-mono text-lg font-bold text-wine dark:text-white">
                           {orders.length > 0 ? Math.round((completedOrders.length / orders.length) * 100) : 0}%
                         </span>
                       </div>
 
                       <div className="p-3 bg-blue-500/10 border border-blue-500/20 flex flex-col gap-1">
                         <span className="text-[9px] font-bold text-blue-600 dark:text-blue-400 flex items-center gap-1"><Clock size={12} /> PROCESSING ({processingOrders.length})</span>
-                        <span className="font-mono text-lg font-bold text-zinc-900 dark:text-white">
+                        <span className="font-mono text-lg font-bold text-wine dark:text-white">
                           {orders.length > 0 ? Math.round((processingOrders.length / orders.length) * 100) : 0}%
                         </span>
                       </div>
 
                       <div className="p-3 bg-amber-500/10 border border-amber-500/20 flex flex-col gap-1">
                         <span className="text-[9px] font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1"><Clock size={12} /> PENDING ({pendingOrders.length})</span>
-                        <span className="font-mono text-lg font-bold text-zinc-900 dark:text-white">
+                        <span className="font-mono text-lg font-bold text-wine dark:text-white">
                           {orders.length > 0 ? Math.round((pendingOrders.length / orders.length) * 100) : 0}%
                         </span>
                       </div>
 
                       <div className="p-3 bg-rose-500/10 border border-rose-500/20 flex flex-col gap-1">
                         <span className="text-[9px] font-bold text-rose-600 dark:text-rose-400 flex items-center gap-1"><Ban size={12} /> CANCELLED ({cancelledOrders.length})</span>
-                        <span className="font-mono text-lg font-bold text-zinc-900 dark:text-white">
+                        <span className="font-mono text-lg font-bold text-wine dark:text-white">
                           {orders.length > 0 ? Math.round((cancelledOrders.length / orders.length) * 100) : 0}%
                         </span>
                       </div>
@@ -1802,8 +1803,8 @@ export default function AdminPanel({
                 </div>
 
                 {/* Category Revenue Performance */}
-                <div className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/5 p-6 flex flex-col gap-6 shadow-sm">
-                  <div className="flex justify-between items-center border-b border-black/10 dark:border-white/10 pb-4">
+                <div className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white border border-wine/10 dark:border-white/5 p-6 flex flex-col gap-6 shadow-sm">
+                  <div className="flex justify-between items-center border-b border-wine/10 dark:border-white/10 pb-4">
                     <div className="flex items-center gap-2">
                       <BarChart2 size={16} className="text-amber-500" />
                       <h3 className="text-xs luxury-tracking uppercase font-bold text-zinc-800 dark:text-white">CATEGORY SALES & REVENUE (مبيادات الأقسام)</h3>
@@ -1815,7 +1816,7 @@ export default function AdminPanel({
                       const amount = categorySalesMap[cat] || 0;
                       const percentage = totalRevenue > 0 ? Math.round((amount / totalRevenue) * 100) : 0;
                       return (
-                        <div key={cat} className="flex flex-col gap-1.5 p-3 bg-zinc-50 dark:bg-[#050505] border border-black/5 dark:border-white/5">
+                        <div key={cat} className="flex flex-col gap-1.5 p-3 bg-zinc-50 dark:bg-[#050505] border border-wine/5 dark:border-white/5">
                           <div className="flex justify-between text-xs font-bold">
                             <span>{cat}</span>
                             <span className="font-mono text-amber-600">{amount.toLocaleString()} {lang === 'ar' ? 'ج.م' : 'EGP'} ({percentage}%)</span>
@@ -1836,16 +1837,16 @@ export default function AdminPanel({
           {/* TAB 3: ORDERS */}
           {activeTab === 'orders' && (
             <div className="flex flex-col gap-6">
-              <div className="flex justify-between items-center bg-white dark:bg-[#0A0A0A] p-6 border border-black/10 dark:border-white/5">
+              <div className="flex justify-between items-center bg-white dark:bg-[#0A0A0A] p-6 border border-wine/10 dark:border-white/5">
                 <div>
-                  <h3 className="text-sm luxury-tracking font-bold uppercase text-zinc-900 dark:text-white">CUSTOMER ORDERS</h3>
+                  <h3 className="text-sm luxury-tracking font-bold uppercase text-wine dark:text-white">CUSTOMER ORDERS</h3>
                   <p className="text-[10px] luxury-tracking text-zinc-500 dark:text-white/50 uppercase mt-1 font-medium">All real orders submitted by site visitors</p>
                 </div>
                 <span className="text-xs luxury-tracking font-mono font-bold bg-zinc-100 dark:bg-white/10 px-3 py-1 text-zinc-800 dark:text-white">TOTAL: {orders.length}</span>
               </div>
 
               {orders.length === 0 ? (
-                <div className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white p-16 border border-black/10 dark:border-white/5 text-center flex flex-col items-center gap-4">
+                <div className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white p-16 border border-wine/10 dark:border-white/5 text-center flex flex-col items-center gap-4">
                   <Package size={36} className="text-zinc-400 dark:text-white/30" />
                   <p className="text-xs luxury-tracking uppercase text-zinc-500 dark:text-white/50">NO CUSTOMER ORDERS RECORDED IN DATABASE YET.</p>
                   <p className="text-[10px] luxury-tracking text-zinc-400 dark:text-white/30 max-w-md">When a customer adds items to bag and completes checkout, their order data, phone number, and address will be saved here in real-time.</p>
@@ -1853,11 +1854,11 @@ export default function AdminPanel({
               ) : (
                 <div className="grid grid-cols-1 gap-6">
                   {orders.map((ord, idx) => (
-                    <div key={`${ord.id}-${idx}`} className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/5 shadow-sm p-6 flex flex-col gap-6">
-                      <div className="flex flex-wrap justify-between items-start border-b border-black/10 dark:border-white/10 pb-4 gap-4">
+                    <div key={`${ord.id}-${idx}`} className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white border border-wine/10 dark:border-white/5 shadow-sm p-6 flex flex-col gap-6">
+                      <div className="flex flex-wrap justify-between items-start border-b border-wine/10 dark:border-white/10 pb-4 gap-4">
                         <div>
                           <div className="flex items-center gap-3">
-                            <span className="font-mono text-sm font-bold text-zinc-900 dark:text-white">#{ord.id}</span>
+                            <span className="font-mono text-sm font-bold text-wine dark:text-white">#{ord.id}</span>
                             <span className={`text-[9px] luxury-tracking uppercase font-bold px-2.5 py-0.5 border ${
                               ord.status === 'COMPLETED' || ord.status === 'Confirmed' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20' :
                               ord.status === 'CANCELLED' || ord.status === 'Cancelled' ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20' :
@@ -1877,12 +1878,12 @@ export default function AdminPanel({
                             <select 
                               value={ord.status} 
                               onChange={(e) => handleUpdateOrderStatus(ord.id, e.target.value as Order['status'])}
-                              className="bg-zinc-100 dark:bg-white/10 border border-black/10 dark:border-white/10 px-3 py-1 text-[10px] luxury-tracking text-zinc-900 dark:text-white focus:outline-none uppercase font-bold"
+                              className="bg-zinc-100 dark:bg-white/10 border border-wine/10 dark:border-white/10 px-3 py-1 text-[10px] luxury-tracking text-wine dark:text-white focus:outline-none uppercase font-bold"
                             >
-                              <option value="PENDING" className="bg-white text-black dark:bg-[#0A0A0A] dark:text-white">PENDING</option>
-                              <option value="PROCESSING" className="bg-white text-black dark:bg-[#0A0A0A] dark:text-white">PROCESSING</option>
-                              <option value="COMPLETED" className="bg-white text-black dark:bg-[#0A0A0A] dark:text-white">COMPLETED</option>
-                              <option value="CANCELLED" className="bg-white text-black dark:bg-[#0A0A0A] dark:text-white">CANCELLED</option>
+                              <option value="PENDING" className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white">PENDING</option>
+                              <option value="PROCESSING" className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white">PROCESSING</option>
+                              <option value="COMPLETED" className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white">COMPLETED</option>
+                              <option value="CANCELLED" className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white">CANCELLED</option>
                             </select>
                           </div>
                           
@@ -1893,24 +1894,24 @@ export default function AdminPanel({
                       </div>
 
                       {/* Customer Details */}
-                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-[11px] luxury-tracking bg-zinc-50 dark:bg-[#050505] p-4 border border-black/5 dark:border-white/5">
+                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-[11px] luxury-tracking bg-zinc-50 dark:bg-[#050505] p-4 border border-wine/5 dark:border-white/5">
                         <div className="flex flex-col gap-1">
                           <span className="text-zinc-400 dark:text-white/40 text-[9px] uppercase font-semibold">
                             {lang === 'ar' ? 'اسم العميل' : 'CUSTOMER NAME'}
                           </span>
-                          <span className="font-bold text-zinc-900 dark:text-white">{ord.customerName}</span>
+                          <span className="font-bold text-wine dark:text-white">{ord.customerName}</span>
                         </div>
                         <div className="flex flex-col gap-1">
                           <span className="text-zinc-400 dark:text-white/40 text-[9px] uppercase font-semibold flex items-center justify-between">
                             <span>{lang === 'ar' ? 'رقم الهاتف' : 'PHONE NUMBER'}</span>
                           </span>
                           <div className="flex items-center gap-2">
-                            <span className="font-bold text-zinc-900 dark:text-white flex items-center gap-1">
+                            <span className="font-bold text-wine dark:text-white flex items-center gap-1">
                               <Phone size={12} className="text-amber-500" /> {ord.customerPhone}
                             </span>
                             <a
                               href={`https://wa.me/20${ord.customerPhone.replace(/\D/g, '').replace(/^0/, '')}?text=${encodeURIComponent(
-                                `مرحباً ${ord.customerName} 👋\nشكراً لطلبك من AVENTO7! 🛍️\n\n` +
+                                `مرحباً ${ord.customerName} 👋\nشكراً لطلبك من KEMET! 🛍️\n\n` +
                                 `📋 *رقم الطلب:* #${ord.id}\n` +
                                 `💰 *الإجمالي النهائي:* ${ord.totalAmount.toLocaleString()} ج.م\n` +
                                 `📍 *عنوان الشحن:* ${ord.governorate} - ${ord.address}\n` +
@@ -1950,10 +1951,10 @@ export default function AdminPanel({
                         <span className="text-[10px] luxury-tracking text-zinc-500 dark:text-white/50 font-bold uppercase">ORDERED ITEMS:</span>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                           {ord.items.map((item, idx) => (
-                            <div key={idx} className="flex gap-3 items-center bg-zinc-50 dark:bg-[#050505] p-2 border border-black/5 dark:border-white/5">
+                            <div key={idx} className="flex gap-3 items-center bg-zinc-50 dark:bg-[#050505] p-2 border border-wine/5 dark:border-white/5">
                               <img src={item.image} alt={item.name} className="w-12 h-14 object-cover" />
                               <div className="flex flex-col text-[10px] luxury-tracking">
-                                <span className="font-bold text-zinc-900 dark:text-white line-clamp-1">{item.name}</span>
+                                <span className="font-bold text-wine dark:text-white line-clamp-1">{item.name}</span>
                                 <span className="text-zinc-500 dark:text-white/50">SIZE: {item.size} | QTY: {item.quantity}</span>
                                 <span className="font-mono text-zinc-800 dark:text-white/80 font-bold">{(item.price * item.quantity).toLocaleString()} {lang === 'ar' ? 'ج.م' : 'EGP'}</span>
                               </div>
@@ -1962,10 +1963,10 @@ export default function AdminPanel({
                         </div>
                       </div>
 
-                      <div className="flex justify-end border-t border-black/10 dark:border-white/10 pt-4 text-[11px] luxury-tracking">
+                      <div className="flex justify-end border-t border-wine/10 dark:border-white/10 pt-4 text-[11px] luxury-tracking">
                         <div className="flex items-center gap-3">
                           <span className="text-zinc-500 dark:text-white/50 font-medium">TOTAL AMOUNT PAID / COD:</span>
-                          <span className="text-lg font-mono font-bold text-zinc-900 dark:text-white">{ord.totalAmount.toLocaleString()} {lang === 'ar' ? 'ج.م' : 'EGP'}</span>
+                          <span className="text-lg font-mono font-bold text-wine dark:text-white">{ord.totalAmount.toLocaleString()} {lang === 'ar' ? 'ج.م' : 'EGP'}</span>
                         </div>
                       </div>
                     </div>
@@ -1979,18 +1980,18 @@ export default function AdminPanel({
           {activeTab === 'users' && (
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-4">
-                <div className="flex justify-between items-center bg-white dark:bg-[#0A0A0A] p-6 border border-black/10 dark:border-white/5">
+                <div className="flex justify-between items-center bg-white dark:bg-[#0A0A0A] p-6 border border-wine/10 dark:border-white/5">
                   <div>
-                    <h3 className="text-sm luxury-tracking font-bold uppercase text-zinc-900 dark:text-white">{lang === 'ar' ? 'العملاء المسجلون' : 'REGISTERED CUSTOMERS'}</h3>
+                    <h3 className="text-sm luxury-tracking font-bold uppercase text-wine dark:text-white">{lang === 'ar' ? 'العملاء المسجلون' : 'REGISTERED CUSTOMERS'}</h3>
                     <p className="text-[10px] luxury-tracking text-zinc-500 dark:text-white/50 uppercase mt-1 font-medium">{lang === 'ar' ? 'حسابات حقيقية مسجلة بأرقام هواتف' : 'Real registered accounts saved with phone numbers'}</p>
                   </div>
                   <span className="text-xs luxury-tracking font-mono font-bold bg-zinc-100 dark:bg-white/10 px-3 py-1 text-zinc-800 dark:text-white">TOTAL: {registeredUsers.length}</span>
                 </div>
                 
-                <div className="flex gap-4 border-b border-black/10 dark:border-white/10">
+                <div className="flex gap-4 border-b border-wine/10 dark:border-white/10">
                   <button 
                     onClick={() => setUserFilter('active')}
-                    className={`pb-2 text-[10px] luxury-tracking uppercase font-bold transition-colors ${userFilter === 'active' ? 'text-zinc-900 dark:text-white border-b-2 border-black dark:border-white' : 'text-zinc-400 hover:text-black dark:text-white/40 dark:hover:text-white'}`}
+                    className={`pb-2 text-[10px] luxury-tracking uppercase font-bold transition-colors ${userFilter === 'active' ? 'text-wine dark:text-white border-b-2 border-wine dark:border-white' : 'text-zinc-400 hover:text-wine dark:text-white/40 dark:hover:text-white'}`}
                   >
                     {lang === 'ar' ? 'العملاء النشطون' : 'ACTIVE USERS'} ({registeredUsers.filter(u => !u.isArchived).length})
                   </button>
@@ -2010,7 +2011,7 @@ export default function AdminPanel({
                     value={userSearch}
                     onChange={(e) => setUserSearch(e.target.value)}
                     placeholder={lang === 'ar' ? 'البحث عن عميل (بالاسم، البريد، رقم الهاتف، المحافظة...)' : 'Search customer by name, email, phone, governorate...'}
-                    className="w-full bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/10 pl-10 pr-10 rtl:pl-10 rtl:pr-10 py-3 text-xs luxury-tracking font-medium text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-black dark:focus:border-amber-400 transition-colors rounded-lg shadow-sm"
+                    className="w-full bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/10 pl-10 pr-10 rtl:pl-10 rtl:pr-10 py-3 text-xs luxury-tracking font-medium text-wine dark:text-white placeholder-zinc-400 focus:outline-none focus:border-wine dark:focus:border-amber-400 transition-colors rounded-lg shadow-sm"
                   />
                   {userSearch && (
                     <button
@@ -2044,7 +2045,7 @@ export default function AdminPanel({
 
                 if (filteredUsersList.length === 0) {
                   return (
-                    <div className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white p-16 border border-black/10 dark:border-white/5 text-center flex flex-col items-center gap-4 rounded-xl">
+                    <div className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white p-16 border border-wine/10 dark:border-white/5 text-center flex flex-col items-center gap-4 rounded-xl">
                       <Users size={36} className="text-zinc-400 dark:text-white/30" />
                       <p className="text-xs luxury-tracking uppercase text-zinc-500 dark:text-white/50">
                         {userSearch.trim() 
@@ -2065,9 +2066,9 @@ export default function AdminPanel({
                 }
 
                 return (
-                  <div className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/5 shadow-sm overflow-x-auto rounded-xl">
+                  <div className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white border border-wine/10 dark:border-white/5 shadow-sm overflow-x-auto rounded-xl">
                     <table className="w-full text-left rtl:text-right text-[11px] luxury-tracking">
-                      <thead className="bg-zinc-100 dark:bg-[#050505] text-zinc-500 dark:text-white/50 uppercase font-semibold border-b border-black/10 dark:border-white/10">
+                      <thead className="bg-zinc-100 dark:bg-[#050505] text-zinc-500 dark:text-white/50 uppercase font-semibold border-b border-wine/10 dark:border-white/10">
                         <tr>
                           <th className="p-4">{lang === 'ar' ? 'العميل' : 'CUSTOMER'}</th>
                           <th className="p-4">{lang === 'ar' ? 'البريد الإلكتروني' : 'EMAIL ADDRESS'}</th>
@@ -2092,7 +2093,7 @@ export default function AdminPanel({
                           <tr key={`${usr.id}-${idx}`} className="hover:bg-zinc-50 dark:hover:bg-white/5 transition-colors">
                             <td className="p-4">
                               <div className="flex flex-col">
-                                <span className="font-bold text-zinc-900 dark:text-white">{usr.name || 'عميل مسجل'}</span>
+                                <span className="font-bold text-wine dark:text-white">{usr.name || 'عميل مسجل'}</span>
                                 <span className="text-[9px] font-mono text-zinc-400 dark:text-zinc-500 uppercase">ID: #{usr.id.slice(-6)}</span>
                               </div>
                             </td>
@@ -2134,7 +2135,7 @@ export default function AdminPanel({
                               </div>
                             </td>
                             <td className="p-4 text-zinc-500 dark:text-white/60 font-mono text-[10px]">
-                              <span dir="ltr" className="inline-block bg-zinc-100 dark:bg-white/5 px-2 py-1 rounded text-[#30001A] dark:text-rose-200 border border-black/5 dark:border-white/5 font-bold">
+                              <span dir="ltr" className="inline-block bg-zinc-100 dark:bg-white/5 px-2 py-1 rounded text-[#30001A] dark:text-rose-200 border border-wine/5 dark:border-white/5 font-bold">
                                 {formatDateSafely(usr.createdAt)}
                               </span>
                             </td>
@@ -2169,10 +2170,10 @@ export default function AdminPanel({
           {activeTab === 'products' && (
             <div className="flex flex-col gap-6 w-full min-w-0">
               {/* Header Toolbar */}
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-black/10 dark:border-white/10">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-wine/10 dark:border-white/10">
                 <div>
                   <div className="flex items-center gap-3">
-                    <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-white uppercase flex items-center gap-2">
+                    <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-wine dark:text-white uppercase flex items-center gap-2">
                       <Boxes size={22} className="text-amber-500" />
                       {lang === 'ar' ? 'إدارة كتالوج المنتجات' : 'PRODUCTS CATALOG MANAGEMENT'}
                     </h2>
@@ -2191,7 +2192,7 @@ export default function AdminPanel({
                       resetForm();
                       setIsProductModalOpen(true);
                     }}
-                    className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-black text-white dark:bg-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all font-bold text-xs uppercase shadow-md cursor-pointer group"
+                    className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-wine text-white dark:bg-white dark:text-wine hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all font-bold text-xs uppercase shadow-md cursor-pointer group"
                   >
                     <Plus size={16} className="group-hover:scale-110 transition-transform" />
                     <span>{lang === 'ar' ? 'إضافة منتج جديد' : 'ADD NEW PRODUCT'}</span>
@@ -2200,7 +2201,7 @@ export default function AdminPanel({
               </div>
 
               {/* SAAS MANAGEMENT TOOLBAR (Search, Filters, Sort & Bulk Actions) */}
-              <div className="flex flex-col gap-3 bg-white dark:bg-[#0d060b] p-4 rounded-2xl border border-black/10 dark:border-white/10 shadow-xs">
+              <div className="flex flex-col gap-3 bg-white dark:bg-[#0d060b] p-4 rounded-2xl border border-wine/10 dark:border-white/10 shadow-xs">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-center">
                   
                   {/* Search Bar (Cols 4) */}
@@ -2211,7 +2212,7 @@ export default function AdminPanel({
                       value={productSearch}
                       onChange={(e) => setProductSearch(e.target.value)}
                       placeholder={lang === 'ar' ? 'بحث باسم المنتج أو SKU أو التصنيف...' : 'Search by name, SKU, category...'}
-                      className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl pl-9 pr-8 py-2 text-xs text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500 transition-colors"
+                      className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl pl-9 pr-8 py-2 text-xs text-wine dark:text-white focus:outline-none focus:border-amber-500 transition-colors"
                     />
                     {productSearch && (
                       <button onClick={() => setProductSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 cursor-pointer">
@@ -2229,7 +2230,7 @@ export default function AdminPanel({
                           onClick={() => setProductCategoryFilter(cat)}
                           className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase transition-all whitespace-nowrap cursor-pointer ${
                             productCategoryFilter === cat
-                              ? 'bg-amber-500 text-black shadow-xs font-black'
+                              ? 'bg-amber-500 text-wine shadow-xs font-black'
                               : 'bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-white/10'
                           }`}
                         >
@@ -2247,7 +2248,7 @@ export default function AdminPanel({
                     <select
                       value={productStatusFilter}
                       onChange={(e) => setProductStatusFilter(e.target.value)}
-                      className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-bold text-zinc-800 dark:text-zinc-200 focus:outline-none focus:border-amber-500 transition-colors cursor-pointer"
+                      className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-bold text-zinc-800 dark:text-zinc-200 focus:outline-none focus:border-amber-500 transition-colors cursor-pointer"
                     >
                       <option value="ALL">{lang === 'ar' ? 'جميع الحالات (All Statuses)' : 'All Statuses'}</option>
                       <option value="IN_STOCK">{lang === 'ar' ? 'متوفر (In Stock)' : 'In Stock'}</option>
@@ -2263,7 +2264,7 @@ export default function AdminPanel({
                     <select
                       value={productSort}
                       onChange={(e) => setProductSort(e.target.value as any)}
-                      className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-bold text-zinc-800 dark:text-zinc-200 focus:outline-none focus:border-amber-500 transition-colors cursor-pointer"
+                      className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-bold text-zinc-800 dark:text-zinc-200 focus:outline-none focus:border-amber-500 transition-colors cursor-pointer"
                     >
                       <option value="newest">{lang === 'ar' ? 'الأحدث أولاً' : 'Newest'}</option>
                       <option value="price-high">{lang === 'ar' ? 'السعر: الأعلى' : 'Price: High to Low'}</option>
@@ -2277,11 +2278,11 @@ export default function AdminPanel({
                 </div>
 
                 {/* Bulk Actions Bar (Appears when products are selected) */}
-                <div className="flex flex-wrap items-center justify-between pt-2 border-t border-black/5 dark:border-white/5 gap-2 text-xs">
+                <div className="flex flex-wrap items-center justify-between pt-2 border-t border-wine/5 dark:border-white/5 gap-2 text-xs">
                   <div className="flex items-center gap-3">
                     <button
                       onClick={() => toggleSelectAllProducts(filteredAndSortedProducts.map(p => p.id))}
-                      className="flex items-center gap-1.5 text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white font-bold cursor-pointer"
+                      className="flex items-center gap-1.5 text-zinc-600 dark:text-zinc-300 hover:text-wine dark:hover:text-white font-bold cursor-pointer"
                     >
                       {selectedProductIds.length > 0 && selectedProductIds.length === filteredAndSortedProducts.length ? (
                         <CheckSquare size={16} className="text-amber-500" />
@@ -2309,7 +2310,7 @@ export default function AdminPanel({
                       </button>
                       <button
                         onClick={handleBulkArchive}
-                        className="px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase bg-zinc-100 dark:bg-white/10 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 border border-black/10 dark:border-white/10 cursor-pointer"
+                        className="px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase bg-zinc-100 dark:bg-white/10 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 border border-wine/10 dark:border-white/10 cursor-pointer"
                       >
                         {lang === 'ar' ? 'حفظ كمسودة' : 'Draft'}
                       </button>
@@ -2326,7 +2327,7 @@ export default function AdminPanel({
 
               {/* SHOPIFY-STYLE COMPACT MANAGEMENT CARDS GRID */}
               {filteredAndSortedProducts.length === 0 ? (
-                <div className="py-20 text-center flex flex-col items-center justify-center bg-white dark:bg-[#0d060b] rounded-2xl border border-dashed border-black/10 dark:border-white/10 p-8 shadow-xs">
+                <div className="py-20 text-center flex flex-col items-center justify-center bg-white dark:bg-[#0d060b] rounded-2xl border border-dashed border-wine/10 dark:border-white/10 p-8 shadow-xs">
                   <Package size={48} className="text-zinc-400 dark:text-white/30 mb-3" />
                   <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-700 dark:text-white/70">
                     {lang === 'ar' ? 'لا توجد منتجات مطابقة للفلترة' : 'NO PRODUCTS MATCHING FILTERS'}
@@ -2344,7 +2345,7 @@ export default function AdminPanel({
                     const pProfit = p.price - pCost;
                     const pMargin = Math.round((pProfit / p.price) * 100);
                     const pStock = p.stock ?? 24;
-                    const pSku = p.sku || `SKU-A7-${p.id.slice(0, 6).toUpperCase()}`;
+                    const pSku = p.sku || `SKU-KM-${p.id.slice(0, 6).toUpperCase()}`;
                     const pVisibility = p.visibility || 'Published';
                     const isSelected = selectedProductIds.includes(p.id);
                     const lastUpdatedText = p.lastUpdated || 'Aug 03, 2026';
@@ -2352,14 +2353,14 @@ export default function AdminPanel({
                     return (
                       <div 
                         key={`${p.id}-${idx}`} 
-                        className={`bg-white dark:bg-[#0d060b] text-zinc-900 dark:text-white border ${
+                        className={`bg-white dark:bg-[#0d060b] text-wine dark:text-white border ${
                           isSelected 
                             ? 'border-amber-500 ring-2 ring-amber-500/30' 
-                            : 'border-black/10 dark:border-white/10 hover:border-amber-500/40'
+                            : 'border-wine/10 dark:border-white/10 hover:border-amber-500/40'
                         } rounded-2xl p-4 sm:p-5 shadow-xs hover:shadow-md transition-all duration-200 flex flex-col justify-between h-full gap-4 group relative`}
                       >
                         {/* Top Metadata Row: Selection, Status & Visibility */}
-                        <div className="flex items-center justify-between gap-2 border-b border-black/5 dark:border-white/5 pb-3">
+                        <div className="flex items-center justify-between gap-2 border-b border-wine/5 dark:border-white/5 pb-3">
                           <div className="flex items-center gap-2">
                             <button 
                               onClick={() => toggleSelectProduct(p.id)}
@@ -2377,7 +2378,7 @@ export default function AdminPanel({
                             <span className={`text-[9px] font-bold uppercase px-2 py-0.5 rounded-md border ${
                               pVisibility === 'Published'
                                 ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20'
-                                : 'bg-zinc-100 dark:bg-white/10 text-zinc-500 border-black/10 dark:border-white/10'
+                                : 'bg-zinc-100 dark:bg-white/10 text-zinc-500 border-wine/10 dark:border-white/10'
                             }`}>
                               {pVisibility}
                             </span>
@@ -2397,7 +2398,7 @@ export default function AdminPanel({
                         {/* Product Identifiers & Thumbnail Area */}
                         <div className="flex flex-col sm:flex-row items-start gap-4">
                           {/* Image Thumbnail */}
-                          <div className="relative w-full sm:w-28 h-36 sm:h-28 rounded-xl overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-black/10 dark:border-white/10 shrink-0">
+                          <div className="relative w-full sm:w-28 h-36 sm:h-28 rounded-xl overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-wine/10 dark:border-white/10 shrink-0">
                             <img 
                               src={p.image} 
                               alt={p.name}
@@ -2407,7 +2408,7 @@ export default function AdminPanel({
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                             />
                             {p.isNew && (
-                              <span className="absolute top-1.5 left-1.5 text-[8px] font-extrabold uppercase px-1.5 py-0.5 bg-amber-500 text-black rounded-md shadow-xs">
+                              <span className="absolute top-1.5 left-1.5 text-[8px] font-extrabold uppercase px-1.5 py-0.5 bg-amber-500 text-wine rounded-md shadow-xs">
                                 NEW
                               </span>
                             )}
@@ -2424,7 +2425,7 @@ export default function AdminPanel({
                               </span>
                             </div>
 
-                            <h3 className="text-sm font-bold text-zinc-900 dark:text-white line-clamp-2 leading-snug">
+                            <h3 className="text-sm font-bold text-wine dark:text-white line-clamp-2 leading-snug">
                               {p.name}
                             </h3>
                             
@@ -2440,13 +2441,13 @@ export default function AdminPanel({
                         </div>
 
                         {/* Financial Metrics Box (Selling Price, Cost, Net Profit & Margin) */}
-                        <div className="bg-zinc-50 dark:bg-white/5 rounded-xl p-3 border border-black/5 dark:border-white/5 flex flex-col gap-2">
+                        <div className="bg-zinc-50 dark:bg-white/5 rounded-xl p-3 border border-wine/5 dark:border-white/5 flex flex-col gap-2">
                           <div className="grid grid-cols-2 gap-2 text-xs font-mono">
                             <div className="flex flex-col">
                               <span className="text-[9px] uppercase font-sans text-zinc-400 font-medium">
                                 {lang === 'ar' ? 'سعر البيع' : 'Selling Price'}
                               </span>
-                              <span className="font-extrabold text-zinc-900 dark:text-white">
+                              <span className="font-extrabold text-wine dark:text-white">
                                 {p.price.toLocaleString()} <span className="text-[10px] text-zinc-400 font-sans">{lang === 'ar' ? 'ج.م' : 'EGP'}</span>
                               </span>
                             </div>
@@ -2461,7 +2462,7 @@ export default function AdminPanel({
                             </div>
                           </div>
 
-                          <div className="pt-2 border-t border-black/5 dark:border-white/5 flex items-center justify-between text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400">
+                          <div className="pt-2 border-t border-wine/5 dark:border-white/5 flex items-center justify-between text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400">
                             <span className="text-[9px] uppercase font-sans text-zinc-500 font-normal">
                               {lang === 'ar' ? 'صافي الربح:' : 'Net Profit:'}
                             </span>
@@ -2478,7 +2479,7 @@ export default function AdminPanel({
                             <div className={`p-2.5 rounded-xl border flex items-center justify-between gap-2 transition-all ${
                               p.isSoldOut 
                                 ? 'bg-rose-500/10 border-rose-500/30 text-rose-700 dark:text-rose-300' 
-                                : 'bg-zinc-50 dark:bg-white/5 border-black/5 dark:border-white/5 text-zinc-700 dark:text-zinc-300'
+                                : 'bg-zinc-50 dark:bg-white/5 border-wine/5 dark:border-white/5 text-zinc-700 dark:text-zinc-300'
                             }`}>
                               <div className="flex items-center gap-2 min-w-0">
                                 <span className={`w-2 h-2 rounded-full shrink-0 ${p.isSoldOut ? 'bg-rose-500 animate-pulse' : 'bg-emerald-500'}`} />
@@ -2532,11 +2533,11 @@ export default function AdminPanel({
                         })()}
 
                         {/* Card Action Footer (Shopify SaaS Controls) */}
-                        <div className="pt-3 border-t border-black/5 dark:border-white/5 flex items-center justify-between gap-1 text-xs">
+                        <div className="pt-3 border-t border-wine/5 dark:border-white/5 flex items-center justify-between gap-1 text-xs">
                           {/* Primary Edit Button */}
                           <button
                             onClick={() => handleEditClick(p)}
-                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-black text-white dark:bg-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-wine text-white dark:bg-white dark:text-wine hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
                           >
                             <Edit2 size={12} />
                             <span>{lang === 'ar' ? 'تعديل' : 'Edit'}</span>
@@ -2546,7 +2547,7 @@ export default function AdminPanel({
                           <div className="flex items-center gap-1 text-zinc-500">
                             <button
                               onClick={() => setQuickViewProduct(p)}
-                              className="p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer"
+                              className="p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-white/10 hover:text-wine dark:hover:text-white transition-colors cursor-pointer"
                               title={lang === 'ar' ? 'معاينة سريعة' : 'Quick View'}
                             >
                               <Eye size={15} />
@@ -2554,7 +2555,7 @@ export default function AdminPanel({
 
                             <button
                               onClick={() => handleDuplicateProduct(p)}
-                              className="p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer"
+                              className="p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-white/10 hover:text-wine dark:hover:text-white transition-colors cursor-pointer"
                               title={lang === 'ar' ? 'تكرار المنتج' : 'Duplicate'}
                             >
                               <Copy size={15} />
@@ -2562,7 +2563,7 @@ export default function AdminPanel({
 
                             <button
                               onClick={() => handleToggleVisibility(p)}
-                              className="p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer"
+                              className="p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-white/10 hover:text-wine dark:hover:text-white transition-colors cursor-pointer"
                               title={lang === 'ar' ? 'تغيير الحالة (مسودة/منشور)' : 'Toggle Draft/Published'}
                             >
                               <Archive size={15} />
@@ -2592,13 +2593,13 @@ export default function AdminPanel({
               
               {/* Marquee Settings */}
               <div className="w-full lg:w-1/2 flex flex-col gap-8">
-                <div className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/5 shadow-sm p-8 flex flex-col gap-6">
-                  <h3 className="text-xs uppercase text-zinc-800 dark:text-white/80 border-b border-black/10 dark:border-white/10 pb-4 font-bold">ACTIVE OFFERS (MARQUEE)</h3>
+                <div className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white border border-wine/10 dark:border-white/5 shadow-sm p-8 flex flex-col gap-6">
+                  <h3 className="text-xs uppercase text-zinc-800 dark:text-white/80 border-b border-wine/10 dark:border-white/10 pb-4 font-bold">ACTIVE OFFERS (MARQUEE)</h3>
                   
                   <div className="flex flex-col gap-4">
                     {settings.offers.map((offer, idx) => (
-                      <div key={idx} className="flex justify-between items-center bg-zinc-50 dark:bg-white/5 p-4 border border-black/5 dark:border-white/5 group">
-                        <span className="uppercase text-zinc-900 dark:text-white truncate max-w-[80%] font-medium">{offer}</span>
+                      <div key={idx} className="flex justify-between items-center bg-zinc-50 dark:bg-white/5 p-4 border border-wine/5 dark:border-white/5 group">
+                        <span className="uppercase text-wine dark:text-white truncate max-w-[80%] font-medium">{offer}</span>
                         <button onClick={() => setDeleteTarget({ type: 'offer', idOrIndex: idx, name: `العرض الإعلاني: "${offer}"` })} className="text-rose-500 hover:text-rose-700 dark:text-red-500/50 dark:hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all">
                           <Trash2 size={16} />
                         </button>
@@ -2613,9 +2614,9 @@ export default function AdminPanel({
                       value={newOffer}
                       onChange={(e) => setNewOffer(e.target.value)}
                       placeholder="NEW OFFER TEXT..." 
-                      className="flex-1 bg-transparent border-b border-black/20 dark:border-white/20 pb-2 text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-[#86868b] focus:outline-none focus:border-black dark:focus:border-white uppercase font-medium"
+                      className="flex-1 bg-transparent border-b border-wine/20 dark:border-white/20 pb-2 text-wine dark:text-white placeholder-zinc-400 dark:placeholder-[#86868b] focus:outline-none focus:border-wine dark:focus:border-white uppercase font-medium"
                     />
-                    <button onClick={handleAddOffer} className="bg-black text-white dark:bg-white dark:text-black px-6 py-2 uppercase font-bold hover:bg-zinc-800 dark:hover:bg-white/80 transition-colors">
+                    <button onClick={handleAddOffer} className="bg-wine text-white dark:bg-white dark:text-wine px-6 py-2 uppercase font-bold hover:bg-zinc-800 dark:hover:bg-white/80 transition-colors">
                       ADD
                     </button>
                   </div>
@@ -2624,14 +2625,14 @@ export default function AdminPanel({
 
               {/* Hero Slider Settings */}
               <div className="w-full lg:w-1/2 flex flex-col gap-8">
-                <div className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/5 shadow-sm p-8 flex flex-col gap-6">
-                  <h3 className="text-xs uppercase text-zinc-800 dark:text-white/80 border-b border-black/10 dark:border-white/10 pb-4 font-bold">HERO SLIDER IMAGES</h3>
+                <div className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white border border-wine/10 dark:border-white/5 shadow-sm p-8 flex flex-col gap-6">
+                  <h3 className="text-xs uppercase text-zinc-800 dark:text-white/80 border-b border-wine/10 dark:border-white/10 pb-4 font-bold">HERO SLIDER IMAGES</h3>
                   
                   <div className="grid grid-cols-2 gap-4">
                     {settings.heroImages.map((img, idx) => (
-                      <div key={idx} className="relative aspect-[4/3] group border border-black/10 dark:border-white/5">
+                      <div key={idx} className="relative aspect-[4/3] group border border-wine/10 dark:border-white/5">
                         <img src={img} alt={`Hero ${idx}`} className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
-                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center backdrop-blur-sm">
+                        <div className="absolute inset-0 bg-wine/40 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center backdrop-blur-sm">
                           <button onClick={() => setDeleteTarget({ type: 'image', idOrIndex: idx, name: `صورة الهيرو رقم ${idx + 1}` })} className="bg-rose-600 text-white p-3 rounded-full hover:bg-rose-700 transition-colors shadow-xl">
                             <Trash2 size={16} />
                           </button>
@@ -2641,7 +2642,7 @@ export default function AdminPanel({
                   </div>
 
                   {/* Upload from Device Button for Hero Slider */}
-                  <div className="flex flex-col gap-3 pt-2 border-t border-black/10 dark:border-white/10">
+                  <div className="flex flex-col gap-3 pt-2 border-t border-wine/10 dark:border-white/10">
                     <label className="cursor-pointer flex items-center justify-center gap-2 p-3.5 border-2 border-dashed border-amber-500/40 hover:border-amber-500 bg-amber-500/5 hover:bg-amber-500/10 transition-all text-center group font-bold text-amber-600 dark:text-amber-400 text-xs">
                       <Upload size={16} className="group-hover:scale-110 transition-transform" />
                       <span>{lang === 'ar' ? 'رفع صورة جديدة للهيرو من الجهاز' : 'UPLOAD NEW HERO IMAGE FROM DEVICE'}</span>
@@ -2655,9 +2656,9 @@ export default function AdminPanel({
                         value={newImage}
                         onChange={(e) => setNewImage(e.target.value)}
                         placeholder={lang === 'ar' ? 'أو ضع رابط صورة مباشر هنا...' : 'OR PASTE IMAGE URL...'} 
-                        className="flex-1 bg-transparent border-b border-black/20 dark:border-white/20 pb-2 text-xs font-mono text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-white/30 focus:outline-none focus:border-amber-500"
+                        className="flex-1 bg-transparent border-b border-wine/20 dark:border-white/20 pb-2 text-xs font-mono text-wine dark:text-white placeholder-zinc-400 dark:placeholder-white/30 focus:outline-none focus:border-amber-500"
                       />
-                      <button onClick={handleAddImage} className="bg-black text-white dark:bg-white dark:text-black px-5 py-2 uppercase font-bold hover:bg-zinc-800 dark:hover:bg-white/80 transition-colors text-xs">
+                      <button onClick={handleAddImage} className="bg-wine text-white dark:bg-white dark:text-wine px-5 py-2 uppercase font-bold hover:bg-zinc-800 dark:hover:bg-white/80 transition-colors text-xs">
                         {lang === 'ar' ? 'إضافة' : 'ADD'}
                       </button>
                     </div>
@@ -2665,8 +2666,8 @@ export default function AdminPanel({
                 </div>
 
                 {/* Social Media Links Card */}
-                <div className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/5 shadow-sm p-8 flex flex-col gap-6">
-                  <div className="flex items-center justify-between border-b border-black/10 dark:border-white/10 pb-4">
+                <div className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white border border-wine/10 dark:border-white/5 shadow-sm p-8 flex flex-col gap-6">
+                  <div className="flex items-center justify-between border-b border-wine/10 dark:border-white/10 pb-4">
                     <h3 className="text-xs uppercase text-zinc-800 dark:text-white/80 font-bold flex items-center gap-2">
                       <Share2 size={16} className="text-amber-500" />
                       <span>{lang === 'ar' ? 'روابط مواقع التواصل الاجتماعي (الفواتر)' : 'SOCIAL MEDIA LINKS (FOOTER)'}</span>
@@ -2696,7 +2697,7 @@ export default function AdminPanel({
                         value={facebookUrl}
                         onChange={(e) => setFacebookUrl(e.target.value)}
                         placeholder="https://facebook.com/your-page"
-                        className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 p-3 text-xs font-mono text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-amber-500"
+                        className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 p-3 text-xs font-mono text-wine dark:text-white placeholder-zinc-400 focus:outline-none focus:border-amber-500"
                       />
                     </div>
 
@@ -2711,14 +2712,14 @@ export default function AdminPanel({
                         value={instagramUrl}
                         onChange={(e) => setInstagramUrl(e.target.value)}
                         placeholder="https://instagram.com/your-profile"
-                        className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 p-3 text-xs font-mono text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-amber-500"
+                        className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 p-3 text-xs font-mono text-wine dark:text-white placeholder-zinc-400 focus:outline-none focus:border-amber-500"
                       />
                     </div>
 
                     {/* TikTok Link */}
                     <div className="flex flex-col gap-1.5">
                       <label className="text-[10px] font-bold text-zinc-600 dark:text-zinc-300 uppercase flex items-center gap-2">
-                        <TikTokIcon className="w-3.5 h-3.5 text-zinc-900 dark:text-white" />
+                        <TikTokIcon className="w-3.5 h-3.5 text-wine dark:text-white" />
                         <span>{lang === 'ar' ? 'رابط حساب تيك توك:' : 'TIKTOK URL:'}</span>
                       </label>
                       <input 
@@ -2726,13 +2727,13 @@ export default function AdminPanel({
                         value={tiktokUrl}
                         onChange={(e) => setTiktokUrl(e.target.value)}
                         placeholder="https://tiktok.com/@your-handle"
-                        className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 p-3 text-xs font-mono text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-amber-500"
+                        className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 p-3 text-xs font-mono text-wine dark:text-white placeholder-zinc-400 focus:outline-none focus:border-amber-500"
                       />
                     </div>
 
                     <button 
                       onClick={handleSaveSocialLinks}
-                      className="mt-2 bg-amber-500 text-black px-6 py-3 uppercase font-bold hover:bg-amber-400 transition-colors flex items-center justify-center gap-2 text-xs shadow-sm cursor-pointer"
+                      className="mt-2 bg-amber-500 text-wine px-6 py-3 uppercase font-bold hover:bg-amber-400 transition-colors flex items-center justify-center gap-2 text-xs shadow-sm cursor-pointer"
                     >
                       <Check size={16} />
                       <span>{lang === 'ar' ? 'حفظ روابط التواصل' : 'SAVE SOCIAL LINKS'}</span>
@@ -2762,13 +2763,13 @@ export default function AdminPanel({
               )}
 
               {/* Header Box */}
-              <div className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/5 p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 shadow-xs">
+              <div className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white border border-wine/10 dark:border-white/5 p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 shadow-xs">
                 <div className="flex items-start gap-4">
                   <div className="p-3.5 bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400">
                     <Truck size={28} />
                   </div>
                   <div>
-                    <h2 className="text-base font-bold uppercase tracking-wider text-zinc-900 dark:text-white flex items-center gap-2">
+                    <h2 className="text-base font-bold uppercase tracking-wider text-wine dark:text-white flex items-center gap-2">
                       {lang === 'ar' ? 'جدول أسعار الشحن للمحافظات المصرية (27 محافظة)' : 'EGYPT GOVERNORATES SHIPPING RATES (27 GOVERNORATES)'}
                     </h2>
                     <p className="text-zinc-500 dark:text-white/50 text-[11px] normal-case mt-1 max-w-2xl font-normal leading-relaxed">
@@ -2782,13 +2783,13 @@ export default function AdminPanel({
                 <div className="flex flex-wrap items-center gap-3 w-full md:w-auto shrink-0">
                   <button 
                     onClick={handleResetDefaultShippingRates}
-                    className="px-4 py-2.5 border border-black/15 dark:border-white/15 text-zinc-700 dark:text-white/70 hover:border-black dark:hover:border-white transition-all uppercase font-bold text-[10px]"
+                    className="px-4 py-2.5 border border-wine/15 dark:border-white/15 text-zinc-700 dark:text-white/70 hover:border-wine dark:hover:border-white transition-all uppercase font-bold text-[10px]"
                   >
                     {lang === 'ar' ? 'إعادة للافتراضي' : 'RESET DEFAULTS'}
                   </button>
                   <button 
                     onClick={handleSaveShippingRates}
-                    className="flex-1 md:flex-initial px-6 py-2.5 bg-amber-500 text-black font-bold uppercase hover:bg-amber-400 transition-all shadow-md flex items-center justify-center gap-2 text-[10px] tracking-widest"
+                    className="flex-1 md:flex-initial px-6 py-2.5 bg-amber-500 text-wine font-bold uppercase hover:bg-amber-400 transition-all shadow-md flex items-center justify-center gap-2 text-[10px] tracking-widest"
                   >
                     <Check size={14} />
                     {lang === 'ar' ? 'حفظ أسعار الشحن' : 'SAVE ALL RATES'}
@@ -2799,24 +2800,24 @@ export default function AdminPanel({
               {/* Bulk Rate Tool & Search Filter */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Search Governorates */}
-                <div className="bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/5 p-4 flex items-center gap-3">
+                <div className="bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/5 p-4 flex items-center gap-3">
                   <Search size={16} className="text-zinc-400 shrink-0" />
                   <input 
                     type="text" 
                     value={shippingSearch}
                     onChange={(e) => setShippingSearch(e.target.value)}
                     placeholder={lang === 'ar' ? 'بحث عن محافظة (مثلاً: القاهرة، الإسكندرية)...' : 'Search governorate (e.g. Cairo, Alexandria)...'}
-                    className="w-full bg-transparent text-xs text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-white/30 focus:outline-none font-medium"
+                    className="w-full bg-transparent text-xs text-wine dark:text-white placeholder-zinc-400 dark:placeholder-white/30 focus:outline-none font-medium"
                   />
                   {shippingSearch && (
-                    <button onClick={() => setShippingSearch('')} className="text-zinc-400 hover:text-black dark:hover:text-white text-xs font-bold">
+                    <button onClick={() => setShippingSearch('')} className="text-zinc-400 hover:text-wine dark:hover:text-white text-xs font-bold">
                       <X size={14} />
                     </button>
                   )}
                 </div>
 
                 {/* Bulk Set Price Tool */}
-                <div className="bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/5 p-4 flex items-center gap-3">
+                <div className="bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/5 p-4 flex items-center gap-3">
                   <span className="text-[10px] font-bold text-zinc-500 dark:text-white/50 uppercase shrink-0">
                     {lang === 'ar' ? 'سعر موحد للكل:' : 'FLAT RATE FOR ALL:'}
                   </span>
@@ -2825,11 +2826,11 @@ export default function AdminPanel({
                     value={bulkRateValue}
                     onChange={(e) => setBulkRateValue(e.target.value)}
                     placeholder="E.G. 60"
-                    className="w-24 bg-zinc-100 dark:bg-white/5 border border-black/10 dark:border-white/10 px-3 py-1 text-xs font-mono font-bold text-zinc-900 dark:text-white focus:outline-none"
+                    className="w-24 bg-zinc-100 dark:bg-white/5 border border-wine/10 dark:border-white/10 px-3 py-1 text-xs font-mono font-bold text-wine dark:text-white focus:outline-none"
                   />
                   <button 
                     onClick={handleApplyBulkRate}
-                    className="px-4 py-1.5 bg-black text-white dark:bg-white dark:text-black font-bold uppercase hover:bg-zinc-800 dark:hover:bg-white/80 transition-colors text-[9px] tracking-wider"
+                    className="px-4 py-1.5 bg-wine text-white dark:bg-white dark:text-wine font-bold uppercase hover:bg-zinc-800 dark:hover:bg-white/80 transition-colors text-[9px] tracking-wider"
                   >
                     {lang === 'ar' ? 'تطبيق على جميع المحافظات' : 'APPLY TO ALL'}
                   </button>
@@ -2850,18 +2851,18 @@ export default function AdminPanel({
                     return (
                       <div 
                         key={`${gov.id}-${idx}`} 
-                        className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/5 p-6 rounded-2xl flex flex-col justify-between h-full gap-5 shadow-xs hover:border-amber-500/50 transition-colors"
+                        className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white border border-wine/10 dark:border-white/5 p-6 rounded-2xl flex flex-col justify-between h-full gap-5 shadow-xs hover:border-amber-500/50 transition-colors"
                       >
                         <div className="flex justify-between items-start">
                           <div>
-                            <h3 className="text-sm font-bold text-zinc-900 dark:text-white">{gov.nameAr}</h3>
+                            <h3 className="text-sm font-bold text-wine dark:text-white">{gov.nameAr}</h3>
                             <span className="text-[10px] text-zinc-400 dark:text-white/40 uppercase font-mono font-medium block mt-0.5">
                               {gov.nameEn}
                             </span>
                           </div>
                           <span className={`text-[8px] font-bold uppercase px-2.5 py-1 rounded-md border ${
                             currentRate === 0 ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20' :
-                            isDefault ? 'bg-zinc-100 dark:bg-white/5 text-zinc-500 dark:text-white/40 border-black/10 dark:border-white/10' :
+                            isDefault ? 'bg-zinc-100 dark:bg-white/5 text-zinc-500 dark:text-white/40 border-wine/10 dark:border-white/10' :
                             'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20'
                           }`}>
                             {currentRate === 0 ? (lang === 'ar' ? 'شحن مجاني' : 'FREE SHIPPING') : isDefault ? (lang === 'ar' ? 'افتراضي' : 'DEFAULT') : (lang === 'ar' ? 'معدل' : 'CUSTOM')}
@@ -2869,7 +2870,7 @@ export default function AdminPanel({
                         </div>
 
                         {/* Input & Quick Action Buttons */}
-                        <div className="flex flex-col gap-2.5 pt-3 border-t border-black/5 dark:border-white/5">
+                        <div className="flex flex-col gap-2.5 pt-3 border-t border-wine/5 dark:border-white/5">
                           <div className="flex items-center gap-2">
                             <span className="text-[10px] text-zinc-400 dark:text-white/40 font-semibold">{lang === 'ar' ? 'السعر:' : 'FEE:'}</span>
                             <div className="relative flex-1">
@@ -2878,7 +2879,7 @@ export default function AdminPanel({
                                 min="0"
                                 value={currentRate}
                                 onChange={(e) => handleRateChange(gov.nameAr, Number(e.target.value))}
-                                className="w-full bg-zinc-50 dark:bg-white/5 border border-black/20 dark:border-white/20 px-3 py-1.5 rounded-lg text-xs font-mono font-bold text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500 pr-12"
+                                className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/20 dark:border-white/20 px-3 py-1.5 rounded-lg text-xs font-mono font-bold text-wine dark:text-white focus:outline-none focus:border-amber-500 pr-12"
                               />
                               <span className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[9px] font-bold text-zinc-400 dark:text-white/40 pointer-events-none">
                                 {lang === 'ar' ? 'ج.م' : 'EGP'}
@@ -2897,13 +2898,13 @@ export default function AdminPanel({
                             </button>
                             <button 
                               onClick={() => handleRateChange(gov.nameAr, currentRate - 10)}
-                              className="px-2.5 py-1 bg-zinc-100 hover:bg-zinc-200 dark:bg-white/5 dark:hover:bg-white/10 text-zinc-700 dark:text-white/70 text-[8px] font-bold border border-black/10 dark:border-white/10 rounded-md cursor-pointer"
+                              className="px-2.5 py-1 bg-zinc-100 hover:bg-zinc-200 dark:bg-white/5 dark:hover:bg-white/10 text-zinc-700 dark:text-white/70 text-[8px] font-bold border border-wine/10 dark:border-white/10 rounded-md cursor-pointer"
                             >
                               -10
                             </button>
                             <button 
                               onClick={() => handleRateChange(gov.nameAr, currentRate + 10)}
-                              className="px-2.5 py-1 bg-zinc-100 hover:bg-zinc-200 dark:bg-white/5 dark:hover:bg-white/10 text-zinc-700 dark:text-white/70 text-[8px] font-bold border border-black/10 dark:border-white/10 rounded-md cursor-pointer"
+                              className="px-2.5 py-1 bg-zinc-100 hover:bg-zinc-200 dark:bg-white/5 dark:hover:bg-white/10 text-zinc-700 dark:text-white/70 text-[8px] font-bold border border-wine/10 dark:border-white/10 rounded-md cursor-pointer"
                             >
                               +10
                             </button>
@@ -2915,13 +2916,13 @@ export default function AdminPanel({
               </div>
 
               {/* Bottom Sticky Action Bar */}
-              <div className="p-6 bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/5 flex justify-between items-center shadow-lg">
+              <div className="p-6 bg-white text-wine dark:bg-[#0A0A0A] dark:text-white border border-wine/10 dark:border-white/5 flex justify-between items-center shadow-lg">
                 <span className="text-[10px] text-zinc-500 dark:text-white/50 uppercase font-medium">
                   {lang === 'ar' ? 'إجمالي المحافظات: 27 محافظة مصرية' : 'TOTAL GOVERNORATES: 27 EGYPTIAN PROVINCES'}
                 </span>
                 <button 
                   onClick={handleSaveShippingRates}
-                  className="px-8 py-3 bg-amber-500 text-black font-bold uppercase hover:bg-amber-400 transition-all shadow-md flex items-center gap-2 text-[10px] tracking-widest"
+                  className="px-8 py-3 bg-amber-500 text-wine font-bold uppercase hover:bg-amber-400 transition-all shadow-md flex items-center gap-2 text-[10px] tracking-widest"
                 >
                   <Check size={16} />
                   {lang === 'ar' ? 'حفظ وتطبيق جميع أسعار الشحن' : 'SAVE & APPLY ALL SHIPPING RATES'}
@@ -2934,9 +2935,9 @@ export default function AdminPanel({
           {/* COUPONS TAB VIEW */}
           {activeTab === 'coupons' && (
             <div className="flex flex-col gap-8">
-              <div className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/5 p-6 flex flex-col gap-6">
-                <div className="flex justify-between items-center border-b border-black/10 dark:border-white/10 pb-4">
-                  <h3 className="text-sm uppercase font-bold text-zinc-900 dark:text-white flex items-center gap-2">
+              <div className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white border border-wine/10 dark:border-white/5 p-6 flex flex-col gap-6">
+                <div className="flex justify-between items-center border-b border-wine/10 dark:border-white/10 pb-4">
+                  <h3 className="text-sm uppercase font-bold text-wine dark:text-white flex items-center gap-2">
                     <Ticket className="text-amber-500" size={18} />
                     {lang === 'ar' ? 'إضافة كوبون خصم جديد' : 'CREATE NEW DISCOUNT COUPON'}
                   </h3>
@@ -2957,8 +2958,8 @@ export default function AdminPanel({
                         type="text" 
                         value={newCouponCode}
                         onChange={(e) => setNewCouponCode(e.target.value.toUpperCase())}
-                        placeholder="E.G. AVENTO20"
-                        className="flex-1 min-w-0 bg-zinc-50 dark:bg-white/5 border border-black/15 dark:border-white/15 p-2.5 text-xs font-mono font-bold uppercase text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500"
+                        placeholder="E.G. KEMET20"
+                        className="flex-1 min-w-0 bg-zinc-50 dark:bg-white/5 border border-wine/15 dark:border-white/15 p-2.5 text-xs font-mono font-bold uppercase text-wine dark:text-white focus:outline-none focus:border-amber-500"
                       />
                       <button
                         type="button"
@@ -2979,12 +2980,12 @@ export default function AdminPanel({
                     <select 
                       value={newCouponType}
                       onChange={(e) => setNewCouponType(e.target.value as 'percentage' | 'fixed')}
-                      className="bg-zinc-50 dark:bg-white/5 border border-black/15 dark:border-white/15 p-2.5 text-xs font-bold text-zinc-900 dark:text-white focus:outline-none"
+                      className="bg-zinc-50 dark:bg-white/5 border border-wine/15 dark:border-white/15 p-2.5 text-xs font-bold text-wine dark:text-white focus:outline-none"
                     >
-                      <option value="percentage" className="bg-white text-black dark:bg-black dark:text-white">
+                      <option value="percentage" className="bg-white text-wine dark:bg-wine dark:text-white">
                         {lang === 'ar' ? 'نسبة مئوية (%)' : 'Percentage (%)'}
                       </option>
-                      <option value="fixed" className="bg-white text-black dark:bg-black dark:text-white">
+                      <option value="fixed" className="bg-white text-wine dark:bg-wine dark:text-white">
                         {lang === 'ar' ? 'مبلغ ثابت (ج.م)' : 'Fixed EGP'}
                       </option>
                     </select>
@@ -2999,7 +3000,7 @@ export default function AdminPanel({
                       value={newCouponValue}
                       onChange={(e) => setNewCouponValue(Number(e.target.value))}
                       placeholder="E.G. 15"
-                      className="bg-zinc-50 dark:bg-white/5 border border-black/15 dark:border-white/15 p-2.5 text-xs font-mono font-bold text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500"
+                      className="bg-zinc-50 dark:bg-white/5 border border-wine/15 dark:border-white/15 p-2.5 text-xs font-mono font-bold text-wine dark:text-white focus:outline-none focus:border-amber-500"
                     />
                   </div>
 
@@ -3012,13 +3013,13 @@ export default function AdminPanel({
                       value={newCouponMinOrder}
                       onChange={(e) => setNewCouponMinOrder(Number(e.target.value))}
                       placeholder="E.G. 1000"
-                      className="bg-zinc-50 dark:bg-white/5 border border-black/15 dark:border-white/15 p-2.5 text-xs font-mono font-bold text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500"
+                      className="bg-zinc-50 dark:bg-white/5 border border-wine/15 dark:border-white/15 p-2.5 text-xs font-mono font-bold text-wine dark:text-white focus:outline-none focus:border-amber-500"
                     />
                   </div>
                 </div>
 
                 {/* Scope Target Selection (Product/Category/All) */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-3 border-t border-black/10 dark:border-white/10">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-3 border-t border-wine/10 dark:border-white/10">
                   <div className="flex flex-col gap-1.5 sm:col-span-1">
                     <label className="text-[10px] font-bold uppercase text-amber-600 dark:text-amber-400 flex items-center gap-1">
                       <Tag size={12} />
@@ -3027,15 +3028,15 @@ export default function AdminPanel({
                     <select 
                       value={newCouponScope}
                       onChange={(e) => setNewCouponScope(e.target.value as 'all' | 'product' | 'category')}
-                      className="bg-zinc-50 dark:bg-white/5 border border-black/15 dark:border-white/15 p-2.5 text-xs font-bold text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500"
+                      className="bg-zinc-50 dark:bg-white/5 border border-wine/15 dark:border-white/15 p-2.5 text-xs font-bold text-wine dark:text-white focus:outline-none focus:border-amber-500"
                     >
-                      <option value="all" className="bg-white text-black dark:bg-black dark:text-white">
+                      <option value="all" className="bg-white text-wine dark:bg-wine dark:text-white">
                         {lang === 'ar' ? 'جميع منتجات المتجر' : 'All Store Products'}
                       </option>
-                      <option value="product" className="bg-white text-black dark:bg-black dark:text-white">
+                      <option value="product" className="bg-white text-wine dark:bg-wine dark:text-white">
                         {lang === 'ar' ? 'منتج واحد محدد' : 'Specific Product Only'}
                       </option>
-                      <option value="category" className="bg-white text-black dark:bg-black dark:text-white">
+                      <option value="category" className="bg-white text-wine dark:bg-wine dark:text-white">
                         {lang === 'ar' ? 'تصنيف محدد كامل' : 'Specific Category Only'}
                       </option>
                     </select>
@@ -3049,13 +3050,13 @@ export default function AdminPanel({
                       <select 
                         value={selectedProductId}
                         onChange={(e) => setSelectedProductId(e.target.value)}
-                        className="bg-zinc-50 dark:bg-white/5 border border-amber-500 p-2.5 text-xs font-bold text-zinc-900 dark:text-white focus:outline-none"
+                        className="bg-zinc-50 dark:bg-white/5 border border-amber-500 p-2.5 text-xs font-bold text-wine dark:text-white focus:outline-none"
                       >
-                        <option value="" className="bg-white text-black dark:bg-black dark:text-white">
+                        <option value="" className="bg-white text-wine dark:bg-wine dark:text-white">
                           {lang === 'ar' ? '-- اختر منتجاً من القائمة --' : '-- Select a product --'}
                         </option>
                         {products.map((p, idx) => (
-                          <option key={`${p.id}-${idx}`} value={p.id} className="bg-white text-black dark:bg-black dark:text-white">
+                          <option key={`${p.id}-${idx}`} value={p.id} className="bg-white text-wine dark:bg-wine dark:text-white">
                             {p.name} ({p.price} {lang === 'ar' ? 'ج.م' : 'EGP'})
                           </option>
                         ))}
@@ -3071,13 +3072,13 @@ export default function AdminPanel({
                       <select 
                         value={selectedCategory}
                         onChange={(e) => setSelectedCategory(e.target.value)}
-                        className="bg-zinc-50 dark:bg-white/5 border border-amber-500 p-2.5 text-xs font-bold text-zinc-900 dark:text-white focus:outline-none"
+                        className="bg-zinc-50 dark:bg-white/5 border border-amber-500 p-2.5 text-xs font-bold text-wine dark:text-white focus:outline-none"
                       >
-                        <option value="" className="bg-white text-black dark:bg-black dark:text-white">
+                        <option value="" className="bg-white text-wine dark:bg-wine dark:text-white">
                           {lang === 'ar' ? '-- اختر تصنيفاً من القائمة --' : '-- Select a category --'}
                         </option>
                         {categoriesList.map((cat, idx) => (
-                          <option key={`${cat}-${idx}`} value={cat} className="bg-white text-black dark:bg-black dark:text-white">
+                          <option key={`${cat}-${idx}`} value={cat} className="bg-white text-wine dark:bg-wine dark:text-white">
                             {cat}
                           </option>
                         ))}
@@ -3088,7 +3089,7 @@ export default function AdminPanel({
 
                 <button 
                   onClick={handleAddCoupon}
-                  className="mt-2 py-3 bg-amber-500 text-black font-bold uppercase hover:bg-amber-400 transition-colors text-xs tracking-wider flex items-center justify-center gap-2 cursor-pointer"
+                  className="mt-2 py-3 bg-amber-500 text-wine font-bold uppercase hover:bg-amber-400 transition-colors text-xs tracking-wider flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Plus size={16} />
                   {lang === 'ar' ? 'إنشاء وتفعيل الكوبون' : 'CREATE & ACTIVATE COUPON'}
@@ -3096,21 +3097,21 @@ export default function AdminPanel({
               </div>
 
               {/* Coupons List */}
-              <div className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/5 p-6 flex flex-col gap-6">
-                <h3 className="text-xs uppercase font-bold text-zinc-900 dark:text-white pb-3 border-b border-black/10 dark:border-white/10 flex items-center justify-between">
+              <div className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white border border-wine/10 dark:border-white/5 p-6 flex flex-col gap-6">
+                <h3 className="text-xs uppercase font-bold text-wine dark:text-white pb-3 border-b border-wine/10 dark:border-white/10 flex items-center justify-between">
                   <span>{lang === 'ar' ? 'الكوبونات الفعالة والمنشأة' : 'ACTIVE STORE COUPONS'}</span>
                   <span className="font-mono text-amber-500 font-bold">{(settings.coupons || []).length}</span>
                 </h3>
 
                 {(!settings.coupons || settings.coupons.length === 0) ? (
                   <p className="text-xs text-zinc-400 dark:text-white/40 py-12 text-center italic">
-                    {lang === 'ar' ? 'لا توجد كوبونات مضافة بعد. يمكنك إنشاء كوبونات مثل AVENTO10 أو WELCOME200 أعلاه.' : 'No active coupons created yet.'}
+                    {lang === 'ar' ? 'لا توجد كوبونات مضافة بعد. يمكنك إنشاء كوبونات مثل KEMET10 أو WELCOME200 أعلاه.' : 'No active coupons created yet.'}
                   </p>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                     {settings.coupons.map((c, idx) => (
                       <div key={`${c.id}-${idx}`} className={`p-6 border rounded-2xl flex flex-col justify-between h-full gap-5 relative overflow-hidden transition-all ${
-                        c.active ? 'bg-zinc-50 dark:bg-white/5 border-amber-500/40 shadow-xs' : 'bg-zinc-100/50 dark:bg-white/2 border-black/10 opacity-60'
+                        c.active ? 'bg-zinc-50 dark:bg-white/5 border-amber-500/40 shadow-xs' : 'bg-zinc-100/50 dark:bg-white/2 border-wine/10 opacity-60'
                       }`}>
                         <div className="flex justify-between items-start">
                           <div>
@@ -3126,7 +3127,7 @@ export default function AdminPanel({
                           </div>
 
                           <span className={`text-[8px] font-bold uppercase px-2.5 py-1 rounded-md border ${
-                            c.active ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20' : 'bg-zinc-300 dark:bg-white/10 text-zinc-600 dark:text-white/50 border-black/10'
+                            c.active ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20' : 'bg-zinc-300 dark:bg-white/10 text-zinc-600 dark:text-white/50 border-wine/10'
                           }`}>
                             {c.active ? (lang === 'ar' ? 'مفعل' : 'ACTIVE') : (lang === 'ar' ? 'معطل' : 'INACTIVE')}
                           </span>
@@ -3154,7 +3155,7 @@ export default function AdminPanel({
                           </span>
                         )}
 
-                        <div className="flex items-center justify-between border-t border-black/5 dark:border-white/5 pt-3.5">
+                        <div className="flex items-center justify-between border-t border-wine/5 dark:border-white/5 pt-3.5">
                           <button 
                             onClick={() => handleToggleCouponStatus(c.id)}
                             className="text-[9px] font-bold uppercase text-zinc-600 dark:text-white/70 hover:text-amber-500 transition-colors cursor-pointer"
@@ -3182,7 +3183,7 @@ export default function AdminPanel({
           {activeTab === 'notifications' && (
             <div className="flex flex-col gap-6">
               {/* Header & KPI Summary */}
-              <div className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/5 p-6 rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xs">
+              <div className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white border border-wine/10 dark:border-white/5 p-6 rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xs">
                 <div className="flex items-center gap-3">
                   <div className="p-3 bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 rounded-xl">
                     <Bell size={24} />
@@ -3221,14 +3222,14 @@ export default function AdminPanel({
               </div>
 
               {/* Filter Controls & Search */}
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/5 p-4 rounded-2xl">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/5 p-4 rounded-2xl">
                 <div className="flex items-center gap-2 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
                   <button
                     onClick={() => setNotifFilter('all')}
                     className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                       notifFilter === 'all'
-                        ? 'bg-black text-white dark:bg-white dark:text-black shadow-xs'
-                        : 'bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
+                        ? 'bg-wine text-white dark:bg-white dark:text-wine shadow-xs'
+                        : 'bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400 hover:text-wine dark:hover:text-white'
                     }`}
                   >
                     {lang === 'ar' ? 'الكل' : 'ALL'} ({notificationsList.length})
@@ -3237,7 +3238,7 @@ export default function AdminPanel({
                     onClick={() => setNotifFilter('pending')}
                     className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                       notifFilter === 'pending'
-                        ? 'bg-amber-500 text-black shadow-xs'
+                        ? 'bg-amber-500 text-wine shadow-xs'
                         : 'bg-zinc-100 dark:bg-white/5 text-amber-600 dark:text-amber-400 hover:bg-amber-500/10'
                     }`}
                   >
@@ -3264,7 +3265,7 @@ export default function AdminPanel({
                     value={notifSearch}
                     onChange={(e) => setNotifSearch(e.target.value)}
                     placeholder={lang === 'ar' ? 'بحث بالمنتج أو معرف المستخدم...' : 'Search product or User ID...'}
-                    className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl pl-9 rtl:pr-9 rtl:pl-3 py-2 text-xs text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500 font-mono"
+                    className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl pl-9 rtl:pr-9 rtl:pl-3 py-2 text-xs text-wine dark:text-white focus:outline-none focus:border-amber-500 font-mono"
                   />
                 </div>
               </div>
@@ -3285,7 +3286,7 @@ export default function AdminPanel({
 
                 if (filtered.length === 0) {
                   return (
-                    <div className="bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/5 rounded-2xl p-12 text-center flex flex-col items-center justify-center gap-3">
+                    <div className="bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/5 rounded-2xl p-12 text-center flex flex-col items-center justify-center gap-3">
                       <Bell size={36} className="text-zinc-300 dark:text-zinc-700" />
                       <h3 className="text-xs font-bold uppercase luxury-tracking text-zinc-500 dark:text-zinc-400">
                         {lang === 'ar' ? 'لا توجد طلبات إشعار تطابق البحث' : 'NO NOTIFICATION REQUESTS FOUND'}
@@ -3301,10 +3302,10 @@ export default function AdminPanel({
                 }
 
                 return (
-                  <div className="bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/5 rounded-2xl overflow-hidden shadow-xs">
+                  <div className="bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/5 rounded-2xl overflow-hidden shadow-xs">
                     <div className="overflow-x-auto">
                       <table className="w-full text-left rtl:text-right text-xs">
-                        <thead className="bg-zinc-50 dark:bg-white/5 text-[10px] font-bold uppercase text-zinc-500 dark:text-zinc-400 border-b border-black/10 dark:border-white/10">
+                        <thead className="bg-zinc-50 dark:bg-white/5 text-[10px] font-bold uppercase text-zinc-500 dark:text-zinc-400 border-b border-wine/10 dark:border-white/10">
                           <tr>
                             <th className="p-3.5">{lang === 'ar' ? 'المنتج المطلوب' : 'TARGET PRODUCT'}</th>
                             <th className="p-3.5">{lang === 'ar' ? 'معرف المستخدم (User ID)' : 'USER ID & CONTACT'}</th>
@@ -3317,17 +3318,17 @@ export default function AdminPanel({
                           {filtered.map((n, idx) => {
                             const targetProd = products.find(p => p.id === n.productId);
                             return (
-                              <tr key={`${n.id}-${idx}`} className="hover:bg-black/2 dark:hover:bg-white/2 transition-colors">
+                              <tr key={`${n.id}-${idx}`} className="hover:bg-wine/2 dark:hover:bg-white/2 transition-colors">
                                 {/* Target Product */}
                                 <td className="p-3.5">
                                   <div className="flex items-center gap-3">
                                     <img 
                                       src={targetProd?.image || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=100&auto=format&fit=crop&q=80'} 
                                       alt={n.productName} 
-                                      className="w-10 h-10 object-cover rounded-lg border border-black/10 dark:border-white/10 shrink-0"
+                                      className="w-10 h-10 object-cover rounded-lg border border-wine/10 dark:border-white/10 shrink-0"
                                     />
                                     <div className="flex flex-col min-w-0">
-                                      <span className="font-bold text-xs text-zinc-900 dark:text-white truncate">
+                                      <span className="font-bold text-xs text-wine dark:text-white truncate">
                                         {n.productName || targetProd?.name || 'Unknown Product'}
                                       </span>
                                       <span className="text-[10px] font-mono text-zinc-400 truncate">
@@ -3384,7 +3385,7 @@ export default function AdminPanel({
                                           });
                                           setTimeout(() => setRestockAlertToast(null), 5000);
                                         }}
-                                        className="px-2.5 py-1 bg-amber-500 text-black font-extrabold text-[10px] uppercase rounded-lg hover:bg-amber-400 transition-colors flex items-center gap-1 cursor-pointer shrink-0"
+                                        className="px-2.5 py-1 bg-amber-500 text-wine font-extrabold text-[10px] uppercase rounded-lg hover:bg-amber-400 transition-colors flex items-center gap-1 cursor-pointer shrink-0"
                                         title={lang === 'ar' ? 'إرسال تنبيه لهذا المستخدم الآن' : 'Trigger Notification Now'}
                                       >
                                         <Bell size={10} />
@@ -3425,7 +3426,7 @@ export default function AdminPanel({
                     <Star size={12} className="fill-amber-500 text-amber-500" />
                     {lang === 'ar' ? 'إدارة تقييمات العملاء وآراء المنتجات' : 'CUSTOMER REVIEWS & MODERATION'}
                   </span>
-                  <h2 className="text-xl sm:text-2xl font-black text-zinc-900 dark:text-white tracking-tight">
+                  <h2 className="text-xl sm:text-2xl font-black text-wine dark:text-white tracking-tight">
                     {lang === 'ar' ? 'آراء وتقييمات العملاء' : 'Product Reviews & Ratings'}
                   </h2>
                   <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
@@ -3437,15 +3438,15 @@ export default function AdminPanel({
 
                 {/* Metrics Summary Badges */}
                 <div className="flex items-center gap-3">
-                  <div className="px-4 py-2 bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl text-center">
+                  <div className="px-4 py-2 bg-white dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl text-center">
                     <span className="text-[9px] font-bold uppercase text-zinc-400 block">{lang === 'ar' ? 'متوسط التقييم' : 'AVG RATING'}</span>
                     <span className="text-lg font-black text-amber-500 font-mono flex items-center justify-center gap-1">
                       <Star size={14} className="fill-amber-500" /> 4.9
                     </span>
                   </div>
-                  <div className="px-4 py-2 bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl text-center">
+                  <div className="px-4 py-2 bg-white dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl text-center">
                     <span className="text-[9px] font-bold uppercase text-zinc-400 block">{lang === 'ar' ? 'إجمالي المراجعات' : 'TOTAL REVIEWS'}</span>
-                    <span className="text-lg font-black text-zinc-900 dark:text-white font-mono">{reviewsList.length}</span>
+                    <span className="text-lg font-black text-wine dark:text-white font-mono">{reviewsList.length}</span>
                   </div>
                   <div className="px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-center">
                     <span className="text-[9px] font-bold uppercase text-emerald-600 dark:text-emerald-400 block">{lang === 'ar' ? 'معتمدة' : 'APPROVED'}</span>
@@ -3457,14 +3458,14 @@ export default function AdminPanel({
               </div>
 
               {/* Controls Bar: Rating Filter & Search */}
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/5 p-4 rounded-2xl">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/5 p-4 rounded-2xl">
                 <div className="flex items-center gap-2 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
                   <button
                     onClick={() => setReviewFilterRating('all')}
                     className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
                       reviewFilterRating === 'all'
-                        ? 'bg-black text-white dark:bg-white dark:text-black shadow-xs'
-                        : 'bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
+                        ? 'bg-wine text-white dark:bg-white dark:text-wine shadow-xs'
+                        : 'bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400 hover:text-wine dark:hover:text-white'
                     }`}
                   >
                     {lang === 'ar' ? 'جميع التقييمات' : 'ALL REVIEWS'} ({reviewsList.length})
@@ -3476,7 +3477,7 @@ export default function AdminPanel({
                       onClick={() => setReviewFilterRating(ratingStars)}
                       className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
                         reviewFilterRating === ratingStars
-                          ? 'bg-amber-500 text-black shadow-xs font-black'
+                          ? 'bg-amber-500 text-wine shadow-xs font-black'
                           : 'bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400 hover:bg-amber-500/10'
                       }`}
                     >
@@ -3493,7 +3494,7 @@ export default function AdminPanel({
                     value={reviewSearch}
                     onChange={(e) => setReviewSearch(e.target.value)}
                     placeholder={lang === 'ar' ? 'بحث بالعميل أو المنتج أو المراجعة...' : 'Search customer, product or text...'}
-                    className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl pl-9 rtl:pr-9 rtl:pl-3 py-2 text-xs text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500"
+                    className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl pl-9 rtl:pr-9 rtl:pl-3 py-2 text-xs text-wine dark:text-white focus:outline-none focus:border-amber-500"
                   />
                 </div>
               </div>
@@ -3514,7 +3515,7 @@ export default function AdminPanel({
 
                 if (filtered.length === 0) {
                   return (
-                    <div className="bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/5 rounded-2xl p-12 text-center flex flex-col items-center justify-center gap-3">
+                    <div className="bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/5 rounded-2xl p-12 text-center flex flex-col items-center justify-center gap-3">
                       <Star size={36} className="text-zinc-300 dark:text-zinc-700" />
                       <h3 className="text-xs font-bold uppercase luxury-tracking text-zinc-500 dark:text-zinc-400">
                         {lang === 'ar' ? 'لا توجد تقييمات تطابق البحث' : 'NO REVIEWS FOUND'}
@@ -3531,19 +3532,19 @@ export default function AdminPanel({
                         className={`bg-white dark:bg-[#0A0A0A] border rounded-2xl p-4 sm:p-5 flex flex-col gap-4 transition-all shadow-xs ${
                           rev.isFeatured 
                             ? 'border-amber-500/40 ring-1 ring-amber-500/20' 
-                            : 'border-black/10 dark:border-white/5'
+                            : 'border-wine/10 dark:border-white/5'
                         }`}
                       >
-                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-black/5 dark:border-white/5 pb-3">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-wine/5 dark:border-white/5 pb-3">
                           {/* Product Info */}
                           <div className="flex items-center gap-3">
                             <img 
                               src={rev.productImage} 
                               alt={rev.productName} 
-                              className="w-11 h-11 object-cover rounded-xl border border-black/10 dark:border-white/10 shrink-0"
+                              className="w-11 h-11 object-cover rounded-xl border border-wine/10 dark:border-white/10 shrink-0"
                             />
                             <div>
-                              <span className="font-bold text-xs text-zinc-900 dark:text-white block">
+                              <span className="font-bold text-xs text-wine dark:text-white block">
                                 {rev.productName}
                               </span>
                               <span className="text-[10px] text-zinc-400 font-mono">
@@ -3568,7 +3569,7 @@ export default function AdminPanel({
                             </div>
 
                             {rev.isFeatured && (
-                              <span className="px-2.5 py-1 bg-amber-500 text-black text-[10px] font-extrabold uppercase rounded-lg flex items-center gap-1 shadow-xs">
+                              <span className="px-2.5 py-1 bg-amber-500 text-wine text-[10px] font-extrabold uppercase rounded-lg flex items-center gap-1 shadow-xs">
                                 <Sparkles size={11} />
                                 {lang === 'ar' ? 'مميّز' : 'FEATURED'}
                               </span>
@@ -3587,13 +3588,13 @@ export default function AdminPanel({
                         {/* Customer Comment */}
                         <div className="flex flex-col gap-1.5">
                           <div className="flex items-center justify-between gap-2 text-xs">
-                            <span className="font-bold text-zinc-900 dark:text-white flex items-center gap-1.5">
+                            <span className="font-bold text-wine dark:text-white flex items-center gap-1.5">
                               <Users size={12} className="text-amber-500" />
                               {rev.userName} <span className="text-zinc-400 text-[11px] font-normal">({rev.userEmail})</span>
                             </span>
                             <span className="text-[10px] font-mono text-zinc-400">{rev.createdAt}</span>
                           </div>
-                          <p className="text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed bg-zinc-50 dark:bg-white/5 p-3 rounded-xl border border-black/5 dark:border-white/5">
+                          <p className="text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed bg-zinc-50 dark:bg-white/5 p-3 rounded-xl border border-wine/5 dark:border-white/5">
                             "{rev.comment}"
                           </p>
                         </div>
@@ -3612,18 +3613,18 @@ export default function AdminPanel({
                         )}
 
                         {/* Reply Form & Action Buttons */}
-                        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 border-t border-black/5 dark:border-white/5">
+                        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 border-t border-wine/5 dark:border-white/5">
                           <div className="flex items-center gap-2 w-full sm:w-auto">
                             <input
                               type="text"
                               value={reviewReplyInput[rev.id] || ''}
                               onChange={(e) => setReviewReplyInput(prev => ({ ...prev, [rev.id]: e.target.value }))}
                               placeholder={lang === 'ar' ? 'اكتب رداً رسمياً من إدارة المتجر...' : 'Write official admin reply...'}
-                              className="flex-1 sm:w-64 bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 py-1.5 text-xs focus:outline-none focus:border-amber-500"
+                              className="flex-1 sm:w-64 bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl px-3 py-1.5 text-xs focus:outline-none focus:border-amber-500"
                             />
                             <button
                               onClick={() => handleSaveReviewReply(rev.id)}
-                              className="px-3 py-1.5 bg-black text-white dark:bg-white dark:text-black font-bold text-xs rounded-xl hover:bg-zinc-800 transition-colors cursor-pointer shrink-0"
+                              className="px-3 py-1.5 bg-wine text-white dark:bg-white dark:text-wine font-bold text-xs rounded-xl hover:bg-zinc-800 transition-colors cursor-pointer shrink-0"
                             >
                               {lang === 'ar' ? 'إرسال الرد' : 'Reply'}
                             </button>
@@ -3634,7 +3635,7 @@ export default function AdminPanel({
                               onClick={() => handleToggleFeaturedReview(rev.id)}
                               className={`px-2.5 py-1.5 text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center gap-1 ${
                                 rev.isFeatured 
-                                  ? 'bg-amber-500 text-black' 
+                                  ? 'bg-amber-500 text-wine' 
                                   : 'bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-300 hover:bg-amber-500/10'
                               }`}
                             >
@@ -3674,7 +3675,7 @@ export default function AdminPanel({
           {/* ADMIN ALERTS TAB (PUSH NOTIFICATIONS) */}
           {activeTab === 'admin-alerts' && (
             <div className="flex flex-col gap-6">
-              <div className="bg-white text-zinc-900 dark:bg-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/5 p-6 rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xs">
+              <div className="bg-white text-wine dark:bg-[#0A0A0A] dark:text-white border border-wine/10 dark:border-white/5 p-6 rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xs">
                 <div className="flex items-center gap-3">
                   <div className="p-3 bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 rounded-xl">
                     <Bell size={24} />
@@ -3694,7 +3695,7 @@ export default function AdminPanel({
                 {adminNotifications.some(n => !n.isRead) && (
                   <button
                     onClick={() => markAllNotificationsAsRead(adminNotifications)}
-                    className="flex items-center gap-2 px-4 py-2 bg-zinc-100 hover:bg-zinc-200 dark:bg-white/10 dark:hover:bg-white/20 text-zinc-900 dark:text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shrink-0 cursor-pointer"
+                    className="flex items-center gap-2 px-4 py-2 bg-zinc-100 hover:bg-zinc-200 dark:bg-white/10 dark:hover:bg-white/20 text-wine dark:text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shrink-0 cursor-pointer"
                   >
                     <CheckCircle size={14} />
                     {lang === 'ar' ? 'تحديد الكل كمقروء' : 'MARK ALL READ'}
@@ -3704,9 +3705,9 @@ export default function AdminPanel({
 
               <div className="grid grid-cols-1 gap-3">
                 {adminNotifications.length === 0 ? (
-                  <div className="text-center py-12 bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/5 rounded-2xl shadow-xs">
+                  <div className="text-center py-12 bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/5 rounded-2xl shadow-xs">
                     <Bell className="w-12 h-12 mx-auto text-zinc-300 dark:text-zinc-700 mb-3" />
-                    <h3 className="text-sm font-bold text-zinc-900 dark:text-white mb-1">
+                    <h3 className="text-sm font-bold text-wine dark:text-white mb-1">
                       {lang === 'ar' ? 'لا توجد تنبيهات' : 'No Notifications'}
                     </h3>
                     <p className="text-xs text-zinc-500">
@@ -3717,7 +3718,7 @@ export default function AdminPanel({
                   adminNotifications.map((notif) => (
                     <div 
                       key={notif.id} 
-                      className={`flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl border ${notif.isRead ? 'bg-zinc-50 dark:bg-white/5 border-transparent' : 'bg-white dark:bg-zinc-900 border-amber-500/30 shadow-sm'}`}
+                      className={`flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl border ${notif.isRead ? 'bg-zinc-50 dark:bg-white/5 border-transparent' : 'bg-white dark:bg-wine border-amber-500/30 shadow-sm'}`}
                     >
                       <div className="flex items-start gap-4">
                         <div className={`p-2 rounded-full mt-1 ${notif.isRead ? 'bg-zinc-200 dark:bg-zinc-800 text-zinc-500' : 'bg-amber-500/20 text-amber-600 dark:text-amber-400'}`}>
@@ -3726,7 +3727,7 @@ export default function AdminPanel({
                            <Bell size={18} />}
                         </div>
                         <div>
-                          <h4 className={`text-sm font-bold ${notif.isRead ? 'text-zinc-600 dark:text-zinc-400' : 'text-zinc-900 dark:text-white'}`}>
+                          <h4 className={`text-sm font-bold ${notif.isRead ? 'text-zinc-600 dark:text-zinc-400' : 'text-wine dark:text-white'}`}>
                             {notif.title}
                           </h4>
                           <p className={`text-xs mt-1 ${notif.isRead ? 'text-zinc-500' : 'text-zinc-700 dark:text-zinc-300'}`}>
@@ -3742,7 +3743,7 @@ export default function AdminPanel({
                         {!notif.isRead && (
                           <button
                             onClick={() => markNotificationAsRead(notif.id)}
-                            className="px-3 py-1.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-white/10 dark:hover:bg-white/20 text-zinc-900 dark:text-white text-xs font-bold rounded-lg transition-colors cursor-pointer"
+                            className="px-3 py-1.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-white/10 dark:hover:bg-white/20 text-wine dark:text-white text-xs font-bold rounded-lg transition-colors cursor-pointer"
                           >
                             {lang === 'ar' ? 'مقروء' : 'Mark Read'}
                           </button>
@@ -3750,7 +3751,7 @@ export default function AdminPanel({
                         {notif.relatedId && notif.type === 'NEW_ORDER' && (
                           <button
                             onClick={() => setActiveTab('orders')}
-                            className="px-3 py-1.5 bg-black text-white dark:bg-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 text-xs font-bold rounded-lg transition-colors cursor-pointer"
+                            className="px-3 py-1.5 bg-wine text-white dark:bg-white dark:text-wine hover:bg-zinc-800 dark:hover:bg-zinc-200 text-xs font-bold rounded-lg transition-colors cursor-pointer"
                           >
                             {lang === 'ar' ? 'عرض الطلب' : 'View Order'}
                           </button>
@@ -3773,7 +3774,7 @@ export default function AdminPanel({
                     <Settings size={12} />
                     {lang === 'ar' ? 'إعدادات ومتجر العلامة التجارية' : 'STORE IDENTITY & GENERAL CONFIG'}
                   </span>
-                  <h2 className="text-xl sm:text-2xl font-black text-zinc-900 dark:text-white tracking-tight">
+                  <h2 className="text-xl sm:text-2xl font-black text-wine dark:text-white tracking-tight">
                     {lang === 'ar' ? 'إعدادات المتجر العامة' : 'General Store Settings'}
                   </h2>
                   <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
@@ -3785,7 +3786,7 @@ export default function AdminPanel({
 
                 <button
                   onClick={handleSaveGeneralSettings}
-                  className="px-5 py-2.5 bg-black text-white dark:bg-white dark:text-black font-bold text-xs rounded-xl shadow-lg hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all flex items-center justify-center gap-2 cursor-pointer shrink-0"
+                  className="px-5 py-2.5 bg-wine text-white dark:bg-white dark:text-wine font-bold text-xs rounded-xl shadow-lg hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all flex items-center justify-center gap-2 cursor-pointer shrink-0"
                 >
                   <Check size={14} />
                   <span>{lang === 'ar' ? 'حفظ كافة الإعدادات' : 'SAVE STORE CONFIG'}</span>
@@ -3802,8 +3803,8 @@ export default function AdminPanel({
               )}
 
               {/* 1. Store Identity */}
-              <div className="bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/5 rounded-2xl p-5 sm:p-6 flex flex-col gap-4 shadow-xs">
-                <h3 className="text-sm font-extrabold uppercase luxury-tracking text-zinc-900 dark:text-white border-b border-black/5 dark:border-white/5 pb-3 flex items-center gap-2">
+              <div className="bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/5 rounded-2xl p-5 sm:p-6 flex flex-col gap-4 shadow-xs">
+                <h3 className="text-sm font-extrabold uppercase luxury-tracking text-wine dark:text-white border-b border-wine/5 dark:border-white/5 pb-3 flex items-center gap-2">
                   <Globe size={16} className="text-amber-500" />
                   {lang === 'ar' ? 'هوية المتجر والدعم' : 'Brand Identity & Support'}
                 </h3>
@@ -3817,7 +3818,7 @@ export default function AdminPanel({
                       type="text"
                       value={storeName}
                       onChange={(e) => setStoreName(e.target.value)}
-                      className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2.5 font-bold text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500"
+                      className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl px-3 py-2.5 font-bold text-wine dark:text-white focus:outline-none focus:border-amber-500"
                     />
                   </div>
                   <div className="flex flex-col gap-1.5">
@@ -3829,7 +3830,7 @@ export default function AdminPanel({
                       value={storeUrl}
                       onChange={(e) => setStoreUrl(e.target.value)}
                       placeholder="https://mystore.com"
-                      className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2.5 font-mono text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500"
+                      className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl px-3 py-2.5 font-mono text-wine dark:text-white focus:outline-none focus:border-amber-500"
                     />
                   </div>
 
@@ -3841,7 +3842,7 @@ export default function AdminPanel({
                       type="text"
                       value={storeCurrency}
                       onChange={(e) => setStoreCurrency(e.target.value)}
-                      className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2.5 font-bold font-mono text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500"
+                      className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl px-3 py-2.5 font-bold font-mono text-wine dark:text-white focus:outline-none focus:border-amber-500"
                     />
                   </div>
 
@@ -3853,7 +3854,7 @@ export default function AdminPanel({
                       type="email"
                       value={contactEmail}
                       onChange={(e) => setContactEmail(e.target.value)}
-                      className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2.5 font-bold font-mono text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500"
+                      className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl px-3 py-2.5 font-bold font-mono text-wine dark:text-white focus:outline-none focus:border-amber-500"
                     />
                   </div>
 
@@ -3865,15 +3866,15 @@ export default function AdminPanel({
                       type="text"
                       value={contactPhone}
                       onChange={(e) => setContactPhone(e.target.value)}
-                      className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2.5 font-bold font-mono text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500"
+                      className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl px-3 py-2.5 font-bold font-mono text-wine dark:text-white focus:outline-none focus:border-amber-500"
                     />
                   </div>
                 </div>
               </div>
 
               {/* 2. Announcement Marquee & Shipping Policy */}
-              <div className="bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/5 rounded-2xl p-5 sm:p-6 flex flex-col gap-4 shadow-xs">
-                <h3 className="text-sm font-extrabold uppercase luxury-tracking text-zinc-900 dark:text-white border-b border-black/5 dark:border-white/5 pb-3 flex items-center gap-2">
+              <div className="bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/5 rounded-2xl p-5 sm:p-6 flex flex-col gap-4 shadow-xs">
+                <h3 className="text-sm font-extrabold uppercase luxury-tracking text-wine dark:text-white border-b border-wine/5 dark:border-white/5 pb-3 flex items-center gap-2">
                   <Truck size={16} className="text-amber-500" />
                   {lang === 'ar' ? 'الشريط الإعلاني وسياسة الشحن' : 'Announcement Marquee & Free Shipping Threshold'}
                 </h3>
@@ -3887,7 +3888,7 @@ export default function AdminPanel({
                       type="text"
                       value={marqueeText}
                       onChange={(e) => setMarqueeText(e.target.value)}
-                      className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2.5 font-bold text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500"
+                      className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl px-3 py-2.5 font-bold text-wine dark:text-white focus:outline-none focus:border-amber-500"
                     />
                   </div>
 
@@ -3899,15 +3900,15 @@ export default function AdminPanel({
                       type="number"
                       value={freeShippingThreshold}
                       onChange={(e) => setFreeShippingThreshold(Number(e.target.value))}
-                      className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2.5 font-bold font-mono text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500"
+                      className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl px-3 py-2.5 font-bold font-mono text-wine dark:text-white focus:outline-none focus:border-amber-500"
                     />
                   </div>
                 </div>
               </div>
 
               {/* 3. Social Profiles */}
-              <div className="bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/5 rounded-2xl p-5 sm:p-6 flex flex-col gap-4 shadow-xs">
-                <h3 className="text-sm font-extrabold uppercase luxury-tracking text-zinc-900 dark:text-white border-b border-black/5 dark:border-white/5 pb-3 flex items-center gap-2">
+              <div className="bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/5 rounded-2xl p-5 sm:p-6 flex flex-col gap-4 shadow-xs">
+                <h3 className="text-sm font-extrabold uppercase luxury-tracking text-wine dark:text-white border-b border-wine/5 dark:border-white/5 pb-3 flex items-center gap-2">
                   <Share2 size={16} className="text-amber-500" />
                   {lang === 'ar' ? 'حسابات التواصل الاجتماعي' : 'Social Media Channels'}
                 </h3>
@@ -3921,8 +3922,8 @@ export default function AdminPanel({
                       type="text"
                       value={facebookUrl}
                       onChange={(e) => setFacebookUrl(e.target.value)}
-                      placeholder="https://facebook.com/a7store"
-                      className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-mono focus:outline-none focus:border-amber-500"
+                      placeholder="https://facebook.com/kemetstore"
+                      className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-mono focus:outline-none focus:border-amber-500"
                     />
                   </div>
 
@@ -3934,8 +3935,8 @@ export default function AdminPanel({
                       type="text"
                       value={instagramUrl}
                       onChange={(e) => setInstagramUrl(e.target.value)}
-                      placeholder="https://instagram.com/a7store"
-                      className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-mono focus:outline-none focus:border-amber-500"
+                      placeholder="https://instagram.com/kemetstore"
+                      className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-mono focus:outline-none focus:border-amber-500"
                     />
                   </div>
 
@@ -3947,17 +3948,17 @@ export default function AdminPanel({
                       type="text"
                       value={tiktokUrl}
                       onChange={(e) => setTiktokUrl(e.target.value)}
-                      placeholder="https://tiktok.com/@a7store"
-                      className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-mono focus:outline-none focus:border-amber-500"
+                      placeholder="https://tiktok.com/@kemetstore"
+                      className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-mono focus:outline-none focus:border-amber-500"
                     />
                   </div>
                 </div>
               </div>
 
               {/* Telegram Notifications */}
-              <div className="bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/5 rounded-2xl p-5 sm:p-6 flex flex-col gap-4 shadow-xs">
-                <div className="border-b border-black/5 dark:border-white/5 pb-3">
-                  <h3 className="text-sm font-extrabold uppercase luxury-tracking text-zinc-900 dark:text-white flex items-center gap-2">
+              <div className="bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/5 rounded-2xl p-5 sm:p-6 flex flex-col gap-4 shadow-xs">
+                <div className="border-b border-wine/5 dark:border-white/5 pb-3">
+                  <h3 className="text-sm font-extrabold uppercase luxury-tracking text-wine dark:text-white flex items-center gap-2">
                     <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className="text-[#0088cc]"><path d="M22 2L11 13"></path><path d="M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
                     {lang === 'ar' ? 'إشعارات تليجرام الفورية' : 'Telegram Instant Notifications'}
                   </h3>
@@ -3975,7 +3976,7 @@ export default function AdminPanel({
                       value={telegramBotToken}
                       onChange={(e) => setTelegramBotToken(e.target.value)}
                       placeholder="e.g. 123456789:ABCdefGHIjklmnoPQRstuvWXYZ"
-                      className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-mono focus:outline-none focus:border-amber-500"
+                      className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-mono focus:outline-none focus:border-amber-500"
                     />
                   </div>
                   <div className="flex flex-col gap-1.5">
@@ -3987,23 +3988,23 @@ export default function AdminPanel({
                       value={telegramChatId}
                       onChange={(e) => setTelegramChatId(e.target.value)}
                       placeholder="e.g. 123456789"
-                      className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-mono focus:outline-none focus:border-amber-500"
+                      className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-mono focus:outline-none focus:border-amber-500"
                     />
                   </div>
                 </div>
               </div>
 
               {/* 4. Push Notification Settings */}
-              <div className="bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/5 rounded-2xl p-5 sm:p-6 flex flex-col gap-4 shadow-xs">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-black/5 dark:border-white/5 pb-3">
-                  <h3 className="text-sm font-extrabold uppercase luxury-tracking text-zinc-900 dark:text-white flex items-center gap-2">
+              <div className="bg-white dark:bg-[#0A0A0A] border border-wine/10 dark:border-white/5 rounded-2xl p-5 sm:p-6 flex flex-col gap-4 shadow-xs">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-wine/5 dark:border-white/5 pb-3">
+                  <h3 className="text-sm font-extrabold uppercase luxury-tracking text-wine dark:text-white flex items-center gap-2">
                     <Bell size={16} className="text-amber-500" />
                     {lang === 'ar' ? 'إعدادات تنبيهات المتصفح' : 'Browser Notification Settings'}
                   </h3>
                   <button 
                     onClick={() => {
                       if ("Notification" in window && Notification.permission !== "granted") {
-                        Notification.requestPermission();
+                        Notification.requestPermission().catch(e => console.warn(e));
                       }
                       if (!notifSettings.isMuted) {
                         audioPlayer.play(notifSettings.soundUrl, notifSettings.volume);
@@ -4043,7 +4044,7 @@ export default function AdminPanel({
                           setNotifSettings({ ...notifSettings, soundUrl: url });
                           audioPlayer.play(url, notifSettings.volume);
                         }}
-                        className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-bold focus:outline-none focus:border-amber-500 cursor-pointer"
+                        className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-bold focus:outline-none focus:border-amber-500 cursor-pointer"
                       >
                         <option value="/sounds/shopify.wav">Shopify Style</option>
                         <option value="/sounds/apple.wav">Apple Style</option>
@@ -4082,7 +4083,7 @@ export default function AdminPanel({
                                 soundsByType: { ...notifSettings.soundsByType, [type.key]: url }
                               });
                             }}
-                            className="flex-1 bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-bold focus:outline-none focus:border-amber-500 cursor-pointer"
+                            className="flex-1 bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-bold focus:outline-none focus:border-amber-500 cursor-pointer"
                           >
                             <option value="/sounds/shopify.wav">Shopify Style</option>
                             <option value="/sounds/apple.wav">Apple Style</option>
@@ -4101,7 +4102,7 @@ export default function AdminPanel({
                             onClick={() => {
                               audioPlayer.play(notifSettings.soundsByType[type.key as keyof typeof notifSettings.soundsByType], notifSettings.volume);
                             }}
-                            className="p-2 border border-black/10 dark:border-white/10 rounded-xl hover:bg-zinc-100 dark:hover:bg-white/5 transition-colors cursor-pointer"
+                            className="p-2 border border-wine/10 dark:border-white/10 rounded-xl hover:bg-zinc-100 dark:hover:bg-white/5 transition-colors cursor-pointer"
                           >
                             ▶️
                           </button>
@@ -4122,7 +4123,7 @@ export default function AdminPanel({
                           setNotifSettings({ ...notifSettings, volume: newVol });
                           audioPlayer.play(notifSettings.soundUrl, newVol);
                         }}
-                        className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-bold focus:outline-none focus:border-amber-500 cursor-pointer"
+                        className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-bold focus:outline-none focus:border-amber-500 cursor-pointer"
                       >
                         <option value="Low">{lang === 'ar' ? 'منخفض' : 'Low'}</option>
                         <option value="Medium">{lang === 'ar' ? 'متوسط' : 'Medium'}</option>
@@ -4130,26 +4131,26 @@ export default function AdminPanel({
                       </select>
                     </div>
 
-                    <label className="flex items-center gap-2 cursor-pointer p-3 bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl">
+                    <label className="flex items-center gap-2 cursor-pointer p-3 bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl">
                       <input 
                         type="checkbox" 
                         checked={notifSettings.isMuted}
                         onChange={(e) => setNotifSettings({ ...notifSettings, isMuted: e.target.checked })}
                         className="w-4 h-4 text-amber-500 bg-white border-zinc-300 rounded focus:ring-amber-500" 
                       />
-                      <span className="font-bold text-zinc-900 dark:text-white">
+                      <span className="font-bold text-wine dark:text-white">
                         {lang === 'ar' ? 'كتم الإشعارات' : 'Mute Notifications'}
                       </span>
                     </label>
 
-                    <label className="flex items-center gap-2 cursor-pointer p-3 bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl">
+                    <label className="flex items-center gap-2 cursor-pointer p-3 bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl">
                       <input 
                         type="checkbox" 
                         checked={notifSettings.vibrate}
                         onChange={(e) => setNotifSettings({ ...notifSettings, vibrate: e.target.checked })}
                         className="w-4 h-4 text-amber-500 bg-white border-zinc-300 rounded focus:ring-amber-500" 
                       />
-                      <span className="font-bold text-zinc-900 dark:text-white">
+                      <span className="font-bold text-wine dark:text-white">
                         {lang === 'ar' ? 'الاهتزاز' : 'Vibrate on Notification'}
                       </span>
                     </label>
@@ -4165,27 +4166,27 @@ export default function AdminPanel({
       {/* ADD / EDIT PRODUCT MODAL */}
       <AnimatePresence>
         {isProductModalOpen && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-md">
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-wine/75 backdrop-blur-md">
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
-              className="relative w-full max-w-xl max-h-[92vh] flex flex-col bg-white text-zinc-900 dark:bg-[#0d060b] dark:text-white border border-black/10 dark:border-white/10 rounded-2xl p-4 sm:p-5 shadow-2xl overflow-hidden"
+              className="relative w-full max-w-xl max-h-[92vh] flex flex-col bg-white text-wine dark:bg-[#0d060b] dark:text-white border border-wine/10 dark:border-white/10 rounded-2xl p-4 sm:p-5 shadow-2xl overflow-hidden"
             >
               {/* Header */}
-              <div className="flex justify-between items-center border-b border-black/10 dark:border-white/10 pb-3 mb-4 shrink-0">
+              <div className="flex justify-between items-center border-b border-wine/10 dark:border-white/10 pb-3 mb-4 shrink-0">
                 <div>
                   <span className="text-[9px] luxury-tracking text-amber-600 dark:text-amber-400 font-extrabold uppercase flex items-center gap-1.5">
                     <Sparkles size={11} />
                     {editingId ? (lang === 'ar' ? 'تحديث بيانات المنتج' : 'UPDATE ITEM') : (lang === 'ar' ? 'إضافة عنصر جديد للكتالوج' : 'NEW CATALOG ITEM')}
                   </span>
-                  <h3 className="text-base sm:text-lg font-bold tracking-tight text-zinc-900 dark:text-white mt-0.5">
+                  <h3 className="text-base sm:text-lg font-bold tracking-tight text-wine dark:text-white mt-0.5">
                     {editingId ? (lang === 'ar' ? 'تعديل المنتج' : 'EDIT PRODUCT') : (lang === 'ar' ? 'إضافة منتج جديد' : 'ADD NEW PRODUCT')}
                   </h3>
                 </div>
                 <button 
                   onClick={resetForm} 
-                  className="p-1.5 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer"
+                  className="p-1.5 rounded-full hover:bg-wine/5 dark:hover:bg-white/10 text-zinc-400 hover:text-wine dark:hover:text-white transition-colors cursor-pointer"
                   title="Close"
                 >
                   <X size={18} />
@@ -4205,7 +4206,7 @@ export default function AdminPanel({
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="E.G. OVERSIZED HEAVYWEIGHT HOODIE"
-                      className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-amber-500 transition-colors uppercase"
+                      className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold text-wine dark:text-white placeholder-zinc-400 focus:outline-none focus:border-amber-500 transition-colors uppercase"
                       required
                     />
                   </div>
@@ -4217,7 +4218,7 @@ export default function AdminPanel({
                     <select 
                       value={category} 
                       onChange={(e) => setCategory(e.target.value)}
-                      className="w-full bg-zinc-50 dark:bg-[#150a12] border border-black/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500 transition-colors cursor-pointer"
+                      className="w-full bg-zinc-50 dark:bg-[#150a12] border border-wine/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold text-wine dark:text-white focus:outline-none focus:border-amber-500 transition-colors cursor-pointer"
                     >
                       <option value="TOPS">TOPS</option>
                       <option value="BOTTOMS">BOTTOMS</option>
@@ -4237,7 +4238,7 @@ export default function AdminPanel({
                       value={price}
                       onChange={(e) => setPrice(e.target.value)}
                       placeholder="1200"
-                      className="mt-auto w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold font-mono text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500 transition-colors"
+                      className="mt-auto w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold font-mono text-wine dark:text-white focus:outline-none focus:border-amber-500 transition-colors"
                       required
                     />
                   </div>
@@ -4250,7 +4251,7 @@ export default function AdminPanel({
                       value={originalPrice}
                       onChange={(e) => setOriginalPrice(e.target.value)}
                       placeholder="1500"
-                      className="mt-auto w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold font-mono text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500 transition-colors"
+                      className="mt-auto w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold font-mono text-wine dark:text-white focus:outline-none focus:border-amber-500 transition-colors"
                     />
                   </div>
 
@@ -4263,7 +4264,7 @@ export default function AdminPanel({
                       value={costPrice}
                       onChange={(e) => setCostPrice(e.target.value)}
                       placeholder="650"
-                      className="mt-auto w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold font-mono text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500 transition-colors"
+                      className="mt-auto w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold font-mono text-wine dark:text-white focus:outline-none focus:border-amber-500 transition-colors"
                     />
                   </div>
 
@@ -4276,7 +4277,7 @@ export default function AdminPanel({
                       value={stockInput}
                       onChange={(e) => setStockInput(e.target.value)}
                       placeholder="25"
-                      className="mt-auto w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold font-mono text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500 transition-colors"
+                      className="mt-auto w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold font-mono text-wine dark:text-white focus:outline-none focus:border-amber-500 transition-colors"
                     />
                   </div>
                 </div>
@@ -4301,8 +4302,8 @@ export default function AdminPanel({
                       type="text"
                       value={skuInput}
                       onChange={(e) => setSkuInput(e.target.value)}
-                      placeholder="SKU-A7-001"
-                      className="w-full bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold font-mono text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500 transition-colors uppercase"
+                      placeholder="SKU-KM-001"
+                      className="w-full bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold font-mono text-wine dark:text-white focus:outline-none focus:border-amber-500 transition-colors uppercase"
                     />
                   </div>
 
@@ -4313,7 +4314,7 @@ export default function AdminPanel({
                     <select 
                       value={gender} 
                       onChange={(e) => setGender(e.target.value as any)}
-                      className="w-full bg-zinc-50 dark:bg-[#150a12] border border-black/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500 transition-colors cursor-pointer"
+                      className="w-full bg-zinc-50 dark:bg-[#150a12] border border-wine/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold text-wine dark:text-white focus:outline-none focus:border-amber-500 transition-colors cursor-pointer"
                     >
                       <option value="Unisex">UNISEX</option>
                       <option value="Men">MEN</option>
@@ -4328,7 +4329,7 @@ export default function AdminPanel({
                     <select
                       value={visibilityInput}
                       onChange={(e) => setVisibilityInput(e.target.value as 'Published' | 'Draft')}
-                      className="w-full bg-zinc-50 dark:bg-[#150a12] border border-black/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500 transition-colors cursor-pointer"
+                      className="w-full bg-zinc-50 dark:bg-[#150a12] border border-wine/10 dark:border-white/10 rounded-lg px-3 py-2 text-xs font-bold text-wine dark:text-white focus:outline-none focus:border-amber-500 transition-colors cursor-pointer"
                     >
                       <option value="Published">{lang === 'ar' ? 'منشور (Published)' : 'Published'}</option>
                       <option value="Draft">{lang === 'ar' ? 'مسودة (Draft)' : 'Draft'}</option>
@@ -4353,8 +4354,8 @@ export default function AdminPanel({
                         }}
                         className={`flex items-center justify-center py-2 rounded-lg text-xs font-bold font-mono transition-all border cursor-pointer ${
                           sizesInput.includes(sz)
-                            ? 'bg-amber-500 text-black border-amber-500 shadow-sm'
-                            : 'bg-zinc-50 dark:bg-white/5 text-zinc-500 border-black/10 dark:border-white/10 hover:border-amber-500/50'
+                            ? 'bg-amber-500 text-wine border-amber-500 shadow-sm'
+                            : 'bg-zinc-50 dark:bg-white/5 text-zinc-500 border-wine/10 dark:border-white/10 hover:border-amber-500/50'
                         }`}
                       >
                         {sz}
@@ -4364,7 +4365,7 @@ export default function AdminPanel({
                 </div>
 
                 {/* Multi-Image Upload & Brand Gallery Manager Box */}
-                <div className="flex flex-col gap-3 p-4 bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl">
+                <div className="flex flex-col gap-3 p-4 bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl">
                   <div className="flex items-center justify-between">
                     <label className="text-[10px] font-bold uppercase luxury-tracking text-amber-600 dark:text-amber-400 flex items-center gap-1.5">
                       <ImageIcon size={13} />
@@ -4379,7 +4380,7 @@ export default function AdminPanel({
                   <label className="cursor-pointer flex items-center justify-center gap-3 py-3 px-4 border-2 border-dashed border-amber-500/40 hover:border-amber-500 bg-amber-500/5 hover:bg-amber-500/10 transition-all text-center rounded-xl group">
                     <Upload className="w-5 h-5 text-amber-500 group-hover:scale-110 transition-transform shrink-0" />
                     <div className="flex flex-col text-left rtl:text-right">
-                      <span className="text-[11px] font-bold text-zinc-900 dark:text-white uppercase">
+                      <span className="text-[11px] font-bold text-wine dark:text-white uppercase">
                         {lang === 'ar' ? 'رفع صورة أو عدة صور من الجهاز' : 'UPLOAD MULTIPLE IMAGES'}
                       </span>
                       <span className="text-[9px] text-zinc-400 dark:text-white/40 font-mono">
@@ -4390,18 +4391,18 @@ export default function AdminPanel({
                   </label>
 
                   {/* Option to add individual URL */}
-                  <div className="flex items-center gap-2 pt-2 border-t border-black/5 dark:border-white/5">
+                  <div className="flex items-center gap-2 pt-2 border-t border-wine/5 dark:border-white/5">
                     <input
                       type="url"
                       value={newImageUrlInput}
                       onChange={(e) => setNewImageUrlInput(e.target.value)}
                       placeholder={lang === 'ar' ? 'أدخل رابط صورة مباشر...' : 'Enter direct image URL...'}
-                      className="flex-1 bg-transparent border-b border-black/20 dark:border-white/20 pb-1 text-xs text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-amber-500 font-mono"
+                      className="flex-1 bg-transparent border-b border-wine/20 dark:border-white/20 pb-1 text-xs text-wine dark:text-white placeholder-zinc-400 focus:outline-none focus:border-amber-500 font-mono"
                     />
                     <button
                       type="button"
                       onClick={handleAddImageUrl}
-                      className="px-3 py-1 bg-amber-500 text-black text-[10px] font-bold uppercase rounded hover:bg-amber-400 transition-colors cursor-pointer shrink-0"
+                      className="px-3 py-1 bg-amber-500 text-wine text-[10px] font-bold uppercase rounded hover:bg-amber-400 transition-colors cursor-pointer shrink-0"
                     >
                       {lang === 'ar' ? 'إضافة' : 'ADD'}
                     </button>
@@ -4415,19 +4416,19 @@ export default function AdminPanel({
                       </span>
                       <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
                         {imagesList.map((img, idx) => (
-                          <div key={idx} className="relative group rounded-lg overflow-hidden border border-black/10 dark:border-white/10 aspect-square bg-black/5">
+                          <div key={idx} className="relative group rounded-lg overflow-hidden border border-wine/10 dark:border-white/10 aspect-square bg-wine/5">
                             <img src={img} alt={`Thumb ${idx}`} className="w-full h-full object-cover" />
                             
                             {/* Main badge for first image */}
                             {idx === 0 ? (
-                              <span className="absolute top-1 left-1 bg-amber-500 text-black text-[8px] font-extrabold px-1.5 py-0.5 rounded shadow uppercase">
+                              <span className="absolute top-1 left-1 bg-amber-500 text-wine text-[8px] font-extrabold px-1.5 py-0.5 rounded shadow uppercase">
                                 {lang === 'ar' ? 'الرئيسية' : 'MAIN'}
                               </span>
                             ) : (
                               <button
                                 type="button"
                                 onClick={() => handleSetPrimaryImage(idx)}
-                                className="absolute top-1 left-1 bg-black/70 hover:bg-amber-500 hover:text-black text-white text-[8px] font-bold px-1.5 py-0.5 rounded backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                                className="absolute top-1 left-1 bg-wine/70 hover:bg-amber-500 hover:text-wine text-white text-[8px] font-bold px-1.5 py-0.5 rounded backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
                               >
                                 {lang === 'ar' ? 'اجعلها الرئيسية' : 'SET MAIN'}
                               </button>
@@ -4450,13 +4451,13 @@ export default function AdminPanel({
                 </div>
 
                 {/* Mark as NEW Checkbox & Sold Out Switch */}
-                <div className="flex flex-row items-center justify-between gap-3 p-2.5 bg-zinc-50 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl">
+                <div className="flex flex-row items-center justify-between gap-3 p-2.5 bg-zinc-50 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl">
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input 
                       type="checkbox" 
                       checked={isNew} 
                       onChange={(e) => setIsNew(e.target.checked)} 
-                      className="appearance-none w-4 h-4 border border-black/30 dark:border-white/20 checked:bg-amber-500 checked:border-amber-500 transition-colors flex justify-center items-center relative before:content-[''] before:absolute before:w-2 before:h-2 before:bg-black before:opacity-0 checked:before:opacity-100 rounded" 
+                      className="appearance-none w-4 h-4 border border-wine/30 dark:border-white/20 checked:bg-amber-500 checked:border-amber-500 transition-colors flex justify-center items-center relative before:content-[''] before:absolute before:w-2 before:h-2 before:bg-wine before:opacity-0 checked:before:opacity-100 rounded" 
                     />
                     <span className="uppercase text-[11px] font-bold text-zinc-800 dark:text-zinc-200">
                       {lang === 'ar' ? 'شارة "NEW"' : "MARK 'NEW'"}
@@ -4485,17 +4486,17 @@ export default function AdminPanel({
                 </div>
 
                 {/* Submit Action Buttons (Inside Form / Footer) */}
-                <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-black/10 dark:border-white/10 shrink-0">
+                <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-wine/10 dark:border-white/10 shrink-0">
                   <button
                     type="button"
                     onClick={resetForm}
-                    className="px-4 py-2 rounded-lg border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/10 font-bold text-xs uppercase text-zinc-700 dark:text-zinc-300 transition-colors cursor-pointer"
+                    className="px-4 py-2 rounded-lg border border-wine/10 dark:border-white/10 hover:bg-wine/5 dark:hover:bg-white/10 font-bold text-xs uppercase text-zinc-700 dark:text-zinc-300 transition-colors cursor-pointer"
                   >
                     {lang === 'ar' ? 'إلغاء' : 'CANCEL'}
                   </button>
                   <button 
                     type="submit" 
-                    className="px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors font-bold text-xs uppercase flex items-center gap-1.5 shadow-md cursor-pointer"
+                    className="px-5 py-2 rounded-lg bg-wine text-white dark:bg-white dark:text-wine hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors font-bold text-xs uppercase flex items-center gap-1.5 shadow-md cursor-pointer"
                   >
                     {editingId ? <Edit2 size={13} /> : <Plus size={13} />} 
                     {editingId ? (lang === 'ar' ? 'حفظ التغييرات' : 'SAVE CHANGES') : (lang === 'ar' ? 'إضافة المنتج' : 'ADD PRODUCT')}
@@ -4510,16 +4511,16 @@ export default function AdminPanel({
       {/* DELETE CONFIRMATION MODAL (رسالة تأكيد قبل الحذف النهائي) */}
       <AnimatePresence>
         {deleteTarget && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-wine/70 backdrop-blur-md">
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 10 }}
-              className="w-full max-w-md bg-white dark:bg-[#0F0F0F] text-zinc-900 dark:text-white border border-rose-500/30 shadow-2xl p-6 sm:p-8 flex flex-col gap-6 relative"
+              className="w-full max-w-md bg-white dark:bg-[#0F0F0F] text-wine dark:text-white border border-rose-500/30 shadow-2xl p-6 sm:p-8 flex flex-col gap-6 relative"
             >
               <button
                 onClick={() => setDeleteTarget(null)}
-                className="absolute top-4 right-4 text-zinc-400 hover:text-black dark:text-white/50 dark:hover:text-white p-1"
+                className="absolute top-4 right-4 text-zinc-400 hover:text-wine dark:text-white/50 dark:hover:text-white p-1"
               >
                 <X size={18} />
               </button>
@@ -4539,12 +4540,12 @@ export default function AdminPanel({
               <div className="text-xs luxury-tracking text-zinc-600 dark:text-white/80 leading-relaxed bg-rose-500/5 p-4 border border-rose-500/10 font-medium">
                 {lang === 'ar' ? (
                   <>
-                    هل أنت متأكد من رغبتك في حذف <strong className="text-zinc-900 dark:text-white underline">{deleteTarget.name}</strong> بشكل نهائي؟
+                    هل أنت متأكد من رغبتك في حذف <strong className="text-wine dark:text-white underline">{deleteTarget.name}</strong> بشكل نهائي؟
                     <p className="mt-2 text-[10px] text-rose-500/80 font-mono">هذا الإجراء لا يمكن التراجع عنه مطلقاً وسيتم إزالته من قاعدة البيانات.</p>
                   </>
                 ) : (
                   <>
-                    Are you sure you want to permanently delete <strong className="text-zinc-900 dark:text-white underline">{deleteTarget.name}</strong>?
+                    Are you sure you want to permanently delete <strong className="text-wine dark:text-white underline">{deleteTarget.name}</strong>?
                     <p className="mt-2 text-[10px] text-rose-500/80 font-mono">This action cannot be undone and will be permanently removed from the database.</p>
                   </>
                 )}
@@ -4553,7 +4554,7 @@ export default function AdminPanel({
               <div className="flex gap-3 justify-end pt-2 text-xs luxury-tracking">
                 <button
                   onClick={() => setDeleteTarget(null)}
-                  className="px-5 py-3 border border-black/10 dark:border-white/20 font-bold uppercase hover:bg-zinc-100 dark:hover:bg-white/10 transition-colors"
+                  className="px-5 py-3 border border-wine/10 dark:border-white/20 font-bold uppercase hover:bg-zinc-100 dark:hover:bg-white/10 transition-colors"
                 >
                   {lang === 'ar' ? 'إلغاء' : 'CANCEL'}
                 </button>
@@ -4572,27 +4573,27 @@ export default function AdminPanel({
       {/* QUICK VIEW PRODUCT MODAL */}
       <AnimatePresence>
         {quickViewProduct && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-black/75 backdrop-blur-md overflow-y-auto">
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-wine/75 backdrop-blur-md overflow-y-auto">
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-2xl bg-white text-zinc-900 dark:bg-[#0d060b] dark:text-white border border-black/10 dark:border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl my-8 overflow-hidden"
+              className="relative w-full max-w-2xl bg-white text-wine dark:bg-[#0d060b] dark:text-white border border-wine/10 dark:border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl my-8 overflow-hidden"
             >
               {/* Header */}
-              <div className="flex justify-between items-center border-b border-black/10 dark:border-white/10 pb-4 mb-6">
+              <div className="flex justify-between items-center border-b border-wine/10 dark:border-white/10 pb-4 mb-6">
                 <div>
                   <span className="text-[10px] font-mono font-bold text-amber-500 uppercase tracking-widest flex items-center gap-1.5">
                     <Eye size={12} />
                     {lang === 'ar' ? 'معاينة سريعة للمنتج' : 'PRODUCT QUICK VIEW'}
                   </span>
-                  <h3 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-white mt-0.5">
+                  <h3 className="text-lg sm:text-xl font-bold text-wine dark:text-white mt-0.5">
                     {quickViewProduct.name}
                   </h3>
                 </div>
                 <button
                   onClick={() => setQuickViewProduct(null)}
-                  className="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer"
+                  className="p-2 rounded-full hover:bg-wine/5 dark:hover:bg-white/10 text-zinc-400 hover:text-wine dark:hover:text-white transition-colors cursor-pointer"
                 >
                   <X size={20} />
                 </button>
@@ -4601,7 +4602,7 @@ export default function AdminPanel({
               {/* Body Content */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
                 {/* Image */}
-                <div className="relative aspect-square rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-black/10 dark:border-white/10">
+                <div className="relative aspect-square rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-wine/10 dark:border-white/10">
                   <img
                     src={quickViewProduct.image}
                     alt={quickViewProduct.name}
@@ -4611,7 +4612,7 @@ export default function AdminPanel({
                     }}
                   />
                   {quickViewProduct.isNew && (
-                    <span className="absolute top-3 left-3 text-[9px] font-black uppercase px-2 py-1 bg-amber-500 text-black rounded-md shadow-md">
+                    <span className="absolute top-3 left-3 text-[9px] font-black uppercase px-2 py-1 bg-amber-500 text-wine rounded-md shadow-md">
                       NEW
                     </span>
                   )}
@@ -4621,14 +4622,14 @@ export default function AdminPanel({
                 <div className="flex flex-col gap-4 text-xs">
                   <div className="flex flex-col gap-1">
                     <span className="text-[10px] font-mono text-amber-600 dark:text-amber-400 font-bold uppercase">
-                      #{quickViewProduct.sku || `SKU-A7-${quickViewProduct.id.slice(0, 6).toUpperCase()}`}
+                      #{quickViewProduct.sku || `SKU-KM-${quickViewProduct.id.slice(0, 6).toUpperCase()}`}
                     </span>
-                    <span className="text-2xl font-extrabold font-mono text-zinc-900 dark:text-white">
+                    <span className="text-2xl font-extrabold font-mono text-wine dark:text-white">
                       {quickViewProduct.price.toLocaleString()} <span className="text-xs font-sans text-zinc-400">{lang === 'ar' ? 'ج.م' : 'EGP'}</span>
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3 p-3 rounded-xl bg-zinc-50 dark:bg-white/5 border border-black/5 dark:border-white/5 font-mono">
+                  <div className="grid grid-cols-2 gap-3 p-3 rounded-xl bg-zinc-50 dark:bg-white/5 border border-wine/5 dark:border-white/5 font-mono">
                     <div>
                       <span className="text-[9px] font-sans text-zinc-400 uppercase block">{lang === 'ar' ? 'سعر التكلفة' : 'Cost Price'}</span>
                       <span className="font-bold text-zinc-700 dark:text-zinc-300">
@@ -4644,7 +4645,7 @@ export default function AdminPanel({
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-2 pt-2 border-t border-black/5 dark:border-white/5">
+                  <div className="flex flex-col gap-2 pt-2 border-t border-wine/5 dark:border-white/5">
                     <div className="flex justify-between items-center text-zinc-600 dark:text-zinc-300">
                       <span className="text-[10px] uppercase font-bold text-zinc-400">{lang === 'ar' ? 'التصنيف:' : 'Category:'}</span>
                       <span className="font-bold">{quickViewProduct.category} ({quickViewProduct.gender})</span>
@@ -4668,21 +4669,21 @@ export default function AdminPanel({
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 pt-4 border-t border-black/10 dark:border-white/10 mt-2">
+                  <div className="flex items-center gap-2 pt-4 border-t border-wine/10 dark:border-white/10 mt-2">
                     <button
                       onClick={() => {
                         const target = quickViewProduct;
                         setQuickViewProduct(null);
                         handleEditClick(target);
                       }}
-                      className="flex-1 py-2.5 rounded-xl bg-black text-white dark:bg-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors font-bold text-xs uppercase flex items-center justify-center gap-2 cursor-pointer"
+                      className="flex-1 py-2.5 rounded-xl bg-wine text-white dark:bg-white dark:text-wine hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors font-bold text-xs uppercase flex items-center justify-center gap-2 cursor-pointer"
                     >
                       <Edit2 size={14} />
                       <span>{lang === 'ar' ? 'تعديل هذا المنتج' : 'EDIT PRODUCT'}</span>
                     </button>
                     <button
                       onClick={() => setQuickViewProduct(null)}
-                      className="px-4 py-2.5 rounded-xl border border-black/10 dark:border-white/10 hover:bg-zinc-100 dark:hover:bg-white/10 font-bold text-xs uppercase text-zinc-600 dark:text-zinc-300 cursor-pointer"
+                      className="px-4 py-2.5 rounded-xl border border-wine/10 dark:border-white/10 hover:bg-zinc-100 dark:hover:bg-white/10 font-bold text-xs uppercase text-zinc-600 dark:text-zinc-300 cursor-pointer"
                     >
                       {lang === 'ar' ? 'إغلاق' : 'CLOSE'}
                     </button>

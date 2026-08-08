@@ -21,7 +21,7 @@ export default function InfoModal({ isOpen, onClose, type, lang = 'ar' }: InfoMo
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 bg-black/80 backdrop-blur-md cursor-pointer"
+          className="fixed inset-0 bg-wine/80 backdrop-blur-md cursor-pointer"
         />
 
         {/* Modal Window */}
@@ -30,10 +30,10 @@ export default function InfoModal({ isOpen, onClose, type, lang = 'ar' }: InfoMo
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className="relative w-full max-w-2xl bg-white dark:bg-[#0a0a0a] border border-black/10 dark:border-white/10 rounded-2xl shadow-2xl overflow-hidden z-10 text-zinc-900 dark:text-white my-auto max-h-[85vh] flex flex-col"
+          className="relative w-full max-w-2xl bg-white dark:bg-[#0a0a0a] border border-wine/10 dark:border-white/10 rounded-2xl shadow-2xl overflow-hidden z-10 text-wine dark:text-white my-auto max-h-[85vh] flex flex-col"
         >
           {/* Top Bar / Header */}
-          <div className="p-6 border-b border-black/10 dark:border-white/10 flex items-center justify-between bg-zinc-50 dark:bg-[#121212] shrink-0">
+          <div className="p-6 border-b border-wine/10 dark:border-white/10 flex items-center justify-between bg-zinc-50 dark:bg-[#121212] shrink-0">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-amber-500/10 dark:bg-amber-500/20 text-amber-500 flex items-center justify-center">
                 {type === 'about' && <Sparkles size={20} />}
@@ -42,7 +42,7 @@ export default function InfoModal({ isOpen, onClose, type, lang = 'ar' }: InfoMo
               </div>
               <div>
                 <h3 className="serif-display text-xl font-bold tracking-wide">
-                  {type === 'about' && (lang === 'ar' ? 'عن ماركة AVENTO7' : 'ABOUT AVENTO7 STUDIOS')}
+                  {type === 'about' && (lang === 'ar' ? 'عن ماركة KEMET' : 'ABOUT KEMET STUDIOS')}
                   {type === 'privacy' && (lang === 'ar' ? 'سياسة الخصوصية' : 'PRIVACY POLICY')}
                   {type === 'terms' && (lang === 'ar' ? 'الشروط والأحكام وحقوق الملكية' : 'TERMS & COPYRIGHT')}
                 </h3>
@@ -56,7 +56,7 @@ export default function InfoModal({ isOpen, onClose, type, lang = 'ar' }: InfoMo
 
             <button
               onClick={onClose}
-              className="w-9 h-9 rounded-full bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 flex items-center justify-center transition-colors cursor-pointer text-zinc-600 dark:text-zinc-300"
+              className="w-9 h-9 rounded-full bg-wine/5 dark:bg-white/10 hover:bg-wine/10 dark:hover:bg-white/20 flex items-center justify-center transition-colors cursor-pointer text-zinc-600 dark:text-zinc-300"
             >
               <X size={18} />
             </button>
@@ -70,7 +70,7 @@ export default function InfoModal({ isOpen, onClose, type, lang = 'ar' }: InfoMo
                 <div className="relative rounded-xl p-8 bg-gradient-to-br from-zinc-900 to-black text-white overflow-hidden shadow-inner border border-white/10">
                   <div className="absolute top-0 right-0 -mr-16 -mt-16 w-48 h-48 rounded-full bg-amber-500/10 blur-2xl pointer-events-none"></div>
                   <h4 className="serif-display text-3xl font-light tracking-widest text-amber-400 mb-2">
-                    AVENTO7 STUDIOS
+                    KEMET STUDIOS
                   </h4>
                   <p className="text-xs luxury-tracking text-zinc-400 uppercase leading-relaxed">
                     {lang === 'ar' ? 'خطوط معمارية وملابس فاخرة مصممة لرواد العصر الحديث' : 'ARCHITECTURAL SILHOUETTES & REFINED DARK-WEAR TAILORED FOR THE MODERN AVANT-GARDE'}
@@ -78,19 +78,19 @@ export default function InfoModal({ isOpen, onClose, type, lang = 'ar' }: InfoMo
                 </div>
 
                 <div className="space-y-4">
-                  <h5 className="font-bold text-zinc-900 dark:text-white text-base flex items-center gap-2 border-b border-black/10 dark:border-white/10 pb-2">
+                  <h5 className="font-bold text-wine dark:text-white text-base flex items-center gap-2 border-b border-wine/10 dark:border-white/10 pb-2">
                     <Award size={18} className="text-amber-500 shrink-0" />
                     <span>{lang === 'ar' ? 'رؤيتنا وفلسفة التصميم' : 'Our Vision & Philosophy'}</span>
                   </h5>
                   <p className="text-xs md:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
                     {lang === 'ar'
-                      ? 'تأسست ماركة AVENTO7 لتعيد تعريف مفهوم الأزياء العصرية الراقية. نحن نؤمن بأن الملابس ليست مجرد مظهر، بل هي لغة تعبر عن الهوية والثقة والاستقلالية. تجمع تصميماتنا بين الهندسية المعمارية الدقيقة واللمسات الفنية الجريئة.'
-                      : 'AVENTO7 was founded to redefine modern luxury streetwear. We believe garments are not just apparel, but a silent language expressing confidence and individuality. Our designs blend architectural structure with bold avant-garde aesthetics.'}
+                      ? 'تأسست ماركة KEMET لتعيد تعريف مفهوم الأزياء العصرية الراقية. نحن نؤمن بأن الملابس ليست مجرد مظهر، بل هي لغة تعبر عن الهوية والثقة والاستقلالية. تجمع تصميماتنا بين الهندسية المعمارية الدقيقة واللمسات الفنية الجريئة.'
+                      : 'KEMET was founded to redefine modern luxury streetwear. We believe garments are not just apparel, but a silent language expressing confidence and individuality. Our designs blend architectural structure with bold avant-garde aesthetics.'}
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="p-4 rounded-xl bg-zinc-50 dark:bg-[#141414] border border-black/5 dark:border-white/5 space-y-2">
+                  <div className="p-4 rounded-xl bg-zinc-50 dark:bg-[#141414] border border-wine/5 dark:border-white/5 space-y-2">
                     <div className="flex items-center gap-2 text-amber-500 font-bold text-xs uppercase">
                       <CheckCircle size={16} />
                       <span>{lang === 'ar' ? 'أجود أنواع الخامات' : 'PREMIUM MATERIALS'}</span>
@@ -102,7 +102,7 @@ export default function InfoModal({ isOpen, onClose, type, lang = 'ar' }: InfoMo
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-zinc-50 dark:bg-[#141414] border border-black/5 dark:border-white/5 space-y-2">
+                  <div className="p-4 rounded-xl bg-zinc-50 dark:bg-[#141414] border border-wine/5 dark:border-white/5 space-y-2">
                     <div className="flex items-center gap-2 text-amber-500 font-bold text-xs uppercase">
                       <CheckCircle size={16} />
                       <span>{lang === 'ar' ? 'دقة الخياطة والحرفية' : 'MASTER CRAFTSMANSHIP'}</span>
@@ -119,7 +119,7 @@ export default function InfoModal({ isOpen, onClose, type, lang = 'ar' }: InfoMo
                   <span className="font-bold uppercase tracking-wider">
                     {lang === 'ar' ? 'تصميم مصري بمواصفات عالمية' : 'DESIGNED IN EGYPT, WORLD-CLASS QUALITY'}
                   </span>
-                  <span className="serif-display font-serif font-bold text-base">A7</span>
+                  <span className="serif-display font-serif font-bold text-base">KEMET</span>
                 </div>
               </>
             )}
@@ -132,7 +132,7 @@ export default function InfoModal({ isOpen, onClose, type, lang = 'ar' }: InfoMo
                 </div>
 
                 <div className="space-y-3">
-                  <h5 className="font-bold text-zinc-900 dark:text-white text-xs uppercase tracking-wider">
+                  <h5 className="font-bold text-wine dark:text-white text-xs uppercase tracking-wider">
                     1. {lang === 'ar' ? 'جمع المعلومات' : 'Information Collection'}
                   </h5>
                   <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
@@ -143,7 +143,7 @@ export default function InfoModal({ isOpen, onClose, type, lang = 'ar' }: InfoMo
                 </div>
 
                 <div className="space-y-3">
-                  <h5 className="font-bold text-zinc-900 dark:text-white text-xs uppercase tracking-wider">
+                  <h5 className="font-bold text-wine dark:text-white text-xs uppercase tracking-wider">
                     2. {lang === 'ar' ? 'حماية البيانات وعدم المشاركة' : 'Data Protection & No Third-Party Sharing'}
                   </h5>
                   <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
@@ -154,7 +154,7 @@ export default function InfoModal({ isOpen, onClose, type, lang = 'ar' }: InfoMo
                 </div>
 
                 <div className="space-y-3">
-                  <h5 className="font-bold text-zinc-900 dark:text-white text-xs uppercase tracking-wider">
+                  <h5 className="font-bold text-wine dark:text-white text-xs uppercase tracking-wider">
                     3. {lang === 'ar' ? 'الأمان والتشفير' : 'Security & Encryption'}
                   </h5>
                   <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
@@ -174,18 +174,18 @@ export default function InfoModal({ isOpen, onClose, type, lang = 'ar' }: InfoMo
                 </div>
 
                 <div className="space-y-3">
-                  <h5 className="font-bold text-zinc-900 dark:text-white text-xs uppercase tracking-wider">
+                  <h5 className="font-bold text-wine dark:text-white text-xs uppercase tracking-wider">
                     1. {lang === 'ar' ? 'حقوق الملكية العلامة التجارية' : 'Brand Trademark & Copyright'}
                   </h5>
                   <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
                     {lang === 'ar'
-                      ? 'جميع التصاميم، والشعارات، والرموز، والصور الموجودة في هذا المتجر هي ملكية حصرية لـ AVENTO7 STUDIOS ومحمية بموجب قوانين حقوق النشر والملكية الفكرية. يمنع منعا باتا نسخها أو إعادة استخدامها بدون إذن كتابي مسبق.'
-                      : 'All designs, logos, images, and brand materials belong exclusively to AVENTO7 STUDIOS and are protected under international copyright and trademark laws. Reproduction without written consent is strictly prohibited.'}
+                      ? 'جميع التصاميم، والشعارات، والرموز، والصور الموجودة في هذا المتجر هي ملكية حصرية لـ KEMET STUDIOS ومحمية بموجب قوانين حقوق النشر والملكية الفكرية. يمنع منعا باتا نسخها أو إعادة استخدامها بدون إذن كتابي مسبق.'
+                      : 'All designs, logos, images, and brand materials belong exclusively to KEMET STUDIOS and are protected under international copyright and trademark laws. Reproduction without written consent is strictly prohibited.'}
                   </p>
                 </div>
 
                 <div className="space-y-3">
-                  <h5 className="font-bold text-zinc-900 dark:text-white text-xs uppercase tracking-wider">
+                  <h5 className="font-bold text-wine dark:text-white text-xs uppercase tracking-wider">
                     2. {lang === 'ar' ? 'سياسة الاسترجاع والشحن' : 'Shipping & Returns Terms'}
                   </h5>
                   <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
@@ -196,13 +196,13 @@ export default function InfoModal({ isOpen, onClose, type, lang = 'ar' }: InfoMo
                 </div>
 
                 <div className="space-y-3">
-                  <h5 className="font-bold text-zinc-900 dark:text-white text-xs uppercase tracking-wider">
+                  <h5 className="font-bold text-wine dark:text-white text-xs uppercase tracking-wider">
                     3. {lang === 'ar' ? 'تطوير وتشغيل المتجر' : 'Store Development & Operations'}
                   </h5>
                   <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
                     {lang === 'ar'
-                      ? 'تم تطوير البنية البرمجية والتصميم الإلكتروني لمتجر AVENTO7 بواسطة FOX TECH.'
-                      : 'The digital infrastructure and user interface for AVENTO7 store was custom built & engineered by FOX TECH.'}
+                      ? 'تم تطوير البنية البرمجية والتصميم الإلكتروني لمتجر KEMET بواسطة FOX TECH.'
+                      : 'The digital infrastructure and user interface for KEMET store was custom built & engineered by FOX TECH.'}
                   </p>
                 </div>
               </div>
@@ -210,10 +210,10 @@ export default function InfoModal({ isOpen, onClose, type, lang = 'ar' }: InfoMo
           </div>
 
           {/* Footer Action */}
-          <div className="p-4 bg-zinc-50 dark:bg-[#121212] border-t border-black/10 dark:border-white/10 flex justify-end shrink-0">
+          <div className="p-4 bg-zinc-50 dark:bg-[#121212] border-t border-wine/10 dark:border-white/10 flex justify-end shrink-0">
             <button
               onClick={onClose}
-              className="bg-zinc-900 dark:bg-white text-white dark:text-black px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-opacity cursor-pointer"
+              className="bg-wine dark:bg-white text-white dark:text-wine px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-opacity cursor-pointer"
             >
               {lang === 'ar' ? 'إغلاق' : 'CLOSE'}
             </button>

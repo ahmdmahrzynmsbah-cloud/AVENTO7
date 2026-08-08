@@ -106,7 +106,7 @@ export default function ProductComparisonModal({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-xl flex items-center justify-center p-2 sm:p-4 md:p-6 animate-fadeIn">
+      <div className="fixed inset-0 z-50 overflow-y-auto bg-wine/80 backdrop-blur-xl flex items-center justify-center p-2 sm:p-4 md:p-6 animate-fadeIn">
         
         {/* Main Modal Box */}
         <motion.div
@@ -114,10 +114,10 @@ export default function ProductComparisonModal({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 20 }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-7xl max-h-[92vh] bg-white dark:bg-[#0c060a] border border-black/10 dark:border-white/15 rounded-3xl shadow-2xl flex flex-col overflow-hidden"
+          className="relative w-full max-w-7xl max-h-[92vh] bg-white dark:bg-[#0c060a] border border-wine/10 dark:border-white/15 rounded-3xl shadow-2xl flex flex-col overflow-hidden"
         >
           {/* TOP BAR / HEADER */}
-          <div className="sticky top-0 z-30 bg-white/95 dark:bg-[#0c060a]/95 backdrop-blur-md px-4 sm:px-8 py-4 border-b border-black/10 dark:border-white/10 flex flex-wrap items-center justify-between gap-4">
+          <div className="sticky top-0 z-30 bg-white/95 dark:bg-[#0c060a]/95 backdrop-blur-md px-4 sm:px-8 py-4 border-b border-wine/10 dark:border-white/10 flex flex-wrap items-center justify-between gap-4">
             
             {/* Title & Counter */}
             <div className="flex items-center gap-3">
@@ -125,9 +125,9 @@ export default function ProductComparisonModal({
                 <ArrowLeftRight size={20} />
               </div>
               <div>
-                <h2 className="text-base sm:text-xl font-black uppercase luxury-tracking tracking-wider text-zinc-900 dark:text-white flex items-center gap-2">
+                <h2 className="text-base sm:text-xl font-black uppercase luxury-tracking tracking-wider text-wine dark:text-white flex items-center gap-2">
                   <span>{isRTL ? 'مقارنة المنتجات' : 'Product Comparison'}</span>
-                  <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-amber-400 text-zinc-950">
+                  <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-amber-400 text-wine">
                     {comparedProducts.length} / 4
                   </span>
                 </h2>
@@ -147,11 +147,11 @@ export default function ProductComparisonModal({
                   onClick={() => setHighlightDifferences(!highlightDifferences)}
                   className={`px-3 py-2 rounded-xl text-xs font-bold uppercase luxury-tracking flex items-center gap-2 border transition-all cursor-pointer min-h-[40px] ${
                     highlightDifferences
-                      ? 'bg-amber-400 text-zinc-950 border-amber-400 shadow-sm font-extrabold'
-                      : 'bg-zinc-100 text-zinc-700 border-black/10 hover:bg-zinc-200 dark:bg-white/10 dark:text-zinc-300 dark:border-white/10'
+                      ? 'bg-amber-400 text-wine border-amber-400 shadow-sm font-extrabold'
+                      : 'bg-zinc-100 text-zinc-700 border-wine/10 hover:bg-zinc-200 dark:bg-white/10 dark:text-zinc-300 dark:border-white/10'
                   }`}
                 >
-                  <Sparkles size={14} className={highlightDifferences ? 'text-zinc-950 animate-pulse' : 'text-amber-500'} />
+                  <Sparkles size={14} className={highlightDifferences ? 'text-wine animate-pulse' : 'text-amber-500'} />
                   <span>{isRTL ? 'تظليل الاختلافات' : 'Highlight Differences'}</span>
                 </button>
               )}
@@ -185,7 +185,7 @@ export default function ProductComparisonModal({
               <button
                 type="button"
                 onClick={onClose}
-                className="p-2 rounded-full text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/10 transition-colors cursor-pointer min-h-[40px] min-w-[40px] flex items-center justify-center"
+                className="p-2 rounded-full text-zinc-400 hover:text-wine dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/10 transition-colors cursor-pointer min-h-[40px] min-w-[40px] flex items-center justify-center"
                 aria-label="Close comparison view"
               >
                 <X size={20} />
@@ -202,13 +202,13 @@ export default function ProductComparisonModal({
                 <div className="w-20 h-20 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-500 flex items-center justify-center mb-4">
                   <ArrowLeftRight size={36} />
                 </div>
-                <h3 className="text-xl font-bold uppercase luxury-tracking text-zinc-900 dark:text-white mb-2">
+                <h3 className="text-xl font-bold uppercase luxury-tracking text-wine dark:text-white mb-2">
                   {isRTL ? 'لم يتم اختيار منتجات للمقارنة' : 'No Products Selected for Comparison'}
                 </h3>
                 <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-6 leading-relaxed">
                   {isRTL 
                     ? 'اختر حتى 4 منتجات من تشكيلة افينتو 7 لمقارنة الأسعار والمواد والألوان والمقاسات جنبًا إلى جنب.'
-                    : 'Select up to 4 products from the AVENTO7 collection to compare prices, fabrics, colors, and fit side-by-side.'}
+                    : 'Select up to 4 products from the KEMET collection to compare prices, fabrics, colors, and fit side-by-side.'}
                 </p>
                 <button
                   type="button"
@@ -229,7 +229,7 @@ export default function ProductComparisonModal({
                   <thead>
                     <tr>
                       {/* Attribute Label Column Header */}
-                      <th className="w-48 p-3 bg-zinc-100/80 dark:bg-white/5 rounded-2xl align-bottom border-b border-black/10 dark:border-white/10">
+                      <th className="w-48 p-3 bg-zinc-100/80 dark:bg-white/5 rounded-2xl align-bottom border-b border-wine/10 dark:border-white/10">
                         <div className="text-xs font-mono font-extrabold text-zinc-400 uppercase tracking-widest pb-1">
                           {isRTL ? 'المواصفات' : 'ATTRIBUTES'}
                         </div>
@@ -242,7 +242,7 @@ export default function ProductComparisonModal({
 
                         return (
                           <th key={product.id} className="p-3 align-top min-w-[220px] max-w-[280px]">
-                            <div className="relative group bg-zinc-50 dark:bg-[#120810] border border-black/10 dark:border-white/10 rounded-2xl p-3 flex flex-col h-full hover:border-amber-500/50 transition-all shadow-sm">
+                            <div className="relative group bg-zinc-50 dark:bg-[#120810] border border-wine/10 dark:border-white/10 rounded-2xl p-3 flex flex-col h-full hover:border-amber-500/50 transition-all shadow-sm">
                               
                               {/* Remove Button */}
                               <button
@@ -256,7 +256,7 @@ export default function ProductComparisonModal({
 
                               {/* Image Container */}
                               <div 
-                                className="relative aspect-[3/4] rounded-xl overflow-hidden bg-zinc-200 dark:bg-black/40 mb-3 cursor-pointer group/img"
+                                className="relative aspect-[3/4] rounded-xl overflow-hidden bg-zinc-200 dark:bg-wine/40 mb-3 cursor-pointer group/img"
                                 onClick={() => onViewProduct(product)}
                               >
                                 <img
@@ -268,7 +268,7 @@ export default function ProductComparisonModal({
 
                                 {/* Best Value / Top Rated Badge Overlays */}
                                 {isCheapest && (
-                                  <div className="absolute top-2 left-2 z-10 bg-amber-400 text-zinc-950 font-black text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-md shadow-md flex items-center gap-1">
+                                  <div className="absolute top-2 left-2 z-10 bg-amber-400 text-wine font-black text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-md shadow-md flex items-center gap-1">
                                     <Sparkles size={10} />
                                     <span>{isRTL ? 'أقل سعر' : 'Best Price'}</span>
                                   </div>
@@ -281,8 +281,8 @@ export default function ProductComparisonModal({
                                   </div>
                                 )}
 
-                                <div className="absolute inset-0 bg-black/30 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center text-white">
-                                  <span className="px-3 py-1.5 rounded-xl bg-black/70 backdrop-blur-md text-[10px] font-bold uppercase luxury-tracking flex items-center gap-1">
+                                <div className="absolute inset-0 bg-wine/30 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center text-white">
+                                  <span className="px-3 py-1.5 rounded-xl bg-wine/70 backdrop-blur-md text-[10px] font-bold uppercase luxury-tracking flex items-center gap-1">
                                     <Eye size={12} />
                                     {isRTL ? 'عرض' : 'Quick View'}
                                   </span>
@@ -295,14 +295,14 @@ export default function ProductComparisonModal({
                               </span>
                               <h3 
                                 onClick={() => onViewProduct(product)}
-                                className="text-sm font-bold uppercase luxury-tracking text-zinc-900 dark:text-white line-clamp-2 hover:text-amber-600 dark:hover:text-rose-300 cursor-pointer transition-colors mb-2"
+                                className="text-sm font-bold uppercase luxury-tracking text-wine dark:text-white line-clamp-2 hover:text-amber-600 dark:hover:text-rose-300 cursor-pointer transition-colors mb-2"
                               >
                                 {isRTL && product.nameAr ? product.nameAr : product.name}
                               </h3>
 
                               {/* Price */}
-                              <div className="mt-auto pt-2 border-t border-black/5 dark:border-white/10 flex items-baseline gap-2">
-                                <span className="text-base font-mono font-black text-zinc-900 dark:text-white">
+                              <div className="mt-auto pt-2 border-t border-wine/5 dark:border-white/10 flex items-baseline gap-2">
+                                <span className="text-base font-mono font-black text-wine dark:text-white">
                                   {product.price.toLocaleString()} {isRTL ? 'ج.م' : 'EGP'}
                                 </span>
                                 {product.originalPrice && product.originalPrice > product.price && (
@@ -322,9 +322,9 @@ export default function ProductComparisonModal({
                           <button
                             type="button"
                             onClick={() => setIsAddPickerOpen(true)}
-                            className="w-full h-full min-h-[320px] rounded-2xl border-2 border-dashed border-black/15 dark:border-white/15 bg-zinc-50/50 dark:bg-white/5 hover:bg-zinc-100 dark:hover:bg-white/10 flex flex-col items-center justify-center gap-3 text-zinc-400 hover:text-amber-500 transition-all cursor-pointer p-6 text-center group"
+                            className="w-full h-full min-h-[320px] rounded-2xl border-2 border-dashed border-wine/15 dark:border-white/15 bg-zinc-50/50 dark:bg-white/5 hover:bg-zinc-100 dark:hover:bg-white/10 flex flex-col items-center justify-center gap-3 text-zinc-400 hover:text-amber-500 transition-all cursor-pointer p-6 text-center group"
                           >
-                            <div className="w-12 h-12 rounded-full border border-black/10 dark:border-white/10 group-hover:border-amber-500 flex items-center justify-center group-hover:scale-110 transition-all">
+                            <div className="w-12 h-12 rounded-full border border-wine/10 dark:border-white/10 group-hover:border-amber-500 flex items-center justify-center group-hover:scale-110 transition-all">
                               <Plus size={24} />
                             </div>
                             <span className="text-xs font-bold uppercase luxury-tracking">
@@ -354,7 +354,7 @@ export default function ProductComparisonModal({
                         
                         return (
                           <td key={p.id} className="p-3.5 font-mono">
-                            <div className="font-extrabold text-sm text-zinc-900 dark:text-white">
+                            <div className="font-extrabold text-sm text-wine dark:text-white">
                               {p.price.toLocaleString()} EGP
                             </div>
                             {discount > 0 ? (
@@ -383,7 +383,7 @@ export default function ProductComparisonModal({
                               p.sizes.map((s) => (
                                 <span 
                                   key={s} 
-                                  className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-zinc-200 dark:bg-white/15 text-zinc-800 dark:text-zinc-200 border border-black/5 dark:border-white/10"
+                                  className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-zinc-200 dark:bg-white/15 text-zinc-800 dark:text-zinc-200 border border-wine/5 dark:border-white/10"
                                 >
                                   {s}
                                 </span>
@@ -406,7 +406,7 @@ export default function ProductComparisonModal({
                         <td key={p.id} className="p-3.5">
                           <div className="flex items-center gap-2">
                             <span 
-                              className="w-4 h-4 rounded-full border border-black/20 dark:border-white/20 shadow-xs shrink-0" 
+                              className="w-4 h-4 rounded-full border border-wine/20 dark:border-white/20 shadow-xs shrink-0" 
                               style={{ backgroundColor: p.colorHex || '#111' }} 
                             />
                             <span className="font-semibold text-zinc-800 dark:text-zinc-200">
@@ -455,7 +455,7 @@ export default function ProductComparisonModal({
                             <div className="flex text-amber-400">
                               <Star size={14} className="fill-amber-400" />
                             </div>
-                            <span className="font-bold text-zinc-900 dark:text-white">
+                            <span className="font-bold text-wine dark:text-white">
                               {p.rating ? p.rating.toFixed(1) : '4.9'}
                             </span>
                             <span className="text-zinc-400 text-[10px]">
@@ -521,7 +521,7 @@ export default function ProductComparisonModal({
                             </li>
                             <li className="flex items-center gap-1">
                               <span className="w-1 h-1 rounded-full bg-amber-400" />
-                              Signature AVENTO7 Hardware
+                              Signature KEMET Hardware
                             </li>
                           </ul>
                         </td>
@@ -545,7 +545,7 @@ export default function ProductComparisonModal({
                                 <select
                                   value={currentChosenSize}
                                   onChange={(e) => handleSizeSelect(p.id, e.target.value)}
-                                  className="w-full bg-white dark:bg-[#180a14] border border-black/10 dark:border-white/15 rounded-lg px-2 py-1.5 text-xs font-bold text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500"
+                                  className="w-full bg-white dark:bg-[#180a14] border border-wine/10 dark:border-white/15 rounded-lg px-2 py-1.5 text-xs font-bold text-wine dark:text-white focus:outline-none focus:border-amber-500"
                                 >
                                   {p.sizes.map((s) => (
                                     <option key={s} value={s}>
@@ -585,17 +585,17 @@ export default function ProductComparisonModal({
         {/* QUICK ADD PRODUCT SELECTION DRAWER / POPOVER OVERLAY */}
         <AnimatePresence>
           {isAddPickerOpen && (
-            <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+            <div className="fixed inset-0 z-50 bg-wine/80 backdrop-blur-md flex items-center justify-center p-4">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                className="w-full max-w-xl bg-white dark:bg-[#120610] border border-black/10 dark:border-white/15 rounded-3xl p-5 shadow-2xl flex flex-col max-h-[85vh]"
+                className="w-full max-w-xl bg-white dark:bg-[#120610] border border-wine/10 dark:border-white/15 rounded-3xl p-5 shadow-2xl flex flex-col max-h-[85vh]"
               >
                 {/* Picker Header */}
-                <div className="flex items-center justify-between pb-3 border-b border-black/10 dark:border-white/10 mb-4">
+                <div className="flex items-center justify-between pb-3 border-b border-wine/10 dark:border-white/10 mb-4">
                   <div>
-                    <h3 className="text-base font-bold uppercase luxury-tracking text-zinc-900 dark:text-white">
+                    <h3 className="text-base font-bold uppercase luxury-tracking text-wine dark:text-white">
                       {isRTL ? 'اختر منتجاً للمقارنة' : 'Select Product to Compare'}
                     </h3>
                     <p className="text-xs text-zinc-500 dark:text-zinc-400">
@@ -604,7 +604,7 @@ export default function ProductComparisonModal({
                   </div>
                   <button
                     onClick={() => setIsAddPickerOpen(false)}
-                    className="p-1.5 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-zinc-400 hover:text-zinc-900 dark:hover:text-white cursor-pointer"
+                    className="p-1.5 rounded-full hover:bg-wine/5 dark:hover:bg-white/10 text-zinc-400 hover:text-wine dark:hover:text-white cursor-pointer"
                   >
                     <X size={18} />
                   </button>
@@ -617,7 +617,7 @@ export default function ProductComparisonModal({
                     value={pickerSearch}
                     onChange={(e) => setPickerSearch(e.target.value)}
                     placeholder={isRTL ? 'ابحث باسم المنتج أو اللون...' : 'Search product name, category or color...'}
-                    className="w-full h-10 bg-zinc-100 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 pl-9 text-xs font-semibold text-zinc-900 dark:text-white focus:outline-none focus:border-amber-500"
+                    className="w-full h-10 bg-zinc-100 dark:bg-white/5 border border-wine/10 dark:border-white/10 rounded-xl px-3 pl-9 text-xs font-semibold text-wine dark:text-white focus:outline-none focus:border-amber-500"
                   />
                   <Search size={15} className="absolute left-3 top-3 text-zinc-400 pointer-events-none" />
                 </div>
@@ -637,20 +637,20 @@ export default function ProductComparisonModal({
                           setIsAddPickerOpen(false);
                           setPickerSearch('');
                         }}
-                        className="flex items-center justify-between p-2.5 rounded-2xl bg-zinc-50 dark:bg-white/5 hover:bg-amber-400/10 border border-black/5 dark:border-white/5 hover:border-amber-500/50 transition-all cursor-pointer group"
+                        className="flex items-center justify-between p-2.5 rounded-2xl bg-zinc-50 dark:bg-white/5 hover:bg-amber-400/10 border border-wine/5 dark:border-white/5 hover:border-amber-500/50 transition-all cursor-pointer group"
                       >
                         <div className="flex items-center gap-3">
                           <img
                             src={item.image}
                             alt={item.name}
-                            className="w-12 h-14 object-cover rounded-xl border border-black/5 dark:border-white/10"
+                            className="w-12 h-14 object-cover rounded-xl border border-wine/5 dark:border-white/10"
                             referrerPolicy="no-referrer"
                           />
                           <div>
                             <span className="text-[9px] font-bold uppercase luxury-tracking text-amber-500 block">
                               {item.gender} • {item.category}
                             </span>
-                            <h4 className="text-xs font-bold text-zinc-900 dark:text-white group-hover:text-amber-500 transition-colors">
+                            <h4 className="text-xs font-bold text-wine dark:text-white group-hover:text-amber-500 transition-colors">
                               {isRTL && item.nameAr ? item.nameAr : item.name}
                             </h4>
                             <span className="text-xs font-mono font-black text-zinc-700 dark:text-zinc-300">

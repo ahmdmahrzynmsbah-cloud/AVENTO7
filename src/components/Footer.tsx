@@ -25,18 +25,18 @@ export default function Footer({ onOpenTrackOrder, socialLinks, lang = 'en' }: F
   const tiktokUrl = socialLinks?.tiktok || 'https://tiktok.com';
 
   return (
-    <footer className="w-full bg-[#f4f4f2] text-zinc-900 border-t border-black/10 dark:bg-[#050505] dark:text-[#f5f5f7] dark:border-white/5 pt-16 md:pt-24 pb-8 md:pb-12 px-6 md:px-12 relative overflow-hidden flex flex-col items-center transition-colors duration-500">
+    <footer className="w-full bg-[#f4f4f2] text-wine border-t border-wine/10 dark:bg-[#050505] dark:text-[#f5f5f7] dark:border-white/5 pt-16 md:pt-24 pb-8 md:pb-12 px-6 md:px-12 relative overflow-hidden flex flex-col items-center transition-colors duration-500">
       {/* Subtle background line */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[1px] bg-gradient-to-r from-transparent via-black/10 dark:via-white/10 to-transparent"></div>
       
       <div className="w-full max-w-[1400px] flex flex-col lg:flex-row justify-between items-start gap-16 lg:gap-20 relative z-10 mb-16">
         
         <div className="w-full lg:w-1/3 flex flex-col">
-          <h3 className="serif-display text-3xl md:text-5xl mb-6 font-light tracking-wide text-zinc-900 dark:text-[#f5f5f7] rtl:font-sans rtl:font-bold">
+          <h3 className="serif-display text-3xl md:text-5xl mb-6 font-light tracking-wide text-wine dark:text-[#f5f5f7] rtl:font-sans rtl:font-bold">
             {lang === 'ar' ? (
-              <>انضم إلى <i className="italic text-black dark:text-white font-normal">أفينتو 7</i></>
+              <>انضم إلى <i className="italic text-wine dark:text-white font-normal">أفينتو 7</i></>
             ) : (
-              <>JOIN THE <i className="italic text-black dark:text-white font-normal">AVENTO7</i></>
+              <>JOIN THE <i className="italic text-wine dark:text-white font-normal">KEMET</i></>
             )}
           </h3>
           <p className="text-[10px] luxury-tracking text-zinc-600 dark:text-[#86868b] leading-relaxed mb-10 max-w-[280px]">
@@ -46,11 +46,11 @@ export default function Footer({ onOpenTrackOrder, socialLinks, lang = 'en' }: F
             <input 
               type="email" 
               placeholder={lang === 'ar' ? 'عنوان البريد الإلكتروني' : 'YOUR EMAIL ADDRESS'} 
-              className="w-full bg-transparent border-b border-black/20 dark:border-white/20 pb-4 pr-10 pl-0 rtl:pr-0 rtl:pl-10 text-[10px] luxury-tracking text-zinc-900 dark:text-white placeholder-zinc-500 dark:placeholder-[#86868b] focus:outline-none focus:border-black dark:focus:border-white transition-colors uppercase text-left rtl:text-right"
+              className="w-full bg-transparent border-b border-wine/20 dark:border-white/20 pb-4 pr-10 pl-0 rtl:pr-0 rtl:pl-10 text-[10px] luxury-tracking text-wine dark:text-white placeholder-zinc-500 dark:placeholder-[#86868b] focus:outline-none focus:border-wine dark:focus:border-white transition-colors uppercase text-left rtl:text-right"
             />
             <button 
               type="submit" 
-              className="absolute right-0 rtl:right-auto rtl:left-0 bottom-4 text-zinc-900 dark:text-white opacity-60 group-hover:opacity-100 hover:opacity-100 transition-opacity cursor-pointer p-1"
+              className="absolute right-0 rtl:right-auto rtl:left-0 bottom-4 text-wine dark:text-white opacity-60 group-hover:opacity-100 hover:opacity-100 transition-opacity cursor-pointer p-1"
             >
               <ArrowRight size={16} strokeWidth={1.5} className="rtl:rotate-180" />
             </button>
@@ -59,45 +59,45 @@ export default function Footer({ onOpenTrackOrder, socialLinks, lang = 'en' }: F
 
         <div className="w-full lg:w-2/3 grid grid-cols-2 md:grid-cols-3 gap-12 md:gap-8 text-[10px] luxury-tracking text-zinc-600 dark:text-[#86868b]">
           <div className="flex flex-col gap-5">
-            <h4 className="text-zinc-900 dark:text-white font-medium tracking-[0.2em] mb-2 uppercase">
-              {lang === 'ar' ? 'عن المتجر' : 'AVENTO7'}
+            <h4 className="text-wine dark:text-white font-medium tracking-[0.2em] mb-2 uppercase">
+              {lang === 'ar' ? 'عن المتجر' : 'KEMET'}
             </h4>
             
             <button 
               onClick={() => setActiveModal('about')}
-              className="hover:text-black dark:hover:text-white transition-colors w-fit group flex items-center gap-2 cursor-pointer text-left rtl:text-right"
+              className="hover:text-wine dark:hover:text-white transition-colors w-fit group flex items-center gap-2 cursor-pointer text-left rtl:text-right"
             >
-              <span className="w-0 h-[1px] bg-black dark:bg-white transition-all duration-300 group-hover:w-3"></span>
+              <span className="w-0 h-[1px] bg-wine dark:bg-white transition-all duration-300 group-hover:w-3"></span>
               {lang === 'ar' ? 'عن الماركة' : 'ABOUT THE BRAND'}
             </button>
 
             <button 
               onClick={() => setActiveModal('privacy')}
-              className="hover:text-black dark:hover:text-white transition-colors w-fit group flex items-center gap-2 cursor-pointer text-left rtl:text-right"
+              className="hover:text-wine dark:hover:text-white transition-colors w-fit group flex items-center gap-2 cursor-pointer text-left rtl:text-right"
             >
-              <span className="w-0 h-[1px] bg-black dark:bg-white transition-all duration-300 group-hover:w-3"></span>
+              <span className="w-0 h-[1px] bg-wine dark:bg-white transition-all duration-300 group-hover:w-3"></span>
               {lang === 'ar' ? 'سياسة الخصوصية' : 'PRIVACY POLICY'}
             </button>
 
             <button 
               onClick={() => setActiveModal('terms')}
-              className="hover:text-black dark:hover:text-white transition-colors w-fit group flex items-center gap-2 cursor-pointer text-left rtl:text-right"
+              className="hover:text-wine dark:hover:text-white transition-colors w-fit group flex items-center gap-2 cursor-pointer text-left rtl:text-right"
             >
-              <span className="w-0 h-[1px] bg-black dark:bg-white transition-all duration-300 group-hover:w-3"></span>
+              <span className="w-0 h-[1px] bg-wine dark:bg-white transition-all duration-300 group-hover:w-3"></span>
               {lang === 'ar' ? 'الشروط وحقوق الملكية' : 'TERMS & COPYRIGHT'}
             </button>
           </div>
 
           <div className="flex flex-col gap-5">
-            <h4 className="text-zinc-900 dark:text-white font-medium tracking-[0.2em] mb-2 uppercase">
+            <h4 className="text-wine dark:text-white font-medium tracking-[0.2em] mb-2 uppercase">
               {lang === 'ar' ? 'الدعم والمساعدة' : 'SUPPORT'}
             </h4>
-            <a href="#" className="hover:text-black dark:hover:text-white transition-colors w-fit group flex items-center gap-2">
-              <span className="w-0 h-[1px] bg-black dark:bg-white transition-all duration-300 group-hover:w-3"></span>
+            <a href="#" className="hover:text-wine dark:hover:text-white transition-colors w-fit group flex items-center gap-2">
+              <span className="w-0 h-[1px] bg-wine dark:bg-white transition-all duration-300 group-hover:w-3"></span>
               {lang === 'ar' ? 'الشحن والاسترجاع' : 'SHIPPING & RETURNS'}
             </a>
-            <a href="#" className="hover:text-black dark:hover:text-white transition-colors w-fit group flex items-center gap-2">
-              <span className="w-0 h-[1px] bg-black dark:bg-white transition-all duration-300 group-hover:w-3"></span>
+            <a href="#" className="hover:text-wine dark:hover:text-white transition-colors w-fit group flex items-center gap-2">
+              <span className="w-0 h-[1px] bg-wine dark:bg-white transition-all duration-300 group-hover:w-3"></span>
               {lang === 'ar' ? 'دليل المقاسات' : 'SIZE GUIDE'}
             </a>
             <button 
@@ -105,20 +105,20 @@ export default function Footer({ onOpenTrackOrder, socialLinks, lang = 'en' }: F
                 e.preventDefault();
                 if (onOpenTrackOrder) onOpenTrackOrder();
               }}
-              className="hover:text-black dark:hover:text-white transition-colors w-fit group flex items-center gap-2 cursor-pointer text-left rtl:text-right"
+              className="hover:text-wine dark:hover:text-white transition-colors w-fit group flex items-center gap-2 cursor-pointer text-left rtl:text-right"
             >
-              <span className="w-0 h-[1px] bg-black dark:bg-white transition-all duration-300 group-hover:w-3"></span>
+              <span className="w-0 h-[1px] bg-wine dark:bg-white transition-all duration-300 group-hover:w-3"></span>
               {lang === 'ar' ? 'تتبع طلبك' : 'TRACK ORDER'}
             </button>
-            <a href="#" className="hover:text-black dark:hover:text-white transition-colors w-fit group flex items-center gap-2">
-              <span className="w-0 h-[1px] bg-black dark:bg-white transition-all duration-300 group-hover:w-3"></span>
+            <a href="#" className="hover:text-wine dark:hover:text-white transition-colors w-fit group flex items-center gap-2">
+              <span className="w-0 h-[1px] bg-wine dark:bg-white transition-all duration-300 group-hover:w-3"></span>
               {lang === 'ar' ? 'الأسئلة الشائعة' : 'FAQ'}
             </a>
           </div>
 
           {/* Social & Contact Us Block */}
-          <div className="flex flex-col gap-5 col-span-2 md:col-span-1 border-t md:border-t-0 border-black/10 dark:border-white/10 pt-8 md:pt-0">
-            <h4 className="text-zinc-900 dark:text-white font-medium tracking-[0.2em] mb-2 uppercase flex items-center gap-2">
+          <div className="flex flex-col gap-5 col-span-2 md:col-span-1 border-t md:border-t-0 border-wine/10 dark:border-white/10 pt-8 md:pt-0">
+            <h4 className="text-wine dark:text-white font-medium tracking-[0.2em] mb-2 uppercase flex items-center gap-2">
               {lang === 'ar' ? 'تواصل معنا' : 'CONNECT WITH US'}
             </h4>
 
@@ -131,7 +131,7 @@ export default function Footer({ onOpenTrackOrder, socialLinks, lang = 'en' }: F
                   rel="noopener noreferrer" 
                   className="hover:text-amber-500 dark:hover:text-amber-400 transition-colors w-fit flex items-center gap-2.5 text-zinc-800 dark:text-zinc-200"
                 >
-                  <div className="w-7 h-7 rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center shrink-0">
+                  <div className="w-7 h-7 rounded-full bg-wine/5 dark:bg-white/10 flex items-center justify-center shrink-0">
                     <Facebook size={14} />
                   </div>
                   <span className="font-bold tracking-wider">{lang === 'ar' ? 'فيسبوك' : 'FACEBOOK'}</span>
@@ -145,7 +145,7 @@ export default function Footer({ onOpenTrackOrder, socialLinks, lang = 'en' }: F
                   rel="noopener noreferrer" 
                   className="hover:text-amber-500 dark:hover:text-amber-400 transition-colors w-fit flex items-center gap-2.5 text-zinc-800 dark:text-zinc-200"
                 >
-                  <div className="w-7 h-7 rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center shrink-0">
+                  <div className="w-7 h-7 rounded-full bg-wine/5 dark:bg-white/10 flex items-center justify-center shrink-0">
                     <Instagram size={14} />
                   </div>
                   <span className="font-bold tracking-wider">{lang === 'ar' ? 'انستغرام' : 'INSTAGRAM'}</span>
@@ -159,7 +159,7 @@ export default function Footer({ onOpenTrackOrder, socialLinks, lang = 'en' }: F
                   rel="noopener noreferrer" 
                   className="hover:text-amber-500 dark:hover:text-amber-400 transition-colors w-fit flex items-center gap-2.5 text-zinc-800 dark:text-zinc-200"
                 >
-                  <div className="w-7 h-7 rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center shrink-0">
+                  <div className="w-7 h-7 rounded-full bg-wine/5 dark:bg-white/10 flex items-center justify-center shrink-0">
                     <TikTokIcon className="w-3.5 h-3.5" />
                   </div>
                   <span className="font-bold tracking-wider">{lang === 'ar' ? 'تيك توك' : 'TIKTOK'}</span>
@@ -172,22 +172,22 @@ export default function Footer({ onOpenTrackOrder, socialLinks, lang = 'en' }: F
 
       {/* Massive Brand Name Footer */}
       <div className="w-full max-w-[1400px] mx-auto flex justify-center opacity-10 select-none pointer-events-none mb-6 md:mb-8 px-2 overflow-hidden">
-        <h2 className="brand-logo text-[12vw] xs:text-[14vw] lg:text-[180px] font-bold tracking-[0.02em] sm:tracking-[0.1em] text-center leading-none text-zinc-900 dark:text-white whitespace-nowrap max-w-full">
-          AVENTO7
+        <h2 className="brand-logo text-[12vw] xs:text-[14vw] lg:text-[180px] font-bold tracking-[0.02em] sm:tracking-[0.1em] text-center leading-none text-wine dark:text-white whitespace-nowrap max-w-full">
+          KEMET
         </h2>
       </div>
 
-      <div className="w-full max-w-[1400px] pt-8 border-t border-black/10 dark:border-white/10 flex justify-center items-center text-[9px] luxury-tracking text-zinc-500 dark:text-[#666666] relative z-10">
+      <div className="w-full max-w-[1400px] pt-8 border-t border-wine/10 dark:border-white/10 flex justify-center items-center text-[9px] luxury-tracking text-zinc-500 dark:text-[#666666] relative z-10">
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-          <p>&copy; {(new Date()).getFullYear()} AVENTO7 STUDIOS. {lang === 'ar' ? 'جميع الحقوق محفوظة.' : 'ALL RIGHTS RESERVED.'}</p>
-          <span className="hidden md:block w-3 h-[1px] bg-black/20 dark:bg-white/20"></span>
+          <p>&copy; {(new Date()).getFullYear()} KEMET STUDIOS. {lang === 'ar' ? 'جميع الحقوق محفوظة.' : 'ALL RIGHTS RESERVED.'}</p>
+          <span className="hidden md:block w-3 h-[1px] bg-wine/20 dark:bg-white/20"></span>
           <p className="flex items-center gap-2">
             {lang === 'ar' ? 'تطوير' : 'DEVELOPED BY'}{" "}
             <a 
               href="https://wa.me/201022293420" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="text-zinc-900 dark:text-white font-bold tracking-[0.2em] hover:text-amber-500 dark:hover:text-amber-400 transition-colors underline decoration-amber-500/40 underline-offset-4"
+              className="text-wine dark:text-white font-bold tracking-[0.2em] hover:text-amber-500 dark:hover:text-amber-400 transition-colors underline decoration-amber-500/40 underline-offset-4"
             >
               FOX TECH
             </a>

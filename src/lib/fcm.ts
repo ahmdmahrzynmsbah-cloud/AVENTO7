@@ -6,7 +6,7 @@ export const requestNotificationPermission = async (userId: string) => {
   try {
     const permission = await Notification.requestPermission();
     if (permission === 'granted') {
-      const token = await getToken(messaging, { vapidKey: 'YOUR_PUBLIC_VAPID_KEY_HERE' }); // Note: We might not need vapidKey for generic FCM if we just use default project config, or we can use empty. Let's see if we can get token without vapidKey. Wait, vapidKey is highly recommended.
+      const token = await getToken(messaging); // Note: We might not need vapidKey for generic FCM if we just use default project config, or we can use empty. Let's see if we can get token without vapidKey. Wait, vapidKey is highly recommended.
       // Actually we can get token without vapidKey or by fetching it from console. 
       // But we can just try getting token directly.
       if (token) {
